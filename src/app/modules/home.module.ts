@@ -5,6 +5,7 @@ import { LargeHighlightGameComponent } from '../components/home/large-highlight-
 import { SmallHighlightGameComponent } from '../components/home/small-highlight-game/small-highlight-game.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common'
+import { MockGameService } from '../services/mock-game.service';
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -20,6 +21,7 @@ const homeRoutes: Routes = [
     CommonModule,
     NgOptimizedImage,
     RouterModule.forChild(homeRoutes)
-  ]
+  ],
+  providers: [MockGameService]
 })
 export class HomeModule { }

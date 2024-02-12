@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { GameModel } from '../components/home/models/game.model';
 import { Observable, of } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class MockGameService {
   //#region constructor
   constructor() {

@@ -7,5 +7,6 @@ import { GameModel } from '../models/game.model';
   styleUrl: './large-highlight-game.component.scss'
 })
 export class LargeHighlightGameComponent {
-  games = input.required<GameModel[]>();
+  gameInputs = input.required<GameModel[]>();
+  currentGameIndexInput = input.required<number>();
 }
