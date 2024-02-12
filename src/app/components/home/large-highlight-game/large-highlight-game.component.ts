@@ -2,7 +2,6 @@ import { Component, EventEmitter, Output, input } from '@angular/core';
 import { GameModel } from '../models/game.model';
 import { HomeCaptionModel } from '../models/caption-models/home-captions.model';
 
-
 @Component({
   selector: 'app-large-highlight-game',
   templateUrl: './large-highlight-game.component.html',

@@ -9,10 +9,7 @@
     <h2>{{games[currentGameIndexInput()].bio}}</h2>
 
     <div>
-        @if (captionInput(); as caption) {
-        <button mat-raised-button>{{caption?.largeHighlightGameCaption?.buyButton}}</button>
-        }
-
+        <button mat-raised-button>{{captionInput()?.largeHighlightGameCaption?.buyButton}}</button>
     </div>
 </div>
 }
