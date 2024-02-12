@@ -4,7 +4,7 @@ import { HomeMainComponent } from '../components/home/home-main/home-main.compon
 import { LargeHighlightGameComponent } from '../components/home/large-highlight-game/large-highlight-game.component';
 import { SmallHighlightGameComponent } from '../components/home/small-highlight-game/small-highlight-game.component';
 import { RouterModule, Routes } from '@angular/router';
-import { GameListComponent } from '../components/home/game-list/game-list.component';
+import { NgOptimizedImage } from '@angular/common'
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -14,11 +14,11 @@ const homeRoutes: Routes = [
   declarations: [
     HomeMainComponent,
     LargeHighlightGameComponent,
-    SmallHighlightGameComponent,
-    GameListComponent
+    SmallHighlightGameComponent
   ],
   imports: [
     CommonModule,
+    NgOptimizedImage,
     RouterModule.forChild(homeRoutes)
   ]
 })

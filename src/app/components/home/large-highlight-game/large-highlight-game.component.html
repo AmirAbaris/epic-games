@@ -1,1 +1,3 @@
-<p>large-highlight-game works!</p>
+@for (game of games(); track $index) {
+<img class="object-cover rounded-2xl" ngSrc="{{game.mainCover}}" width="752" height="600" alt="{{game.bio}}">
+}
