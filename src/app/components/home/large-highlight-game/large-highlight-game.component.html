@@ -1,8 +1,18 @@
-<!-- @for (game of games(); track $index) {
-<img class="object-cover rounded-2xl" ngSrc="{{game.mainCover}}" width="752" height="600" priority alt="{{game.bio}}">
-} -->
+@if (gameInputs(); as games) {
+<img class="relative rounded-2xl aspect-auto" ngSrc="{{games[currentGameIndexInput()].mainCover}}" width="752"
+    height="600" priority alt="{{games[currentGameIndexInput()].bio}}">
+<div class="absolute top-56 text-white p-11">
+    <!-- gonna change the logo to img -->
+    <!--TODO: change to img-->
+    <p class="mb-4">{{games[currentGameIndexInput()].logo}}</p>
+    <h1 class="mb-4">{{games[currentGameIndexInput()].name}}</h1>
+    <h2>{{games[currentGameIndexInput()].bio}}</h2>
 
-@if (gameInputs()) {
-<img class="object-cover rounded-2xl" ngSrc="{{gameInputs()[currentGameIndexInput()].mainCover}}" width="752"
-    height="600" priority alt="{{gameInputs()[currentGameIndexInput()].bio}}">
+    <div>
+        @if (captionInput(); as caption) {
+        <button mat-raised-button>{{caption?.largeHighlightGameCaption?.buyButton}}</button>
+        }
+
+    </div>
+</div>
 }

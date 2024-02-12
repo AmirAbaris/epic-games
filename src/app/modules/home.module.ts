@@ -6,6 +6,10 @@ import { SmallHighlightGameComponent } from '../components/home/small-highlight-
 import { RouterModule, Routes } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common'
 import { MockGameService } from '../services/mock-game.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -20,6 +24,8 @@ const homeRoutes: Routes = [
   imports: [
     CommonModule,
     NgOptimizedImage,
+    MatButtonModule,
+    HttpClientModule,
     RouterModule.forChild(homeRoutes)
   ],
   providers: [MockGameService]

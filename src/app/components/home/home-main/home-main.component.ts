@@ -2,6 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { GameModel } from '../models/game.model';
 import { MockGameService } from '../../../services/mock-game.service';
 import { interval, startWith } from 'rxjs';
+import { HomeCaptionModel } from '../models/caption-models/home-captions.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home-main',
@@ -11,16 +13,23 @@ import { interval, startWith } from 'rxjs';
 export class HomeMainComponent implements OnInit {
   //#region inject functions
   private mockGameService = inject(MockGameService);
+  private translateService = inject(TranslateService);
   //#endregion
 
   //#region properties
   public games: GameModel[] | undefined;
   public currentGameIndex: number = 0;
+  public homeCaptions: HomeCaptionModel | undefined;
+
+  private readonly captionPaths = {
+    'largeHighlightGame': 'home.LargeHighlightGame'
+  }
   //#endregion
 
   //#region lifecycle methods
   ngOnInit(): void {
     this.getGames();
+    this.getCaptions();
   }
   //#endregion
 
@@ -34,6 +43,15 @@ export class HomeMainComponent implements OnInit {
       },
       error: (error) => {
         console.log(error);
+      }
+    });
+  }
+
+  private getCaptions(): void {
+    this.translateService.get(this.captionPaths.largeHighlightGame).subscribe({
+      next: (caption) => {
+        if (this.homeCaptions)
+          this.homeCaptions.largeHighlightGameCaption = caption;
       }
     });
   }
