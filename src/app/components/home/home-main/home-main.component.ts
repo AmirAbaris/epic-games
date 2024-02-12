@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { GameModel } from '../models/game.model';
 import { MockGameService } from '../../../services/mock-game.service';
 import { interval, startWith } from 'rxjs';
@@ -39,7 +39,7 @@ export class HomeMainComponent implements OnInit {
   }
 
   private _startSwitchingGameCovers(): void {
-    interval(1000).pipe(startWith(0)).subscribe(() => {
+    interval(7000).pipe(startWith(0)).subscribe(() => {
       if (this.games) {
         this.currentGameIndex = (this.currentGameIndex + 1) % this.games.length;
       }
