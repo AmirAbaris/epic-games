@@ -3,6 +3,10 @@ module.exports = {
   content: [
     "./src/**/*.{html,ts}",
   ],
+  externals: {
+    // Specify Swiper as an external dependency
+    swiper: 'swiper',
+  },
   theme: {
     extend: {
       animation: {

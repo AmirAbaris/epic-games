@@ -4,7 +4,6 @@ import { MockGameService } from '../../../services/mock-game.service';
 import { interval, startWith } from 'rxjs';
 import { HomeCaptionModel } from '../models/caption-models/home-captions.model';
 import { TranslateService } from '@ngx-translate/core';
-import { GameCardModel } from '../models/game-card.model';
 
 @Component({
   selector: 'app-home-main',
@@ -19,7 +18,6 @@ export class HomeMainComponent implements OnInit {
 
   //#region properties
   public games: GameModel[] | undefined;
-  public gameCards: GameCardModel[] | undefined;
   public currentGameIndex: number = 0;
   public homeCaptions: HomeCaptionModel = {
     largeHighlightGameCaption: {
@@ -36,7 +34,6 @@ export class HomeMainComponent implements OnInit {
   //#region lifecycle methods
   ngOnInit(): void {
     this.getGames();
-    this.getGameCards();
     this.getCaptions();
   }
   //#endregion
@@ -48,17 +45,6 @@ export class HomeMainComponent implements OnInit {
         this.games = games;
 
         this.startSwitchingGameCovers();
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
-  }
-
-  public getGameCards(): void {
-    this.mockGameService.getGameCards().subscribe({
-      next: (games) => {
-        this.gameCards = games;
       },
       error: (err) => {
         console.log(err);
