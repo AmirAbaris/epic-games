@@ -14,6 +14,8 @@ import { HighlightGameCardComponent } from '../components/home/highlight-game-ca
 import { GameCardManagementComponent } from '../components/home/game-card-management/game-card-management.component';
 import { GameCardComponent } from '../components/home/game-card/game-card.component';
 import { MatCardModule } from '@angular/material/card';
+import { FreeGameCardManagementComponent } from '../components/home/free-game-card-management/free-game-card-management.component';
+import { FreeGameCardComponent } from '../components/home/free-game-card/free-game-card.component';
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -26,7 +28,9 @@ const homeRoutes: Routes = [
     SmallHighlightGameComponent,
     HighlightGameCardComponent,
     GameCardComponent,
-    GameCardManagementComponent
+    GameCardManagementComponent,
+    FreeGameCardManagementComponent,
+    FreeGameCardComponent
   ],
   imports: [
     CommonModule,

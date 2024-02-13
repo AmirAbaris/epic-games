@@ -20,6 +20,26 @@ export class MockGameService {
         basePrice: 60,
         finalPrice: 48,
         isFree: false,
+        fromFreeDate: new Date(),
+        toFreeDate: new Date(),
+        isPublished: true
+      },
+      {
+        id: '12',
+        logo: 'Game x Logo',
+        mainCover: '../assets/game-covers/egs-banishers-ghosts-of-new-eden-carousel-desktop-v2-1920x1080-0c6045d584ca.jpg',
+        thumbnailCover: '../assets/game-covers/egs-banishers-ghosts-of-new-eden-carousel-thumb-1200x1600-3385133d6cd1.jpg',
+        cardCover: '../assets/game-covers/outbreak-epidemic-viral-terror-qpcx5.jpg',
+        type: 'action',
+        name: 'Game x',
+        bio: 'Game x bio',
+        discountPercent: 20,
+        basePrice: 60,
+        finalPrice: 48,
+        isFree: true,
+        fromFreeDate: new Date(),
+        toFreeDate: new Date(),
+        isPublished: true
       },
       {
         id: '12',
@@ -34,6 +54,9 @@ export class MockGameService {
         basePrice: 50,
         finalPrice: 42.50,
         isFree: false,
+        fromFreeDate: new Date(),
+        toFreeDate: new Date(),
+        isPublished: true
       },
       {
         id: '13',
@@ -48,6 +71,9 @@ export class MockGameService {
         basePrice: 45,
         finalPrice: 40.50,
         isFree: false,
+        fromFreeDate: new Date(),
+        toFreeDate: new Date(),
+        isPublished: true
       }
     ];
   }

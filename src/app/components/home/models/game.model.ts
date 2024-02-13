@@ -11,4 +11,7 @@ export interface GameModel {
     basePrice: number;
     finalPrice: number;
     isFree: boolean;
+    fromFreeDate?: Date;
+    toFreeDate?: Date;
+    isPublished: boolean;
 }

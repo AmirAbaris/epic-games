@@ -1,0 +1,16 @@
+<mat-card>
+    <div class="flex flex-row justify-center items-center flex-wrap gap-6">
+        @for (game of gameInputs(); track $index) {
+        <div>
+            <img class="rounded-t-md" ngSrc="{{game.mainCover}}" width="305" height="170" alt="{{game.name}}">
+            @if (game.isFree) {
+            <div class="bg-vividBlue text-white text-center py-1">FREE NOW</div>
+            }
+            @else {
+            <div class="bg-darkGray text-lightGray text-center py-1">COMING SOON</div>
+            }
+            <h1 class="my-4 text-lightGray">{{game.name}}</h1>
+        </div>
+        }
+    </div>
+</mat-card>
