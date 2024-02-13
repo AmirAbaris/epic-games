@@ -26,6 +26,7 @@ const homeRoutes: Routes = [
     NgOptimizedImage,
     MatButtonModule,
     HttpClientModule,
+    MatIconModule,
     RouterModule.forChild(homeRoutes)
   ],
   providers: [MockGameService]

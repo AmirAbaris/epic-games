@@ -8,8 +8,10 @@
         <p>{{games[currentGameIndexInput()].logo}}</p>
         <h1>{{games[currentGameIndexInput()].name}}</h1>
         <h2>{{games[currentGameIndexInput()].bio}}</h2>
-        <div>
-            <button mat-raised-button>{{captionInput().buyButton}}</button>
+        <div class="flex gap-5">
+            <button class="buy-btn" mat-raised-button>{{captionInput().buyButton}}</button>
+            <button class="add-to-wishlist-btn" mat-button> <mat-icon>{{addIconInput()}}</mat-icon>
+                {{captionInput().AddToWishlistButton}}</button>
         </div>
     </div>
 </div>

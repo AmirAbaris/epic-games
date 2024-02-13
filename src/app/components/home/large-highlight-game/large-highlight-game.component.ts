@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Output, computed, input } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 import { GameModel } from '../models/game.model';
-import { HomeCaptionModel } from '../models/caption-models/home-captions.model';
 import { LargeHighlightGameCaptionModel } from '../models/caption-models/large-highlight-game-caption.model';
 
 @Component({
@@ -13,6 +12,7 @@ export class LargeHighlightGameComponent {
   gameInputs = input.required<GameModel[]>();
   currentGameIndexInput = input.required<number>();
   captionInput = input.required<LargeHighlightGameCaptionModel>();
+  addIconInput = input.required<string>();
 
   @Output('playButton') playButtonEvent = new EventEmitter();
   @Output('addWishlistButton') AddToWishListButtonEvent = new EventEmitter();
