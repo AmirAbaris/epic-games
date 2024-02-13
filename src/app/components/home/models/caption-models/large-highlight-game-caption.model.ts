@@ -1,4 +1,4 @@
 export interface LargeHighlightGameCaptionModel {
-    "buyButton": string;
-    "AddToWishlistButton": string;
+    buyButton: string;
+    AddToWishlistButton: string;
 }

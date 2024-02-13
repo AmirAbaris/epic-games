@@ -1,15 +1,16 @@
 @if (gameInputs(); as games) {
-<img class="relative rounded-2xl aspect-auto" ngSrc="{{games[currentGameIndexInput()].mainCover}}" width="752"
-    height="600" priority alt="{{games[currentGameIndexInput()].bio}}">
-<div class="absolute top-56 text-white p-11">
-    <!-- gonna change the logo to img -->
-    <!--TODO: change to img-->
-    <p class="mb-4">{{games[currentGameIndexInput()].logo}}</p>
-    <h1 class="mb-4">{{games[currentGameIndexInput()].name}}</h1>
-    <h2>{{games[currentGameIndexInput()].bio}}</h2>
-
-    <div>
-        <button mat-raised-button>{{captionInput()?.largeHighlightGameCaption?.buyButton}}</button>
+<div class="relative">
+    <img class="rounded-2xl aspect-auto" ngSrc="{{games[currentGameIndexInput()].mainCover}}" width="752" height="600"
+        priority alt="{{games[currentGameIndexInput()].bio}}">
+    <div class="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-end items-start gap-14 text-white p-11">
+        <!-- gonna change the logo to img -->
+        <!--TODO: change to img-->
+        <p>{{games[currentGameIndexInput()].logo}}</p>
+        <h1>{{games[currentGameIndexInput()].name}}</h1>
+        <h2>{{games[currentGameIndexInput()].bio}}</h2>
+        <div>
+            <button mat-raised-button>{{captionInput().buyButton}}</button>
+        </div>
     </div>
 </div>
 }

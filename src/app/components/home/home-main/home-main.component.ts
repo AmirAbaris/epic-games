@@ -19,7 +19,12 @@ export class HomeMainComponent implements OnInit {
   //#region properties
   public games: GameModel[] | undefined;
   public currentGameIndex: number = 0;
-  public homeCaptions: HomeCaptionModel | undefined;
+  public homeCaptions: HomeCaptionModel = {
+    largeHighlightGameCaption: {
+      buyButton: '',
+      AddToWishlistButton: ''
+    }
+  };
 
   private readonly captionPaths = {
     'largeHighlightGame': 'home.LargeHighlightGame'
@@ -39,7 +44,7 @@ export class HomeMainComponent implements OnInit {
       next: (games) => {
         this.games = games;
 
-        this._startSwitchingGameCovers();
+        this.startSwitchingGameCovers();
       },
       error: (error) => {
         console.log(error);
@@ -50,13 +55,14 @@ export class HomeMainComponent implements OnInit {
   private getCaptions(): void {
     this.translateService.get(this.captionPaths.largeHighlightGame).subscribe({
       next: (caption) => {
-        if (this.homeCaptions)
-          this.homeCaptions.largeHighlightGameCaption = caption;
+        this.homeCaptions.largeHighlightGameCaption = caption;
+
+        console.log(caption.buyButton);
       }
     });
   }
 
-  private _startSwitchingGameCovers(): void {
+  private startSwitchingGameCovers(): void {
     interval(7000).pipe(startWith(0)).subscribe(() => {
       if (this.games) {
         this.currentGameIndex = (this.currentGameIndex + 1) % this.games.length;
