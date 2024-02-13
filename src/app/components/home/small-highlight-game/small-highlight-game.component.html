@@ -1,1 +1,8 @@
-<p>small-highlight-game works!</p>
+<div class="flex flex-col gap-12 ml-7">
+    @for (game of games; track $index) {
+    <div class="flex flex-row gap-2 items-center">
+        <img class="rounded-lg" ngSrc="{{game.thumbnailCover}}" height="25" width="33" alt="{{game.name}}">
+        <h1 class="text-lightGray text-sm">{{game.name}}</h1>
+    </div>
+    }
+</div>

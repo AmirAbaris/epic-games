@@ -1,1 +1,6 @@
-<p>highlight-game-card works!</p>
+<div class="flex flex-row mt-24 justify-center">
+    <app-large-highlight-game [gameInputs]="gameInputs()" [currentGameIndexInput]="currentGameIndexInput()"
+        [captionInput]="captionInputs().largeHighlightGameCaption" [addIconInput]="'add_circle'" />
+
+    <app-small-highlight-game [gameInputs]="gameInputs()" />
+</div>

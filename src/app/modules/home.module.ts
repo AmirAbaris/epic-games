@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { HighlightGameCardComponent } from '../components/home/highlight-game-card/highlight-game-card.component';
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -19,7 +20,8 @@ const homeRoutes: Routes = [
   declarations: [
     HomeMainComponent,
     LargeHighlightGameComponent,
-    SmallHighlightGameComponent
+    SmallHighlightGameComponent,
+    HighlightGameCardComponent
   ],
   imports: [
     CommonModule,
