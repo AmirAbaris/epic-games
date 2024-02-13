@@ -3,7 +3,6 @@ export interface GameModel {
     logo?: string;
     mainCover?: string;
     thumbnailCover?: string;
-    cardCover?: string;
     name: string;
     bio: string;
 }

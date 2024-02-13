@@ -11,6 +11,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { HighlightGameCardComponent } from '../components/home/highlight-game-card/highlight-game-card.component';
+import { GameCardManagementComponent } from '../components/home/game-card-management/game-card-management.component';
+import { GameCardComponent } from '../components/home/game-card/game-card.component';
+import { MatCardModule } from '@angular/material/card';
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -21,7 +24,9 @@ const homeRoutes: Routes = [
     HomeMainComponent,
     LargeHighlightGameComponent,
     SmallHighlightGameComponent,
-    HighlightGameCardComponent
+    HighlightGameCardComponent,
+    GameCardComponent,
+    GameCardManagementComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +34,7 @@ const homeRoutes: Routes = [
     MatButtonModule,
     HttpClientModule,
     MatIconModule,
+    MatCardModule,
     RouterModule.forChild(homeRoutes)
   ],
   providers: [MockGameService]
