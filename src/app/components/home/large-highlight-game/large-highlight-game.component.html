@@ -1,10 +1,13 @@
 <div class="flex flex-row gap-4 justify-start px-8 items-center overflow-x-scroll w-screen">
-    @for (game of gameInputs(); track $index) {
-    <div class="relative">
-        <mat-icon class="absolute top-2 right-3">add_circle</mat-icon>
-        <img class="rounded-2xl" ngSrc="{{game.mobileCover}}" width="330" height="450" priority alt="{{game.name}}">
-        <img class="absolute top-32 left-0" ngSrc="{{game.logo}}" width="80" height="10" alt="{{game.name}}">
-        <h1 class="absolute top-44 left-0 text-xs text-white">{{game.bio}}</h1>
+    @for (game of gameInputs(); track $index)
+    {
+    <div class="relative flex-shrink-0">
+        <div class="relative">
+            <mat-icon class="absolute top-2 right-3">{{addIconInput()}}</mat-icon>
+            <img class="rounded-2xl" ngSrc="{{game.mobileCover}}" width="330" height="450" priority alt="{{game.name}}">
+            <img class="absolute bottom-28 left-4" ngSrc="{{game.logo}}" width="140" height="10" alt="{{game.name}}">
+            <h1 class="absolute bottom-20 left-4 text-xs text-white">{{game.bio}}</h1>
+        </div>
     </div>
     }
 </div>
