@@ -14,23 +14,17 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
       state('active', style({
         background: 'linear-gradient(to right, darkGray 0%, darkGray 50%, transparent 50%, transparent 100%)',
         backgroundSize: '200% 100%',
-        animation: 'progress 7s linear infinite'
+        
       })),
       transition('inactive => active', [
         animate('1s')
       ]),
       transition('active => inactive', [
-        animate('0.5s')
+        animate('0.5s', keyframes([
+          style({ backgroundPosition: '0% 0%', offset: 0 }), // Start with background on the left
+          style({ backgroundPosition: '100% 0%', offset: 1 })
+        ]))
       ])
-    ]),
-    trigger('progress', [
-      animate('7s', keyframes([
-        style({ backgroundPosition: '0% 0%', offset: 0 }),
-        style({ backgroundPosition: '25% 0%', offset: 0.25 }),
-        style({ backgroundPosition: '50% 0%', offset: 0.5 }),
-        style({ backgroundPosition: '75% 0%', offset: 0.75 }),
-        style({ backgroundPosition: '100% 0%', offset: 1 })
-      ]))
     ])
   ]
 })
