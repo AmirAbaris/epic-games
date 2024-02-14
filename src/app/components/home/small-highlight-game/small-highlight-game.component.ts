@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { SmallHighlightGameModel } from '../models/small-highlight-game.model';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-small-highlight-game',
@@ -12,13 +12,16 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
         background: 'transparent'
       })),
       state('active', style({
-        background: 'red'
+        background: 'transparent',
       })),
       transition('inactive => active', [
         animate('1s')
       ]),
       transition('active => inactive', [
-        animate('0.5s')
+        animate('7s', keyframes([
+          style({ background: 'red', offset: 0 }),
+          style({ background: 'transparent', offset: 1 })
+        ]))
       ])
     ])
   ]
