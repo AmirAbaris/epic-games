@@ -2,6 +2,7 @@ export interface GameModel {
     id: string;
     logo?: string;
     mainCover?: string;
+    mainMobileCover?: string;
     thumbnailCover?: string;
     cardCover?: string;
     name: string;

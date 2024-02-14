@@ -18,8 +18,9 @@ export class GameService { // TODO: change name to game, move out of constructor
 const games = [
   {
     id: '11',
-    logo: 'Game 1 Logo',
+    logo: '../assets/game-covers/egs-banishers-ghosts-of-new-eden-carousel-logo-white-1920x1080-9536b5c98218.png',
     mainCover: '../assets/game-covers/egs-banishers-ghosts-of-new-eden-carousel-desktop-v2-1920x1080-0c6045d584ca.jpg',
+    mainMobileCover: '../assets/game-covers/egs-banishers-ghosts-of-new-eden-carousel-mobile-1200x1600-fd082fee0233.jpg',
     thumbnailCover: '../assets/game-covers/egs-banishers-ghosts-of-new-eden-carousel-thumb-1200x1600-3385133d6cd1.jpg',
     cardCover: '../assets/game-covers/outbreak-epidemic-viral-terror-qpcx5.jpg',
     type: 'action',
@@ -52,8 +53,9 @@ const games = [
   },
   {
     id: '12',
-    logo: 'Game 2 Logo',
+    logo: '../assets/game-covers/egs-outriders-complete-edition-carousel-logo-v2-350x84-eb6380d39f5b.png',
     mainCover: '../assets/game-covers/egs-homeworld-3-demo-launch-carousel-desktop-v2-1920x1080-90a09688b19a.jpg',
+    mainMobileCover: '../assets/game-covers/egs-banishers-ghosts-of-new-eden-carousel-mobile-1200x1600-fd082fee0233.jpg',
     thumbnailCover: '../assets/game-covers/egs-homeworld-3-demo-launch-carousel-thumb-1200x1600-2cc5dff938bb.jpg',
     cardCover: '../assets/game-covers/outbreak-epidemic-viral-terror-qpcx5.jpg',
     type: 'adventure',

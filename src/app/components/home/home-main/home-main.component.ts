@@ -88,9 +88,10 @@ export class HomeMainComponent implements OnInit {
     if (this.games) {
       this.games.forEach((game) => {
         // check if the required properties are not undefined
-        if (game.mainCover && game.logo && game.name && game.bio) {
+        if (game.mainCover && game.logo && game.name && game.bio && game.mainMobileCover) {
           const largeHighlightGame: LargeHighlightGameModel = {
             cover: game.mainCover,
+            mobileCover: game.mainMobileCover,
             logo: game.logo,
             name: game.name,
             bio: game.bio
