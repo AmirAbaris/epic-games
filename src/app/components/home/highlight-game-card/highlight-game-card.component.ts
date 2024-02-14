@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import { GameModel } from '../models/game.model';
-import { HomeCaptionModel } from '../models/caption-models/home-captions.model';
+import { HomeMainCaptionModel } from '../models/caption-models/home-main-captions.model';
+import { HighlightGameModels } from '../models/highlight-game-models';
 
 @Component({
   selector: 'app-highlight-game-card',
@@ -9,8 +9,8 @@ import { HomeCaptionModel } from '../models/caption-models/home-captions.model';
 })
 export class HighlightGameCardComponent {
   //#region properties
-  gameInputs = input.required<GameModel[]>();
+  gameInputs = input.required<HighlightGameModels>();
   currentGameIndexInput = input.required<number>();
-  captionInputs = input.required<HomeCaptionModel>();
+  captionInputs = input.required<HomeMainCaptionModel>();
   //#endregion
 }

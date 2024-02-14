@@ -1,9 +1,13 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { GameModel } from '../models/game.model';
-import { MockGameService } from '../../../services/mock-game.service';
 import { interval, startWith } from 'rxjs';
-import { HomeCaptionModel } from '../models/caption-models/home-captions.model';
 import { TranslateService } from '@ngx-translate/core';
+import { GameService } from '../../../services/game.service';
+import { HomeMainCaptionModel } from '../models/caption-models/home-main-captions.model';
+import { LargeHighlightGameModel } from '../models/large-highlight-game.model';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SmallHighlightGameModel } from '../models/small-highlight-game.model';
+import { HighlightGameModels } from '../models/highlight-game-models';
 
 @Component({
   selector: 'app-home-main',
@@ -12,14 +16,21 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HomeMainComponent implements OnInit {
   //#region inject functions
-  private mockGameService = inject(MockGameService);
+  private gameService = inject(GameService);
   private translateService = inject(TranslateService);
+  private destroyRef = inject(DestroyRef);
   //#endregion
 
   //#region properties
   public games: GameModel[] | undefined;
+  // public largeHighlightGames: LargeHighlightGameModel[] | undefined;
+  // public smallHighlightGames: SmallHighlightGameModel[] | undefined;
+  public highlightGamesModel: HighlightGameModels = {
+    largeHighlightGames: [],
+    smallHighlightGames: []
+  }
   public currentGameIndex: number = 0;
-  public homeCaptions: HomeCaptionModel = {
+  public homeCaptions: HomeMainCaptionModel = {
     largeHighlightGameCaption: {
       buyButton: '',
       AddToWishlistButton: ''
@@ -40,11 +51,13 @@ export class HomeMainComponent implements OnInit {
 
   //#region main logic methods
   public getGames(): void {
-    this.mockGameService.getGames().subscribe({
+    this.gameService.getGames().subscribe({
       next: (games) => {
         this.games = games;
 
         this.startSwitchingGameCovers();
+        this.convertGameModelToLargeHighlightGameMode();
+        this.convertGameModelSmallHighlightGameMode();
       },
       error: (err) => {
         console.log(err);
@@ -63,11 +76,51 @@ export class HomeMainComponent implements OnInit {
   }
 
   private startSwitchingGameCovers(): void {
-    interval(7000).pipe(startWith(0)).subscribe(() => {
+    interval(7000).pipe(startWith(0)).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       if (this.games) {
         this.currentGameIndex = (this.currentGameIndex + 1) % this.games.length;
       }
     });
+  }
+  //#endregion
+
+  //#region helper methods
+  private convertGameModelToLargeHighlightGameMode(): void {
+    if (this.games) {
+      this.games.forEach((game) => {
+        // check if the required properties are not undefined
+        if (game.mainCover && game.logo && game.name && game.bio) {
+          const largeHighlightGame: LargeHighlightGameModel = {
+            cover: game.mainCover,
+            logo: game.logo,
+            name: game.name,
+            bio: game.bio
+          }
+
+          if (this.highlightGamesModel?.largeHighlightGames) {
+            this.highlightGamesModel.largeHighlightGames.push(largeHighlightGame);
+          }
+        }
+      });
+    }
+  }
+
+  private convertGameModelSmallHighlightGameMode(): void {
+    if (this.games) {
+      this.games.forEach((game) => {
+        // check if the required properties are not undefined
+        if (game.thumbnailCover && game.name) {
+          const smallHighlightGame: SmallHighlightGameModel = {
+            name: game.name,
+            thumbnailCover: game.thumbnailCover
+          }
+
+          if (this.highlightGamesModel?.smallHighlightGames) {
+            this.highlightGamesModel.smallHighlightGames.push(smallHighlightGame);
+          }
+        }
+      });
+    }
   }
   //#endregion
 }

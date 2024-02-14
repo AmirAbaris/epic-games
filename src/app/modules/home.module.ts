@@ -5,7 +5,6 @@ import { LargeHighlightGameComponent } from '../components/home/large-highlight-
 import { SmallHighlightGameComponent } from '../components/home/small-highlight-game/small-highlight-game.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common'
-import { MockGameService } from '../services/mock-game.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,6 +15,7 @@ import { GameCardComponent } from '../components/home/game-card/game-card.compon
 import { MatCardModule } from '@angular/material/card';
 import { FreeGameCardManagementComponent } from '../components/home/free-game-card-management/free-game-card-management.component';
 import { FreeGameCardComponent } from '../components/home/free-game-card/free-game-card.component';
+import { GameService } from '../services/game.service';
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -41,6 +41,6 @@ const homeRoutes: Routes = [
     MatCardModule,
     RouterModule.forChild(homeRoutes)
   ],
-  providers: [MockGameService]
+  providers: [GameService]
 })
 export class HomeModule { }

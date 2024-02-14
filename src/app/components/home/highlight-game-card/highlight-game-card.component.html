@@ -1,6 +1,6 @@
 <div class="flex flex-row mt-24 justify-center">
-    <app-large-highlight-game [gameInputs]="gameInputs()" [currentGameIndexInput]="currentGameIndexInput()"
+    <app-large-highlight-game [gameInputs]="gameInputs().largeHighlightGames" [currentGameIndexInput]="currentGameIndexInput()"
         [captionInput]="captionInputs().largeHighlightGameCaption" [addIconInput]="'add_circle'" />
 
-    <app-small-highlight-game [gameInputs]="gameInputs()" />
+    <app-small-highlight-game [gameInputs]="gameInputs().smallHighlightGames" />
 </div>

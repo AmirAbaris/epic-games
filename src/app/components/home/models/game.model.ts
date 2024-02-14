@@ -15,3 +15,5 @@ export interface GameModel {
     toFreeDate?: Date;
     isPublished: boolean;
 }
+
+// TODO: create a ne model for each

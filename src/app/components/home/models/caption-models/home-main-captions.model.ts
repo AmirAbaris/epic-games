@@ -1,5 +1,5 @@
 import { LargeHighlightGameCaptionModel } from "./large-highlight-game-caption.model";
 
-export interface HomeCaptionModel {
+export interface HomeMainCaptionModel {
     largeHighlightGameCaption: LargeHighlightGameCaptionModel;
 }

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MockGameService } from './mock-game.service';
+import { MockGameService } from './game.service';
 
 describe('MockGameService', () => {
   let service: MockGameService;

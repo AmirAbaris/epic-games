@@ -1,4 +1,4 @@
 export interface SmallHighlightGameModel {
-    thumbnailCover?: string;
+    thumbnailCover: string;
     name: string;
 }

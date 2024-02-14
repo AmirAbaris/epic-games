@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
-import { GameModel } from '../models/game.model';
 import { LargeHighlightGameCaptionModel } from '../models/caption-models/large-highlight-game-caption.model';
+import { LargeHighlightGameModel } from '../models/large-highlight-game.model';
 
 @Component({
   selector: 'app-large-highlight-game',
@@ -9,7 +9,7 @@ import { LargeHighlightGameCaptionModel } from '../models/caption-models/large-h
 })
 export class LargeHighlightGameComponent {
   //#region properties
-  gameInputs = input.required<GameModel[]>();
+  gameInputs = input.required<LargeHighlightGameModel[]>();
   currentGameIndexInput = input.required<number>();
   captionInput = input.required<LargeHighlightGameCaptionModel>();
   addIconInput = input.required<string>();
