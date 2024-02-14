@@ -2,16 +2,16 @@
 <div class="relative">
     <img class="rounded-2xl aspect-auto" ngSrc="{{games[currentGameIndexInput()].cover}}" width="752" height="600"
         priority alt="{{games[currentGameIndexInput()].bio}}">
-    <div class="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-end items-start gap-14 text-white p-11">
+    <div class="absolute inset-0 flex flex-col justify-end items-start gap-14 text-white p-11">
         <!-- gonna change the logo to img -->
         <!--TODO: change to img-->
         <p>{{games[currentGameIndexInput()].logo}}</p>
         <h1>{{games[currentGameIndexInput()].name}}</h1>
         <h2>{{games[currentGameIndexInput()].bio}}</h2>
         <div class="flex gap-5">
-            <button class="buy-btn" mat-raised-button>{{captionInput().buyButton}}</button>
-            <button class="add-to-wishlist-btn" mat-button> <mat-icon>{{addIconInput()}}</mat-icon>
-                {{captionInput().AddToWishlistButton}}</button>
+            <button class="bg-white text-black p-3 w-32 text-xs">{{captionInput().buyButton}}</button>
+            <button class="flex items-center gap-2 text-xs">
+                <mat-icon>{{addIconInput()}}</mat-icon>{{captionInput().AddToWishlistButton}}</button>
         </div>
     </div>
 </div>
