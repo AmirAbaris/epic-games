@@ -7,7 +7,7 @@ import { HomeMainCaptionModel } from '../models/caption-models/home-main-caption
 import { LargeHighlightGameModel } from '../models/large-highlight-game.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SmallHighlightGameModel } from '../models/small-highlight-game.model';
-import { HighlightGameModels } from '../models/highlight-game-models';
+import { HighlightGamesModel } from '../models/highlight-games-model';
 
 @Component({
   selector: 'app-home-main',
@@ -23,9 +23,7 @@ export class HomeMainComponent implements OnInit {
 
   //#region properties
   public games: GameModel[] | undefined;
-  // public largeHighlightGames: LargeHighlightGameModel[] | undefined;
-  // public smallHighlightGames: SmallHighlightGameModel[] | undefined;
-  public highlightGamesModel: HighlightGameModels = {
+  public highlightGamesModel: HighlightGamesModel = {
     largeHighlightGames: [],
     smallHighlightGames: []
   }
@@ -55,7 +53,8 @@ export class HomeMainComponent implements OnInit {
       next: (games) => {
         this.games = games;
 
-        this.startSwitchingGameCovers();
+        this.startSwitchingGames();
+
         this.convertGameModelToLargeHighlightGameMode();
         this.convertGameModelSmallHighlightGameMode();
       },
@@ -75,7 +74,7 @@ export class HomeMainComponent implements OnInit {
     });
   }
 
-  private startSwitchingGameCovers(): void {
+  private startSwitchingGames(): void {
     interval(7000).pipe(startWith(0)).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       if (this.games) {
         this.currentGameIndex = (this.currentGameIndex + 1) % this.games.length;

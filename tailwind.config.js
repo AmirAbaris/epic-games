@@ -9,18 +9,10 @@ module.exports = {
   },
   theme: {
     extend: {
-      animation: {
-        'slideRightToLeft': 'slideRightToLeft 0.5s ease-out',
-      },
-      keyframes: {
-        slideRightToLeft: {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(0%)' },
-        },
-      },
       colors: {
         darkTransparent: '#00000080',
         darkGray: '#0b0b0b',
+        nightRider: '#383434',
         darkSlate: '#121212',
         charcoal: '#1c1c1c',
         darkCharcoal: '#202020',
