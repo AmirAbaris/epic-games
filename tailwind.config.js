@@ -12,6 +12,7 @@ module.exports = {
       colors: {
         darkTransparent: '#00000080',
         darkGray: '#0b0b0b',
+        darkBackground: '#424242',
         nightRider: '#383434',
         darkSlate: '#121212',
         charcoal: '#1c1c1c',

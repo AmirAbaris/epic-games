@@ -3,6 +3,14 @@
         "LargeHighlightGame": {
             "buyButton": "BUY NOW",
             "AddToWishlistButton": "ADD TO WISHLIST"
+        },
+        "FreeGameCardManagement": {
+            "freeGamesTitle": "Free Games",
+            "viewMoreTitle": "View More"
+        },
+        "FreeGameCard": {
+            "freeNowTitle": "FREE NOW",
+            "comingSoonTitle": "COMING SOON"
         }
     }
 }

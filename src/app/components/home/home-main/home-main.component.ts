@@ -32,11 +32,23 @@ export class HomeMainComponent implements OnInit {
     largeHighlightGameCaption: {
       buyButton: '',
       AddToWishlistButton: ''
+    },
+    freeCardCaptions: {
+      freeGameCardManagementCaption: {
+        freeGamesTitle: '',
+        viewMoreTitle: ''
+      },
+      freeGameCardCaption: {
+        freeNowTitle: '',
+        comingSoonTitle: ''
+      }
     }
   };
 
   private readonly captionPaths = {
-    'largeHighlightGame': 'home.LargeHighlightGame'
+    'largeHighlightGame': 'home.LargeHighlightGame',
+    'freeGameCardManagement': 'home.FreeGameCardManagement',
+    'freeGameCard': 'home.FreeGameCard'
   }
   //#endregion
 
@@ -68,8 +80,18 @@ export class HomeMainComponent implements OnInit {
     this.translateService.get(this.captionPaths.largeHighlightGame).subscribe({
       next: (caption) => {
         this.homeCaptions.largeHighlightGameCaption = caption;
+      }
+    });
 
-        console.log(caption.buyButton);
+    this.translateService.get(this.captionPaths.freeGameCardManagement).subscribe({
+      next: (caption) => {
+        this.homeCaptions.freeCardCaptions.freeGameCardManagementCaption = caption;
+      }
+    });
+
+    this.translateService.get(this.captionPaths.freeGameCard).subscribe({
+      next: (caption) => {
+        this.homeCaptions.freeCardCaptions.freeGameCardCaption = caption;
       }
     });
   }

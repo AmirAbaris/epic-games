@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { GameModel } from '../models/game.model';
+import { FreeCardCaptionsModel } from '../models/caption-models/free-card-captions.model';
 
 @Component({
   selector: 'app-free-game-card-management',
@@ -9,5 +10,7 @@ import { GameModel } from '../models/game.model';
 export class FreeGameCardManagementComponent {
   //#region properties
   public gameInputs = input.required<GameModel[]>();
+  public captionInput = input.required<FreeCardCaptionsModel>();
+  public iconInput = input.required<string>();
   //#endregion
 }
