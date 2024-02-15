@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-center gap-8 ml-7 h-full">
+<div class="flex-col justify-center gap-8 ml-7 mt-4 sm:hidden lg:flex">
     @for (game of gameInputs(); track $index) {
     <div class="flex flex-row gap-2 items-center p-4 rounded-xl"
         [@cardAnimation]="$index === currentGameIndexInput() ? 'active' : 'inactive'">
