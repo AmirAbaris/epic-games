@@ -17,6 +17,8 @@ import { FreeGameCardManagementComponent } from '../components/home/free-game-ca
 import { FreeGameCardComponent } from '../components/home/free-game-card/free-game-card.component';
 import { GameService } from '../services/game.service';
 import { SwiperDirective } from '../directives/swiper.directive';
+import { FortniteCardComponent } from '../components/home/fortnite-card/fortnite-card.component';
+import { FortniteCardManagementComponent } from '../components/home/fortnite-card-management/fortnite-card-management.component';
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -31,7 +33,9 @@ const homeRoutes: Routes = [
     GameCardComponent,
     GameCardManagementComponent,
     FreeGameCardManagementComponent,
-    FreeGameCardComponent
+    FreeGameCardComponent,
+    FortniteCardManagementComponent,
+    FortniteCardComponent
   ],
   imports: [
     CommonModule,

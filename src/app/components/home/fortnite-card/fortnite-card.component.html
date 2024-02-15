@@ -1,0 +1,11 @@
+@for (game of gameInput(); track $index) {
+<div class="flex flex-col flex-wrap items-center">
+    @if (game.isFortnite) {
+    <img class="rounded-md mt-16" ngSrc="{{game.mainCover}}" width="384" height="200" alt="{{game.name}}">
+    <div class="flex flex-col items-start justify-start text-white text-xs gap-2 w-96 mt-2">
+        <h1>{{game.type}}</h1>
+        <h2>{{game.name}}</h2>
+    </div>
+    }
+</div>
+}

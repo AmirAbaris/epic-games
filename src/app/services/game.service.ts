@@ -3,7 +3,7 @@ import { GameModel } from '../components/home/models/game.model';
 import { Observable, of } from 'rxjs';
 
 @Injectable()
-export class GameService { // TODO: change name to game, move out of constructor!
+export class GameService {
   //#region properties
   public games: GameModel[] | undefined;
   //#endregion
@@ -32,7 +32,8 @@ const games = [
     isFree: false,
     fromFreeDate: new Date(),
     toFreeDate: new Date(),
-    isPublished: true
+    isPublished: true,
+    isFortnite: false
   },
   {
     id: '12',
@@ -49,7 +50,8 @@ const games = [
     isFree: true,
     fromFreeDate: new Date(),
     toFreeDate: new Date(),
-    isPublished: true
+    isPublished: true,
+    isFortnite: false
   },
   {
     id: '12',
@@ -67,7 +69,8 @@ const games = [
     isFree: false,
     fromFreeDate: new Date(),
     toFreeDate: new Date(),
-    isPublished: true
+    isPublished: true,
+    isFortnite: false
   },
   {
     id: '13',
@@ -84,7 +87,31 @@ const games = [
     isFree: false,
     fromFreeDate: new Date(),
     toFreeDate: new Date(),
-    isPublished: true
+    isPublished: true,
+    isFortnite: false
+  },
+
+  // fortnite card data
+  {
+    name: 'lego fortnite',
+    mainCover: '../assets/game-covers/FNJN_01_EGS_Launcher_Blade_2560x1440_2560x1440-9b2da247e66cc11c447d59784923efbd.jpeg',
+    type: 'EXPERIENCE',
+    isFree: true,
+    isFortnite: true
+  },
+  {
+    name: 'fortnite battle royale',
+    mainCover: '../assets/game-covers/28BR_C5S1_EGS_Launcher_Blade_2560x1440_2560x1440-e598d8d28d63a6deafe2b14a2e42cd01.jpeg',
+    type: 'EXPERIENCE',
+    isFree: true,
+    isFortnite: true
+  },
+  {
+    name: 'fortnite festival',
+    mainCover: '../assets/game-covers/FNSP_01_EGS_Launcher_Blade_2560x1440_2560x1440-966445d9d0e9b389b765a8d3da6badb6.jpeg',
+    type: 'EXPERIENCE',
+    isFree: true,
+    isFortnite: true
   }
 ];
 
