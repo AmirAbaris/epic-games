@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { register } from 'swiper/element/bundle';
+import { SwiperDirective } from './directives/swiper.directive';
 // register swiper
 register();
 
@@ -19,7 +20,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SwiperDirective
   ],
   imports: [
     BrowserModule,

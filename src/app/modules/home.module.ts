@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeMainComponent } from '../components/home/home-main/home-main.component';
 import { LargeHighlightGameComponent } from '../components/home/large-highlight-game/large-highlight-game.component';
@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { FreeGameCardManagementComponent } from '../components/home/free-game-card-management/free-game-card-management.component';
 import { FreeGameCardComponent } from '../components/home/free-game-card/free-game-card.component';
 import { GameService } from '../services/game.service';
+import { SwiperDirective } from '../directives/swiper.directive';
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -41,6 +42,7 @@ const homeRoutes: Routes = [
     MatCardModule,
     RouterModule.forChild(homeRoutes)
   ],
-  providers: [GameService]
+  providers: [GameService, SwiperDirective],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeModule { }

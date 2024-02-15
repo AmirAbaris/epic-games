@@ -1,8 +1,9 @@
 <mat-card>
-    <div class="flex flex-row flex-wrap gap-6 mt-20 mx-16">
+    <div class="flex flex-row flex-wrap justify-center gap-6 mt-20 mx-16">
         @for (gameCard of gameCardInputs(); track $index) {
         <div>
-            <img class="rounded-md" ngSrc="{{gameCard.cardCover}}" width="232" height="320" alt="{{gameCard.name}}">
+            <img class="rounded-md w-full lg:w-52" ngSrc="{{gameCard.cardCover}}" width="300" height="400"
+                alt="{{gameCard.name}}">
             <h1 class="text-xs font-thin my-1">{{gameCard.type}}</h1>
             <h2>{{gameCard.name}}</h2>
             <div class="flex flex-row gap-5 items-center text-sm mt-2">
