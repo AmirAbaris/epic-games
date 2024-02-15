@@ -1,5 +1,4 @@
 import { Component, input } from '@angular/core';
-import { GameCardModel } from '../models/game-card.model';
 import { GameModel } from '../models/game.model';
 
 @Component({
