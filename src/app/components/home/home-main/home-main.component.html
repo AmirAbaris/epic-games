@@ -1,8 +1,7 @@
-@if (games && highlightGamesModel && gameListItem) {
 <app-highlight-game-card [gameInputs]="highlightGamesModel" [currentGameIndexInput]="currentGameIndex"
     [captionInputs]="homeCaptions" />
 
-<app-game-card-management [gameCardInputs]="games" />
+<app-game-card-management [gameCardInputs]="gameCard" />
 
 <app-free-game-card-management [gameInputs]="games" [captionInput]="homeCaptions.freeCardCaptions"
     [iconInput]="'redeem'" />
@@ -10,4 +9,5 @@
 <app-fortnite-card-management [gameInput]="games" />
 
 <app-game-list-management [gameInput]="gameListItem" />
-}
+
+<app-game-card-management [gameCardInputs]="games" />

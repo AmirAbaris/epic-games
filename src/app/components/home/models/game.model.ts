@@ -1,5 +1,4 @@
 export interface GameModel {
-    id?: string;
     logo?: string;
     mainCover?: string;
     mainMobileCover?: string;

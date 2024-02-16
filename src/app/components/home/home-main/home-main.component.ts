@@ -9,6 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SmallHighlightGameModel } from '../models/small-highlight-game.model';
 import { HighlightGamesModel } from '../models/highlight-games-model';
 import { GameListItemModel } from '../models/game-list-item.model';
+import { GameCardModel } from '../models/game-card.model';
 
 @Component({
   selector: 'app-home-main',
@@ -23,12 +24,13 @@ export class HomeMainComponent implements OnInit {
   //#endregion
 
   //#region properties
-  public games: GameModel[] | undefined;
+  public games: GameModel[] = [];
   public gameListItem: GameListItemModel[] = [];
   public highlightGamesModel: HighlightGamesModel = {
     largeHighlightGames: [],
     smallHighlightGames: []
   }
+  public gameCard: GameCardModel[] = [];
   public currentGameIndex: number = 0;
   public homeCaptions: HomeMainCaptionModel = {
     largeHighlightGameCaption: {
@@ -71,7 +73,8 @@ export class HomeMainComponent implements OnInit {
 
         this.convertGameModelToLargeHighlightGameMode();
         this.convertGameModelSmallHighlightGameMode();
-        this.convertGameModelToGameListItemMode();
+        this.convertGameModelToGameCardModel();
+        this.convertGameModelToGameListItemModel();
       },
       error: (err) => {
         console.log(err);
@@ -148,12 +151,11 @@ export class HomeMainComponent implements OnInit {
     }
   }
 
-  private convertGameModelToGameListItemMode(): void {
+  private convertGameModelToGameListItemModel(): void {
     if (this.games) {
       this.games.forEach((game) => {
         // check if the required properties are not undefined
         const gameItem: GameListItemModel = {
-          id: game.id,
           thumbnailCover: game.thumbnailCover,
           name: game.name,
           discountPercent: game.discountPercent,
@@ -166,6 +168,25 @@ export class HomeMainComponent implements OnInit {
 
         if (this.gameListItem) {
           this.gameListItem.push(gameItem);
+        }
+      });
+    }
+  }
+  private convertGameModelToGameCardModel(): void {
+    if (this.games) {
+      this.games.forEach((game) => {
+        const games: GameCardModel = {
+          name: game.name,
+          type: game.type,
+          discountPercent: game.discountPercent,
+          basePrice: game.basePrice,
+          finalPrice: game.finalPrice,
+          isFree: game.isFree,
+          cover: game.cardCover
+        }
+
+        if (this.gameCard) {
+          this.gameCard.push(games);
         }
       });
     }

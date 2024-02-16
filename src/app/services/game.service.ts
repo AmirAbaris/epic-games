@@ -4,10 +4,6 @@ import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class GameService {
-  //#region properties
-  public games: GameModel[] | undefined;
-  //#endregion
-
   //#region handler methods
   public getGames(): Observable<GameModel[]> {
     return of(games || []);

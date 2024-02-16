@@ -1,1 +1,6 @@
-<app-game-item-list [gameInput]="gameInput()" />
+<div>
+    @for (game of gameInput(); track $index) {
+    <h1>{{game.categoryType}}</h1>
+    }
+    <app-game-item-list [gameInput]="gameInput()" />
+</div>
