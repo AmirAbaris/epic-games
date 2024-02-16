@@ -1,4 +1,4 @@
-@if (games && highlightGamesModel) {
+@if (games && highlightGamesModel && gameListItem) {
 <app-highlight-game-card [gameInputs]="highlightGamesModel" [currentGameIndexInput]="currentGameIndex"
     [captionInputs]="homeCaptions" />
 
@@ -9,5 +9,5 @@
 
 <app-fortnite-card-management [gameInput]="games" />
 
-<app-game-list-management />
+<app-game-list-management [gameInput]="gameListItem" />
 }

@@ -8,6 +8,7 @@ import { LargeHighlightGameModel } from '../models/large-highlight-game.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SmallHighlightGameModel } from '../models/small-highlight-game.model';
 import { HighlightGamesModel } from '../models/highlight-games-model';
+import { GameListItemModel } from '../models/game-list-item.model';
 
 @Component({
   selector: 'app-home-main',
@@ -23,6 +24,7 @@ export class HomeMainComponent implements OnInit {
 
   //#region properties
   public games: GameModel[] | undefined;
+  public gameListItem: GameListItemModel[] | undefined;
   public highlightGamesModel: HighlightGamesModel = {
     largeHighlightGames: [],
     smallHighlightGames: []
@@ -69,6 +71,7 @@ export class HomeMainComponent implements OnInit {
 
         this.convertGameModelToLargeHighlightGameMode();
         this.convertGameModelSmallHighlightGameMode();
+        this.convertGameModelToGameListItemMode();
       },
       error: (err) => {
         console.log(err);
@@ -140,6 +143,29 @@ export class HomeMainComponent implements OnInit {
           if (this.highlightGamesModel?.smallHighlightGames) {
             this.highlightGamesModel.smallHighlightGames.push(smallHighlightGame);
           }
+        }
+      });
+    }
+  }
+
+  private convertGameModelToGameListItemMode(): void {
+    if (this.games) {
+      this.games.forEach((game) => {
+        // check if the required properties are not undefined
+        const gameItem: GameListItemModel = {
+          id: game.id,
+          cardCover: game.cardCover,
+          name: game.name,
+          discountPercent: game.discountPercent,
+          basePrice: game.basePrice,
+          finalPrice: game.finalPrice,
+          isFree: game.isFree,
+          isFortnite: game.isFortnite,
+          categoryType: game.categoryType
+        }
+
+        if (this.gameListItem) {
+          this.gameListItem.push(gameItem);
         }
       });
     }

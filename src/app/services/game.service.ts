@@ -51,7 +51,8 @@ const games = [
     fromFreeDate: new Date(),
     toFreeDate: new Date(),
     isPublished: true,
-    isFortnite: false
+    isFortnite: false,
+    categoryType: 'new releases'
   },
   {
     id: '12',
@@ -70,7 +71,8 @@ const games = [
     fromFreeDate: new Date(),
     toFreeDate: new Date(),
     isPublished: true,
-    isFortnite: false
+    isFortnite: false,
+    categoryType: 'new releases'
   },
   {
     id: '13',
@@ -88,7 +90,27 @@ const games = [
     fromFreeDate: new Date(),
     toFreeDate: new Date(),
     isPublished: true,
-    isFortnite: false
+    isFortnite: false,
+    categoryType: 'top player rated'
+  },
+  {
+    id: '14',
+    logo: 'Game y Logo',
+    mainCover: '../assets/game-covers/egs-honkai-star-rail-version-2-0-carousel-desktop-2560x1440-d3b790cf05dd.jpg',
+    thumbnailCover: '../assets/game-covers/egs-outriders-complete-edition-carousel-thumb-1200x1600-9ca95962e046.jpg',
+    cardCover: '../assets/game-covers/outbreak-epidemic-viral-terror-qpcx5.jpg',
+    type: 'puzzle',
+    name: 'Game 3',
+    bio: 'Game 3 bio',
+    discountPercent: 10,
+    basePrice: 45,
+    finalPrice: 40.50,
+    isFree: false,
+    fromFreeDate: new Date(),
+    toFreeDate: new Date(),
+    isPublished: true,
+    isFortnite: false,
+    categoryType: 'coming soon'
   },
 
   // fortnite card data

@@ -16,6 +16,7 @@ export interface GameModel {
     toFreeDate?: Date;
     isPublished?: boolean;
     isFortnite: boolean;
+    categoryType?: string;
 }
 
 // TODO: create a ne model for each

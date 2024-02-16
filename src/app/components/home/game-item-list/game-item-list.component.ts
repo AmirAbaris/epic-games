@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { GameListItemModel } from '../models/game-list-item.model';
 
 @Component({
   selector: 'app-game-item-list',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './game-item-list.component.scss'
 })
 export class GameItemListComponent {
-
+  //#region properties
+  gameInput = input.required<GameListItemModel[]>();
+  //#endregion
 }
