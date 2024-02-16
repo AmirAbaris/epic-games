@@ -1,6 +1,6 @@
 export interface GameListItemModel {
     id?: string;
-    cardCover?: string;
+    thumbnailCover?: string;
     name: string;
     discountPercent?: number;
     basePrice?: number;

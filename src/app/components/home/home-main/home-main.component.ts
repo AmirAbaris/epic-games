@@ -24,7 +24,7 @@ export class HomeMainComponent implements OnInit {
 
   //#region properties
   public games: GameModel[] | undefined;
-  public gameListItem: GameListItemModel[] | undefined;
+  public gameListItem: GameListItemModel[] = [];
   public highlightGamesModel: HighlightGamesModel = {
     largeHighlightGames: [],
     smallHighlightGames: []
@@ -154,7 +154,7 @@ export class HomeMainComponent implements OnInit {
         // check if the required properties are not undefined
         const gameItem: GameListItemModel = {
           id: game.id,
-          cardCover: game.cardCover,
+          thumbnailCover: game.thumbnailCover,
           name: game.name,
           discountPercent: game.discountPercent,
           basePrice: game.basePrice,
