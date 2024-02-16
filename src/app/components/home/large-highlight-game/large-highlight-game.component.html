@@ -1,11 +1,11 @@
 <section class="hidden lg:flex">
     @if (gameInputs(); as games) {
     <div class="lg:relative">
-        <img class="rounded-2xl aspect-auto" ngSrc="{{games[currentGameIndexInput()].cover}}" width="752" height="600"
+        <img class="rounded-2xl aspect-auto" ngSrc="{{games[currentGameIndexInput()].cover}}" width="680" height="384"
             priority alt="{{games[currentGameIndexInput()].bio}}">
         <img class="absolute top-32 left-9" ngSrc="{{games[currentGameIndexInput()].logo}}" width="200" height="100"
             priority alt="{{games[currentGameIndexInput()].bio}}">
-        <h2 class="absolute bottom-48 left-9 text-white">{{games[currentGameIndexInput()].bio}}</h2>
+        <h2 class="absolute bottom-44 left-9 text-white">{{games[currentGameIndexInput()].bio}}</h2>
         <div class="absolute bottom-5 left-9 flex items-center gap-6 mb-7">
             <button class="buy-btn" mat-raised-button>{{captionInput().buyButton}}</button>
             <button class="" mat-button>
