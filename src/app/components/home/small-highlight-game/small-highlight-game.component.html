@@ -1,6 +1,6 @@
-<div class="flex-col justify-center items-center ml-7 gap-3 h-96 hidden lg:flex">
+<div class="flex-col justify-between items-center ml-7 h-96 hidden lg:flex">
     @for (game of gameInputs().slice(0, 4); track $index) {
-    <div class="flex flex-row gap-2 items-center p-4 rounded-xl"
+    <div class="flex flex-row gap-2 items-center p-4 rounded-xl cursor-pointer" (click)="selectGameIndex($index)"
         [@cardAnimation]="$index === currentGameIndexInput() ? 'active' : 'inactive'">
         <img class="rounded-lg" ngSrc="{{game.thumbnailCover}}" height="25" width="33" alt="{{game.name}}">
         <h1 class="text-lightGray text-sm">{{game.name}}</h1>
