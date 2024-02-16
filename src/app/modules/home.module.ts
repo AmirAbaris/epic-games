@@ -6,7 +6,6 @@ import { SmallHighlightGameComponent } from '../components/home/small-highlight-
 import { RouterModule, Routes } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common'
 import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { HighlightGameCardComponent } from '../components/home/highlight-game-card/highlight-game-card.component';
@@ -19,6 +18,9 @@ import { GameService } from '../services/game.service';
 import { SwiperDirective } from '../directives/swiper.directive';
 import { FortniteCardComponent } from '../components/home/fortnite-card/fortnite-card.component';
 import { FortniteCardManagementComponent } from '../components/home/fortnite-card-management/fortnite-card-management.component';
+import { GameItemListComponent } from '../components/home/game-item-list/game-item-list.component';
+import { GameListManagementComponent } from '../components/home/game-list-management/game-list-management.component';
+import { GameListComponent } from '../components/home/game-list/game-list.component';
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -35,7 +37,10 @@ const homeRoutes: Routes = [
     FreeGameCardManagementComponent,
     FreeGameCardComponent,
     FortniteCardManagementComponent,
-    FortniteCardComponent
+    FortniteCardComponent,
+    GameListManagementComponent,
+    GameListComponent,
+    GameItemListComponent
   ],
   imports: [
     CommonModule,
