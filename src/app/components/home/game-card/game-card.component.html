@@ -1,6 +1,7 @@
 <mat-card>
     <div class="flex flex-row flex-wrap justify-center gap-6 mt-20 mx-16 mb-4">
         @for (game of gameCardInputs(); track $index) {
+        @if (!game.isFortnite) {
         <div>
             <img class="rounded-md w-full lg:w-52" ngSrc="{{game.cover}}" width="300" height="400" alt="{{game.name}}">
             <h1 class="text-xs font-thin my-1">{{game.type}}</h1>
@@ -15,6 +16,7 @@
                 <h5>{{game.finalPrice | currency: 'USD' : 'symbol' : '1.0-0'}}</h5>
             </div>
         </div>
+        }
         }
     </div>
 </mat-card>

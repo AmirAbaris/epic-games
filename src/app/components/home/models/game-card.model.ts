@@ -6,4 +6,5 @@ export interface GameCardModel {
     finalPrice?: number;
     isFree?: boolean;
     cover?: string;
+    isFortnite: boolean;
 }

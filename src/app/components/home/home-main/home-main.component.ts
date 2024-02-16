@@ -182,7 +182,8 @@ export class HomeMainComponent implements OnInit {
           basePrice: game.basePrice,
           finalPrice: game.finalPrice,
           isFree: game.isFree,
-          cover: game.cardCover
+          cover: game.cardCover,
+          isFortnite: game.isFortnite
         }
 
         if (this.gameCard) {
