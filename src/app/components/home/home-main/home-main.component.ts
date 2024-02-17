@@ -10,6 +10,7 @@ import { SmallHighlightGameModel } from '../models/small-highlight-game.model';
 import { HighlightGamesModel } from '../models/highlight-games-model';
 import { GameListItemModel } from '../models/game-list-item.model';
 import { GameCardModel } from '../models/game-card.model';
+import { FreeGameCardModel } from '../models/free-game-card.model';
 
 @Component({
   selector: 'app-home-main',
@@ -26,6 +27,7 @@ export class HomeMainComponent implements OnInit {
   //#region properties
   public games: GameModel[] = [];
   public gameListItem: GameListItemModel[] = [];
+  public freeGameCard: FreeGameCardModel[] = [];
   public highlightGamesModel: HighlightGamesModel = {
     largeHighlightGames: [],
     smallHighlightGames: []
@@ -71,10 +73,7 @@ export class HomeMainComponent implements OnInit {
 
         this.startSwitchingGames();
 
-        this.convertGameModelToLargeHighlightGameMode();
-        this.convertGameModelSmallHighlightGameMode();
-        this.convertGameModelToGameCardModel();
-        this.convertGameModelToGameListItemModel();
+        this.callModelConvertors();
       },
       error: (err) => {
         console.log(err);
@@ -128,6 +127,25 @@ export class HomeMainComponent implements OnInit {
           if (this.highlightGamesModel?.largeHighlightGames) {
             this.highlightGamesModel.largeHighlightGames.push(largeHighlightGame);
           }
+        }
+      });
+    }
+  }
+
+  private convertGameModelTFreeGameCardModel(): void {
+    if (this.games) {
+      this.games.forEach((game) => {
+        const games: FreeGameCardModel = {
+          name: game.name,
+          type: game.type,
+          isFree: game.isFree,
+          cover: game.cardCover,
+          isFortnite: game.isFortnite,
+          isPublished: game.isPublished
+        }
+
+        if (this.freeGameCard) {
+          this.freeGameCard.push(games);
         }
       });
     }
@@ -191,6 +209,14 @@ export class HomeMainComponent implements OnInit {
         }
       });
     }
+  }
+
+  private callModelConvertors(): void {
+    this.convertGameModelToLargeHighlightGameMode();
+    this.convertGameModelSmallHighlightGameMode();
+    this.convertGameModelToGameCardModel();
+    this.convertGameModelTFreeGameCardModel();
+    this.convertGameModelToGameListItemModel();
   }
   //#endregion
 }

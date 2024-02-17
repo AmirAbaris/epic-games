@@ -2,18 +2,20 @@
     <div class="flex flex-row justify-center items-center flex-wrap gap-6 bg-darkBackground">
         @for (game of gameInputs(); track $index) {
         @if (!game.isFortnite) {
+        @if (game.isFree) {
         <div>
-            <img class="rounded-t-md lg:w-72 lg:h-80 lg:object-cover" ngSrc="{{game.mainCover}}" width="200"
-                height="300" alt="{{game.name}}">
-            @if (game.isFree) {
+            <img class="rounded-t-md lg:w-72 lg:h-80 lg:object-cover" ngSrc="{{game.cover}}" width="200" height="300"
+                alt="{{game.name}}">
+            @if (!game.isPublished) {
             <div class="bg-vividBlue text-white text-center py-1 rounded-b-md">{{captionInput().freeNowTitle}}</div>
             }
-            @else {
+            @else if (game.isPublished) {
             <div class="bg-darkGray text-lightGray text-center py-1 rounded-b-md">{{captionInput().comingSoonTitle}}
             </div>
             }
             <h1 class="my-4 text-lightGray">{{game.name}}</h1>
         </div>
+        }
         }
         }
     </div>
