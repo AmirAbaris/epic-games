@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { GameModel } from '../models/game.model';
+import { FortniteCardModel } from '../models/fortnite-card.model';
 
 @Component({
   selector: 'app-fortnite-card-management',
@@ -8,6 +8,6 @@ import { GameModel } from '../models/game.model';
 })
 export class FortniteCardManagementComponent {
   //#region properties
-  gameInput = input.required<GameModel[]>();
+  gameInput = input.required<FortniteCardModel[]>();
   //#region 
 }

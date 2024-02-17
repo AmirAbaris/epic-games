@@ -11,6 +11,7 @@ import { HighlightGamesModel } from '../models/highlight-games-model';
 import { GameListItemModel } from '../models/game-list-item.model';
 import { GameCardModel } from '../models/game-card.model';
 import { FreeGameCardModel } from '../models/free-game-card.model';
+import { FortniteCardModel } from '../models/fortnite-card.model';
 
 @Component({
   selector: 'app-home-main',
@@ -28,6 +29,7 @@ export class HomeMainComponent implements OnInit {
   public games: GameModel[] = [];
   public gameListItem: GameListItemModel[] = [];
   public freeGameCard: FreeGameCardModel[] = [];
+  public fortniteCard: FortniteCardModel[] = [];
   public highlightGamesModel: HighlightGamesModel = {
     largeHighlightGames: [],
     smallHighlightGames: []
@@ -190,7 +192,8 @@ export class HomeMainComponent implements OnInit {
       });
     }
   }
-  private convertGameModelToGameCardModel(): void {
+
+  private convertGameModelToFortniteCardModel(): void {
     if (this.games) {
       this.games.forEach((game) => {
         const games: GameCardModel = {
@@ -211,10 +214,28 @@ export class HomeMainComponent implements OnInit {
     }
   }
 
+  private convertGameModelToGameCardModel(): void {
+    if (this.games) {
+      this.games.forEach((game) => {
+        const games: FortniteCardModel = {
+          cover: game.mainCover,
+          name: game.name,
+          type: game.type,
+          isFortnite: game.isFortnite
+        }
+
+        if (this.fortniteCard) {
+          this.fortniteCard.push(games);
+        }
+      });
+    }
+  }
+
   private callModelConvertors(): void {
     this.convertGameModelToLargeHighlightGameMode();
     this.convertGameModelSmallHighlightGameMode();
     this.convertGameModelToGameCardModel();
+    this.convertGameModelToFortniteCardModel();
     this.convertGameModelTFreeGameCardModel();
     this.convertGameModelToGameListItemModel();
   }

@@ -1,5 +1,4 @@
 import { Component, input } from '@angular/core';
-import { GameModel } from '../models/game.model';
 import { FreeCardCaptionsModel } from '../models/caption-models/free-card-captions.model';
 import { FreeGameCardModel } from '../models/free-game-card.model';
 
