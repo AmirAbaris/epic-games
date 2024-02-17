@@ -9,6 +9,9 @@ module.exports = {
   },
   theme: {
     extend: {
+      height: {
+        '128': '32rem',
+      },
       colors: {
         darkTransparent: '#00000080',
         darkGray: '#0b0b0b',

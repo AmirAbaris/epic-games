@@ -1,13 +1,13 @@
-@for (game of gameInput(); track $index) {
-<div class="flex flex-col flex-wrap items-center lg:flex-row">
+<div class="flex flex-col flex-wrap items-center p-5 lg:flex-row lg:justify-around">
+    @for (game of gameInput(); track $index) {
     @if (game.isFortnite) {
     <div>
-        <img class="rounded-md mt-16" ngSrc="{{game.cover}}" width="384" height="200" alt="{{game.name}}">
-        <div class="flex flex-col items-start justify-start text-white text-xs gap-2 w-96 mt-2">
+        <img class="rounded-md" ngSrc="{{game.cover}}" width="450" height="350" alt="{{game.name}}">
+        <div class="flex flex-col items-start justify-start text-white text-xs gap-2 mt-2">
             <h1>{{game.type}}</h1>
-            <h2>{{game.name}}</h2>
+            <h2 class="mb-10">{{game.name}}</h2>
         </div>
     </div>
     }
+    }
 </div>
-}
