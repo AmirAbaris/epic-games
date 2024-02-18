@@ -87,7 +87,7 @@ const games = [
     toFreeDate: new Date(),
     isPublished: true,
     isFortnite: false,
-    categoryType: 'new releases'
+    categoryType: 'New Releases'
   },
   {
     id: '13',
@@ -106,7 +106,7 @@ const games = [
     toFreeDate: new Date(),
     isPublished: true,
     isFortnite: false,
-    categoryType: 'top player rated',
+    categoryType: 'Top Player Rated',
   },
   {
     id: '14',
@@ -125,7 +125,7 @@ const games = [
     toFreeDate: new Date(),
     isPublished: false,
     isFortnite: false,
-    categoryType: 'coming soon'
+    categoryType: 'Coming Soon'
   },
   {
     id: '14',

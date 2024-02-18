@@ -1,7 +1,13 @@
+@for (game of gameInput(); track $index) {
 <div class="flex flex-row">
-    @for (game of gameInput(); track $index) {
-    <h1>{{game.categoryType}}</h1>
-    <app-game-item-list class="flex flex-col" [gameInput]="gameInput()" [categoryType]="game.categoryType" />
-    }
-    <!-- <mat-divider /> -->
+    <h1>New Releases</h1>
+    <app-game-item-list class="flex flex-col" [gameInput]="gameInput()" [categoryType]="'New Releases'" />
+
+    <h2>Top Player Rated</h2>
+    <app-game-item-list class="flex flex-col" [gameInput]="gameInput()" [categoryType]="'Top Player Rated'" />
+
+    <h3>Coming Soon</h3>
+    <app-game-item-list class="flex flex-col" [gameInput]="gameInput()" [categoryType]="'Coming Soon'" />
 </div>
+}
+<!-- <mat-divider /> -->
