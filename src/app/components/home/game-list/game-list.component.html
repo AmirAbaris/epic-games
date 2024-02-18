@@ -1,13 +1,12 @@
 @for (game of gameInput(); track $index) {
 <div class="flex flex-row">
     <h1>New Releases</h1>
-    <app-game-item-list class="flex flex-col" [gameInput]="gameInput()" [categoryType]="'New Releases'" />
+    <app-game-item-list [gameInput]="gameInput()" [categoryType]="'New Releases'" />
 
     <h2>Top Player Rated</h2>
-    <app-game-item-list class="flex flex-col" [gameInput]="gameInput()" [categoryType]="'Top Player Rated'" />
+    <app-game-item-list [gameInput]="gameInput()" [categoryType]="'Top Player Rated'" />
 
     <h3>Coming Soon</h3>
-    <app-game-item-list class="flex flex-col" [gameInput]="gameInput()" [categoryType]="'Coming Soon'" />
+    <app-game-item-list [gameInput]="gameInput()" [categoryType]="'Coming Soon'" />
 </div>
 }
-<!-- <mat-divider /> -->
