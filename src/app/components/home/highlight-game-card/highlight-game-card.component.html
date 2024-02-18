@@ -4,5 +4,5 @@
         [addIconInput]="'add_circle'" />
 
     <app-small-highlight-game [gameInputs]="gameInputs().smallHighlightGames"
-        [currentGameIndexInput]="currentGameIndexInput()" (selectGame)="currentGameIndexInput()" />
+        [currentGameIndexInput]="currentGameIndexInput()" (targetGameIndex)="$event" />
 </div>

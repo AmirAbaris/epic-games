@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, EventEmitter, Output, computed, effect, input } from '@angular/core';
 import { SmallHighlightGameModel } from '../models/small-highlight-game.model';
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 
@@ -33,12 +33,12 @@ export class SmallHighlightGameComponent {
   gameInputs = input.required<SmallHighlightGameModel[]>();
   currentGameIndexInput = input.required<number>();
 
-  @Output() selectGame = new EventEmitter<number>();
+  @Output() targetGameIndex = new EventEmitter<number>();
   //#endregion
 
   //#region handler methods
   public selectGameIndex(index: number): void {
-    this.selectGame.emit(index);
+    this.targetGameIndex.emit(index);
   }
   //#endregion
 }
