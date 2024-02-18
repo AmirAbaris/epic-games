@@ -21,6 +21,7 @@ import { FortniteCardManagementComponent } from '../components/home/fortnite-car
 import { GameItemListComponent } from '../components/home/game-item-list/game-item-list.component';
 import { GameListManagementComponent } from '../components/home/game-list-management/game-list-management.component';
 import { GameListComponent } from '../components/home/game-list/game-list.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -49,6 +50,7 @@ const homeRoutes: Routes = [
     HttpClientModule,
     MatIconModule,
     MatCardModule,
+    MatDividerModule,
     RouterModule.forChild(homeRoutes)
   ],
   providers: [GameService, SwiperDirective],

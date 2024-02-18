@@ -9,5 +9,6 @@ import { GameListItemModel } from '../models/game-list-item.model';
 export class GameItemListComponent {
   //#region properties
   gameInput = input.required<GameListItemModel[]>();
+  categoryType = input<string>();
   //#endregion
 }

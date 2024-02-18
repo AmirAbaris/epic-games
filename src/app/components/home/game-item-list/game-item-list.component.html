@@ -1,5 +1,5 @@
 @for (game of gameInput(); track $index) {
-@if (!game.isFortnite) {
+@if (!game.isFortnite && game.categoryType === categoryType()) {
 <div class="flex flex-row gap-4 mt-4">
     <img class="rounded-md" ngSrc="{{game.thumbnailCover}}" width="48" height="64" alt="{{game.name}}">
     @if (game.isFree) {
@@ -21,7 +21,6 @@
         </div>
     </div>
     }
-
 </div>
 }
 }

@@ -1,6 +1,7 @@
-<div>
+<div class="flex flex-row">
     @for (game of gameInput(); track $index) {
     <h1>{{game.categoryType}}</h1>
+    <app-game-item-list class="flex flex-col" [gameInput]="gameInput()" [categoryType]="game.categoryType" />
     }
-    <app-game-item-list [gameInput]="gameInput()" />
+    <!-- <mat-divider /> -->
 </div>
