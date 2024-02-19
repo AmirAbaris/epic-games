@@ -12,6 +12,7 @@ import { register } from 'swiper/element/bundle';
 import { SwiperDirective } from './directives/swiper.directive';
 // register swiper
 register();
+// TODO: use swiper and tell the results
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
