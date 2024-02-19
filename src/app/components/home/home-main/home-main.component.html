@@ -1,6 +1,7 @@
-<app-highlight-game-card [gameInputs]="highlightGamesModel" [currentGameIndexInput]="currentGameIndex"
-    [captionInputs]="homeCaptions" />
-
+@if (highlightGames) {
+<app-highlight-game-card [gameInputs]="highlightGames" [captionInputs]="homeCaptions" />
+}
+<!-- 
 <app-game-card-management [gameCardInputs]="gameCard" />
 
 <app-free-game-card-management [gameInputs]="freeGameCard" [captionInput]="homeCaptions.freeCardCaptions"
@@ -10,4 +11,4 @@
 
 <app-game-list-management [gameInput]="gameListItem" />
 
-<app-game-card-management [gameCardInputs]="gameCard" />
+<app-game-card-management [gameCardInputs]="gameCard" /> -->

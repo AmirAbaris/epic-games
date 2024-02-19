@@ -1,4 +1,5 @@
 export interface LargeHighlightGameModel {
+    id: string;
     cover: string;
     mobileCover: string;
     logo: string;
