@@ -1,0 +1,8 @@
+<div class="flex flex-row bg-darkBackground p-3 justify-between items-center text-white text-sm">
+    <div class="flex flex-row gap-2 items-center">
+        <mat-icon>{{iconInput()}}</mat-icon>
+        <h1>{{captionInput().freeGameCardManagementCaption.freeGamesTitle}}</h1>
+    </div>
+    <button mat-stroked-button>{{captionInput().freeGameCardManagementCaption.viewMoreTitle}}</button>
+</div>
+<app-free-game-card [gameInputs]="gameInputs()" [captionInput]="captionInput().freeGameCardCaption" />
