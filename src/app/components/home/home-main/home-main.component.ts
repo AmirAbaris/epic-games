@@ -1,9 +1,7 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
-import { interval, startWith } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { GameService } from '../../../services/game.service';
 import { HomeMainCaptionModel } from '../models/caption-models/home-main-captions.model';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HighlightGamesModel } from '../models/highlight-games-model';
 import { GameListItemModel } from '../models/game-list-item.model';
 import { GameCardModel } from '../models/game-card.model';
@@ -23,13 +21,28 @@ export class HomeMainComponent implements OnInit {
   //#endregion
 
   //#region properties
-  public gameListItem!: GameListItemModel;
-  public freeGameCard!: FreeGameCardModel;
-  public fortniteCard!: FortniteCardModel;
-  public highlightGames!: HighlightGamesModel;
-  public gameCard!: GameCardModel;
-  public currentGameIndex!: number;
-  public homeCaptions!: HomeMainCaptionModel;
+  // public gameListItem!: GameListItemModel;
+  // public freeGameCard!: FreeGameCardModel;
+  // public fortniteCard!: FortniteCardModel;
+  public highlightGames: HighlightGamesModel | undefined;
+  // public gameCard!: GameCardModel;
+
+  public homeCaptions: HomeMainCaptionModel = {
+    largeHighlightGameCaption: {
+      buyButton: '',
+      AddToWishlistButton: ''
+    },
+    freeCardCaptions: {
+      freeGameCardManagementCaption: {
+        freeGamesTitle: '',
+        viewMoreTitle: ''
+      },
+      freeGameCardCaption: {
+        freeNowTitle: '',
+        comingSoonTitle: ''
+      }
+    }
+  }
 
   private readonly captionPaths = {
     'largeHighlightGame': 'home.LargeHighlightGame',
@@ -70,12 +83,12 @@ export class HomeMainComponent implements OnInit {
     // });
   }
 
-  private startSwitchingGames(): void {
-    interval(7000).pipe(startWith(0)).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-      if (this.highlightGames.largeHighlightGames) {
-        this.currentGameIndex = (this.currentGameIndex + 1) % this.highlightGames.largeHighlightGames.length;
-      }
-    });
-  }
+  // private startSwitchingGames(): void {
+  //   interval(7000).pipe(startWith(0)).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+  //     if (this.highlightGames) {
+  //       this.currentGameIndex = (this.currentGameIndex + 1) % this.highlightGames.largeHighlightGames.length;
+  //     }
+  //   });
+  // }
   //#endregion
 }

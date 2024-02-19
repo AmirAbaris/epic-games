@@ -10,7 +10,6 @@ import { HighlightGamesModel } from '../models/highlight-games-model';
 export class HighlightGameCardComponent {
   //#region properties
   gameInputs = input.required<HighlightGamesModel>();
-  currentGameIndexInput = input.required<number>();
   captionInputs = input.required<HomeMainCaptionModel>();
 
   @Output('playButton') playButtonEvent = new EventEmitter();
@@ -25,11 +24,6 @@ export class HighlightGameCardComponent {
 
   public onAddToWishlistButtonEvent(): void {
     this.playButtonEvent.emit();
-  }
-
-  getTargetEvent(targetIndex: number): void {
-    // can't set the new value to signal input!
-    computed(() => this.currentGameIndexInput());
   }
   //#endregion
 }

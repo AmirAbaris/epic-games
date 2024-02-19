@@ -1,6 +1,5 @@
-@if (highlightGames && homeCaptions && currentGameIndex) {
-<app-highlight-game-card [gameInputs]="highlightGames" [currentGameIndexInput]="currentGameIndex"
-    [captionInputs]="homeCaptions" />
+@if (highlightGames) {
+<app-highlight-game-card [gameInputs]="highlightGames" [captionInputs]="homeCaptions" />
 }
 <!-- 
 <app-game-card-management [gameCardInputs]="gameCard" />
