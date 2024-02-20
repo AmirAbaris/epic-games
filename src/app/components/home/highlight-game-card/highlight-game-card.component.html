@@ -1,6 +1,6 @@
 <div class="flex flex-row mt-24 justify-center">
-    <!-- <app-large-highlight-game [gameInputs]="gameInputs().largeHighlightGames" [currentGameIndexInput]="1"
-        [captionInput]="captionInputs().largeHighlightGameCaption" [addIconInput]="'add_circle'" /> -->
+    <app-large-highlight-game [gameInputs]="gameInputs().largeHighlightGames" [currentGameIndexInput]="0"
+        [captionInput]="captionInputs().largeHighlightGameCaption" [addIconInput]="'add_circle'" />
 
     <div class="flex-col justify-between items-center ml-7 h-128 lg:flex">
         @for (game of gameInputs().smallHighlightGames; track $index) {

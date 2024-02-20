@@ -1,10 +1,10 @@
 <section class="hidden lg:flex">
-    @if (gameInputs(); as games) {
     <div class="lg:relative">
-        <app-image [imageUrlInput]="games[currentGameIndexInput()].cover" [imageWight]="900" [imageHight]="512" />
-        <app-image class="absolute top-32 left-9" [imageUrlInput]="games[currentGameIndexInput()].logo"
+        <app-image [imageUrlInput]="gameInputs()[currentGameIndexInput()].cover" [imageWight]="900"
+            [imageHight]="512" />
+        <app-image class="absolute top-32 left-9" [imageUrlInput]="gameInputs()[currentGameIndexInput()].logo"
             [imageWight]="200" [imageHight]="100" />
-        <h2 class="absolute bottom-44 left-9 text-white">{{games[currentGameIndexInput()].bio}}</h2>
+        <h2 class="absolute bottom-44 left-9 text-white">{{gameInputs()[currentGameIndexInput()].bio}}</h2>
         <div class="absolute bottom-5 left-9 flex items-center gap-6 mb-7">
             <button class="buy-btn" mat-raised-button>{{captionInput().buyButton}}</button>
             <button class="" mat-button>
@@ -13,7 +13,6 @@
             </button>
         </div>
     </div>
-    }
 </section>
 
 <!-- <section class="hidden md:flex">
@@ -35,20 +34,17 @@
     }
 </section> -->
 
-<section class="lg:hidden">
+<!-- <section class="lg:hidden">
     <div class="flex flex-row gap-4 justify-start px-8 items-center overflow-x-scroll w-screen">
-        @for (game of gameInputs(); track $index)
-        {
         <div class="flex-shrink-0">
             <div class="relative">
                 <mat-icon class="absolute top-2 right-3">{{addIconInput()}}</mat-icon>
-                <img class="rounded-2xl" ngSrc="{{game.mobileCover}}" width="330" height="450" priority
+                <img class="rounded-2xl" ngSrc="{{gameInputs().mobileCover}}" width="330" height="450" priority
                     alt="{{game.name}}">
                 <img class="absolute bottom-28 left-4" ngSrc="{{game.logo}}" width="140" height="10"
                     alt="{{game.name}}">
                 <h1 class="absolute bottom-20 left-4 text-xs text-white">{{game.bio}}</h1>
             </div>
         </div>
-        }
     </div>
-</section>
+</section> -->
