@@ -12,9 +12,6 @@ module.exports = {
       height: {
         '128': '32rem'
       },
-      width: {
-        '256': '56rem'
-      },
       colors: {
         darkTransparent: '#00000080',
         darkGray: '#0b0b0b',

@@ -30,7 +30,8 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
 })
 export class SmallHighlightGameComponent {
   //#region properties
-  gameInputs = input.required<SmallHighlightGameModel[]>();
+  gameImageInput = input<string>();
+  gameNameInput = input<string>();
   currentGameIndexInput = input.required<number>();
 
   @Output() targetGameIndex = new EventEmitter<number>();
