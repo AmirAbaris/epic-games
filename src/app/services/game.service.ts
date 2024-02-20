@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HighlightGamesModel } from '../components/home/models/highlight-games-model';
+import { GameModel } from '../components/home/models/game.model';
 
 @Injectable()
 export class GameService {

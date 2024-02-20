@@ -1,8 +1,8 @@
-<div class="flex flex-row mt-24 justify-center h-128 p-2">
-    <app-large-highlight-game [gameInputs]="gameInputs().largeHighlightGames" [currentGameIndexInput]="0"
+<div class="flex flex-row mt-24 justify-center">
+    <app-large-highlight-game [gameInputs]="gameInputs().largeHighlightGames" [currentGameIndexInput]="1"
         [captionInput]="captionInputs().largeHighlightGameCaption" [addIconInput]="'add_circle'" />
 
-    <app-small-highlight-game [gameInputs]="gameInputs().smallHighlightGames" [currentGameIndexInput]="0"
+    <app-small-highlight-game [gameInputs]="gameInputs().smallHighlightGames" [currentGameIndexInput]="1"
         (targetGameIndex)="$event" />
 </div>
 

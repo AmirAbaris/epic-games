@@ -22,7 +22,7 @@ import { GameItemListComponent } from '../components/home/game-item-list/game-it
 import { GameListManagementComponent } from '../components/home/game-list-management/game-list-management.component';
 import { GameListComponent } from '../components/home/game-list/game-list.component';
 import { MatDividerModule } from '@angular/material/divider';
-import { HomeImageComponent } from '../components/home/home-image/home-image.component';
+import { ImageComponent } from '../components/image/image/image.component';
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -42,13 +42,13 @@ const homeRoutes: Routes = [
     FortniteCardComponent,
     GameListManagementComponent,
     GameListComponent,
-    GameItemListComponent,
-    HomeImageComponent
+    GameItemListComponent
   ],
   imports: [
     CommonModule,
     NgOptimizedImage,
     MatButtonModule,
+    ImageComponent,
     HttpClientModule,
     MatIconModule,
     MatCardModule,
