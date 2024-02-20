@@ -1,8 +1,9 @@
-<div class="flex flex-row mt-24 justify-center">
-    <app-large-highlight-game [gameInputs]="gameInputs().largeHighlightGames" [currentGameIndexInput]="0"
-        [captionInput]="captionInputs().largeHighlightGameCaption" [addIconInput]="'add_circle'" />
+<div class="mt-24 lg:flex lg:justify-center">
+    <app-large-highlight-game class="flex overflow-x-scroll" [gameInputs]="gameInputs().largeHighlightGames"
+        [currentGameIndexInput]="largeHighlightIndex" [captionInput]="captionInputs().largeHighlightGameCaption"
+        [addIconInput]="'add_circle'" />
 
-    <div class="flex-col justify-between items-center ml-7 h-128 lg:flex">
+    <div class=" hidden flex-col justify-between items-center ml-7 h-128 lg:flex">
         @for (game of gameInputs().smallHighlightGames; track $index) {
         <app-small-highlight-game [gameImageInput]=" game.thumbnailCover" [gameNameInput]="game.name"
             [currentGameIndexInput]="$index" />
