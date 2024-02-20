@@ -4,9 +4,8 @@
 
     <div class="flex-col justify-between items-center ml-7 h-128 lg:flex">
         @for (game of gameInputs().smallHighlightGames; track $index) {
-        <app-small-highlight-game class="rounded-2xl" [gameImageInput]=" game.thumbnailCover"
-            [gameNameInput]="game.name" [currentGameIndexInput]="$index"
-            [@cardAnimation]="$index ? 'active' : 'inactive'" />
+        <app-small-highlight-game [gameImageInput]=" game.thumbnailCover" [gameNameInput]="game.name"
+            [currentGameIndexInput]="$index" />
         }
     </div>
 </div>

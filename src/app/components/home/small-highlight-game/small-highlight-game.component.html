@@ -1,4 +1,5 @@
-<div class="flex flex-row gap-2 items-center p-4 rounded-xl cursor-pointer">
+<div class="flex flex-row gap-2 items-center p-4 rounded-xl cursor-pointer"
+    [@cardAnimation]="currentGameIndexInput() === gameNameInput()?.length ? 'active' : 'inactive'">
     <app-image [imageUrlInput]="gameImageInput()" [imageHight]="25" [imageWight]="33" />
     <h1 class="text-lightGray text-sm">{{gameNameInput()}}</h1>
 </div>
