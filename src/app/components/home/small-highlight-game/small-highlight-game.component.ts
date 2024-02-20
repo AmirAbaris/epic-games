@@ -13,8 +13,7 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
       })),
       state('active', style({
         background: 'linear-gradient(to right, darkGray 0%, darkGray 50%, transparent 50%, transparent 100%)',
-        backgroundSize: '200% 100%',
-
+        backgroundSize: '200% 100%'
       })),
       transition('inactive => active', [
         animate('1s')
