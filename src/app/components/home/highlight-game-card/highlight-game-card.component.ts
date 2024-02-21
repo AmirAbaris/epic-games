@@ -3,6 +3,7 @@ import { HomeMainCaptionModel } from '../models/caption-models/home-main-caption
 import { HighlightGamesModel } from '../models/highlight-games-model';
 import { interval } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { LargeHighlightGameCaptionModel } from '../models/caption-models/large-highlight-game-caption.model';
 
 @Component({
   selector: 'app-highlight-game-card',
@@ -14,20 +15,20 @@ export class HighlightGameCardComponent implements OnInit {
   private _destroyRef = inject(DestroyRef);
   //#endregion
 
-  //#region lifecycle methods
-  ngOnInit(): void {
-    this._startSwitchingGames();
-  }
-  //#endregion
-
   //#region properties
   gameInputs = input.required<HighlightGamesModel>();
-  captionInputs = input.required<HomeMainCaptionModel>();
+  captionInputs = input.required<LargeHighlightGameCaptionModel>();
 
   @Output('playButton') playButtonEvent = new EventEmitter();
   @Output('addWishlistButton') AddToWishListButtonEvent = new EventEmitter();
 
   public largeHighlightIndex: number = 0;
+  //#endregion
+
+  //#region lifecycle methods
+  ngOnInit(): void {
+    this._startSwitchingGames();
+  }
   //#endregion
 
   //#region main logic methods
