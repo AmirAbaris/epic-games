@@ -13,7 +13,7 @@ module.exports = {
         '128': '32rem'
       },
       width: {
-        '256': '64rem'
+        '256': '55rem'
       },
       colors: {
         darkTransparent: '#00000080',
