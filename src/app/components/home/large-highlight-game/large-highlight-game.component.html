@@ -1,7 +1,8 @@
 <section class="hidden lg:flex">
     <div class="lg:relative">
-        <app-image [imageUrlInput]="gameInputs()[currentGameIndexInput()].cover" [imageWight]="900"
-            [imageHight]="512" />
+        <div class="rounded-2xl w-96 h-40 object-cover">
+            <!-- <app-image [imageUrlInput]="gameInputs()[currentGameIndexInput()].cover" /> -->
+        </div>
         <app-image class="absolute top-32 left-9" [imageUrlInput]="gameInputs()[currentGameIndexInput()].logo"
             [imageWight]="200" [imageHight]="100" />
         <h1 class="absolute bottom-44 left-9 text-white">{{gameInputs()[currentGameIndexInput()].bio}}</h1>
@@ -17,9 +18,9 @@
 
 @for (game of gameInputs(); track $index) {
 <section class="relative flex flex-shrink-0 px-10 lg:hidden">
-    <app-image [imageUrlInput]="game.mobileCover" [imageHight]="450" [imageWight]="330" />
+    <!-- <app-image [imageUrlInput]="game.mobileCover" [imageHight]="450" [imageWight]="330" /> -->
     <mat-icon class="absolute top-4 left-80">{{addIconInput()}}</mat-icon>
-    <app-image class="absolute bottom-28 left-14" [imageUrlInput]="game.logo" [imageHight]="450" [imageWight]="300" />
+    <!-- <app-image class="absolute bottom-28 left-14" [imageUrlInput]="game.logo" [imageHight]="450" [imageWight]="300" /> -->
     <h2 class="absolute bottom-20 left-14 text-xs text-white">{{game.bio}}</h2>
 </section>
 }

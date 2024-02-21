@@ -11,7 +11,5 @@ import { Component, input } from '@angular/core';
 export class ImageComponent {
   //#region properties
   imageUrlInput = input<string>();
-  imageWight = input<number>(200);
-  imageHight = input<number>(200);
   //#endregion
 }

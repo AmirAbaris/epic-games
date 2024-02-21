@@ -1,6 +1,6 @@
 @if (imageUrlInput()) {
-<img class="rounded-2xl" ngSrc="{{imageUrlInput()}}" width="{{imageWight()}}" height="{{imageHight()}}">
+<img ngSrc="{{imageUrlInput()}}" fill />
 }
 @else {
-<img class="rounded-2xl" ngSrc="../assets/game-covers/default-cover/default-fallback-image.png" fill>
+<img ngSrc="../assets/game-covers/default-cover/default-fallback-image.png" fill />
 }
