@@ -13,8 +13,7 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
       })),
       state('active', style({
         background: 'linear-gradient(to right, darkGray 0%, darkGray 50%, transparent 50%, transparent 100%)',
-        backgroundSize: '200% 100%',
-
+        backgroundSize: '200% 100%'
       })),
       transition('inactive => active', [
         animate('1s')
@@ -30,15 +29,8 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
 })
 export class SmallHighlightGameComponent {
   //#region properties
-  gameInputs = input.required<SmallHighlightGameModel[]>();
-  currentGameIndexInput = input.required<number>();
-
-  @Output() targetGameIndex = new EventEmitter<number>();
-  //#endregion
-
-  //#region handler methods
-  public selectGameIndex(index: number): void {
-    this.targetGameIndex.emit(index);
-  }
+  gameImageInput = input<string>();
+  gameNameInput = input<string>();
+  currentGameIndexInput = input<number>();
   //#endregion
 }

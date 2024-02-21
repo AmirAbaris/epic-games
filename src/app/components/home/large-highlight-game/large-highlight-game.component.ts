@@ -15,7 +15,7 @@ export class LargeHighlightGameComponent {
   addIconInput = input.required<string>();
 
   @Output('playButton') playButtonEvent = new EventEmitter();
-  @Output('addWishlistButton') AddToWishListButtonEvent = new EventEmitter();
+  @Output('addWishlistButton') addToWishListButtonEvent = new EventEmitter();
   //#endregion
 
   //#region handler methods
