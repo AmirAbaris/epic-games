@@ -53,15 +53,18 @@ export class HomeMainComponent implements OnInit {
 
   //#region lifecycle methods
   ngOnInit(): void {
-    this._getHighlightGames();
+    this._getGames();
     this._getCaptions();
   }
   //#endregion
 
   //#region main logic methods
-  private _getHighlightGames(): void {
-    this._gameService.getHighlightGames().subscribe((highlightGames) => {
-      this.highlightGames = highlightGames;
+  private _getGames(): void {
+    this._gameService.getHighlightGamesDto().subscribe((highlightGamesDto) => {
+      this.highlightGames = {
+        largeHighlightGames: highlightGamesDto.largeHighlightGames,
+        smallHighlightGames: highlightGamesDto.smallHighlightGames
+      }
     });
   }
 

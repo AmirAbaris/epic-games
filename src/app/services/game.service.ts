@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HighlightGamesModel } from '../components/home/models/highlight-games-model';
+import { HighlightGamesDto } from '../components/home/dtos/highlight-games-dto-model';
 
 @Injectable()
 export class GameService {
   //#region handler methods
-  public getHighlightGames(): Observable<HighlightGamesModel> {
-    return of(highlightGames);
+  public getHighlightGamesDto(): Observable<HighlightGamesDto> {
+    return of(highlightGamesDto);
   }
   //#endregion
 }
 
-const highlightGames = {
+const highlightGamesDto: HighlightGamesDto = {
   largeHighlightGames: [
     {
       id: '1',
@@ -80,5 +80,6 @@ const highlightGames = {
       thumbnailCover: '../assets/game-covers/thumbnail-covers/egs-skull-and-bones-carousel-thumb-1200x1600-eb9d60ded5a8.jpg',
       name: 'Game 5'
     }
-  ]
+  ],
+  hasFeaturedGame: false
 }
