@@ -1,4 +1,4 @@
-import { Component, DestroyRef, EventEmitter, OnInit, Output, inject, input } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 import { LargeHighlightGameCaptionModel } from '../models/caption-models/large-highlight-game-caption.model';
 import { LargeHighlightGameModel } from '../models/large-highlight-game.model';
 
