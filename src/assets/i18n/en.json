@@ -2,7 +2,7 @@
     "home": {
         "LargeHighlightGame": {
             "buyButton": "BUY NOW",
-            "AddToWishlistButton": "ADD TO WISHLIST"
+            "addToWishlistButton": "ADD TO WISHLIST"
         },
         "FreeGameCardManagement": {
             "freeGamesTitle": "Free Games",
