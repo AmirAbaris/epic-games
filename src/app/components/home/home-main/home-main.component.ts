@@ -8,6 +8,8 @@ import { GameCardModel } from "../models/game-card.model";
 import { FreeGameCardModel } from "../models/free-game-card.model";
 import { FortniteCardModel } from "../models/fortnite-card.model";
 import { LargeHighlightGameCaptionModel } from "../models/caption-models/large-highlight-game-caption.model";
+import { HighlightGamesDto } from "../dots/highlight-games-dto";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
   selector: "app-home-main",
@@ -46,8 +48,8 @@ export class HomeMainComponent implements OnInit {
 
   //#region main logic methods
   private _getHighlightGames(): void {
-    this._gameService.getHighlightGames().subscribe((highlightGames) => {
-      this.highlightGames = highlightGames;
+    this._gameService.getHighlightGames().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((highlightGamesDto) => {
+      this.highlightGames = this._convertHighlightGamesDtoToHighlightGamesModel(highlightGamesDto);
     });
   }
 
@@ -55,26 +57,17 @@ export class HomeMainComponent implements OnInit {
     this._translateService.get(this.captionPaths.largeHighlightGame).subscribe((caption) => {
       this.largeHighlightGameCaption = caption;
     });
-
-    // this._translateService.get(this.captionPaths.freeGameCardManagement).subscribe({
-    //   next: (caption) => {
-    //     this.homeCaptions.freeCardCaptions.freeGameCardManagementCaption = caption;
-    //   }
-    // });
-
-    // this._translateService.get(this.captionPaths.freeGameCard).subscribe({
-    //   next: (caption) => {
-    //     this.homeCaptions.freeCardCaptions.freeGameCardCaption = caption;
-    //   }
-    // });
   }
+  //#endregion
 
-  // private startSwitchingGames(): void {
-  //   interval(7000).pipe(startWith(0)).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-  //     if (this.highlightGames) {
-  //       this.currentGameIndex = (this.currentGameIndex + 1) % this.highlightGames.largeHighlightGames.length;
-  //     }
-  //   });
-  // }
+  //#region helper methods
+  private _convertHighlightGamesDtoToHighlightGamesModel(highlightGamesDto: HighlightGamesDto): HighlightGamesModel {
+    const highlightGamesModel: HighlightGamesModel = {
+      smallHighlightGames: highlightGamesDto.smallHighlightGames,
+      largeHighlightGames: highlightGamesDto.largeHighlightGames
+    }
+
+    return highlightGamesModel;
+  }
   //#endregion
 }
