@@ -6,5 +6,4 @@ export interface GameCardDto {
     basePrice?: number;
     finalPrice?: number;
     isFree: boolean;
-    isOnSale: boolean
 }

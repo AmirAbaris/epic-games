@@ -6,4 +6,5 @@ export interface GameCardModel {
     basePrice?: number;
     finalPrice?: number;
     isFree: boolean;
+    isOnSale: boolean;
 }
