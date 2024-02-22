@@ -1,4 +1,4 @@
-export interface GameCardModel {
+export interface GameCardDto {
     name: string;
     type: string;
     cover: string;
@@ -6,4 +6,5 @@ export interface GameCardModel {
     basePrice?: number;
     finalPrice?: number;
     isFree: boolean;
+    isOnSale: boolean
 }

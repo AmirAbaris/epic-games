@@ -27,7 +27,7 @@ export class HomeMainComponent implements OnInit {
   // public gameListItem!: GameListItemModel;
   // public freeGameCard!: FreeGameCardModel;
   // public fortniteCard!: FortniteCardModel;
-  public highlightGames: HighlightGamesModel | undefined;
+  public highlightGames: HighlightGamesDto | undefined;
   // public gameCard!: GameCardModel;
 
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
@@ -48,8 +48,8 @@ export class HomeMainComponent implements OnInit {
 
   //#region main logic methods
   private _getHighlightGames(): void {
-    this._gameService.getHighlightGames().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((highlightGamesDto) => {
-      this.highlightGames = this._convertHighlightGamesDtoToHighlightGamesModel(highlightGamesDto);
+    this._gameService.getHighlightGames().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((highlightGames) => {
+      this.highlightGames = this._convertHighlightGamesModelToHighlightGamesDto(highlightGames);
     });
   }
 
@@ -61,13 +61,13 @@ export class HomeMainComponent implements OnInit {
   //#endregion
 
   //#region helper methods
-  private _convertHighlightGamesDtoToHighlightGamesModel(highlightGamesDto: HighlightGamesDto): HighlightGamesModel {
-    const highlightGamesModel: HighlightGamesModel = {
-      smallHighlightGames: highlightGamesDto.smallHighlightGames,
-      largeHighlightGames: highlightGamesDto.largeHighlightGames
+  private _convertHighlightGamesModelToHighlightGamesDto(highlightGames: HighlightGamesModel): HighlightGamesDto {
+    const highlightGamesDto: HighlightGamesDto = {
+      smallHighlightGames: highlightGames.smallHighlightGames,
+      largeHighlightGames: highlightGames.largeHighlightGames
     }
 
-    return highlightGamesModel;
+    return highlightGamesDto;
   }
   //#endregion
 }

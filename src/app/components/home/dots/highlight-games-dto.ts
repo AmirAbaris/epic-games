@@ -4,5 +4,4 @@ import { SmallHighlightGameModel } from "../models/small-highlight-game.model";
 export interface HighlightGamesDto {
     largeHighlightGames: LargeHighlightGameModel[];
     smallHighlightGames: SmallHighlightGameModel[];
-    isFeatured: boolean;
 }

@@ -6,13 +6,13 @@ import { HighlightGamesDto } from '../components/home/dots/highlight-games-dto';
 @Injectable()
 export class GameService {
   //#region handler methods
-  public getHighlightGames(): Observable<HighlightGamesDto> {
+  public getHighlightGames(): Observable<HighlightGamesModel> {
     return of(highlightGames);
   }
   //#endregion
 }
 
-const highlightGames: HighlightGamesDto = {
+const highlightGames: HighlightGamesModel = {
   largeHighlightGames: [
     {
       id: '1',

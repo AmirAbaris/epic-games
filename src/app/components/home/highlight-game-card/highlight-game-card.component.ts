@@ -4,6 +4,7 @@ import { HighlightGamesModel } from '../models/highlight-games-model';
 import { interval } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LargeHighlightGameCaptionModel } from '../models/caption-models/large-highlight-game-caption.model';
+import { HighlightGamesDto } from '../dots/highlight-games-dto';
 
 @Component({
   selector: 'app-highlight-game-card',
@@ -16,7 +17,7 @@ export class HighlightGameCardComponent implements OnInit {
   //#endregion
 
   //#region properties
-  gameInputs = input.required<HighlightGamesModel>();
+  gameInputs = input.required<HighlightGamesDto>();
   captionInputs = input.required<LargeHighlightGameCaptionModel>();
 
   @Output('playButton') playButtonEvent = new EventEmitter();
