@@ -7,11 +7,6 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { register } from 'swiper/element/bundle';
-import { SwiperDirective } from './directives/swiper.directive';
-// register swiper
-register();
-// TODO: use swiper and tell the results
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -20,8 +15,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SwiperDirective
+    AppComponent
   ],
   imports: [
     BrowserModule,

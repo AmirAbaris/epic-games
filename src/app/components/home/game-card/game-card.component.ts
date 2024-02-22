@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { GameCardModel } from '../models/game-card.model';
+import { GameCardDto } from '../dots/game-card-dto';
 
 @Component({
   selector: 'app-game-card',
@@ -8,6 +9,6 @@ import { GameCardModel } from '../models/game-card.model';
 })
 export class GameCardComponent {
   //#region properties
-  gameCardInputs = input.required<GameCardModel[]>();
+  gameCardInputs = input.required<GameCardDto[]>();
   //#endregion
 }

@@ -3,7 +3,7 @@
         [currentGameIndexInput]="largeHighlightIndex" [captionInput]="captionInputs()" [addIconInput]="'add_circle'" />
 
     @for (game of gameInputs().largeHighlightGames; track $index) {
-    <app-large-highlight-game-mobile class="flex overflow-x-scroll" [gameInput]="game" [addIconInput]="'add_circle'" />
+    <app-large-highlight-game-mobile [gameInput]="game" [addIconInput]="'add_circle'" />
     }
 
     <div class="hidden flex-col justify-around items-center h-128 lg:flex">

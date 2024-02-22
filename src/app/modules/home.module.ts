@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeMainComponent } from '../components/home/home-main/home-main.component';
 import { LargeHighlightGameComponent } from '../components/home/large-highlight-game/large-highlight-game.component';
@@ -15,7 +15,6 @@ import { MatCardModule } from '@angular/material/card';
 import { FreeGameCardManagementComponent } from '../components/home/free-game-card-management/free-game-card-management.component';
 import { FreeGameCardComponent } from '../components/home/free-game-card/free-game-card.component';
 import { GameService } from '../services/game.service';
-import { SwiperDirective } from '../directives/swiper.directive';
 import { FortniteCardComponent } from '../components/home/fortnite-card/fortnite-card.component';
 import { FortniteCardManagementComponent } from '../components/home/fortnite-card-management/fortnite-card-management.component';
 import { GameItemListComponent } from '../components/home/game-item-list/game-item-list.component';
@@ -57,7 +56,6 @@ const homeRoutes: Routes = [
     MatDividerModule,
     RouterModule.forChild(homeRoutes)
   ],
-  providers: [GameService, SwiperDirective],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  providers: [GameService]
 })
 export class HomeModule { }

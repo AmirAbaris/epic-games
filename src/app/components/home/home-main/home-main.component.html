@@ -1,9 +1,10 @@
-@if (highlightGames && largeHighlightGameCaption) {
+@if (highlightGames && largeHighlightGameCaption && gameCards) {
 <app-highlight-game-card [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption" />
-}
-<!-- 
-<app-game-card-management [gameCardInputs]="gameCard" />
 
+<app-game-card-management [gameCardInputs]="gameCards" />
+}
+
+<!-- 
 <app-free-game-card-management [gameInputs]="freeGameCard" [captionInput]="homeCaptions.freeCardCaptions"
     [iconInput]="'redeem'" />
 

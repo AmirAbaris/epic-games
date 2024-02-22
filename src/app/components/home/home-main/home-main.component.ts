@@ -10,6 +10,7 @@ import { FortniteCardModel } from "../models/fortnite-card.model";
 import { LargeHighlightGameCaptionModel } from "../models/caption-models/large-highlight-game-caption.model";
 import { HighlightGamesDto } from "../dots/highlight-games-dto";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { GameCardDto } from "../dots/game-card-dto";
 
 @Component({
   selector: "app-home-main",
@@ -28,7 +29,7 @@ export class HomeMainComponent implements OnInit {
   // public freeGameCard!: FreeGameCardModel;
   // public fortniteCard!: FortniteCardModel;
   public highlightGames: HighlightGamesDto | undefined;
-  // public gameCard!: GameCardModel;
+  public gameCards: GameCardDto[] | undefined;
 
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
 
@@ -42,6 +43,7 @@ export class HomeMainComponent implements OnInit {
   //#region lifecycle methods
   ngOnInit(): void {
     this._getHighlightGames();
+    this._getGameCards();
     this._getCaptions();
   }
   //#endregion
@@ -50,6 +52,12 @@ export class HomeMainComponent implements OnInit {
   private _getHighlightGames(): void {
     this._gameService.getHighlightGames().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((highlightGames) => {
       this.highlightGames = this._convertHighlightGamesModelToHighlightGamesDto(highlightGames);
+    });
+  }
+
+  private _getGameCards(): void {
+    this._gameService.getGameCards().subscribe((gameCards) => {
+      this.gameCards = this._convertGameCardModelToGameCardDto(gameCards);
     });
   }
 
@@ -69,5 +77,26 @@ export class HomeMainComponent implements OnInit {
 
     return highlightGamesDto;
   }
+
+  private _convertGameCardModelToGameCardDto(gameCards: GameCardModel[]): GameCardDto[] {
+    const gameCardsDto: GameCardDto[] = [];
+
+    gameCards.forEach((gameCard) => {
+      const gameCardDto: GameCardDto = {
+        name: gameCard.name,
+        type: gameCard.type,
+        cover: gameCard.cover,
+        discountPercent: gameCard.discountPercent,
+        basePrice: gameCard.basePrice,
+        finalPrice: gameCard.finalPrice,
+        isFree: gameCard.isFree
+      };
+
+      gameCardsDto.push(gameCardDto);
+    });
+
+    return gameCardsDto;
+  }
+
   //#endregion
 }
