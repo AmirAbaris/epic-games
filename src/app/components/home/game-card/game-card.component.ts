@@ -9,6 +9,6 @@ import { GameCardDto } from '../dots/game-card-dto';
 })
 export class GameCardComponent {
   //#region properties
-  gameCardInputs = input.required<GameCardDto[]>();
+  gameCardInputs = input.required<GameCardDto>();
   //#endregion
 }

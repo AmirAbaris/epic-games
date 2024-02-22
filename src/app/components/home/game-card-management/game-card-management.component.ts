@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import { GameCardModel } from '../models/game-card.model';
 import { GameCardDto } from '../dots/game-card-dto';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-game-card-management',
@@ -10,5 +10,26 @@ import { GameCardDto } from '../dots/game-card-dto';
 export class GameCardManagementComponent {
   //#region properties
   gameCardInputs = input.required<GameCardDto[]>();
+
+  public swiper = new Swiper('.swiper', {
+    direction: 'vertical',
+    loop: true,
+
+    // If we need pagination
+    pagination: {
+      el: '.swiper-pagination',
+    },
+
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+
+    // And if we need scrollbar
+    scrollbar: {
+      el: '.swiper-scrollbar',
+    },
+  });
   //#endregion
 }
