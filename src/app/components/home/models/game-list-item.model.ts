@@ -1,10 +1,12 @@
+import { GameCategoryEnum } from "../enums/category-types.enum";
+
 export interface GameListItemModel {
-    thumbnailCover?: string;
+    thumbnailCover: string;
     name: string;
     discountPercent?: number;
     basePrice?: number;
     finalPrice?: number;
-    isFree?: boolean;
+    isFree: boolean;
     categoryType: string;
     isFeatured: boolean;
 }

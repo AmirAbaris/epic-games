@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { GameListItemModel } from '../models/game-list-item.model';
+import { GameListItemDto } from '../dots/game-list-item-dto';
 
 @Component({
   selector: 'app-game-list-management',
@@ -8,6 +9,6 @@ import { GameListItemModel } from '../models/game-list-item.model';
 })
 export class GameListManagementComponent {
   //#region 
-  gameInput = input.required<GameListItemModel[]>();
+  gameInput = input.required<GameListItemDto[]>();
   //#endregion
 }

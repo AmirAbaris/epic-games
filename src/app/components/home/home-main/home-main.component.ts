@@ -19,6 +19,7 @@ import { FortniteCardDto } from "../dots/fortnite-card-dto";
 import { FortniteCardManagementCaptionModel } from "../models/caption-models/fortnite-management-caption.model";
 import { GameBannerDto } from "../dots/game-banner-dto";
 import { GameBannerModel } from "../models/game-banner.model";
+import { GameListItemDto } from "../dots/game-list-item-dto";
 
 @Component({
   selector: "app-home-main",
@@ -39,6 +40,7 @@ export class HomeMainComponent implements OnInit {
   public freeGameCards: FreeGameCardDto[] | undefined;
   public fortniteGameCards: FortniteCardDto[] | undefined;
   public gameBanners: GameBannerDto[] | undefined;
+  public gameListItem: GameListItemDto[] | undefined;
 
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
@@ -60,6 +62,7 @@ export class HomeMainComponent implements OnInit {
     this._getFreeGames();
     this._getFortniteGames();
     this._getGameBanners();
+    this._getGameListItems();
 
     this._getCaptions();
   }
@@ -93,7 +96,13 @@ export class HomeMainComponent implements OnInit {
   private _getGameBanners(): void {
     this._gameService.getGameBanners().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((gameBanner) => {
       this.gameBanners = this._convertGameBannerModelToGameBannerDto(gameBanner);
-    })
+    });
+  }
+
+  private _getGameListItems(): void {
+    this._gameService.getGameList().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((gameItems) => {
+      this.gameListItem = this._convertGameListItemModelToGameListItemDto(gameItems);
+    });
   }
 
   private _getCaptions(): void {
@@ -137,7 +146,7 @@ export class HomeMainComponent implements OnInit {
         basePrice: gameCard.basePrice,
         finalPrice: gameCard.finalPrice,
         isFree: gameCard.isFree
-      };
+      }
 
       gameCardsDto.push(gameCardDto);
     });
@@ -155,7 +164,7 @@ export class HomeMainComponent implements OnInit {
         isFree: game.isFree,
         cover: game.cover,
         isPublished: game.isPublished
-      };
+      }
 
       freeGamesDto.push(gameCardDto);
     });
@@ -172,7 +181,7 @@ export class HomeMainComponent implements OnInit {
         name: game.name,
         type: game.type
 
-      };
+      }
 
       fortniteCardsDto.push(fortniteCard);
     });
@@ -190,12 +199,32 @@ export class HomeMainComponent implements OnInit {
         bio: game.bio,
         isFree: game.isFree,
         price: game.price
-      };
+      }
 
       gameBanners.push(gameBanner);
     });
 
     return gameBanners;
+  }
+
+  private _convertGameListItemModelToGameListItemDto(gameListItems: GameListItemModel[]): GameListItemDto[] {
+    const gameItems: GameListItemDto[] = [];
+
+    gameListItems.forEach((game) => {
+      const gameItem: GameListItemDto = {
+        thumbnailCover: game.thumbnailCover,
+        name: game.name,
+        discountPercent: game.discountPercent,
+        basePrice: game.basePrice,
+        finalPrice: game.finalPrice,
+        isFree: game.isFree,
+        categoryType: game.categoryType
+      }
+
+      gameItems.push(gameItem);
+    });
+
+    return gameItems;
   }
   //#endregion
 }

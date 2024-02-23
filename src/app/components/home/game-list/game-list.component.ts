@@ -1,5 +1,7 @@
 import { Component, input } from '@angular/core';
 import { GameListItemModel } from '../models/game-list-item.model';
+import { GameListItemDto } from '../dots/game-list-item-dto';
+import { GameCategoryEnum } from '../enums/category-types.enum';
 
 @Component({
   selector: 'app-game-list',
@@ -8,6 +10,7 @@ import { GameListItemModel } from '../models/game-list-item.model';
 })
 export class GameListComponent {
   //#region properties
-  gameInput = input.required<GameListItemModel[]>();
+  gameInput = input.required<GameListItemDto[]>();
+  public gameCategories: GameCategoryEnum | undefined;
   //#endregion
 }
