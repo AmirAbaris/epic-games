@@ -38,7 +38,9 @@ export class HomeMainComponent implements OnInit {
   public gameCards: GameCardDto[] | undefined;
   public freeGameCards: FreeGameCardDto[] | undefined;
   public fortniteGameCards: FortniteCardDto[] | undefined;
+  public banners: GameBannerDto[] | undefined;
   public gameBanners: GameBannerDto[] | undefined;
+  public nonGameBanners: GameBannerDto[] | undefined;
   public gameListItem: GameListItemDto[] | undefined;
 
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
@@ -57,7 +59,8 @@ export class HomeMainComponent implements OnInit {
   //#region lifecycle methods
   ngOnInit(): void {
     this._getAllGameData();
-
+    this._filterGamesInGameBanners();
+    this._filterNonGamesInGameBanners();
     this._getCaptions();
   }
   //#endregion
@@ -76,7 +79,7 @@ export class HomeMainComponent implements OnInit {
       this.gameCards = this._convertGameCardModelToGameCardDto(gameCards);
       this.freeGameCards = this._convertFreeGameModelToFreeGamesDto(freeGames);
       this.fortniteGameCards = this._convertFortniteCardModelToFortniteCardDto(fortniteGames);
-      this.gameBanners = this._convertGameBannerModelToGameBannerDto(gameBanner);
+      this.banners = this._convertGameBannerModelToGameBannerDto(gameBanner);
       this.gameListItem = this._convertGameListItemModelToGameListItemDto(gameItems);
     });
   }
@@ -98,6 +101,14 @@ export class HomeMainComponent implements OnInit {
       this.freeGamesCaption = freeGamesCaption;
       this.fortniteCaption = fortniteCaption;
     });
+  }
+
+  private _filterGamesInGameBanners(): void {
+    this.gameBanners = this.banners?.filter((game) => game.isAGame);
+  }
+
+  private _filterNonGamesInGameBanners(): void {
+    this.nonGameBanners = this.banners?.filter((game) => !game.isAGame);
   }
   //#endregion
 
@@ -175,7 +186,9 @@ export class HomeMainComponent implements OnInit {
         name: game.name,
         bio: game.bio,
         isFree: game.isFree,
-        price: game.price
+        price: game.price,
+        isAGame: game.isAGame,
+        playable: game.playable
       }
 
       gameBanners.push(gameBanner);

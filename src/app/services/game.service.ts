@@ -250,6 +250,7 @@ const gameBanner: GameBannerModel[] = [
     name: 'game x',
     bio: 'some random description about the game',
     isFree: true,
+    isAGame: true,
     isFeatured: true
   },
   {
@@ -257,6 +258,48 @@ const gameBanner: GameBannerModel[] = [
     name: 'game y',
     bio: 'some random description about the game',
     isFree: true,
+    isAGame: true,
+    isFeatured: true
+  },
+  {
+    cover: '../assets/game-covers/game-banner/b3.jpg',
+    name: 'game y',
+    bio: 'some random description about the game',
+    isFree: false,
+    price: 11.59,
+    isAGame: true,
+    isFeatured: true
+  },
+  {
+    cover: '../assets/game-covers/game-banner/b4.jpg',
+    name: 'game y',
+    bio: 'some random description about the game',
+    isFree: true,
+    isAGame: true,
+    isFeatured: true
+  },
+  {
+    cover: '../assets/game-covers/game-banner/b5.jpg',
+    name: 'Sales & Specials',
+    bio: 'Save big on hit titles and hidden gems. Theres always something on sale at the Epic Games Store!',
+    isAGame: false,
+    playable: false,
+    isFeatured: true
+  },
+  {
+    cover: '../assets/game-covers/game-banner/b6.jpg',
+    name: 'Free Games',
+    bio: 'Explore free and free-to-play games from our collection. Come back every Thursday for a new free game!',
+    isAGame: false,
+    playable: true,
+    isFeatured: true
+  },
+  {
+    cover: '../assets/game-covers/game-banner/b7.jpg',
+    name: 'Apps',
+    bio: 'Enjoy some of the best Apps for music, gaming, creating, and more!',
+    isAGame: false,
+    playable: false,
     isFeatured: true
   }
 ];

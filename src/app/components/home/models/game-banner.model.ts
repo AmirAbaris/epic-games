@@ -1,8 +1,10 @@
 export interface GameBannerModel {
     cover: string;
-    name: string;
+    name?: string;
     bio: string;
-    isFree: boolean;
+    isFree?: boolean;
     price?: number;
+    isAGame: boolean;
+    playable?: boolean;
     isFeatured: boolean;
 }
