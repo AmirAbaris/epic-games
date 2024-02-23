@@ -20,6 +20,7 @@ import { FortniteCardManagementCaptionModel } from "../models/caption-models/for
 import { GameBannerDto } from "../dots/game-banner-dto";
 import { GameBannerModel } from "../models/game-banner.model";
 import { GameListItemDto } from "../dots/game-list-item-dto";
+import { forkJoin } from "rxjs";
 
 @Component({
   selector: "app-home-main",
@@ -30,11 +31,9 @@ export class HomeMainComponent implements OnInit {
   //#region inject functions
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
-  private _destroyRef = inject(DestroyRef);
   //#endregion
 
   //#region properties
-  // public gameListItem!: GameListItemModel;
   public highlightGames: HighlightGamesDto | undefined;
   public gameCards: GameCardDto[] | undefined;
   public freeGameCards: FreeGameCardDto[] | undefined;
@@ -57,69 +56,47 @@ export class HomeMainComponent implements OnInit {
 
   //#region lifecycle methods
   ngOnInit(): void {
-    this._getHighlightGames();
-    this._getGameCards();
-    this._getFreeGames();
-    this._getFortniteGames();
-    this._getGameBanners();
-    this._getGameListItems();
+    this._getAllGameData();
 
     this._getCaptions();
   }
   //#endregion
 
   //#region main logic methods
-  private _getHighlightGames(): void {
-    this._gameService.getHighlightGames().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((highlightGames) => {
-      this.highlightGames = this._convertHighlightGamesModelToHighlightGamesDto(highlightGames);
-    });
-  }
-
-  private _getGameCards(): void {
-    this._gameService.getGameCards().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((gameCards) => {
+  private _getAllGameData(): void {
+    forkJoin([
+      this._gameService.getHighlightGames(),
+      this._gameService.getGameCards(),
+      this._gameService.getFreeGames(),
+      this._gameService.getFortniteGames(),
+      this._gameService.getGameBanners(),
+      this._gameService.getGameList()
+    ]).subscribe(([highlighGames, gameCards, freeGames, fortniteGames, gameBanner, gameItems]) => {
+      this.highlightGames = this._convertHighlightGamesModelToHighlightGamesDto(highlighGames);
       this.gameCards = this._convertGameCardModelToGameCardDto(gameCards);
-    });
-  }
-
-  private _getFreeGames(): void {
-    this._gameService.getFreeGames().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((freeGames) => {
       this.freeGameCards = this._convertFreeGameModelToFreeGamesDto(freeGames);
-    });
-  }
-
-  private _getFortniteGames(): void {
-    this._gameService.getFortniteGames().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((fortniteGames) => {
       this.fortniteGameCards = this._convertFortniteCardModelToFortniteCardDto(fortniteGames);
-    });
-  }
-
-  private _getGameBanners(): void {
-    this._gameService.getGameBanners().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((gameBanner) => {
       this.gameBanners = this._convertGameBannerModelToGameBannerDto(gameBanner);
-    });
-  }
-
-  private _getGameListItems(): void {
-    this._gameService.getGameList().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((gameItems) => {
       this.gameListItem = this._convertGameListItemModelToGameListItemDto(gameItems);
     });
   }
 
   private _getCaptions(): void {
-    this._translateService.get(this.captionPaths.largeHighlightGame).subscribe((caption) => {
-      this.largeHighlightGameCaption = caption;
-    });
+    const largeHighlightGameCaption = this._translateService.get(this.captionPaths.largeHighlightGame);
+    const freeGameManagementCaption = this._translateService.get(this.captionPaths.freeGameCardManagement);
+    const freeGamesCaption = this._translateService.get(this.captionPaths.freeGameCard);
+    const fortniteCaption = this._translateService.get(this.captionPaths.fortniteCardManagement);
 
-    this._translateService.get(this.captionPaths.freeGameCardManagement).subscribe((caption) => {
-      this.freeGameManagementCaption = caption;
-    });
-
-    this._translateService.get(this.captionPaths.freeGameCard).subscribe((caption) => {
-      this.freeGamesCaption = caption;
-    });
-
-    this._translateService.get(this.captionPaths.fortniteCardManagement).subscribe((caption) => {
-      this.fortniteCaption = caption;
+    forkJoin([
+      largeHighlightGameCaption,
+      freeGameManagementCaption,
+      freeGamesCaption,
+      fortniteCaption
+    ]).subscribe(([largeHighlightGameCaption, freeGameManagementCaption, freeGamesCaption, fortniteCaption]) => {
+      this.largeHighlightGameCaption = largeHighlightGameCaption;
+      this.freeGameManagementCaption = freeGameManagementCaption;
+      this.freeGamesCaption = freeGamesCaption;
+      this.fortniteCaption = fortniteCaption;
     });
   }
   //#endregion
