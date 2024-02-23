@@ -5,6 +5,7 @@ import { HighlightGamesDto } from '../components/home/dots/highlight-games-dto';
 import { GameCardModel } from '../components/home/models/game-card.model';
 import { FreeGameCardModel } from '../components/home/models/free-game-card.model';
 import { FortniteCardModel } from '../components/home/models/fortnite-card.model';
+import { GameBannerModel } from '../components/home/models/game-banner.model';
 
 @Injectable()
 export class GameService {
@@ -23,6 +24,10 @@ export class GameService {
 
   public getFortniteGames(): Observable<FortniteCardModel[]> {
     return of(FortniteCards);
+  }
+
+  public getGameBanners(): Observable<GameBannerModel[]> {
+    return of(gameBanner);
   }
   //#endregion
 }
@@ -231,6 +236,23 @@ const FortniteCards: FortniteCardModel[] = [
     cover: '../assets/game-covers/fortnite-games/fo3.jpeg',
     name: 'F 3',
     type: 'F something',
+    isFeatured: true
+  }
+];
+
+const gameBanner: GameBannerModel[] = [
+  {
+    cover: '../assets/game-covers/game-banner/b1.jpg',
+    name: 'game x',
+    bio: 'some random description about the game',
+    isFree: true,
+    isFeatured: true
+  },
+  {
+    cover: '../assets/game-covers/game-banner/b2.jpg',
+    name: 'game y',
+    bio: 'some random description about the game',
+    isFree: true,
     isFeatured: true
   }
 ]

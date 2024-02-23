@@ -1,0 +1,5 @@
+<div class="flex flex-row justify-center gap-6">
+    @for (game of gameInput(); track $index) {
+    <app-game-banner [gameInput]="game" />
+    }
+</div>

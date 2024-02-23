@@ -7,6 +7,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { GameBannerManagementComponent } from './components/home/game-banner-management/game-banner-management.component';
+import { GameBannerComponent } from './components/home/game-banner/game-banner.component';
+import { GameBannerActionComponent } from './components/home/game-banner-action/game-banner-action.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {

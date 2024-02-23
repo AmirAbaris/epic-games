@@ -1,0 +1,7 @@
+<img class="rounded-md" ngSrc="{{gameInput().cover}}" width="500" height="100" alt="{{gameInput().name}}">
+<div class="my-2">
+    <h1 class="text-white text-lg">{{gameInput().name}}</h1>
+    <h2 class="text-lightGray text-sm">{{gameInput().bio}}</h2>
+</div>
+
+<app-game-banner-action [gameInput]="gameInput()" />

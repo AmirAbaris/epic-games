@@ -23,6 +23,9 @@ import { GameListComponent } from '../components/home/game-list/game-list.compon
 import { MatDividerModule } from '@angular/material/divider';
 import { ImageComponent } from '../components/image/image/image.component';
 import { LargeHighlightGameMobileComponent } from '../components/home/large-highlight-game-mobile/large-highlight-game-mobile.component';
+import { GameBannerActionComponent } from '../components/home/game-banner-action/game-banner-action.component';
+import { GameBannerManagementComponent } from '../components/home/game-banner-management/game-banner-management.component';
+import { GameBannerComponent } from '../components/home/game-banner/game-banner.component';
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -43,7 +46,10 @@ const homeRoutes: Routes = [
     GameListManagementComponent,
     GameListComponent,
     GameItemListComponent,
-    LargeHighlightGameMobileComponent
+    LargeHighlightGameMobileComponent,
+    GameBannerManagementComponent,
+    GameBannerComponent,
+    GameBannerActionComponent
   ],
   imports: [
     CommonModule,

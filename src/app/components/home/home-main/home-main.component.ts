@@ -17,6 +17,8 @@ import { freeGameCardManagementCaptionModel } from "../models/caption-models/fre
 import { FreeCardCaptionsModel } from "../models/caption-models/free-card-captions.model";
 import { FortniteCardDto } from "../dots/fortnite-card-dto";
 import { FortniteCardManagementCaptionModel } from "../models/caption-models/fortnite-management-caption.model";
+import { GameBannerDto } from "../dots/game-banner-dto";
+import { GameBannerModel } from "../models/game-banner.model";
 
 @Component({
   selector: "app-home-main",
@@ -32,11 +34,11 @@ export class HomeMainComponent implements OnInit {
 
   //#region properties
   // public gameListItem!: GameListItemModel;
-  // public fortniteCard!: FortniteCardModel;
   public highlightGames: HighlightGamesDto | undefined;
   public gameCards: GameCardDto[] | undefined;
   public freeGameCards: FreeGameCardDto[] | undefined;
   public fortniteGameCards: FortniteCardDto[] | undefined;
+  public gameBanners: GameBannerDto[] | undefined;
 
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
@@ -57,6 +59,7 @@ export class HomeMainComponent implements OnInit {
     this._getGameCards();
     this._getFreeGames();
     this._getFortniteGames();
+    this._getGameBanners();
 
     this._getCaptions();
   }
@@ -85,6 +88,12 @@ export class HomeMainComponent implements OnInit {
     this._gameService.getFortniteGames().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((fortniteGames) => {
       this.fortniteGameCards = this._convertFortniteCardModelToFortniteCardDto(fortniteGames);
     });
+  }
+
+  private _getGameBanners(): void {
+    this._gameService.getGameBanners().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((gameBanner) => {
+      this.gameBanners = this._convertGameBannerModelToGameBannerDto(gameBanner);
+    })
   }
 
   private _getCaptions(): void {
@@ -169,6 +178,24 @@ export class HomeMainComponent implements OnInit {
     });
 
     return fortniteCardsDto;
+  }
+
+  private _convertGameBannerModelToGameBannerDto(gameBannersModel: GameBannerModel[]): GameBannerDto[] {
+    const gameBanners: GameBannerDto[] = [];
+
+    gameBannersModel.forEach((game) => {
+      const gameBanner: GameBannerDto = {
+        cover: game.cover,
+        name: game.name,
+        bio: game.bio,
+        isFree: game.isFree,
+        price: game.price
+      };
+
+      gameBanners.push(gameBanner);
+    });
+
+    return gameBanners;
   }
   //#endregion
 }
