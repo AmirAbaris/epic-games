@@ -1,4 +1,4 @@
-export interface GameListItemModel {
+export interface GameListItemDto {
     thumbnailCover?: string;
     name: string;
     discountPercent?: number;

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HighlightGamesModel } from '../components/home/models/highlight-games-model';
-import { HighlightGamesDto } from '../components/home/dots/highlight-games-dto';
 import { GameCardModel } from '../components/home/models/game-card.model';
 import { FreeGameCardModel } from '../components/home/models/free-game-card.model';
 import { FortniteCardModel } from '../components/home/models/fortnite-card.model';
 import { GameBannerModel } from '../components/home/models/game-banner.model';
+import { GameListItemModel } from '../components/home/models/game-list-item.model';
 
 @Injectable()
 export class GameService {
@@ -28,6 +28,10 @@ export class GameService {
 
   public getGameBanners(): Observable<GameBannerModel[]> {
     return of(gameBanner);
+  }
+
+  public getGameList(): Observable<GameListItemModel[]> {
+    return of(gameList);
   }
   //#endregion
 }
@@ -255,4 +259,157 @@ const gameBanner: GameBannerModel[] = [
     isFree: true,
     isFeatured: true
   }
-]
+];
+
+const gameList: GameListItemModel[] = [
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l1.jpeg",
+    name: "Game 1",
+    discountPercent: 25,
+    basePrice: 39.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Top Sellers",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l2.jpeg",
+    name: "Game 2",
+    discountPercent: 50,
+    basePrice: 19.99,
+    finalPrice: 9.99,
+    isFree: false,
+    categoryType: "Top Sellers",
+    isFeatured: false,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l3.jpeg",
+    name: "Game 3",
+    discountPercent: 0,
+    basePrice: 59.99,
+    finalPrice: 59.99,
+    isFree: false,
+    categoryType: "Top Sellers",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l4.jpeg",
+    name: "Game 4",
+    discountPercent: 8,
+    basePrice: 9.99,
+    finalPrice: 9.99,
+    isFree: true,
+    categoryType: "Top Sellers",
+    isFeatured: false,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l5.jpeg",
+    name: "Game 5",
+    discountPercent: 75,
+    basePrice: 59.99,
+    finalPrice: 14.99,
+    isFree: false,
+    categoryType: "Top Sellers",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l6.jpeg",
+    name: "Game 6",
+    discountPercent: 10,
+    basePrice: 29.99,
+    finalPrice: 26.99,
+    isFree: false,
+    categoryType: "Most Played",
+    isFeatured: false,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l7.jpeg",
+    name: "Game 7",
+    discountPercent: 20,
+    basePrice: 14.99,
+    finalPrice: 11.99,
+    isFree: false,
+    categoryType: "Most Played",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l8.jpeg",
+    name: "Game 8",
+    discountPercent: 40,
+    basePrice: 49.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Most Played",
+    isFeatured: false,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l9.jpeg",
+    name: "Game 9",
+    discountPercent: 15,
+    basePrice: 19.99,
+    finalPrice: 16.99,
+    isFree: false,
+    categoryType: "Most Played",
+    isFeatured: false,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l10.jpeg",
+    name: "Game 10",
+    discountPercent: 0,
+    basePrice: 29.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Most Played",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l11.jpeg",
+    name: "Game 11",
+    discountPercent: 0,
+    basePrice: 29.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Top Upcoming Wishlisted",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l12.jpeg",
+    name: "Game 12",
+    discountPercent: 0,
+    basePrice: 29.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Top Upcoming Wishlisted",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l13.jpeg",
+    name: "Game 13",
+    discountPercent: 0,
+    basePrice: 29.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Top Upcoming Wishlisted",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l14.jpeg",
+    name: "Game 14",
+    discountPercent: 0,
+    basePrice: 29.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Top Upcoming Wishlisted",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+    name: "Game 15",
+    discountPercent: 0,
+    basePrice: 29.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Top Upcoming Wishlisted",
+    isFeatured: true,
+  }
+];
