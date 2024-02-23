@@ -15,6 +15,8 @@ import { FreeGameCardDto } from "../dots/free-game-card-dto";
 import { FreeGameCardCaptionModel } from "../models/caption-models/free-game-card-caption.model";
 import { freeGameCardManagementCaptionModel } from "../models/caption-models/free-game-card-management-caption.model";
 import { FreeCardCaptionsModel } from "../models/caption-models/free-card-captions.model";
+import { FortniteCardDto } from "../dots/fortnite-card-dto";
+import { FortniteCardManagementCaptionModel } from "../models/caption-models/fortnite-management-caption.model";
 
 @Component({
   selector: "app-home-main",
@@ -34,15 +36,18 @@ export class HomeMainComponent implements OnInit {
   public highlightGames: HighlightGamesDto | undefined;
   public gameCards: GameCardDto[] | undefined;
   public freeGameCards: FreeGameCardDto[] | undefined;
+  public fortniteGameCards: FortniteCardDto[] | undefined;
 
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameManagementCaption: freeGameCardManagementCaptionModel | undefined;
+  public fortniteCaption: FortniteCardManagementCaptionModel | undefined;
 
   private readonly captionPaths = {
     largeHighlightGame: "home.LargeHighlightGame",
     freeGameCardManagement: "home.FreeGameCardManagement",
     freeGameCard: "home.FreeGameCard",
+    fortniteCardManagement: "home.FortniteCardManagement"
   };
   //#endregion
 
@@ -51,6 +56,7 @@ export class HomeMainComponent implements OnInit {
     this._getHighlightGames();
     this._getGameCards();
     this._getFreeGames();
+    this._getFortniteGames();
 
     this._getCaptions();
   }
@@ -75,6 +81,12 @@ export class HomeMainComponent implements OnInit {
     });
   }
 
+  private _getFortniteGames(): void {
+    this._gameService.getFortniteGames().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((fortniteGames) => {
+      this.fortniteGameCards = this._convertFortniteCardModelToFortniteCardDto(fortniteGames);
+    });
+  }
+
   private _getCaptions(): void {
     this._translateService.get(this.captionPaths.largeHighlightGame).subscribe((caption) => {
       this.largeHighlightGameCaption = caption;
@@ -86,6 +98,10 @@ export class HomeMainComponent implements OnInit {
 
     this._translateService.get(this.captionPaths.freeGameCard).subscribe((caption) => {
       this.freeGamesCaption = caption;
+    });
+
+    this._translateService.get(this.captionPaths.fortniteCardManagement).subscribe((caption) => {
+      this.fortniteCaption = caption;
     });
   }
   //#endregion
@@ -136,6 +152,23 @@ export class HomeMainComponent implements OnInit {
     });
 
     return freeGamesDto;
+  }
+
+  private _convertFortniteCardModelToFortniteCardDto(fortniteGames: FortniteCardModel[]): FortniteCardDto[] {
+    const fortniteCardsDto: FortniteCardDto[] = [];
+
+    fortniteGames.forEach((game) => {
+      const fortniteCard: FortniteCardDto = {
+        cover: game.cover,
+        name: game.name,
+        type: game.type
+
+      };
+
+      fortniteCardsDto.push(fortniteCard);
+    });
+
+    return fortniteCardsDto;
   }
   //#endregion
 }
