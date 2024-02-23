@@ -1,12 +1,13 @@
-@if (highlightGames && largeHighlightGameCaption && gameCards) {
+@if (highlightGames && largeHighlightGameCaption && gameCards && freeGameCards && freeGamesCaption &&
+freeGameManagementCaption) {
 <app-highlight-game-card [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption" />
 
 <app-game-card-management [gameCardInputs]="gameCards" />
-}
 
+<app-free-game-card-management [gameInputs]="freeGameCards" [cardCaption]="freeGamesCaption"
+    [managementCaption]="freeGameManagementCaption" [iconInput]="'redeem'" />
+}
 <!-- 
-<app-free-game-card-management [gameInputs]="freeGameCard" [captionInput]="homeCaptions.freeCardCaptions"
-    [iconInput]="'redeem'" />
 
 <app-fortnite-card-management [gameInput]="fortniteCard" />
 

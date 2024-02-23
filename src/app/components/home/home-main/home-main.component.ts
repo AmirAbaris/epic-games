@@ -11,6 +11,10 @@ import { LargeHighlightGameCaptionModel } from "../models/caption-models/large-h
 import { HighlightGamesDto } from "../dots/highlight-games-dto";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { GameCardDto } from "../dots/game-card-dto";
+import { FreeGameCardDto } from "../dots/free-game-card-dto";
+import { FreeGameCardCaptionModel } from "../models/caption-models/free-game-card-caption.model";
+import { freeGameCardManagementCaptionModel } from "../models/caption-models/free-game-card-management-caption.model";
+import { FreeCardCaptionsModel } from "../models/caption-models/free-card-captions.model";
 
 @Component({
   selector: "app-home-main",
@@ -26,12 +30,14 @@ export class HomeMainComponent implements OnInit {
 
   //#region properties
   // public gameListItem!: GameListItemModel;
-  // public freeGameCard!: FreeGameCardModel;
   // public fortniteCard!: FortniteCardModel;
   public highlightGames: HighlightGamesDto | undefined;
   public gameCards: GameCardDto[] | undefined;
+  public freeGameCards: FreeGameCardDto[] | undefined;
 
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
+  public freeGamesCaption: FreeGameCardCaptionModel | undefined;
+  public freeGameManagementCaption: freeGameCardManagementCaptionModel | undefined;
 
   private readonly captionPaths = {
     largeHighlightGame: "home.LargeHighlightGame",
@@ -44,6 +50,8 @@ export class HomeMainComponent implements OnInit {
   ngOnInit(): void {
     this._getHighlightGames();
     this._getGameCards();
+    this._getFreeGames();
+
     this._getCaptions();
   }
   //#endregion
@@ -56,14 +64,28 @@ export class HomeMainComponent implements OnInit {
   }
 
   private _getGameCards(): void {
-    this._gameService.getGameCards().subscribe((gameCards) => {
+    this._gameService.getGameCards().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((gameCards) => {
       this.gameCards = this._convertGameCardModelToGameCardDto(gameCards);
+    });
+  }
+
+  private _getFreeGames(): void {
+    this._gameService.getFreeGames().pipe(takeUntilDestroyed(this._destroyRef)).subscribe((freeGames) => {
+      this.freeGameCards = this._convertFreeGameModelToFreeGamesDto(freeGames);
     });
   }
 
   private _getCaptions(): void {
     this._translateService.get(this.captionPaths.largeHighlightGame).subscribe((caption) => {
       this.largeHighlightGameCaption = caption;
+    });
+
+    this._translateService.get(this.captionPaths.freeGameCardManagement).subscribe((caption) => {
+      this.freeGameManagementCaption = caption;
+    });
+
+    this._translateService.get(this.captionPaths.freeGameCard).subscribe((caption) => {
+      this.freeGamesCaption = caption;
     });
   }
   //#endregion
@@ -98,5 +120,22 @@ export class HomeMainComponent implements OnInit {
     return gameCardsDto;
   }
 
+  private _convertFreeGameModelToFreeGamesDto(freeGame: FreeGameCardModel[]): FreeGameCardDto[] {
+    const freeGamesDto: FreeGameCardDto[] = [];
+
+    freeGame.forEach((game) => {
+      const gameCardDto: FreeGameCardDto = {
+        name: game.name,
+        type: game.type,
+        isFree: game.isFree,
+        cover: game.cover,
+        isPublished: game.isPublished
+      };
+
+      freeGamesDto.push(gameCardDto);
+    });
+
+    return freeGamesDto;
+  }
   //#endregion
 }

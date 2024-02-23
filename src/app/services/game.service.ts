@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { HighlightGamesModel } from '../components/home/models/highlight-games-model';
 import { HighlightGamesDto } from '../components/home/dots/highlight-games-dto';
 import { GameCardModel } from '../components/home/models/game-card.model';
+import { FreeGameCardModel } from '../components/home/models/free-game-card.model';
 
 @Injectable()
 export class GameService {
@@ -13,6 +14,10 @@ export class GameService {
 
   public getGameCards(): Observable<GameCardModel[]> {
     return of(gameCards);
+  }
+
+  public getFreeGames(): Observable<FreeGameCardModel[]> {
+    return of(freeGames);
   }
   //#endregion
 }
@@ -184,3 +189,22 @@ const gameCards: GameCardModel[] = [
     isOnSale: true
   }
 ]
+
+const freeGames: FreeGameCardModel[] = [
+  {
+    name: "Game Y",
+    type: "Type of Game",
+    isFree: true,
+    cover: "../assets/game-covers/free-games/f1.jpeg",
+    isPublished: true,
+    isFeatured: false,
+  },
+  {
+    name: "Game x",
+    type: "Type of Game",
+    isFree: true,
+    cover: "../assets/game-covers/free-games/f2.jpg",
+    isPublished: false,
+    isFeatured: false,
+  }
+];
