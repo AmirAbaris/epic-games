@@ -10,6 +10,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { GameBannerManagementComponent } from './components/home/game-banner-management/game-banner-management.component';
 import { GameBannerComponent } from './components/home/game-banner/game-banner.component';
 import { GameBannerActionComponent } from './components/home/game-banner-action/game-banner-action.component';
+import { register } from 'swiper/element/bundle';
+import { SwiperDirective } from './directives/swiper.directive';
+
+register();
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -18,7 +22,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SwiperDirective
   ],
   imports: [
     BrowserModule,

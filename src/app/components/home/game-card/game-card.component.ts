@@ -1,6 +1,8 @@
-import { Component, input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild, input } from '@angular/core';
 import { GameCardModel } from '../models/game-card.model';
 import { GameCardDto } from '../dots/game-card-dto';
+import { SwiperOptions } from 'swiper/types';
+import { SwiperContainer } from 'swiper/element';
 
 @Component({
   selector: 'app-game-card',
