@@ -1,19 +1,23 @@
-<img class="rounded-md" ngSrc="{{gameInput().thumbnailCover}}" width="48" height="64" alt="{{gameInput().name}}">
-@if (gameInput().isFree) {
-<div class="flex flex-col gap-4 text-white">
-    <h1>{{gameInput().name}}</h1>
-    <h2 class="text-xs">FREE</h2>
-</div>
-}
-@else {
-<div class="flex flex-col gap-1 text-white text-sm">
+<div class="flex flex-row gap-6">
+    <img class="rounded-md" ngSrc="{{gameInput().thumbnailCover}}" width="48" height="64" alt="{{gameInput().name}}">
     <div>
-        <h3>{{gameInput().name}}</h3>
-    </div>
-    <div class="flex flex-row gap-4 text-xs items-center">
-        <h4 class="bg-vividBlue p-1 rounded-sm">{{gameInput().discountPercent | percent}}</h4>
-        <h5 class="line-through text-gray-500">{{gameInput().basePrice | currency}}</h5>
-        <p>{{gameInput().finalPrice | currency}}</p>
+        @if (gameInput().isFree) {
+        <div class="flex flex-col gap-4 text-white">
+            <h1>{{gameInput().name}}</h1>
+            <h2 class="text-xs">FREE</h2>
+        </div>
+        }
+        @if (!gameInput().isFree) {
+        <div class="flex flex-col gap-1 text-white text-sm">
+            <div>
+                <h3>{{gameInput().name}}</h3>
+            </div>
+            <div class="flex flex-row gap-4 text-xs items-center">
+                <h4 class="bg-vividBlue p-1 rounded-sm">{{gameInput().discountPercent | percent}}</h4>
+                <h5 class="line-through text-gray-500">{{gameInput().basePrice | currency}}</h5>
+                <p>{{gameInput().finalPrice | currency}}</p>
+            </div>
+        </div>
+        }
     </div>
 </div>
-}
