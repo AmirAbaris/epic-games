@@ -1,6 +1,4 @@
 import { Component, DestroyRef, EventEmitter, OnInit, Output, inject, input } from '@angular/core';
-import { HomeMainCaptionModel } from '../models/caption-models/home-main-captions.model';
-import { HighlightGamesModel } from '../models/highlight-games-model';
 import { interval } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LargeHighlightGameCaptionModel } from '../models/caption-models/large-highlight-game-caption.model';
