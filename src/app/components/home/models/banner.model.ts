@@ -1,4 +1,4 @@
-export interface GameBannerDto {
+export interface BannerModel {
     cover: string;
     name?: string;
     bio: string;
@@ -6,4 +6,5 @@ export interface GameBannerDto {
     price?: number;
     isAGame: boolean;
     playable?: boolean;
+    isFeatured: boolean;
 }

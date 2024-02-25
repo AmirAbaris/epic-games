@@ -17,8 +17,8 @@ import { freeGameCardManagementCaptionModel } from "../models/caption-models/fre
 import { FreeCardCaptionsModel } from "../models/caption-models/free-card-captions.model";
 import { FortniteCardDto } from "../dots/fortnite-card-dto";
 import { FortniteCardManagementCaptionModel } from "../models/caption-models/fortnite-management-caption.model";
-import { GameBannerDto } from "../dots/game-banner-dto";
-import { GameBannerModel } from "../models/game-banner.model";
+import { BannerDto } from "../dots/banner-dto";
+import { BannerModel } from "../models/banner.model";
 import { GameListItemDto } from "../dots/game-list-item-dto";
 import { forkJoin } from "rxjs";
 
@@ -38,9 +38,9 @@ export class HomeMainComponent implements OnInit {
   public gameCards: GameCardDto[] | undefined;
   public freeGameCards: FreeGameCardDto[] | undefined;
   public fortniteGameCards: FortniteCardDto[] | undefined;
-  public banners: GameBannerDto[] | undefined;
-  public gameBanners: GameBannerDto[] | undefined;
-  public nonGameBanners: GameBannerDto[] | undefined;
+  public banners: BannerDto[] | undefined;
+  public gameBanners: BannerDto[] | undefined;
+  public nonGameBanners: BannerDto[] | undefined;
   public gameListItem: GameListItemDto[] | undefined;
 
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
@@ -177,11 +177,11 @@ export class HomeMainComponent implements OnInit {
     return fortniteCardsDto;
   }
 
-  private _convertGameBannerModelToGameBannerDto(gameBannersModel: GameBannerModel[]): GameBannerDto[] {
-    const gameBanners: GameBannerDto[] = [];
+  private _convertGameBannerModelToGameBannerDto(gameBannersModel: BannerModel[]): BannerDto[] {
+    const gameBanners: BannerDto[] = [];
 
     gameBannersModel.forEach((game) => {
-      const gameBanner: GameBannerDto = {
+      const gameBanner: BannerDto = {
         cover: game.cover,
         name: game.name,
         bio: game.bio,

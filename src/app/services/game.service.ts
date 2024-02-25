@@ -4,7 +4,7 @@ import { HighlightGamesModel } from '../components/home/models/highlight-games-m
 import { GameCardModel } from '../components/home/models/game-card.model';
 import { FreeGameCardModel } from '../components/home/models/free-game-card.model';
 import { FortniteCardModel } from '../components/home/models/fortnite-card.model';
-import { GameBannerModel } from '../components/home/models/game-banner.model';
+import { BannerModel } from '../components/home/models/banner.model';
 import { GameListItemModel } from '../components/home/models/game-list-item.model';
 
 @Injectable()
@@ -26,7 +26,7 @@ export class GameService {
     return of(FortniteCards);
   }
 
-  public getGameBanners(): Observable<GameBannerModel[]> {
+  public getGameBanners(): Observable<BannerModel[]> {
     return of(gameBanner);
   }
 
@@ -244,7 +244,7 @@ const FortniteCards: FortniteCardModel[] = [
   }
 ];
 
-const gameBanner: GameBannerModel[] = [
+const gameBanner: BannerModel[] = [
   {
     cover: '../assets/game-covers/game-banner/b1.jpg',
     name: 'game x',

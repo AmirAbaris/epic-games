@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { GameBannerDto } from '../dots/game-banner-dto';
+import { BannerDto } from '../dots/banner-dto';
 
 @Component({
   selector: 'app-game-banner',
@@ -8,6 +8,6 @@ import { GameBannerDto } from '../dots/game-banner-dto';
 })
 export class GameBannerComponent {
   //#region properties
-  gameInput = input.required<GameBannerDto>();
+  gameInput = input.required<BannerDto>();
   //#endregion
 }
