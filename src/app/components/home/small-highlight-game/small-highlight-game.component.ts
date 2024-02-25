@@ -32,5 +32,6 @@ export class SmallHighlightGameComponent {
   gameImageInput = input<string>();
   gameNameInput = input<string>();
   currentGameIndexInput = input<number>();
+  isActiveInput = input.required<boolean>();
   //#endregion
 }

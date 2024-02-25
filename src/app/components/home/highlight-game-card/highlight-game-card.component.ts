@@ -22,6 +22,7 @@ export class HighlightGameCardComponent implements OnInit {
   @Output('addWishlistButton') AddToWishListButtonEvent = new EventEmitter();
 
   public largeHighlightIndex: number = 0;
+  public isActive: boolean = true;
   //#endregion
 
   //#region lifecycle methods
@@ -34,6 +35,8 @@ export class HighlightGameCardComponent implements OnInit {
   private _startSwitchingGames(): void {
     interval(7000).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
       this.largeHighlightIndex = (this.largeHighlightIndex + 1) % this.gameInputs().largeHighlightGames.length;
+
+      this.isActive = !this.isActive;
     });
   }
   //#endregion

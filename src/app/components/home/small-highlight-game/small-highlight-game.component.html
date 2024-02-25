@@ -1,5 +1,5 @@
 <div class="flex items-center gap-4 p-4 rounded-xl cursor-pointer"
-    [@cardAnimation]="currentGameIndexInput() === 0 ? 'active': 'inactive'">
+    [@cardAnimation]="isActiveInput() ? 'active': 'inactive'">
     <img class="rounded-lg" ngSrc="{{gameImageInput()}}" width="45" height="5" alt="{{gameNameInput()}}">
     <h1 class="text-lightGray text-sm">
         {{gameNameInput()}}</h1>
