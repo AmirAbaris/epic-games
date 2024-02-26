@@ -17,5 +17,3 @@ export interface GameModel {
     isFortnite: boolean;
     categoryType?: string;
 }
-
-// TODO: create a ne model for each

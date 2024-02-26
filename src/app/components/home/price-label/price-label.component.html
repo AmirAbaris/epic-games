@@ -1,0 +1,15 @@
+@if (!priceLabelInput().discountPercent) {
+<h1>{{priceLabelInput().finalPrice | currency}}</h1>
+}
+@else {
+<div class="flex justify-start items-center gap-3 font-sans">
+    <h2 class="flex items-center justify-center rounded-sm bg-vividBlue w-10 h-5 text-[9px]">
+        {{-(priceLabelInput().discountPercent!) / 100 |
+        percent}}
+    </h2>
+    <div class="flex flex-wrap gap-3 items-center justify-end">
+        <h3 class="line-through text-lightGray">{{priceLabelInput().basePrice | currency}}</h3>
+        <h4>{{priceLabelInput().finalPrice | currency}}</h4>
+    </div>
+</div>
+}

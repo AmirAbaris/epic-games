@@ -26,6 +26,8 @@ import { LargeHighlightGameMobileComponent } from '../components/home/large-high
 import { GameBannerActionComponent } from '../components/home/game-banner-action/game-banner-action.component';
 import { GameBannerManagementComponent } from '../components/home/game-banner-management/game-banner-management.component';
 import { GameBannerComponent } from '../components/home/game-banner/game-banner.component';
+import { PriceLabelComponent } from '../components/home/price-label/price-label.component';
+import { PriceLabelManagementComponent } from '../components/home/price-label-management/price-label-management.component';
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -49,7 +51,9 @@ const homeRoutes: Routes = [
     LargeHighlightGameMobileComponent,
     GameBannerManagementComponent,
     GameBannerComponent,
-    GameBannerActionComponent
+    GameBannerActionComponent,
+    PriceLabelComponent,
+    PriceLabelManagementComponent
   ],
   imports: [
     CommonModule,
