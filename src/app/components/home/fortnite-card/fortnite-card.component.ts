@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { FortniteCardModel } from '../models/fortnite-card.model';
+import { FortniteCardDto } from '../dots/fortnite-card-dto';
 
 @Component({
   selector: 'app-fortnite-card',
@@ -8,6 +9,6 @@ import { FortniteCardModel } from '../models/fortnite-card.model';
 })
 export class FortniteCardComponent {
   //#region properties
-  gameInput = input.required<FortniteCardModel[]>();
+  gameInput = input.required<FortniteCardDto>();
   //#region 
 }

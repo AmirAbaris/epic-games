@@ -1,10 +1,7 @@
-<section class="relative flex flex-shrink-0 px-10 lg:hidden">
-    <div class="object-cover w-80 h-128">
-        <app-image [imageUrlInput]="gameInput().mobileCover" />
-    </div>
-    <mat-icon class="absolute top-4 right-6">{{addIconInput()}}</mat-icon>
-    <div class="absolute object-cover w-44 h-20 bottom-32 left-14">
-        <app-image [imageUrlInput]="gameInput().logo" />
-    </div>
+<div class="relative lg:hidden">
+    <img class="rounded-xl" ngSrc="{{gameInput().mobileCover}}" width="350" height="100" alt="{{gameInput().name}}">
+    <mat-icon class="absolute top-4 left-80">{{addIconInput()}}</mat-icon>
+    <img class="absolute bottom-32 left-14" ngSrc="{{gameInput().logo}}" width="200" height="5"
+        alt="{{gameInput().name}}">
     <h2 class="absolute bottom-20 left-14 text-xs text-white">{{gameInput().bio}}</h2>
-</section>
+</div>

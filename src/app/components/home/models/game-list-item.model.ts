@@ -1,11 +1,12 @@
+import { GameCategoryEnum } from "../enums/category-types.enum";
+
 export interface GameListItemModel {
-    id?: string;
-    thumbnailCover?: string;
+    thumbnailCover: string;
     name: string;
     discountPercent?: number;
     basePrice?: number;
     finalPrice?: number;
-    isFree?: boolean;
-    isFortnite: boolean;
-    categoryType?: string;
+    isFree: boolean;
+    categoryType: string;
+    isFeatured: boolean;
 }

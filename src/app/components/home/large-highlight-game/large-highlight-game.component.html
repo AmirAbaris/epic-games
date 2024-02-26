@@ -1,22 +1,19 @@
 <section class="hidden lg:flex">
     <div class="lg:relative">
-        <div class="w-256 h-40 object-cover">
-            <app-image [imageUrlInput]="gameInputs()[currentGameIndexInput()].cover" />
-        </div>
-        <div class="absolute top-32 left-9 w-52 h-32">
-            <app-image [imageUrlInput]="gameInputs()[currentGameIndexInput()].logo" />
-        </div>
+        <img class="rounded-xl" ngSrc="{{gameInputs()[currentGameIndexInput()].cover}}" width="900" height="1000"
+            alt="{{gameInputs()[currentGameIndexInput()].name}}">
+
+        <img class="absolute bottom-72 left-9" ngSrc="{{gameInputs()[currentGameIndexInput()].logo}}" width="200"
+            height="100" alt="{{gameInputs()[currentGameIndexInput()].name}}">
+
         <h1 class="absolute bottom-44 left-9 text-white">{{gameInputs()[currentGameIndexInput()].bio}}</h1>
-        <div class="absolute bottom-5 left-9 flex items-center gap-6 mb-7">
+
+        <div class="absolute bottom-10 left-9 flex items-center gap-6 mb-7">
             <button class="buy-btn" mat-raised-button>{{captionInput().buyButton}}</button>
-            <button class="" mat-button>
+            <button class="add-btn" mat-button>
                 <mat-icon>{{addIconInput()}}</mat-icon>
                 {{captionInput().AddToWishlistButton}}
             </button>
         </div>
     </div>
 </section>
-
-@for (game of gameInputs(); track $index) {
-<app-large-highlight-game-mobile [gameInput]="game" [addIconInput]="addIconInput()" />
-}

@@ -3,6 +3,6 @@ export interface FreeGameCardModel {
     type: string;
     isFree?: boolean;
     cover?: string;
-    isFortnite: boolean;
     isPublished?: boolean;
+    isFeatured: boolean;
 }

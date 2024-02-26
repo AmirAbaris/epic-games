@@ -11,6 +11,10 @@
         "FreeGameCard": {
             "freeNowTitle": "FREE NOW",
             "comingSoonTitle": "COMING SOON"
+        },
+        "FortniteCardManagement": {
+            "mainTitle": "Fortnite Experience",
+            "websiteTitle": "VISIT FORTNITE.COM"
         }
     }
 }

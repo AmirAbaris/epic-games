@@ -1,9 +1,8 @@
 import { Component, DestroyRef, EventEmitter, OnInit, Output, inject, input } from '@angular/core';
-import { HomeMainCaptionModel } from '../models/caption-models/home-main-captions.model';
-import { HighlightGamesModel } from '../models/highlight-games-model';
 import { interval } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LargeHighlightGameCaptionModel } from '../models/caption-models/large-highlight-game-caption.model';
+import { HighlightGamesDto } from '../dots/highlight-games-dto';
 
 @Component({
   selector: 'app-highlight-game-card',
@@ -16,13 +15,14 @@ export class HighlightGameCardComponent implements OnInit {
   //#endregion
 
   //#region properties
-  gameInputs = input.required<HighlightGamesModel>();
+  gameInputs = input.required<HighlightGamesDto>();
   captionInputs = input.required<LargeHighlightGameCaptionModel>();
 
   @Output('playButton') playButtonEvent = new EventEmitter();
   @Output('addWishlistButton') AddToWishListButtonEvent = new EventEmitter();
 
   public largeHighlightIndex: number = 0;
+  public isActive: boolean = true;
   //#endregion
 
   //#region lifecycle methods
@@ -35,6 +35,8 @@ export class HighlightGameCardComponent implements OnInit {
   private _startSwitchingGames(): void {
     interval(7000).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
       this.largeHighlightIndex = (this.largeHighlightIndex + 1) % this.gameInputs().largeHighlightGames.length;
+
+      this.isActive = !this.isActive;
     });
   }
   //#endregion

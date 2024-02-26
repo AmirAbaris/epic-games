@@ -1,46 +1,15 @@
 <mat-card>
-    <div class="flex flex-row flex-wrap justify-center gap-6 mt-20 mx-16 mb-4">
-        @for (game of gameCardInputs(); track $index) {
-        @if (!game.isFortnite) {
-        <div>
-            <img class="rounded-md w-full lg:w-52" ngSrc="{{game.cover}}" width="300" height="400" alt="{{game.name}}">
-            <h1 class="text-xs font-thin my-1">{{game.type}}</h1>
-            <h2>{{game.name}}</h2>
-            <div class="flex flex-row gap-5 items-center text-sm mt-2">
-                @if (game.discountPercent) {
-                <div class="bg-brightBlue text-white p-1 rounded-sm">
-                    <h3 class="font-light">{{-(game.discountPercent / 100) | percent }}</h3>
-                </div>
-                }
-                <h4 class="line-through">{{game.basePrice | currency: 'USD' : 'symbol' : '1.0-0'}}</h4>
-                <h5>{{game.finalPrice | currency: 'USD' : 'symbol' : '1.0-0'}}</h5>
-            </div>
+    <img class="rounded-md w-full lg:w-52" ngSrc="{{gameCardInputs().cover}}" width="100" height="100"
+        alt="{{gameCardInputs().name}}">
+    <h1 class="text-xs font-thin my-1">{{gameCardInputs().type}}</h1>
+    <h2>{{gameCardInputs().name}}</h2>
+    <div class="flex flex-row gap-5 items-center text-sm mt-2">
+        @if (gameCardInputs().discountPercent) {
+        <div class="bg-brightBlue text-white p-1 rounded-sm">
+            <h3 class="font-light">{{gameCardInputs().discountPercent | percent }}</h3>
         </div>
         }
-        }
+        <h4 class="line-through">{{gameCardInputs().basePrice | currency: 'USD' : 'symbol' : '1.0-0'}}</h4>
+        <h5>{{gameCardInputs().finalPrice | currency: 'USD' : 'symbol' : '1.0-0'}}</h5>
     </div>
 </mat-card>
-
-<!-- <mat-card>
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            @for (game of gameInputs(); track $index) {
-            <div class="swiper-slide">
-                <img class="rounded-md" ngSrc="{{game.cover}}" width="232" height="320" alt="{{game.name}}">
-                <h1 class="text-xs font-thin my-1">{{game.type}}</h1>
-                <h2>{{game.name}}</h2>
-                <div class="flex flex-row gap-5 items-center text-sm mt-2">
-                    @if (game.discountPercent) {
-                    <div class="bg-brightBlue text-white p-1 rounded-sm">
-                        <h3 class="font-light">{{-(game.discountPercent / 100) | percent }}</h3>
-                    </div>
-                    }
-                    <h4 class="line-through">{{game.basePrice | currency: 'USD' : 'symbol' : '1.0-0'}}</h4>
-                    <h5>{{game.finalPrice | currency: 'USD' : 'symbol' : '1.0-0'}}</h5>
-                </div>
-            </div>
-            }
-        </div>
-        <div class="swiper-pagination"></div>
-    </div>
-</mat-card> -->

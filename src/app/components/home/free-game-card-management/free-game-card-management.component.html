@@ -1,8 +1,15 @@
-<div class="flex flex-row bg-darkBackground p-3 justify-between items-center text-white text-sm">
-    <div class="flex flex-row gap-2 items-center">
-        <mat-icon>{{iconInput()}}</mat-icon>
-        <h1>{{captionInput().freeGameCardManagementCaption.freeGamesTitle}}</h1>
+<div class="bg-darkBackground p-3 text-white text-sm rounded-md mt-12">
+    <div class="flex flex-row gap-2 items-center justify-between p-4">
+        <div class="flex flex-row items-center gap-3">
+            <mat-icon>{{iconInput()}}</mat-icon>
+            <h1>{{managementCaption().freeGamesTitle}}</h1>
+        </div>
+        <button mat-stroked-button>{{managementCaption().viewMoreTitle}}</button>
     </div>
-    <button mat-stroked-button>{{captionInput().freeGameCardManagementCaption.viewMoreTitle}}</button>
+
+    <div class="flex flex-row flex-wrap justify-around">
+        @for (game of gameInputs(); track $index) {
+        <app-free-game-card [gameInputs]="game" [captionInput]="cardCaption()" />
+        }
+    </div>
 </div>
-<app-free-game-card [gameInputs]="gameInputs()" [captionInput]="captionInput().freeGameCardCaption" />

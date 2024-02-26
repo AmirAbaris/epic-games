@@ -1,14 +1,20 @@
-@if (highlightGames && largeHighlightGameCaption) {
-<app-highlight-game-card [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption" />
-}
-<!-- 
-<app-game-card-management [gameCardInputs]="gameCard" />
+@if (highlightGames && largeHighlightGameCaption && gameCards && freeGameCards && freeGamesCaption &&
+freeGameManagementCaption && fortniteGameCards && fortniteCaption && gameBanners && nonGameBanners && gameListItem)
+{
+<!-- <app-highlight-game-card [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption" />
 
-<app-free-game-card-management [gameInputs]="freeGameCard" [captionInput]="homeCaptions.freeCardCaptions"
-    [iconInput]="'redeem'" />
+<app-game-card-management [gameCardInputs]="gameCards" />
 
-<app-fortnite-card-management [gameInput]="fortniteCard" />
+<app-free-game-card-management [gameInputs]="freeGameCards" [cardCaption]="freeGamesCaption"
+    [managementCaption]="freeGameManagementCaption" [iconInput]="'redeem'" />
+
+<app-fortnite-card-management [gameInput]="fortniteGameCards" [captionInput]="fortniteCaption" />
+
+<app-game-banner-management [gameInput]="gameBanners.slice(0, 2)" />
 
 <app-game-list-management [gameInput]="gameListItem" />
 
-<app-game-card-management [gameCardInputs]="gameCard" /> -->
+<app-game-banner-management [gameInput]="gameBanners.slice(2)" />
+
+<app-game-banner-management [gameInput]="nonGameBanners" /> -->
+}

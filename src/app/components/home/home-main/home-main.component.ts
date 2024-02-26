@@ -8,6 +8,19 @@ import { GameCardModel } from "../models/game-card.model";
 import { FreeGameCardModel } from "../models/free-game-card.model";
 import { FortniteCardModel } from "../models/fortnite-card.model";
 import { LargeHighlightGameCaptionModel } from "../models/caption-models/large-highlight-game-caption.model";
+import { HighlightGamesDto } from "../dots/highlight-games-dto";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { GameCardDto } from "../dots/game-card-dto";
+import { FreeGameCardDto } from "../dots/free-game-card-dto";
+import { FreeGameCardCaptionModel } from "../models/caption-models/free-game-card-caption.model";
+import { freeGameCardManagementCaptionModel } from "../models/caption-models/free-game-card-management-caption.model";
+import { FreeCardCaptionsModel } from "../models/caption-models/free-card-captions.model";
+import { FortniteCardDto } from "../dots/fortnite-card-dto";
+import { FortniteCardManagementCaptionModel } from "../models/caption-models/fortnite-management-caption.model";
+import { BannerDto } from "../dots/banner-dto";
+import { BannerModel } from "../models/banner.model";
+import { GameListItemDto } from "../dots/game-list-item-dto";
+import { forkJoin } from "rxjs";
 
 @Component({
   selector: "app-home-main",
@@ -18,63 +31,190 @@ export class HomeMainComponent implements OnInit {
   //#region inject functions
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
-  private _destroyRef = inject(DestroyRef);
   //#endregion
 
   //#region properties
-  // public gameListItem!: GameListItemModel;
-  // public freeGameCard!: FreeGameCardModel;
-  // public fortniteCard!: FortniteCardModel;
-  public highlightGames: HighlightGamesModel | undefined;
-  // public gameCard!: GameCardModel;
+  public highlightGames: HighlightGamesDto | undefined;
+  public gameCards: GameCardDto[] | undefined;
+  public freeGameCards: FreeGameCardDto[] | undefined;
+  public fortniteGameCards: FortniteCardDto[] | undefined;
+  public banners: BannerDto[] | undefined;
+  public gameBanners: BannerDto[] | undefined;
+  public nonGameBanners: BannerDto[] | undefined;
+  public gameListItem: GameListItemDto[] | undefined;
 
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
+  public freeGamesCaption: FreeGameCardCaptionModel | undefined;
+  public freeGameManagementCaption: freeGameCardManagementCaptionModel | undefined;
+  public fortniteCaption: FortniteCardManagementCaptionModel | undefined;
 
   private readonly captionPaths = {
     largeHighlightGame: "home.LargeHighlightGame",
     freeGameCardManagement: "home.FreeGameCardManagement",
     freeGameCard: "home.FreeGameCard",
+    fortniteCardManagement: "home.FortniteCardManagement"
   };
   //#endregion
 
   //#region lifecycle methods
   ngOnInit(): void {
-    this._getHighlightGames();
+    this._getAllGameData();
+    this._filterGamesInGameBanners();
+    this._filterNonGamesInGameBanners();
     this._getCaptions();
   }
   //#endregion
 
   //#region main logic methods
-  private _getHighlightGames(): void {
-    this._gameService.getHighlightGames().subscribe((highlightGames) => {
-      this.highlightGames = highlightGames;
+  private _getAllGameData(): void {
+    forkJoin([
+      this._gameService.getHighlightGames(),
+      this._gameService.getGameCards(),
+      this._gameService.getFreeGames(),
+      this._gameService.getFortniteGames(),
+      this._gameService.getGameBanners(),
+      this._gameService.getGameList()
+    ]).subscribe(([highlighGames, gameCards, freeGames, fortniteGames, gameBanner, gameItems]) => {
+      this.highlightGames = this._convertHighlightGamesModelToHighlightGamesDto(highlighGames);
+      this.gameCards = this._convertGameCardModelToGameCardDto(gameCards);
+      this.freeGameCards = this._convertFreeGameModelToFreeGamesDto(freeGames);
+      this.fortniteGameCards = this._convertFortniteCardModelToFortniteCardDto(fortniteGames);
+      this.banners = this._convertGameBannerModelToGameBannerDto(gameBanner);
+      this.gameListItem = this._convertGameListItemModelToGameListItemDto(gameItems);
     });
   }
 
   private _getCaptions(): void {
-    this._translateService.get(this.captionPaths.largeHighlightGame).subscribe((caption) => {
-      this.largeHighlightGameCaption = caption;
+    const largeHighlightGameCaption = this._translateService.get(this.captionPaths.largeHighlightGame);
+    const freeGameManagementCaption = this._translateService.get(this.captionPaths.freeGameCardManagement);
+    const freeGamesCaption = this._translateService.get(this.captionPaths.freeGameCard);
+    const fortniteCaption = this._translateService.get(this.captionPaths.fortniteCardManagement);
+
+    forkJoin([
+      largeHighlightGameCaption,
+      freeGameManagementCaption,
+      freeGamesCaption,
+      fortniteCaption
+    ]).subscribe(([largeHighlightGameCaption, freeGameManagementCaption, freeGamesCaption, fortniteCaption]) => {
+      this.largeHighlightGameCaption = largeHighlightGameCaption;
+      this.freeGameManagementCaption = freeGameManagementCaption;
+      this.freeGamesCaption = freeGamesCaption;
+      this.fortniteCaption = fortniteCaption;
     });
-
-    // this._translateService.get(this.captionPaths.freeGameCardManagement).subscribe({
-    //   next: (caption) => {
-    //     this.homeCaptions.freeCardCaptions.freeGameCardManagementCaption = caption;
-    //   }
-    // });
-
-    // this._translateService.get(this.captionPaths.freeGameCard).subscribe({
-    //   next: (caption) => {
-    //     this.homeCaptions.freeCardCaptions.freeGameCardCaption = caption;
-    //   }
-    // });
   }
 
-  // private startSwitchingGames(): void {
-  //   interval(7000).pipe(startWith(0)).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-  //     if (this.highlightGames) {
-  //       this.currentGameIndex = (this.currentGameIndex + 1) % this.highlightGames.largeHighlightGames.length;
-  //     }
-  //   });
-  // }
+  private _filterGamesInGameBanners(): void {
+    this.gameBanners = this.banners?.filter((game) => game.isAGame);
+  }
+
+  private _filterNonGamesInGameBanners(): void {
+    this.nonGameBanners = this.banners?.filter((game) => !game.isAGame);
+  }
+  //#endregion
+
+  //#region helper methods
+  private _convertHighlightGamesModelToHighlightGamesDto(highlightGames: HighlightGamesModel): HighlightGamesDto {
+    const highlightGamesDto: HighlightGamesDto = {
+      smallHighlightGames: highlightGames.smallHighlightGames,
+      largeHighlightGames: highlightGames.largeHighlightGames
+    }
+
+    return highlightGamesDto;
+  }
+
+  private _convertGameCardModelToGameCardDto(gameCards: GameCardModel[]): GameCardDto[] {
+    const gameCardsDto: GameCardDto[] = [];
+
+    gameCards.forEach((gameCard) => {
+      const gameCardDto: GameCardDto = {
+        name: gameCard.name,
+        type: gameCard.type,
+        cover: gameCard.cover,
+        discountPercent: gameCard.discountPercent,
+        basePrice: gameCard.basePrice,
+        finalPrice: gameCard.finalPrice,
+        isFree: gameCard.isFree
+      }
+
+      gameCardsDto.push(gameCardDto);
+    });
+
+    return gameCardsDto;
+  }
+
+  private _convertFreeGameModelToFreeGamesDto(freeGame: FreeGameCardModel[]): FreeGameCardDto[] {
+    const freeGamesDto: FreeGameCardDto[] = [];
+
+    freeGame.forEach((game) => {
+      const gameCardDto: FreeGameCardDto = {
+        name: game.name,
+        type: game.type,
+        isFree: game.isFree,
+        cover: game.cover,
+        isPublished: game.isPublished
+      }
+
+      freeGamesDto.push(gameCardDto);
+    });
+
+    return freeGamesDto;
+  }
+
+  private _convertFortniteCardModelToFortniteCardDto(fortniteGames: FortniteCardModel[]): FortniteCardDto[] {
+    const fortniteCardsDto: FortniteCardDto[] = [];
+
+    fortniteGames.forEach((game) => {
+      const fortniteCard: FortniteCardDto = {
+        cover: game.cover,
+        name: game.name,
+        type: game.type
+
+      }
+
+      fortniteCardsDto.push(fortniteCard);
+    });
+
+    return fortniteCardsDto;
+  }
+
+  private _convertGameBannerModelToGameBannerDto(gameBannersModel: BannerModel[]): BannerDto[] {
+    const gameBanners: BannerDto[] = [];
+
+    gameBannersModel.forEach((game) => {
+      const gameBanner: BannerDto = {
+        cover: game.cover,
+        name: game.name,
+        bio: game.bio,
+        isFree: game.isFree,
+        price: game.price,
+        isAGame: game.isAGame,
+        playable: game.playable
+      }
+
+      gameBanners.push(gameBanner);
+    });
+
+    return gameBanners;
+  }
+
+  private _convertGameListItemModelToGameListItemDto(gameListItems: GameListItemModel[]): GameListItemDto[] {
+    const gameItems: GameListItemDto[] = [];
+
+    gameListItems.forEach((game) => {
+      const gameItem: GameListItemDto = {
+        thumbnailCover: game.thumbnailCover,
+        name: game.name,
+        discountPercent: game.discountPercent,
+        basePrice: game.basePrice,
+        finalPrice: game.finalPrice,
+        isFree: game.isFree,
+        categoryType: game.categoryType
+      }
+
+      gameItems.push(gameItem);
+    });
+
+    return gameItems;
+  }
   //#endregion
 }

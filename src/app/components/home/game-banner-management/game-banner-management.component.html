@@ -1,0 +1,5 @@
+<div class="grid grid-flow-col gap-4 my-10">
+    @for (game of gameInput(); track $index) {
+    <app-game-banner [gameInput]="game" />
+    }
+</div>

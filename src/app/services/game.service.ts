@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HighlightGamesModel } from '../components/home/models/highlight-games-model';
+import { GameCardModel } from '../components/home/models/game-card.model';
+import { FreeGameCardModel } from '../components/home/models/free-game-card.model';
+import { FortniteCardModel } from '../components/home/models/fortnite-card.model';
+import { BannerModel } from '../components/home/models/banner.model';
+import { GameListItemModel } from '../components/home/models/game-list-item.model';
 
 @Injectable()
 export class GameService {
@@ -8,10 +13,30 @@ export class GameService {
   public getHighlightGames(): Observable<HighlightGamesModel> {
     return of(highlightGames);
   }
+
+  public getGameCards(): Observable<GameCardModel[]> {
+    return of(gameCards);
+  }
+
+  public getFreeGames(): Observable<FreeGameCardModel[]> {
+    return of(freeGames);
+  }
+
+  public getFortniteGames(): Observable<FortniteCardModel[]> {
+    return of(FortniteCards);
+  }
+
+  public getGameBanners(): Observable<BannerModel[]> {
+    return of(gameBanner);
+  }
+
+  public getGameList(): Observable<GameListItemModel[]> {
+    return of(gameList);
+  }
   //#endregion
 }
 
-const highlightGames = {
+const highlightGames: HighlightGamesModel = {
   largeHighlightGames: [
     {
       id: '1',
@@ -80,5 +105,354 @@ const highlightGames = {
       thumbnailCover: '../assets/game-covers/thumbnail-covers/egs-skull-and-bones-carousel-thumb-1200x1600-eb9d60ded5a8.jpg',
       name: 'Game 5'
     }
-  ]
+  ],
+  isFeatured: false
 }
+
+const gameCards: GameCardModel[] = [
+  {
+    name: 'game 1',
+    type: 'RPG',
+    cover: '../assets/game-covers/game-card-covers/1.jpeg',
+    basePrice: 29.99,
+    finalPrice: 14.99,
+    isFree: true,
+    isOnSale: false
+  },
+  {
+    name: 'game 2',
+    type: 'FPS',
+    cover: '../assets/game-covers/game-card-covers/2.jpeg',
+    basePrice: 29.99,
+    finalPrice: 14.99,
+    isFree: false,
+    isOnSale: true
+  },
+  {
+    name: 'game 3',
+    type: 'Adventure',
+    cover: '../assets/game-covers/game-card-covers/33.jpg',
+    basePrice: 39.99,
+    finalPrice: 39.99,
+    isFree: false,
+    isOnSale: false
+  },
+  {
+    name: 'game 4',
+    type: 'Simulation',
+    cover: '../assets/game-covers/game-card-covers/4.jpeg',
+    basePrice: 49.99,
+    finalPrice: 49.99,
+    isFree: false,
+    isOnSale: false
+  },
+  {
+    name: 'game 5',
+    type: 'Puzzle',
+    cover: '../assets/game-covers/game-card-covers/5.jpeg',
+    discountPercent: 25,
+    basePrice: 9.99,
+    finalPrice: 7.49,
+    isFree: false,
+    isOnSale: true
+  },
+  {
+    name: 'game 1',
+    type: 'RPG',
+    cover: '../assets/game-covers/game-card-covers/1.jpeg',
+    basePrice: 29.99,
+    finalPrice: 14.99,
+    isFree: true,
+    isOnSale: false
+  },
+  {
+    name: 'game 2',
+    type: 'FPS',
+    cover: '../assets/game-covers/game-card-covers/2.jpeg',
+    basePrice: 29.99,
+    finalPrice: 14.99,
+    isFree: false,
+    isOnSale: true
+  },
+  {
+    name: 'game 3',
+    type: 'Adventure',
+    cover: '../assets/game-covers/game-card-covers/33.jpg',
+    basePrice: 39.99,
+    finalPrice: 39.99,
+    isFree: false,
+    isOnSale: false
+  },
+  {
+    name: 'game 4',
+    type: 'Simulation',
+    cover: '../assets/game-covers/game-card-covers/4.jpeg',
+    basePrice: 49.99,
+    finalPrice: 49.99,
+    isFree: false,
+    isOnSale: false
+  },
+  {
+    name: 'game 5',
+    type: 'Puzzle',
+    cover: '../assets/game-covers/game-card-covers/5.jpeg',
+    discountPercent: 25,
+    basePrice: 9.99,
+    finalPrice: 7.49,
+    isFree: false,
+    isOnSale: true
+  }
+]
+
+const freeGames: FreeGameCardModel[] = [
+  {
+    name: "Game Y",
+    type: "Type of Game",
+    isFree: true,
+    cover: "../assets/game-covers/free-games/f1.jpeg",
+    isPublished: true,
+    isFeatured: false,
+  },
+  {
+    name: "Game x",
+    type: "Type of Game",
+    isFree: true,
+    cover: "../assets/game-covers/free-games/f2.jpg",
+    isPublished: false,
+    isFeatured: false,
+  }
+];
+
+const FortniteCards: FortniteCardModel[] = [
+  {
+    cover: '../assets/game-covers/fortnite-games/fo1.jpeg',
+    name: 'F 1',
+    type: 'F something',
+    isFeatured: true
+  },
+  {
+    cover: '../assets/game-covers/fortnite-games/fo2.jpeg',
+    name: 'F 2',
+    type: 'F something',
+    isFeatured: true
+  },
+  {
+    cover: '../assets/game-covers/fortnite-games/fo3.jpeg',
+    name: 'F 3',
+    type: 'F something',
+    isFeatured: true
+  }
+];
+
+const gameBanner: BannerModel[] = [
+  {
+    cover: '../assets/game-covers/game-banner/b1.jpg',
+    name: 'game x',
+    bio: 'some random description about the game',
+    isFree: true,
+    isAGame: true,
+    isFeatured: true
+  },
+  {
+    cover: '../assets/game-covers/game-banner/b2.jpg',
+    name: 'game y',
+    bio: 'some random description about the game',
+    isFree: true,
+    isAGame: true,
+    isFeatured: true
+  },
+  {
+    cover: '../assets/game-covers/game-banner/b3.jpg',
+    name: 'game y',
+    bio: 'some random description about the game',
+    isFree: false,
+    price: 11.59,
+    isAGame: true,
+    isFeatured: true
+  },
+  {
+    cover: '../assets/game-covers/game-banner/b4.jpg',
+    name: 'game y',
+    bio: 'some random description about the game',
+    isFree: true,
+    isAGame: true,
+    isFeatured: true
+  },
+  {
+    cover: '../assets/game-covers/game-banner/b5.jpg',
+    name: 'Sales & Specials',
+    bio: 'Save big on hit titles and hidden gems. Theres always something on sale at the Epic Games Store!',
+    isAGame: false,
+    playable: false,
+    isFeatured: true
+  },
+  {
+    cover: '../assets/game-covers/game-banner/b6.jpg',
+    name: 'Free Games',
+    bio: 'Explore free and free-to-play games from our collection. Come back every Thursday for a new free game!',
+    isAGame: false,
+    playable: true,
+    isFeatured: true
+  },
+  {
+    cover: '../assets/game-covers/game-banner/b7.jpg',
+    name: 'Apps',
+    bio: 'Enjoy some of the best Apps for music, gaming, creating, and more!',
+    isAGame: false,
+    playable: false,
+    isFeatured: true
+  }
+];
+
+const gameList: GameListItemModel[] = [
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l1.jpeg",
+    name: "Game 1",
+    discountPercent: 25,
+    basePrice: 39.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Top Sellers",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l2.jpeg",
+    name: "Game 2",
+    discountPercent: 50,
+    basePrice: 19.99,
+    finalPrice: 9.99,
+    isFree: false,
+    categoryType: "Top Sellers",
+    isFeatured: false,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l3.jpeg",
+    name: "Game 3",
+    discountPercent: 0,
+    basePrice: 59.99,
+    finalPrice: 59.99,
+    isFree: false,
+    categoryType: "Top Sellers",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l4.jpeg",
+    name: "Game 4",
+    discountPercent: 8,
+    basePrice: 9.99,
+    finalPrice: 9.99,
+    isFree: true,
+    categoryType: "Top Sellers",
+    isFeatured: false,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l5.jpeg",
+    name: "Game 5",
+    discountPercent: 75,
+    basePrice: 59.99,
+    finalPrice: 14.99,
+    isFree: false,
+    categoryType: "Top Sellers",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l6.jpeg",
+    name: "Game 6",
+    discountPercent: 10,
+    basePrice: 29.99,
+    finalPrice: 26.99,
+    isFree: false,
+    categoryType: "Most Played",
+    isFeatured: false,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l7.jpeg",
+    name: "Game 7",
+    discountPercent: 20,
+    basePrice: 14.99,
+    finalPrice: 11.99,
+    isFree: false,
+    categoryType: "Most Played",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l8.jpeg",
+    name: "Game 8",
+    discountPercent: 40,
+    basePrice: 49.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Most Played",
+    isFeatured: false,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l9.jpeg",
+    name: "Game 9",
+    discountPercent: 15,
+    basePrice: 19.99,
+    finalPrice: 16.99,
+    isFree: false,
+    categoryType: "Most Played",
+    isFeatured: false,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l10.jpeg",
+    name: "Game 10",
+    discountPercent: 0,
+    basePrice: 29.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Most Played",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l11.jpeg",
+    name: "Game 11",
+    discountPercent: 0,
+    basePrice: 29.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Top Upcoming Wishlisted",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l12.jpeg",
+    name: "Game 12",
+    discountPercent: 0,
+    basePrice: 29.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Top Upcoming Wishlisted",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l13.jpeg",
+    name: "Game 13",
+    discountPercent: 0,
+    basePrice: 29.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Top Upcoming Wishlisted",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l14.jpeg",
+    name: "Game 14",
+    discountPercent: 0,
+    basePrice: 29.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Top Upcoming Wishlisted",
+    isFeatured: true,
+  },
+  {
+    thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+    name: "Game 15",
+    discountPercent: 0,
+    basePrice: 29.99,
+    finalPrice: 29.99,
+    isFree: false,
+    categoryType: "Top Upcoming Wishlisted",
+    isFeatured: true,
+  }
+];

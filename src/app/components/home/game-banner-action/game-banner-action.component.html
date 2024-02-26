@@ -1,0 +1,16 @@
+@if (gameInput().isAGame) {
+@if (gameInput().isFree) {
+<h1 class="text-white underline">Play For Free</h1>
+}
+@else {
+<h2 class="text-white">{{gameInput().price | currency}}</h2>
+}
+}
+@if (!gameInput().isAGame) {
+@if (gameInput().playable) {
+<h4 class="text-white underline">Play For Free</h4>
+}
+@else {
+<h3 class="text-white underline">Browse</h3>
+}
+}
