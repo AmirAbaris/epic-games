@@ -9,6 +9,15 @@ module.exports = {
   },
   theme: {
     extend: {
+      keyframes: {
+        slideInRight: {
+          '0%': { transform: 'translateX(20%)' },
+          '100%': { transform: 'translateX(0)' }
+        }
+      },
+      animation: {
+        slideInRight: 'slideInRight 0.2s forwards'
+      },
       fontFamily: {
         sans: ['Open Sans', 'sans-serif'],
       },
