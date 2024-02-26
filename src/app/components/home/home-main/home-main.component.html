@@ -1,7 +1,8 @@
 @if (highlightGames && largeHighlightGameCaption && gameCards && freeGameCards && freeGamesCaption &&
 freeGameManagementCaption && fortniteGameCards && fortniteCaption && gameBanners && nonGameBanners && gameListItem)
 {
-<app-highlight-game-card [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption" />
+<app-highlight-game-card [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption"
+    (buyButton)="buyGame($event)" (addWishlistButton)="addGameToWishList($event)" />
 
 <app-game-card-management [gameCardInputs]="gameCards" />
 

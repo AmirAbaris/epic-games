@@ -112,6 +112,16 @@ export class HomeMainComponent implements OnInit {
   }
   //#endregion
 
+  //#region handler methods
+  public buyGame(gameId: string): void {
+    console.log(gameId);
+  }
+
+  public addGameToWishList(gameId: string): void {
+    console.log(gameId);
+  }
+  //#endregion
+
   //#region helper methods
   private _convertHighlightGamesModelToHighlightGamesDto(highlightGames: HighlightGamesModel): HighlightGamesDto {
     const highlightGamesDto: HighlightGamesDto = {

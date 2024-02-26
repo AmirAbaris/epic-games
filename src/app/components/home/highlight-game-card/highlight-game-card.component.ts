@@ -18,8 +18,8 @@ export class HighlightGameCardComponent implements OnInit {
   gameInputs = input.required<HighlightGamesDto>();
   captionInputs = input.required<LargeHighlightGameCaptionModel>();
 
-  @Output('playButton') playButtonEvent = new EventEmitter();
-  @Output('addWishlistButton') AddToWishListButtonEvent = new EventEmitter();
+  @Output('buyButton') buyButtonEvent = new EventEmitter<string>();
+  @Output('addWishlistButton') AddToWishListButtonEvent = new EventEmitter<string>();
 
   public largeHighlightIndex: number = 0;
   public isActive: boolean = true;
@@ -42,12 +42,12 @@ export class HighlightGameCardComponent implements OnInit {
   //#endregion
 
   //#region handler methods
-  public onPlayButtonEvent(): void {
-    this.playButtonEvent.emit();
+  public onBuyButtonEvent(gameId: string): void {
+    this.buyButtonEvent.emit(gameId);
   }
 
-  public onAddToWishlistButtonEvent(): void {
-    this.playButtonEvent.emit();
+  public onAddToWishlistButtonEvent(gameId: string): void {
+    this.AddToWishListButtonEvent.emit(gameId);
   }
   //#endregion
 }

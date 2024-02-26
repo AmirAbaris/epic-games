@@ -9,8 +9,10 @@
         <h1 class="absolute bottom-44 left-9 text-white">{{gameInputs()[currentGameIndexInput()].bio}}</h1>
 
         <div class="absolute bottom-10 left-9 flex items-center gap-6 mb-7">
-            <button class="buy-btn" mat-raised-button>{{captionInput().buyButton}}</button>
-            <button class="add-btn" mat-button>
+            <button class="buy-btn" (click)="onPlayButtonEvent(gameInputs()[currentGameIndexInput()].id)"
+                mat-raised-button>{{captionInput().buyButton}}</button>
+            <button class="add-btn" (click)="onAddToWishlistButtonEvent(gameInputs()[currentGameIndexInput()].id)"
+                mat-button>
                 <mat-icon>{{addIconInput()}}</mat-icon>
                 {{captionInput().AddToWishlistButton}}
             </button>

@@ -14,17 +14,17 @@ export class LargeHighlightGameComponent {
   captionInput = input.required<LargeHighlightGameCaptionModel>();
   addIconInput = input.required<string>();
 
-  @Output('playButton') playButtonEvent = new EventEmitter();
-  @Output('addWishlistButton') addToWishListButtonEvent = new EventEmitter();
+  @Output('buyButton') buyButtonEvent = new EventEmitter<string>();
+  @Output('addWishlistButton') addToWishListButtonEvent = new EventEmitter<string>();
   //#endregion
 
   //#region handler methods
-  public onPlayButtonEvent(): void {
-    this.playButtonEvent.emit();
+  public onPlayButtonEvent(gameId: string): void {
+    this.buyButtonEvent.emit(gameId);
   }
 
-  public onAddToWishlistButtonEvent(): void {
-    this.playButtonEvent.emit();
+  public onAddToWishlistButtonEvent(gameId: string): void {
+    this.addToWishListButtonEvent.emit(gameId);
   }
   //#endregion
 }
