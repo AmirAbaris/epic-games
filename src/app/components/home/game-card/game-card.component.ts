@@ -11,6 +11,7 @@ import { SizeEnum } from '../enums/size.enum';
 export class GameCardComponent implements OnInit {
   //#region properties
   gameCardInputs = input.required<GameCardDto>();
+  iconInput = input.required<string>();
 
   public priceLabel: PriceLabelModel | undefined;
   //#endregion
@@ -18,8 +19,8 @@ export class GameCardComponent implements OnInit {
   //#region lifecycle methods
   ngOnInit(): void {
     this._completePriceLabelData();
-    //#endregion
   }
+  //#endregion
 
   //#region main logic methods
   private _completePriceLabelData(): void {
@@ -27,7 +28,7 @@ export class GameCardComponent implements OnInit {
       discountPercent: this.gameCardInputs().discountPercent,
       basePrice: this.gameCardInputs().basePrice,
       finalPrice: this.gameCardInputs().finalPrice,
-      size: SizeEnum.Big
+      size: SizeEnum.Medium
     }
 
     this.priceLabel = prices;

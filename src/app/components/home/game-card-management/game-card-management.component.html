@@ -1,11 +1,5 @@
-<div class="swiper-container" #swiper>
-    <!-- <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div> -->
-    <div class="swiper-wrapper">
-        <div class="grid grid-cols-5 gap-5 mt-20">
-            @for (game of gameCardInputs(); track $index) {
-            <app-game-card [gameCardInputs]="game" />
-            }
-        </div>
-    </div>
+<div class="grid grid-cols-5 gap-5 mt-20">
+    @for (game of gameCardInputs().slice(0, 5); track $index) {
+    <app-game-card [gameCardInputs]="game" [iconInput]="'add_circle'" />
+    }
 </div>

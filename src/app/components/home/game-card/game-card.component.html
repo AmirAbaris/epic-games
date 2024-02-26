@@ -1,16 +1,15 @@
-<mat-card>
-    <img class="rounded-md w-full lg:w-52" ngSrc="{{gameCardInputs().cover}}" width="100" height="100"
-        alt="{{gameCardInputs().name}}">
-    <h1 class="text-xs font-thin my-1">{{gameCardInputs().type}}</h1>
+<div class="text-white">
+    <div class="relative">
+        <img class="rounded-md w-full hover:brightness-125 transition duration-300 cursor-pointer lg:w-52"
+            ngSrc="{{gameCardInputs().cover}}" width="100" height="100" alt="{{gameCardInputs().name}}">
+        <div class="absolute top-2 right-3 opacity-0 hover:opacity-100 transition duration-300">
+            <mat-icon>{{ iconInput() }}</mat-icon>
+        </div>
+    </div>
+
+    <h1 class="font-thin my-1 text-[9px] text-lightGray tracking-widest">{{gameCardInputs().type | uppercase}}</h1>
     <h2>{{gameCardInputs().name}}</h2>
     <div class="flex flex-row gap-5 items-center text-sm mt-2">
-        <!-- @if (gameCardInputs().discountPercent) {
-        <div class="bg-brightBlue text-white p-1 rounded-sm">
-            <h3 class="font-light">{{gameCardInputs().discountPercent | percent }}</h3>
-        </div>
-        }
-        <h4 class="line-through">{{gameCardInputs().basePrice | currency: 'USD' : 'symbol' : '1.0-0'}}</h4>
-        <h5>{{gameCardInputs().finalPrice | currency: 'USD' : 'symbol' : '1.0-0'}}</h5> -->
         <app-price-label-management class="w-full" *ngIf="priceLabel" [priceLabelInput]="priceLabel" />
     </div>
-</mat-card>
+</div>
