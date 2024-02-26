@@ -2,7 +2,7 @@ import { Component, DestroyRef, EventEmitter, OnInit, Output, inject, input } fr
 import { interval } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LargeHighlightGameCaptionModel } from '../models/caption-models/large-highlight-game-caption.model';
-import { HighlightGamesDto } from '../dots/highlight-games-dto';
+import { HighlightGamesDto } from '../dtos/highlight-games-dto';
 
 @Component({
   selector: 'app-highlight-game-card',

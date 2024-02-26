@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { FortniteCardModel } from '../models/fortnite-card.model';
-import { FortniteCardDto } from '../dots/fortnite-card-dto';
+import { FortniteCardDto } from '../dtos/fortnite-card-dto';
 
 @Component({
   selector: 'app-fortnite-card',

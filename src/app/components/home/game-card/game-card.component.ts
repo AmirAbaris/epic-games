@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { GameCardModel } from '../models/game-card.model';
-import { GameCardDto } from '../dots/game-card-dto';
+import { GameCardDto } from '../dtos/game-card-dto';
 
 @Component({
   selector: 'app-game-card',

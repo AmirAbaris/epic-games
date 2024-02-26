@@ -1,6 +1,6 @@
 import { Component, OnInit, input } from '@angular/core';
 import { GameListItemModel } from '../models/game-list-item.model';
-import { GameListItemDto } from '../dots/game-list-item-dto';
+import { GameListItemDto } from '../dtos/game-list-item-dto';
 import { GameCategoryEnum } from '../enums/category-types.enum';
 
 @Component({

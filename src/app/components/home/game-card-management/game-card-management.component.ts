@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { GameCardDto } from '../dots/game-card-dto';
+import { GameCardDto } from '../dtos/game-card-dto';
 
 @Component({
   selector: 'app-game-card-management',

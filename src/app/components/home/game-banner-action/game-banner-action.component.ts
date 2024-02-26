@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { BannerDto } from '../dots/banner-dto';
+import { BannerDto } from '../dtos/banner-dto';
 
 @Component({
   selector: 'app-game-banner-action',

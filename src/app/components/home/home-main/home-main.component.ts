@@ -8,18 +8,18 @@ import { GameCardModel } from "../models/game-card.model";
 import { FreeGameCardModel } from "../models/free-game-card.model";
 import { FortniteCardModel } from "../models/fortnite-card.model";
 import { LargeHighlightGameCaptionModel } from "../models/caption-models/large-highlight-game-caption.model";
-import { HighlightGamesDto } from "../dots/highlight-games-dto";
+import { HighlightGamesDto } from "../dtos/highlight-games-dto";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { GameCardDto } from "../dots/game-card-dto";
-import { FreeGameCardDto } from "../dots/free-game-card-dto";
+import { GameCardDto } from "../dtos/game-card-dto";
+import { FreeGameCardDto } from "../dtos/free-game-card-dto";
 import { FreeGameCardCaptionModel } from "../models/caption-models/free-game-card-caption.model";
 import { freeGameCardManagementCaptionModel } from "../models/caption-models/free-game-card-management-caption.model";
 import { FreeCardCaptionsModel } from "../models/caption-models/free-card-captions.model";
-import { FortniteCardDto } from "../dots/fortnite-card-dto";
+import { FortniteCardDto } from "../dtos/fortnite-card-dto";
 import { FortniteCardManagementCaptionModel } from "../models/caption-models/fortnite-management-caption.model";
-import { BannerDto } from "../dots/banner-dto";
+import { BannerDto } from "../dtos/banner-dto";
 import { BannerModel } from "../models/banner.model";
-import { GameListItemDto } from "../dots/game-list-item-dto";
+import { GameListItemDto } from "../dtos/game-list-item-dto";
 import { forkJoin } from "rxjs";
 
 @Component({

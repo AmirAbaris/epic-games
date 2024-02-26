@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { FortniteCardDto } from '../dots/fortnite-card-dto';
+import { FortniteCardDto } from '../dtos/fortnite-card-dto';
 import { FortniteCardManagementCaptionModel } from '../models/caption-models/fortnite-management-caption.model';
 
 @Component({

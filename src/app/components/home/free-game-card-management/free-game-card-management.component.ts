@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { FreeCardCaptionsModel } from '../models/caption-models/free-card-captions.model';
 import { FreeGameCardModel } from '../models/free-game-card.model';
-import { FreeGameCardDto } from '../dots/free-game-card-dto';
+import { FreeGameCardDto } from '../dtos/free-game-card-dto';
 import { FreeGameCardCaptionModel } from '../models/caption-models/free-game-card-caption.model';
 import { freeGameCardManagementCaptionModel } from '../models/caption-models/free-game-card-management-caption.model';
 
