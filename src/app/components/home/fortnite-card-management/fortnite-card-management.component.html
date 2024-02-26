@@ -5,6 +5,7 @@
 
 <div class="flex flex-col flex-wrap items-center lg:grid lg:grid-cols-3 lg:gap-3">
     @for (game of gameInput(); track $index) {
-    <app-fortnite-card [gameInput]="game" />
+    <app-fortnite-card [gameInput]="game" [iconInput]="'add_circle'"
+        (addWishlistButton)="onAddToWishlistButtonEvent($event)" />
     }
 </div>

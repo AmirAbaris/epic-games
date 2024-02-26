@@ -1,4 +1,9 @@
-<img class="rounded-md" ngSrc="{{gameInput().cover}}" width="400" height="350" alt="{{gameInput().name}}">
+<div class="relative">
+    <img class="rounded-md" ngSrc="{{gameInput().cover}}" width="400" height="350" alt="{{gameInput().name}}">
+    <div class="absolute top-2 right-3">
+        <mat-icon (click)="onAddToWishlistButtonEvent(gameInput().id)">{{iconInput()}}</mat-icon>
+    </div>
+</div>
 <div class="flex flex-col items-start justify-start text-white text-xs gap-2 mt-2">
     <h1>{{gameInput().type}}</h1>
     <h2 class="mb-10">{{gameInput().name}}</h2>

@@ -1,4 +1,5 @@
 export interface GameCardModel {
+    id: string;
     name: string;
     type: string;
     cover: string;

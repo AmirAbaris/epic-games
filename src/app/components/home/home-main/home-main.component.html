@@ -4,12 +4,13 @@ freeGameManagementCaption && fortniteGameCards && fortniteCaption && gameBanners
 <app-highlight-game-card [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption"
     (buyButton)="buyGame($event)" (addWishlistButton)="addGameToWishList($event)" />
 
-<app-game-card-management [gameCardInputs]="gameCards" />
+<app-game-card-management [gameCardInputs]="gameCards" (addWishlistButton)="addGameToWishList($event)" />
 
 <app-free-game-card-management [gameInputs]="freeGameCards" [cardCaption]="freeGamesCaption"
-    [managementCaption]="freeGameManagementCaption" [iconInput]="'redeem'" />
+    [managementCaption]="freeGameManagementCaption" [iconInput]="'redeem'" (viewMoreButton)="viewMoreButton($event)" />
 
-<app-fortnite-card-management [gameInput]="fortniteGameCards" [captionInput]="fortniteCaption" />
+<app-fortnite-card-management [gameInput]="fortniteGameCards" [captionInput]="fortniteCaption"
+    (addWishlistButton)="addGameToWishList($event)" />
 
 <app-game-banner-management [gameInput]="gameBanners.slice(0, 2)" />
 

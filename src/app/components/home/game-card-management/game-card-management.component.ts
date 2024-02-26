@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 import { GameCardDto } from '../dtos/game-card-dto';
 
 @Component({
@@ -9,5 +9,13 @@ import { GameCardDto } from '../dtos/game-card-dto';
 export class GameCardManagementComponent {
   //#region properties
   gameCardInputs = input.required<GameCardDto[]>();
+
+  @Output('addWishlistButton') AddToWishListButtonEvent = new EventEmitter<string>();
+  //#endregion
+
+  //#region handler methods
+  public onAddToWishlistButtonEvent(gameId: string): void {
+    this.AddToWishListButtonEvent.emit(gameId);
+  }
   //#endregion
 }

@@ -1,4 +1,5 @@
 export interface GameCardDto {
+    id: string;
     name: string;
     type: string;
     cover: string;

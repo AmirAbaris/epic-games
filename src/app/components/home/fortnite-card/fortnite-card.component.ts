@@ -1,5 +1,4 @@
-import { Component, input } from '@angular/core';
-import { FortniteCardModel } from '../models/fortnite-card.model';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 import { FortniteCardDto } from '../dtos/fortnite-card-dto';
 
 @Component({
@@ -10,5 +9,14 @@ import { FortniteCardDto } from '../dtos/fortnite-card-dto';
 export class FortniteCardComponent {
   //#region properties
   gameInput = input.required<FortniteCardDto>();
-  //#region 
+  iconInput = input.required<string>();
+
+  @Output('addWishlistButton') AddToWishListButtonEvent = new EventEmitter<string>();
+  //#endregion
+
+  //#region handler methods
+  public onAddToWishlistButtonEvent(gameId: string): void {
+    this.AddToWishListButtonEvent.emit(gameId);
+  }
+  //#endregion
 }

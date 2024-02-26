@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 import { FreeCardCaptionsModel } from '../models/caption-models/free-card-captions.model';
 import { FreeGameCardModel } from '../models/free-game-card.model';
 import { FreeGameCardDto } from '../dtos/free-game-card-dto';
@@ -12,11 +12,17 @@ import { freeGameCardManagementCaptionModel } from '../models/caption-models/fre
 })
 export class FreeGameCardManagementComponent {
   //#region properties
-  public gameInputs = input.required<FreeGameCardDto[]>();
+  gameInputs = input.required<FreeGameCardDto[]>();
+  managementCaption = input.required<freeGameCardManagementCaptionModel>();
+  cardCaption = input.required<FreeGameCardCaptionModel>();
+  iconInput = input.required<string>();
 
-  public managementCaption = input.required<freeGameCardManagementCaptionModel>();
-  public cardCaption = input.required<FreeGameCardCaptionModel>();
+  @Output('viewMoreButton') viewMore = new EventEmitter<string>();
+  //#endregion
 
-  public iconInput = input.required<string>();
+  //#region handler methods
+  public onViewMore(data: string): void {
+    this.viewMore.emit(data);
+  }
   //#endregion
 }

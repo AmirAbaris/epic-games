@@ -4,7 +4,7 @@
             <mat-icon>{{iconInput()}}</mat-icon>
             <h1>{{managementCaption().freeGamesTitle}}</h1>
         </div>
-        <button mat-stroked-button>{{managementCaption().viewMoreTitle}}</button>
+        <button (click)="onViewMore('view more')" mat-stroked-button>{{managementCaption().viewMoreTitle}}</button>
     </div>
 
     <div class="flex flex-row flex-wrap justify-around">

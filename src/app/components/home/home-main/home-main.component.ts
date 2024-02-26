@@ -120,6 +120,10 @@ export class HomeMainComponent implements OnInit {
   public addGameToWishList(gameId: string): void {
     console.log(gameId);
   }
+
+  public viewMoreButton(data: string): void {
+    console.log(data);
+  }
   //#endregion
 
   //#region helper methods
@@ -137,6 +141,7 @@ export class HomeMainComponent implements OnInit {
 
     gameCards.forEach((gameCard) => {
       const gameCardDto: GameCardDto = {
+        id: gameCard.id,
         name: gameCard.name,
         type: gameCard.type,
         cover: gameCard.cover,
@@ -175,6 +180,7 @@ export class HomeMainComponent implements OnInit {
 
     fortniteGames.forEach((game) => {
       const fortniteCard: FortniteCardDto = {
+        id: game.id,
         cover: game.cover,
         name: game.name,
         type: game.type

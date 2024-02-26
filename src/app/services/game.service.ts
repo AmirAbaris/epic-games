@@ -111,6 +111,7 @@ const highlightGames: HighlightGamesModel = {
 
 const gameCards: GameCardModel[] = [
   {
+    id: '1',
     name: 'game 1',
     type: 'RPG',
     cover: '../assets/game-covers/game-card-covers/1.jpeg',
@@ -120,6 +121,7 @@ const gameCards: GameCardModel[] = [
     isOnSale: false
   },
   {
+    id: '2',
     name: 'game 2',
     type: 'FPS',
     cover: '../assets/game-covers/game-card-covers/2.jpeg',
@@ -129,6 +131,7 @@ const gameCards: GameCardModel[] = [
     isOnSale: true
   },
   {
+    id: '3',
     name: 'game 3',
     type: 'Adventure',
     cover: '../assets/game-covers/game-card-covers/33.jpg',
@@ -138,6 +141,7 @@ const gameCards: GameCardModel[] = [
     isOnSale: false
   },
   {
+    id: '4',
     name: 'game 4',
     type: 'Simulation',
     cover: '../assets/game-covers/game-card-covers/4.jpeg',
@@ -147,6 +151,7 @@ const gameCards: GameCardModel[] = [
     isOnSale: false
   },
   {
+    id: '5',
     name: 'game 5',
     type: 'Puzzle',
     cover: '../assets/game-covers/game-card-covers/5.jpeg',
@@ -157,6 +162,7 @@ const gameCards: GameCardModel[] = [
     isOnSale: true
   },
   {
+    id: '6',
     name: 'game 1',
     type: 'RPG',
     cover: '../assets/game-covers/game-card-covers/1.jpeg',
@@ -166,6 +172,7 @@ const gameCards: GameCardModel[] = [
     isOnSale: false
   },
   {
+    id: '7',
     name: 'game 2',
     type: 'FPS',
     cover: '../assets/game-covers/game-card-covers/2.jpeg',
@@ -175,6 +182,7 @@ const gameCards: GameCardModel[] = [
     isOnSale: true
   },
   {
+    id: '8',
     name: 'game 3',
     type: 'Adventure',
     cover: '../assets/game-covers/game-card-covers/33.jpg',
@@ -184,6 +192,7 @@ const gameCards: GameCardModel[] = [
     isOnSale: false
   },
   {
+    id: '9',
     name: 'game 4',
     type: 'Simulation',
     cover: '../assets/game-covers/game-card-covers/4.jpeg',
@@ -193,6 +202,7 @@ const gameCards: GameCardModel[] = [
     isOnSale: false
   },
   {
+    id: '10',
     name: 'game 5',
     type: 'Puzzle',
     cover: '../assets/game-covers/game-card-covers/5.jpeg',
@@ -225,18 +235,21 @@ const freeGames: FreeGameCardModel[] = [
 
 const FortniteCards: FortniteCardModel[] = [
   {
+    id: '1',
     cover: '../assets/game-covers/fortnite-games/fo1.jpeg',
     name: 'F 1',
     type: 'F something',
     isFeatured: true
   },
   {
+    id: '2',
     cover: '../assets/game-covers/fortnite-games/fo2.jpeg',
     name: 'F 2',
     type: 'F something',
     isFeatured: true
   },
   {
+    id: '3',
     cover: '../assets/game-covers/fortnite-games/fo3.jpeg',
     name: 'F 3',
     type: 'F something',
