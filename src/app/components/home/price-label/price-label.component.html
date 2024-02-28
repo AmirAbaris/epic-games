@@ -2,7 +2,7 @@
 <h1>{{priceLabelInput().finalPrice | currency}}</h1>
 }
 @else {
-<div class="flex justify-start items-center gap-3 font-sans">
+<div [ngClass]="getSizeClass()" class="flex justify-start items-center gap-3 font-sans">
     <h2 class="flex items-center justify-center rounded-sm bg-vividBlue w-10 h-5 text-[9px]">
         {{-(priceLabelInput().discountPercent!) / 100 |
         percent}}

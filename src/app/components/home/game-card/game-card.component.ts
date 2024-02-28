@@ -1,7 +1,7 @@
-import { Component, OnInit, input } from '@angular/core';
-import { GameCardDto } from '../dtos/game-card-dto';
-import { PriceLabelModel } from '../models/price-label.model';
-import { SizeEnum } from '../enums/size.enum';
+import {Component, input, OnInit} from '@angular/core';
+import {GameCardDto} from '../dtos/game-card-dto';
+import {PriceLabelModel} from '../models/price-label.model';
+import {SizeEnum} from '../enums/size.enum';
 
 @Component({
   selector: 'app-game-card',
@@ -23,14 +23,12 @@ export class GameCardComponent implements OnInit {
 
   //#region main logic methods
   private _completePriceLabelData(): void {
-    const prices: PriceLabelModel = {
+    this.priceLabel = {
       discountPercent: this.gameCardInputs().discountPercent,
       basePrice: this.gameCardInputs().basePrice,
-      finalPrice: this.gameCardInputs().finalPrice,
-      size: SizeEnum.Big
-    }
-
-    this.priceLabel = prices;
+      finalPrice: this.gameCardInputs().finalPrice
+    };
   }
   //#endregion
+  protected readonly SizeEnum = SizeEnum;
 }
