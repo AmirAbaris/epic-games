@@ -11,5 +11,19 @@ export class GameItemListComponent {
   //#region properties
   gameInput = input.required<GameListItemDto>();
 
+  @Output() clickWishlistButtonEvent = new EventEmitter<string>();
+  @Output() clickItemEvent = new EventEmitter<string>();
+
+  public showWishlist: boolean = false;
   //#endregion
+
+  //region Handler methods
+  onClickWishlistButton(gameId: string) {
+    this.clickWishlistButtonEvent.emit(gameId);
+  }
+
+  onClickItem(gameId: string) {
+    this.clickItemEvent.emit(gameId);
+  }
+  //endregion
 }

@@ -23,7 +23,7 @@ module.exports = {
       },
       colors: {
         darkTransparent: '#00000080',
-        darkGray: '#0b0b0b',
+        darkGray: '#363636',
         darkBackground: '#424242',
         nightRider: '#383434',
         darkSlate: '#121212',
