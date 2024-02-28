@@ -1,5 +1,5 @@
 @if (!priceLabelInput().discountPercent) {
-<h1>{{priceLabelInput().finalPrice | currency}}</h1>
+<h1 [ngClass]="getSizeClass()">{{priceLabelInput().finalPrice | currency}}</h1>
 }
 @else {
 <div [ngClass]="getSizeClass()" class="flex justify-start items-center gap-3 font-sans">
