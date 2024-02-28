@@ -26,6 +26,8 @@ import { LargeHighlightGameMobileComponent } from '../components/home/large-high
 import { GameBannerActionComponent } from '../components/home/game-banner-action/game-banner-action.component';
 import { GameBannerManagementComponent } from '../components/home/game-banner-management/game-banner-management.component';
 import { GameBannerComponent } from '../components/home/game-banner/game-banner.component';
+import {WishListButtonComponent} from "../components/home/wish-list-button/wish-list-button.component";
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 const homeRoutes: Routes = [
   { path: '', component: HomeMainComponent }
@@ -49,7 +51,8 @@ const homeRoutes: Routes = [
     LargeHighlightGameMobileComponent,
     GameBannerManagementComponent,
     GameBannerComponent,
-    GameBannerActionComponent
+    GameBannerActionComponent,
+    WishListButtonComponent
   ],
   imports: [
     CommonModule,
@@ -60,6 +63,7 @@ const homeRoutes: Routes = [
     MatIconModule,
     MatCardModule,
     MatDividerModule,
+    MatTooltipModule,
     RouterModule.forChild(homeRoutes)
   ],
   providers: [GameService]

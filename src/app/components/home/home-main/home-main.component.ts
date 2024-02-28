@@ -202,13 +202,15 @@ export class HomeMainComponent implements OnInit {
 
     gameListItems.forEach((game) => {
       const gameItem: GameListItemDto = {
+        id: game.id,
         thumbnailCover: game.thumbnailCover,
         name: game.name,
         discountPercent: game.discountPercent,
         basePrice: game.basePrice,
         finalPrice: game.finalPrice,
         isFree: game.isFree,
-        categoryType: game.categoryType
+        publishDate: game.publishDate,
+        isPublished: game.isPublished
       }
 
       gameItems.push(gameItem);
