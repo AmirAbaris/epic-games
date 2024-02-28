@@ -20,10 +20,14 @@ export class GameItemListComponent {
   //region Handler methods
   onClickWishlistButton(gameId: string) {
     this.clickWishlistButtonEvent.emit(gameId);
+
+    console.log(gameId);
   }
 
   onClickItem(gameId: string) {
     this.clickItemEvent.emit(gameId);
+
+    console.log(gameId);
   }
   //endregion
 }

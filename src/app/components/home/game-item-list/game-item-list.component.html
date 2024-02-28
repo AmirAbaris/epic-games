@@ -1,8 +1,9 @@
-<div class="flex flex-row gap-6 p-2 rounded-2xl w-80 hover:bg-darkGray transition duration-300 cursor-pointer" (mouseenter)="showWishlist=true" (mouseleave)="showWishlist=false">
+<div class="flex flex-row gap-6 p-2 rounded-2xl w-80 hover:bg-darkGray transition duration-300 cursor-pointer"
+     (mouseenter)="showWishlist=true" (mouseleave)="showWishlist=false" (click)="onClickWishlistButton(gameInput().id)">
   <div class="relative">
     <div class="absolute top-1 right-1 text-black">
       @if (showWishlist) {
-        <app-wish-list-button />
+        <app-wish-list-button (clickButtonEvent)="onClickItem($event)" />
       }
     </div>
     <img class="rounded-md" ngSrc="{{gameInput().thumbnailCover}}" width="64" height="48" alt="{{gameInput().name}}">

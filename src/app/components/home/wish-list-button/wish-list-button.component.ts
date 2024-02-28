@@ -13,8 +13,8 @@ export class WishListButtonComponent {
   //endregion
 
   //region Handler methods
-  public onClickButtonEvent(gameId: string): void {
-    this.clickButtonEvent.emit(gameId);
+  public onClickButtonEvent(): void {
+    this.clickButtonEvent.emit();
   }
   //endregion
 }
