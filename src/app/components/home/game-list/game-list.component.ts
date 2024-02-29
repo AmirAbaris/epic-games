@@ -20,12 +20,12 @@ export class GameListComponent implements OnInit {
 
   //#region lifecycle methods
   ngOnInit(): void {
-    this.filterGames(this.gameInput());
+    this._filterGames(this.gameInput());
   }
   //#endregion
 
   //#region main logic methods
-  filterGames(games: GameListItemDto[]): void {
+  private _filterGames(games: GameListItemDto[]): void {
     this.firstGameCategory = games.filter((game) => game.categoryType === this.gameCategories[0]);
     this.secondGameCategory = games.filter((game) => game.categoryType === this.gameCategories[1]);
     this.thirdGameCategory = games.filter((game) => game.categoryType === this.gameCategories[2]);
