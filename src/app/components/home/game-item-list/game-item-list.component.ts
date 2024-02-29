@@ -27,37 +27,34 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 export class GameItemListComponent implements OnInit {
   //#region Properties
   gameInput = input.required<GameListItemDto>();
+  captionInput = input.required<string>();
 
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   @Output() clickItemEvent = new EventEmitter<string>();
-
-  public showWishlist: boolean = false;
 
   // mocked loading
   public isLoading: boolean = true;
   //#endregion
 
   //region Lifecycle methods
-  ngOnInit() {
+  ngOnInit(): void {
     // mock loading until main logic refactor
     interval(5000).pipe(take(1)).subscribe(() => {
       this.isLoading = !this.isLoading;
-    })
+    });
   }
 
   //endregion
 
   //region Handler methods
-  onClickWishlistButtonHandler(gameId: string) {
+  onClickWishlistButtonHandler(gameId: string): void {
     this.clickWishlistButtonEvent.emit(gameId);
 
     console.log(gameId);
   }
 
-  onClickItemHandler(gameId: string) {
-    this.clickItemEvent.emit(gameId);
-
-    console.log(gameId);
+  onClickItemHandler(): void {
+    this.clickItemEvent.emit();
   }
 
   //endregion

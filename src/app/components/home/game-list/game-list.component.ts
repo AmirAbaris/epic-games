@@ -1,6 +1,5 @@
-import { Component, input } from '@angular/core';
-import { GameListItemDto } from '../dtos/game-list-item-dto';
-import { GameCategoryEnum } from '../enums/category-types.enum';
+import {Component, input} from '@angular/core';
+import {GameListItemDto} from '../dtos/game-list-item-dto';
 
 @Component({
   selector: 'app-game-list',
@@ -10,6 +9,6 @@ import { GameCategoryEnum } from '../enums/category-types.enum';
 export class GameListComponent {
   //#region properties
   gameInput = input.required<GameListItemDto>();
-  public gameCategories: GameCategoryEnum[] = [GameCategoryEnum.TopSellers, GameCategoryEnum.MostPlayed, GameCategoryEnum.TopUpcomingWishlisted];
+  captionInput = input.required<string>();
   //#endregion
 }

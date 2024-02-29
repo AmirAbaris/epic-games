@@ -1,26 +1,23 @@
-import { Component, DestroyRef, OnInit, inject } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
-import { GameService } from "../../../services/game.service";
-import { HomeMainCaptionModel } from "../models/caption-models/home-main-captions.model";
-import { HighlightGamesModel } from "../models/highlight-games-model";
-import { GameListItemModel } from "../models/game-list-item.model";
-import { GameCardModel } from "../models/game-card.model";
-import { FreeGameCardModel } from "../models/free-game-card.model";
-import { FortniteCardModel } from "../models/fortnite-card.model";
-import { LargeHighlightGameCaptionModel } from "../models/caption-models/large-highlight-game-caption.model";
-import { HighlightGamesDto } from "../dtos/highlight-games-dto";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { GameCardDto } from "../dtos/game-card-dto";
-import { FreeGameCardDto } from "../dtos/free-game-card-dto";
-import { FreeGameCardCaptionModel } from "../models/caption-models/free-game-card-caption.model";
-import { freeGameCardManagementCaptionModel } from "../models/caption-models/free-game-card-management-caption.model";
-import { FreeCardCaptionsModel } from "../models/caption-models/free-card-captions.model";
-import { FortniteCardDto } from "../dtos/fortnite-card-dto";
-import { FortniteCardManagementCaptionModel } from "../models/caption-models/fortnite-management-caption.model";
-import { BannerDto } from "../dtos/banner-dto";
-import { BannerModel } from "../models/banner.model";
-import { GameListItemDto } from "../dtos/game-list-item-dto";
-import { forkJoin } from "rxjs";
+import {Component, inject, OnInit} from "@angular/core";
+import {TranslateService} from "@ngx-translate/core";
+import {GameService} from "../../../services/game.service";
+import {HighlightGamesModel} from "../models/highlight-games-model";
+import {GameListItemModel} from "../models/game-list-item.model";
+import {GameCardModel} from "../models/game-card.model";
+import {FreeGameCardModel} from "../models/free-game-card.model";
+import {FortniteCardModel} from "../models/fortnite-card.model";
+import {LargeHighlightGameCaptionModel} from "../models/caption-models/large-highlight-game-caption.model";
+import {HighlightGamesDto} from "../dtos/highlight-games-dto";
+import {GameCardDto} from "../dtos/game-card-dto";
+import {FreeGameCardDto} from "../dtos/free-game-card-dto";
+import {FreeGameCardCaptionModel} from "../models/caption-models/free-game-card-caption.model";
+import {freeGameCardManagementCaptionModel} from "../models/caption-models/free-game-card-management-caption.model";
+import {FortniteCardDto} from "../dtos/fortnite-card-dto";
+import {FortniteCardManagementCaptionModel} from "../models/caption-models/fortnite-management-caption.model";
+import {BannerDto} from "../dtos/banner-dto";
+import {BannerModel} from "../models/banner.model";
+import {GameListItemDto} from "../dtos/game-list-item-dto";
+import {forkJoin} from "rxjs";
 
 @Component({
   selector: "app-home-main",
@@ -28,31 +25,31 @@ import { forkJoin } from "rxjs";
   styleUrl: "./home-main.component.scss",
 })
 export class HomeMainComponent implements OnInit {
-  //#region inject functions
-  private _gameService = inject(GameService);
-  private _translateService = inject(TranslateService);
-  //#endregion
-
   //#region properties
   public highlightGames: HighlightGamesDto | undefined;
   public gameCards: GameCardDto[] | undefined;
+  //#endregion
   public freeGameCards: FreeGameCardDto[] | undefined;
   public fortniteGameCards: FortniteCardDto[] | undefined;
   public banners: BannerDto[] | undefined;
   public gameBanners: BannerDto[] | undefined;
   public nonGameBanners: BannerDto[] | undefined;
   public gameListItem: GameListItemDto[] | undefined;
-
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameManagementCaption: freeGameCardManagementCaptionModel | undefined;
   public fortniteCaption: FortniteCardManagementCaptionModel | undefined;
+  public gameItemCaption: string | undefined;
 
+  //#region inject functions
+  private _gameService = inject(GameService);
+  private _translateService = inject(TranslateService);
   private readonly captionPaths = {
     largeHighlightGame: "home.LargeHighlightGame",
     freeGameCardManagement: "home.FreeGameCardManagement",
     freeGameCard: "home.FreeGameCard",
-    fortniteCardManagement: "home.FortniteCardManagement"
+    fortniteCardManagement: "home.FortniteCardManagement",
+    gameItemList: 'home.GameItemList.freeTitle'
   };
   //#endregion
 
@@ -63,6 +60,7 @@ export class HomeMainComponent implements OnInit {
     this._filterNonGamesInGameBanners();
     this._getCaptions();
   }
+
   //#endregion
 
   //#region main logic methods
@@ -74,8 +72,8 @@ export class HomeMainComponent implements OnInit {
       this._gameService.getFortniteGames(),
       this._gameService.getGameBanners(),
       this._gameService.getGameList()
-    ]).subscribe(([highlighGames, gameCards, freeGames, fortniteGames, gameBanner, gameItems]) => {
-      this.highlightGames = this._convertHighlightGamesModelToHighlightGamesDto(highlighGames);
+    ]).subscribe(([highlightGames, gameCards, freeGames, fortniteGames, gameBanner, gameItems]) => {
+      this.highlightGames = this._convertHighlightGamesModelToHighlightGamesDto(highlightGames);
       this.gameCards = this._convertGameCardModelToGameCardDto(gameCards);
       this.freeGameCards = this._convertFreeGameModelToFreeGamesDto(freeGames);
       this.fortniteGameCards = this._convertFortniteCardModelToFortniteCardDto(fortniteGames);
@@ -89,17 +87,20 @@ export class HomeMainComponent implements OnInit {
     const freeGameManagementCaption = this._translateService.get(this.captionPaths.freeGameCardManagement);
     const freeGamesCaption = this._translateService.get(this.captionPaths.freeGameCard);
     const fortniteCaption = this._translateService.get(this.captionPaths.fortniteCardManagement);
+    const gameItemCaption = this._translateService.get(this.captionPaths.gameItemList);
 
     forkJoin([
       largeHighlightGameCaption,
       freeGameManagementCaption,
       freeGamesCaption,
-      fortniteCaption
-    ]).subscribe(([largeHighlightGameCaption, freeGameManagementCaption, freeGamesCaption, fortniteCaption]) => {
+      fortniteCaption,
+      gameItemCaption
+    ]).subscribe(([largeHighlightGameCaption, freeGameManagementCaption, freeGamesCaption, fortniteCaption, gameItemCaption]) => {
       this.largeHighlightGameCaption = largeHighlightGameCaption;
       this.freeGameManagementCaption = freeGameManagementCaption;
       this.freeGamesCaption = freeGamesCaption;
       this.fortniteCaption = fortniteCaption;
+      this.gameItemCaption = gameItemCaption;
     });
   }
 
@@ -110,16 +111,15 @@ export class HomeMainComponent implements OnInit {
   private _filterNonGamesInGameBanners(): void {
     this.nonGameBanners = this.banners?.filter((game) => !game.isAGame);
   }
+
   //#endregion
 
   //#region helper methods
   private _convertHighlightGamesModelToHighlightGamesDto(highlightGames: HighlightGamesModel): HighlightGamesDto {
-    const highlightGamesDto: HighlightGamesDto = {
+    return {
       smallHighlightGames: highlightGames.smallHighlightGames,
       largeHighlightGames: highlightGames.largeHighlightGames
-    }
-
-    return highlightGamesDto;
+    };
   }
 
   private _convertGameCardModelToGameCardDto(gameCards: GameCardModel[]): GameCardDto[] {
@@ -218,5 +218,6 @@ export class HomeMainComponent implements OnInit {
 
     return gameItems;
   }
+
   //#endregion
 }
