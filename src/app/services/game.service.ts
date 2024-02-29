@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { HighlightGamesModel } from '../components/home/models/highlight-games-model';
-import { GameCardModel } from '../components/home/models/game-card.model';
-import { FreeGameCardModel } from '../components/home/models/free-game-card.model';
-import { FortniteCardModel } from '../components/home/models/fortnite-card.model';
-import { BannerModel } from '../components/home/models/banner.model';
-import { GameListItemModel } from '../components/home/models/game-list-item.model';
+import {Injectable} from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {HighlightGamesModel} from '../components/home/models/highlight-games-model';
+import {GameCardModel} from '../components/home/models/game-card.model';
+import {FreeGameCardModel} from '../components/home/models/free-game-card.model';
+import {FortniteCardModel} from '../components/home/models/fortnite-card.model';
+import {BannerModel} from '../components/home/models/banner.model';
+import {GameListItemModel} from '../components/home/models/game-list-item.model';
 
 @Injectable()
 export class GameService {
@@ -33,6 +33,7 @@ export class GameService {
   public getGameList(): Observable<GameListItemModel[]> {
     return of(gameList);
   }
+
   //#endregion
 }
 
@@ -484,5 +485,28 @@ const gameList: GameListItemModel[] = [
     publishDate: new Date(),
     isPublished: true,
     isFeatured: true
-  }
+  },
+  {
+    id: '16',
+    thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+    name: "Game 16",
+    discountPercent: 0,
+    basePrice: 29.99,
+    finalPrice: 29.99,
+    isFree: false,
+    isPublished: false,
+    isFeatured: true
+  },
+  {
+    id: '16',
+    thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+    name: "Game 16",
+    discountPercent: 0,
+    basePrice: 29.99,
+    finalPrice: 29.99,
+    isFree: false,
+    publishDate: new Date(),
+    isPublished: false,
+    isFeatured: true
+  },
 ];

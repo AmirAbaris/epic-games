@@ -18,6 +18,7 @@ import {BannerDto} from "../dtos/banner-dto";
 import {BannerModel} from "../models/banner.model";
 import {GameListItemDto} from "../dtos/game-list-item-dto";
 import {forkJoin} from "rxjs";
+import {GameItemCaptionModel} from "../models/caption-models/game-item-caption.model";
 
 @Component({
   selector: "app-home-main",
@@ -39,7 +40,7 @@ export class HomeMainComponent implements OnInit {
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameManagementCaption: freeGameCardManagementCaptionModel | undefined;
   public fortniteCaption: FortniteCardManagementCaptionModel | undefined;
-  public gameItemCaption: string | undefined;
+  public gameItemCaption: GameItemCaptionModel | undefined;
 
   //#region inject functions
   private _gameService = inject(GameService);
@@ -49,7 +50,7 @@ export class HomeMainComponent implements OnInit {
     freeGameCardManagement: "home.FreeGameCardManagement",
     freeGameCard: "home.FreeGameCard",
     fortniteCardManagement: "home.FortniteCardManagement",
-    gameItemList: 'home.GameItemList.freeTitle'
+    gameItemList: 'home.GameItemList'
   };
   //#endregion
 

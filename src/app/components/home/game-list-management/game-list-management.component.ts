@@ -1,5 +1,6 @@
 import {Component, input} from '@angular/core';
 import {GameListItemDto} from '../dtos/game-list-item-dto';
+import {GameItemCaptionModel} from "../models/caption-models/game-item-caption.model";
 
 @Component({
   selector: 'app-game-list-management',
@@ -9,6 +10,6 @@ import {GameListItemDto} from '../dtos/game-list-item-dto';
 export class GameListManagementComponent {
   //#region
   gameInput = input.required<GameListItemDto[]>();
-  captionInput = input.required<string>();
+  captionInput = input.required<GameItemCaptionModel>();
   //#endregion
 }

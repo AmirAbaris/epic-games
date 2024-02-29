@@ -2,6 +2,7 @@ import {Component, EventEmitter, input, OnInit, Output} from '@angular/core';
 import {GameListItemDto} from '../dtos/game-list-item-dto';
 import {interval, take} from "rxjs";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {GameItemCaptionModel} from "../models/caption-models/game-item-caption.model";
 
 @Component({
   selector: 'app-game-item-list',
@@ -27,7 +28,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 export class GameItemListComponent implements OnInit {
   //#region Properties
   gameInput = input.required<GameListItemDto>();
-  captionInput = input.required<string>();
+  captionInput = input.required<GameItemCaptionModel>();
 
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   @Output() clickItemEvent = new EventEmitter<string>();

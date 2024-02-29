@@ -2,7 +2,7 @@
   "home": {
     "LargeHighlightGame": {
       "buyButton": "BUY NOW",
-      "AddToWishlistButton": "ADD TO WISHLIST"
+      "addToWishlistButton": "ADD TO WISHLIST"
     },
     "FreeGameCardManagement": {
       "freeGamesTitle": "Free Games",
@@ -17,7 +17,9 @@
       "websiteTitle": "VISIT FORTNITE.COM"
     },
     "GameItemList": {
-      "freeTitle": "FREE"
+      "freeTitle": "FREE",
+      "comingSoonTitle": "Coming Soon",
+      "availableTitle": "Available"
     }
   }
 }

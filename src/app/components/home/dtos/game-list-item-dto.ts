@@ -6,6 +6,6 @@ export interface GameListItemDto {
   basePrice: number;
   finalPrice: number;
   isFree: boolean;
-  publishDate: Date;
+  publishDate?: Date;
   isPublished: boolean;
 }

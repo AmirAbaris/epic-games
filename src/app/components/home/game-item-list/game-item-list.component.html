@@ -20,29 +20,34 @@
         <img class="rounded-md" ngSrc="{{gameInput().thumbnailCover}}" fill alt="{{gameInput().name}}">
       </div>
     </div>
-    
+
     <div class="flex flex-col justify-around">
-      <h3>{{ gameInput().name }}</h3>
+      <h1>{{ gameInput().name }}</h1>
       <div>
-        @if (gameInput().isPublished) {
+        @if (!gameInput().isPublished && !gameInput().publishDate) {
+          <h2 class="text-lightDarkGray text-sm">{{ captionInput().comingSoonTitle }}</h2>
+        } @else if (!gameInput().isPublished && gameInput().publishDate) {
+          <h3 class="text-lightDarkGray mb-8">
+            {{ captionInput().availableTitle }} {{ gameInput().publishDate!.getDate() }}
+            / {{ gameInput().publishDate!.getMonth() }}
+            / {{ gameInput().publishDate!.getDay() }}</h3>
+        } @else {
           @if (gameInput().isFree) {
             <div class="flex flex-col gap-4 text-white">
-              <h2 class="text-xs">{{ captionInput() }}</h2>
+              <h4 class="text-xs">{{ captionInput().freeTitle }}</h4>
             </div>
           }
           @if (!gameInput().isFree) {
             <div class="flex flex-col justify-start text-sm">
               <div class="flex flex-row gap-4 text-xs items-center">
                 @if (gameInput().discountPercent) {
-                  <h4 class="bg-vividBlue p-1 rounded-sm">{{ -(gameInput().discountPercent / 100) | percent }}</h4>
+                  <h5 class="bg-vividBlue p-1 rounded-sm">{{ -(gameInput().discountPercent / 100) | percent }}</h5>
                 }
-                <h5 class="line-through text-gray-500">{{ gameInput().basePrice | currency }}</h5>
+                <p class="line-through text-lightDarkGray">{{ gameInput().basePrice | currency }}</p>
                 <p>{{ gameInput().finalPrice | currency }}</p>
               </div>
             </div>
           }
-        } @else {
-          <p>{{ gameInput().publishDate }}</p>
         }
       </div>
     </div>
