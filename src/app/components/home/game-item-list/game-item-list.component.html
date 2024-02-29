@@ -40,11 +40,8 @@
           @if (!gameInput().isFree) {
             <div class="flex flex-col justify-start text-sm">
               <div class="flex flex-row gap-4 text-xs items-center">
-                @if (gameInput().discountPercent) {
-                  <h5 class="bg-vividBlue p-1 rounded-sm">{{ -(gameInput().discountPercent / 100) | percent }}</h5>
-                }
-                <p class="line-through text-lightDarkGray">{{ gameInput().basePrice | currency }}</p>
-                <p>{{ gameInput().finalPrice | currency }}</p>
+                <app-price-label *ngIf="priceLabelData" [priceLabelInput]="priceLabelData"
+                                 [sizeInput]="SizeEnum.Small"/>
               </div>
             </div>
           }

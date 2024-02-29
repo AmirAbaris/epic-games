@@ -36,6 +36,7 @@ import {GameBannerComponent} from '../components/home/game-banner/game-banner.co
 import {WishListButtonComponent} from "../components/home/wish-list-button/wish-list-button.component";
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ActivateWishlistDirective} from "../directives/activate-wishlist.directive";
+import {PriceLabelComponent} from "../components/home/price-label/price-label.component";
 
 const homeRoutes: Routes = [
   {path: '', component: HomeMainComponent}
@@ -61,7 +62,8 @@ const homeRoutes: Routes = [
     GameBannerComponent,
     GameBannerActionComponent,
     WishListButtonComponent,
-    ActivateWishlistDirective
+    ActivateWishlistDirective,
+    PriceLabelComponent
   ],
   imports: [
     CommonModule,

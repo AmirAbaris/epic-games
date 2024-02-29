@@ -3,6 +3,8 @@ import {GameListItemDto} from '../dtos/game-list-item-dto';
 import {interval, take} from "rxjs";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {GameItemCaptionModel} from "../models/caption-models/game-item-caption.model";
+import {PriceLabelModel} from "../models/price-label.model";
+import {SizeEnum} from "../enums/size.enum";
 
 @Component({
   selector: 'app-game-item-list',
@@ -35,17 +37,24 @@ export class GameItemListComponent implements OnInit {
 
   // mocked loading
   public isLoading: boolean = true;
+  public priceLabelData: PriceLabelModel | undefined;
   //#endregion
+  //endregion
+  protected readonly SizeEnum = SizeEnum;
+
+  //endregion
 
   //region Lifecycle methods
   ngOnInit(): void {
     // mock loading until main logic refactor
     interval(5000).pipe(take(1)).subscribe(() => {
       this.isLoading = !this.isLoading;
+
+      this.priceLabelData = this._convertGameListItemDtoToPriceLabelModel(this.gameInput());
+
+      console.log(this.priceLabelData);
     });
   }
-
-  //endregion
 
   //region Handler methods
   onClickWishlistButtonHandler(gameId: string): void {
@@ -54,9 +63,18 @@ export class GameItemListComponent implements OnInit {
     console.log(gameId);
   }
 
+  //endregion
+
   onClickItemHandler(): void {
     this.clickItemEvent.emit();
   }
 
-  //endregion
+  //region Helper methods
+  private _convertGameListItemDtoToPriceLabelModel(gameData: GameListItemDto): PriceLabelModel {
+    return {
+      discountPercent: gameData.discountPercent,
+      basePrice: gameData.basePrice,
+      finalPrice: gameData.finalPrice
+    }
+  }
 }
