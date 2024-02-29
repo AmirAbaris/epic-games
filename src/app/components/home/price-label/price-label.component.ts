@@ -17,13 +17,13 @@ export class PriceLabelComponent implements OnInit {
 
   //region Lifecycle methods
   ngOnInit(): void {
-    this.setTextSize();
+    this._setTextSize();
   }
 
   //endregion
 
   //region Main logic methods
-  public setTextSize(): void {
+  private _setTextSize(): void {
     // return size for tailwind based on SizeEnum
     switch (this.sizeInput()) {
       case SizeEnum.Small:
