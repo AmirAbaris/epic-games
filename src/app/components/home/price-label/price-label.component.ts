@@ -7,34 +7,41 @@ import {SizeEnum} from "../enums/size.enum";
   templateUrl: './price-label.component.html',
   styleUrl: './price-label.component.scss'
 })
-export class PriceLabelComponent implements OnInit{
+export class PriceLabelComponent implements OnInit {
   //region Properties
   priceLabelInput = input.required<PriceLabelModel>();
   sizeInput = input.required<SizeEnum>();
+
+  public textSize: string | undefined;
   //endregion
 
   //region Lifecycle methods
-ngOnInit() {
-  this.getSizeClass();
-}
+  ngOnInit() {
+    this.setTextSize();
+  }
+
   //endregion
 
   //region Main logic methods
-  public getSizeClass(): string {
+  public setTextSize(): void {
     // return size for tailwind based on SizeEnum
     switch (this.sizeInput()) {
       case SizeEnum.Small:
-        return 'text-sm';
+        this.textSize = 'text-sm';
+        return;
 
       case SizeEnum.Medium:
-        return  'text-md';
+        this.textSize = 'text-md';
+        return;
 
       case SizeEnum.Big:
-        return 'text-lg';
+        this.textSize = 'text-lg';
+        return;
 
       default:
-        return 'text-md';
+        this.textSize = 'text-md';
     }
   }
+
   //endregion
 }
