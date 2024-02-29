@@ -16,7 +16,7 @@ export class PriceLabelComponent implements OnInit {
   //endregion
 
   //region Lifecycle methods
-  ngOnInit() {
+  ngOnInit(): void {
     this.setTextSize();
   }
 
