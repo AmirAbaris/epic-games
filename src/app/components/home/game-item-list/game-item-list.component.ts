@@ -1,6 +1,5 @@
-import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
-import { GameListItemModel } from '../models/game-list-item.model';
-import { GameListItemDto } from '../dtos/game-list-item-dto';
+import {Component, EventEmitter, input, OnInit, Output} from '@angular/core';
+import {GameListItemDto} from '../dtos/game-list-item-dto';
 import {interval, take} from "rxjs";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 
@@ -25,7 +24,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     ])
   ]
 })
-export class GameItemListComponent implements OnInit{
+export class GameItemListComponent implements OnInit {
   //#region properties
   gameInput = input.required<GameListItemDto>();
 
@@ -45,6 +44,7 @@ export class GameItemListComponent implements OnInit{
       this.isLoading = !this.isLoading;
     })
   }
+
   //endregion
 
   //region Handler methods
@@ -59,5 +59,6 @@ export class GameItemListComponent implements OnInit{
 
     console.log(gameId);
   }
+
   //endregion
 }
