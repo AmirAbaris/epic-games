@@ -1,6 +1,5 @@
-import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
-import { GameListItemModel } from '../models/game-list-item.model';
-import { GameListItemDto } from '../dtos/game-list-item-dto';
+import {Component, EventEmitter, input, OnInit, Output} from '@angular/core';
+import {GameListItemDto} from '../dtos/game-list-item-dto';
 import {interval, take} from "rxjs";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 
@@ -25,8 +24,8 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     ])
   ]
 })
-export class GameItemListComponent implements OnInit{
-  //#region properties
+export class GameItemListComponent implements OnInit {
+  //#region Properties
   gameInput = input.required<GameListItemDto>();
 
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
@@ -45,19 +44,21 @@ export class GameItemListComponent implements OnInit{
       this.isLoading = !this.isLoading;
     })
   }
+
   //endregion
 
   //region Handler methods
-  onClickWishlistButton(gameId: string) {
+  onClickWishlistButtonHandler(gameId: string) {
     this.clickWishlistButtonEvent.emit(gameId);
 
     console.log(gameId);
   }
 
-  onClickItem(gameId: string) {
+  onClickItemHandler(gameId: string) {
     this.clickItemEvent.emit(gameId);
 
     console.log(gameId);
   }
+
   //endregion
 }
