@@ -14,7 +14,8 @@
 
     <div class="relative">
       <div class="absolute top-1 right-1 text-black z-10">
-        <app-wish-list-button class="wishlist" (clickButtonEvent)="onClickWishlistButtonHandler($event)"/>
+        <app-wish-list-button class="wishlist"
+                              (clickButtonEvent)="onClickWishlistButtonHandler(gameInput().id)"/>
       </div>
       <div class="w-16 h-full">
         <img class="rounded-md" ngSrc="{{gameInput().thumbnailCover}}" fill alt="{{gameInput().name}}">

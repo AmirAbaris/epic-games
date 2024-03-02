@@ -47,8 +47,6 @@ export class GameItemListComponent implements OnInit {
       this.isLoading = !this.isLoading;
 
       this.priceLabelData = this._convertGameListItemDtoToPriceLabelModel(this.gameInput());
-
-      console.log(this.priceLabelData);
     });
   }
 
@@ -59,10 +57,14 @@ export class GameItemListComponent implements OnInit {
     this.clickWishlistButtonEvent.emit(gameId);
 
     console.log(gameId);
+    console.log('wishlist called');
+
   }
 
   public onClickItemHandler(gameId: string): void {
     this.clickItemEvent.emit(gameId);
+
+    console.log('clicked called');
   }
 
   //region Helper methods
