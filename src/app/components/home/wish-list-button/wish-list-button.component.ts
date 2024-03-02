@@ -8,9 +8,12 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class WishListButtonComponent {
   //region Properties
-  @Output() clickButtonEvent = new EventEmitter<string>();
+  @Output() clickButtonEvent = new EventEmitter();
+
   private _translateService = inject(TranslateService);
+
   public tooltipMessage: string = this._translateService.instant('home.WishListButton.addTitle');
+
   //endregion
 
   //region Handler methods

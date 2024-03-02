@@ -1,6 +1,6 @@
 import {Component, EventEmitter, input, OnInit, Output} from '@angular/core';
 import {GameListItemDto} from '../dtos/game-list-item-dto';
-import {interval, take} from "rxjs";
+import {finalize, interval, take, tap} from "rxjs";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {GameItemCaptionModel} from "../models/caption-models/game-item-caption.model";
 import {PriceLabelModel} from "../models/price-label.model";
@@ -42,24 +42,33 @@ export class GameItemListComponent implements OnInit {
 
   //region Lifecycle methods
   ngOnInit(): void {
-    // mock loading until main logic refactor
-    interval(5000).pipe(take(1)).subscribe(() => {
-      this.isLoading = !this.isLoading;
+    this.isLoading = true; // set isLoading to true initially
 
-      this.priceLabelData = this._convertGameListItemDtoToPriceLabelModel(this.gameInput());
-    });
+    interval(5000).pipe(
+      take(1),
+      tap(() => {
+        this.priceLabelData = this._convertGameListItemDtoToPriceLabelModel(this.gameInput());
+      }),
+      finalize(() => {
+        this.isLoading = false; // set isLoading to false when observable completes
+      })
+    ).subscribe();
   }
 
   //endregion
 
   //region Handler methods
-  public onClickWishlistButtonHandler(gameId: string): void {
+  public onClickWishlistButtonHandler(event: MouseEvent, gameId: string): void {
+    // Prevent event propagation
+    event.stopPropagation();
+
+    // Emit the clickWishlistButtonEvent
     this.clickWishlistButtonEvent.emit(gameId);
 
     console.log(gameId);
     console.log('wishlist called');
-
   }
+
 
   public onClickItemHandler(gameId: string): void {
     this.clickItemEvent.emit(gameId);
