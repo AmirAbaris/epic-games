@@ -35,13 +35,9 @@ export class GameItemListComponent implements OnInit {
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   @Output() clickItemEvent = new EventEmitter<string>();
 
-  // mocked loading
   public isLoading: boolean = true;
   public priceLabelData: PriceLabelModel | undefined;
-  //#endregion
-  //endregion
   protected readonly SizeEnum = SizeEnum;
-
   //endregion
 
   //region Lifecycle methods
@@ -56,17 +52,17 @@ export class GameItemListComponent implements OnInit {
     });
   }
 
+  //endregion
+
   //region Handler methods
-  onClickWishlistButtonHandler(gameId: string): void {
+  public onClickWishlistButtonHandler(gameId: string): void {
     this.clickWishlistButtonEvent.emit(gameId);
 
     console.log(gameId);
   }
 
-  //endregion
-
-  onClickItemHandler(): void {
-    this.clickItemEvent.emit();
+  public onClickItemHandler(gameId: string): void {
+    this.clickItemEvent.emit(gameId);
   }
 
   //region Helper methods

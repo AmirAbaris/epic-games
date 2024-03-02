@@ -2,7 +2,7 @@
   <div class="loading-transition" [@fadeInOut]="isLoading ? 'loading' : 'loaded'">
     <div class="animate-pulse flex flex-row gap-6 p-2 rounded-2xl w-80 h-24 bg-darkGray">
       <div class="flex bg-darkSilver w-16 h-full rounded-2xl"></div>
-      <div class="flex-1 flex flex-col justify-around">
+      <div class="flex-1 flex flex-col justify-center gap-4">
         <div class="w-1/2 h-2 rounded-2xl bg-darkSilver"></div>
         <div class="w-3/4 h-2 rounded-2xl bg-darkCharcoal"></div>
       </div>
@@ -10,7 +10,7 @@
   </div>
 } @else {
   <div class="flex flex-row gap-6 p-2 rounded-2xl w-80 h-24 hover:bg-darkGray transition duration-300 cursor-pointer"
-       activateWishlistDir (click)="onClickItemHandler()">
+       activateWishlistDir (click)="onClickItemHandler(gameInput().id)">
 
     <div class="relative">
       <div class="absolute top-1 right-1 text-black z-10">
@@ -21,16 +21,17 @@
       </div>
     </div>
 
-    <div class="flex flex-col justify-around">
+    <div class="flex flex-col justify-center gap-2">
       <h1>{{ gameInput().name }}</h1>
       <div>
         @if (!gameInput().isPublished && !gameInput().publishDate) {
-          <h2 class="text-lightDarkGray text-sm">{{ captionInput().comingSoonTitle }}</h2>
+          <h2 class="text-lightDarkGray text-lg">{{ captionInput().comingSoonTitle }}</h2>
         } @else if (!gameInput().isPublished && gameInput().publishDate) {
-          <h3 class="text-lightDarkGray mb-8">
-            {{ captionInput().availableTitle }} {{ gameInput().publishDate!.getDate() }}
-            / {{ gameInput().publishDate!.getMonth() }}
-            / {{ gameInput().publishDate!.getDay() }}</h3>
+          <h3 class="text-lightDarkGray">
+            {{ captionInput().availableTitle }}
+            {{ gameInput().publishDate! | date: 'MM/dd/yy' }}
+          </h3>
+
         } @else {
           @if (gameInput().isFree) {
             <div class="flex flex-col gap-4 text-white">

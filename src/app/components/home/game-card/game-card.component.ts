@@ -1,7 +1,6 @@
 import {Component, input, OnInit} from '@angular/core';
 import {GameCardDto} from '../dtos/game-card-dto';
 import {PriceLabelModel} from '../models/price-label.model';
-import {SizeEnum} from '../enums/size.enum';
 
 @Component({
   selector: 'app-game-card',
@@ -29,6 +28,4 @@ export class GameCardComponent implements OnInit {
       finalPrice: this.gameCardInputs().finalPrice
     };
   }
-  //#endregion
-  protected readonly SizeEnum = SizeEnum;
 }

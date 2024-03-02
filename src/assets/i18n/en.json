@@ -20,6 +20,9 @@
       "freeTitle": "FREE",
       "comingSoonTitle": "Coming Soon",
       "availableTitle": "Available"
+    },
+    "WishListButton": {
+      "addTitle": "Add to Wishlist"
     }
   }
 }
