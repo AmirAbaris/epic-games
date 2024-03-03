@@ -1,6 +1,6 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {GameListItemDto} from '../dtos/game-list-item-dto';
-import {GameCategoryEnum} from '../enums/category-types.enum';
+import {GameItemCaptionModel} from "../models/caption-models/game-item-caption.model";
 
 @Component({
   selector: 'app-game-list',
@@ -10,6 +10,7 @@ import {GameCategoryEnum} from '../enums/category-types.enum';
 export class GameListComponent {
   //#region properties
   gameInput = input.required<GameListItemDto>();
+  captionInput = input.required<GameItemCaptionModel>();
   titleInput = input.required<string>();
   categoryTypeInput = input.required<GameCategoryEnum>();
 

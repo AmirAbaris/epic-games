@@ -1,7 +1,10 @@
 import {Component, EventEmitter, input, OnInit, Output} from '@angular/core';
 import {GameListItemDto} from '../dtos/game-list-item-dto';
-import {interval, take} from "rxjs";
+import {finalize, interval, take, tap} from "rxjs";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {GameItemCaptionModel} from "../models/caption-models/game-item-caption.model";
+import {PriceLabelModel} from "../models/price-label.model";
+import {SizeEnum} from "../enums/size.enum";
 
 @Component({
   selector: 'app-game-item-list',
@@ -25,8 +28,9 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
   ]
 })
 export class GameItemListComponent implements OnInit {
-  //#region properties
+  //#region Properties
   gameInput = input.required<GameListItemDto>();
+  captionInput = input.required<GameItemCaptionModel>();
 
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   @Output() clickItemEvent = new EventEmitter<string>();
@@ -35,29 +39,53 @@ export class GameItemListComponent implements OnInit {
 
   // mocked loading
   public isLoading: boolean = true;
-  //#endregion
+  public priceLabelData: PriceLabelModel | undefined;
+  protected readonly SizeEnum = SizeEnum;
+  //endregion
 
   //region Lifecycle methods
-  ngOnInit() {
-    // mock loading until main logic refactor
-    interval(5000).pipe(take(1)).subscribe(() => {
-      this.isLoading = !this.isLoading;
-    })
+  public ngOnInit(): void {
+    this.isLoading = true; // set isLoading to true initially
+
+    interval(5000).pipe(
+      take(1),
+      tap(() => {
+        this.priceLabelData = this._convertGameListItemDtoToPriceLabelModel(this.gameInput());
+      }),
+      finalize(() => {
+        this.isLoading = false; // set isLoading to false when observable completes
+      })
+    ).subscribe();
+  }
+  //endregion
+
+  //region Handler methods
+  public onClickWishlistButtonHandler(event: MouseEvent, gameId: string): void {
+    // Prevent event propagation
+    event.stopPropagation();
+
+    // Emit the clickWishlistButtonEvent
+    this.clickWishlistButtonEvent.emit(gameId);
+
+    console.log(gameId);
+    console.log('wishlist called');
+  }
+
+  public onClickItemHandler(gameId: string): void {
+    this.clickItemEvent.emit(gameId);
+
+    console.log('clicked called');
   }
 
   //endregion
 
-  //region Handler methods
-  onClickWishlistButton(gameId: string) {
-    this.clickWishlistButtonEvent.emit(gameId);
-
-    console.log(gameId);
-  }
-
-  onClickItem(gameId: string) {
-    this.clickItemEvent.emit(gameId);
-
-    console.log(gameId);
+  //region Helper methods
+  private _convertGameListItemDtoToPriceLabelModel(gameData: GameListItemDto): PriceLabelModel {
+    return {
+      discountPercent: gameData.discountPercent,
+      basePrice: gameData.basePrice,
+      finalPrice: gameData.finalPrice
+    }
   }
 
   //endregion

@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Output} from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-wish-list-button',
@@ -7,14 +8,18 @@ import {Component, EventEmitter, Output} from '@angular/core';
 })
 export class WishListButtonComponent {
   //region Properties
-  @Output() clickButtonEvent = new EventEmitter<string>();
+  @Output() clickButtonEvent = new EventEmitter();
 
-  public tooltipMessage: string = 'Add to Wishlist';
+  private _translateService = inject(TranslateService);
+
+  public tooltipMessage: string = this._translateService.instant('home.WishListButton.addTitle');
+
   //endregion
 
   //region Handler methods
-  public onClickButtonEvent(): void {
+  public onClickButtonEventHandler(): void {
     this.clickButtonEvent.emit();
   }
+
   //endregion
 }

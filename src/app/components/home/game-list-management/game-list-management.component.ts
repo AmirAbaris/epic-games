@@ -1,6 +1,6 @@
 import {Component, input} from '@angular/core';
 import {GameListItemDto} from '../dtos/game-list-item-dto';
-import {GameCategoryEnum} from "../enums/category-types.enum";
+import {GameItemCaptionModel} from "../models/caption-models/game-item-caption.model";
 
 @Component({
   selector: 'app-game-list-management',
@@ -10,6 +10,6 @@ import {GameCategoryEnum} from "../enums/category-types.enum";
 export class GameListManagementComponent {
   //#region
   gameInput = input.required<GameListItemDto[]>();
+  captionInput = input.required<GameItemCaptionModel>();
   //#endregion
-  protected readonly GameCategoryEnum = GameCategoryEnum;
 }

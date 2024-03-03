@@ -9,6 +9,9 @@ module.exports = {
   },
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Open Sans', 'sans-serif'],
+      },
       height: {
         '128': '32rem'
       },
@@ -23,7 +26,8 @@ module.exports = {
       },
       colors: {
         darkTransparent: '#00000080',
-        darkGray: '#363636',
+        darkGray: '#2a2a2a',
+        lightDarkGray: '#666666',
         darkBackground: '#424242',
         nightRider: '#383434',
         darkSlate: '#121212',
