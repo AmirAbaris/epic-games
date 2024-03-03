@@ -26,8 +26,8 @@ module.exports = {
       },
       colors: {
         darkTransparent: '#00000080',
-        lightGray: '#F5F5F599',
-        darkGray: '#0b0b0b',
+        darkGray: '#2a2a2a',
+        lightDarkGray: '#666666',
         darkBackground: '#424242',
         nightRider: '#383434',
         darkSlate: '#121212',
@@ -37,6 +37,7 @@ module.exports = {
         vividBlue: '#0074e4',
         electricBlue: '#037aee',
         brightBlue: '#0078f2',
+        lightGray: '#f8f8f8'
       }
     },
   },

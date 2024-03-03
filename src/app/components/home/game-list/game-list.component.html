@@ -1,20 +1,5 @@
 <div class="flex flex-row justify-between text-white">
-    <div class="flex flex-col gap-3 relative">
-        @for (game of firstGameCategory; track $index) {
-        <h1 *ngIf="$index === 0">Top Sellers</h1>
-        <app-game-item-list [gameInput]="game" />
-        }
-    </div>
-    <div class="flex flex-col gap-3">
-        @for (game of secondGameCategory; track $index) {
-        <h2 *ngIf="$index === 0">Most Played</h2>
-        <app-game-item-list [gameInput]="game" />
-        }
-    </div>
-    <div class="flex flex-col gap-3">
-        @for (game of thirdGameCategory; track $index) {
-        <h3 *ngIf="$index === 0">Top Upcoming Wishlisted</h3>
-        <app-game-item-list [gameInput]="game" />
-        }
-    </div>
+  <div class="flex flex-col gap-3 relative">
+    <app-game-item-list [captionInput]="captionInput()" [gameInput]="gameInput()"/>
+  </div>
 </div>
