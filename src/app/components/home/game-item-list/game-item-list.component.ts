@@ -41,7 +41,7 @@ export class GameItemListComponent implements OnInit {
   //endregion
 
   //region Lifecycle methods
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.isLoading = true; // set isLoading to true initially
 
     interval(5000).pipe(
@@ -69,12 +69,13 @@ export class GameItemListComponent implements OnInit {
     console.log('wishlist called');
   }
 
-
   public onClickItemHandler(gameId: string): void {
     this.clickItemEvent.emit(gameId);
 
     console.log('clicked called');
   }
+
+  //endregion
 
   //region Helper methods
   private _convertGameListItemDtoToPriceLabelModel(gameData: GameListItemDto): PriceLabelModel {
@@ -84,4 +85,6 @@ export class GameItemListComponent implements OnInit {
       finalPrice: gameData.finalPrice
     }
   }
+
+  //endregion
 }
