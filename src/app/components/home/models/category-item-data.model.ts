@@ -1,4 +1,5 @@
 export interface CategoryItemDataModel {
+  id: string;
   thumbnailCover: string;
   name: string;
   discountPercent: number;

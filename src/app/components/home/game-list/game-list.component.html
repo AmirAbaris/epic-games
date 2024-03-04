@@ -1,15 +1,20 @@
-<div class="flex flex-row justify-between text-white">
-  <div class="flex justify-around">
-    @for (category of GameCategoryEnum; track $index) {
-      <h1>{{ category }}</h1>
-      <button mat-stroked-button>View More</button>
+<div class="flex flex-col justify-start text-white">
+  <div class="flex justify-between items-center w-full">
+    @for (title of gameListInput().title; track $index) {
+      <h1>{{ title }}</h1>
+      <button mat-stroked-button>VIEW MORE</button>
+      <div class="top-0 right-0 p-2 w-1 h-96 bg-darkGray"></div>
     }
   </div>
-  <div class="flex flex-col gap-3 relative">
-    @for (game of gameItemInput(); track $index) {
-      <app-game-item-list [gameInput]="game" [captionInput]=""
-                          (clickWishlistButtonEvent)="onClickWishlistEventHandler($event)"
-                          (clickItemEvent)="onClickGameEventHandler($event)"/>
+  <div class="flex flex-col gap-2 my-1">
+    @for (data of gameListInput().categoryItemData; track $index) {
+      @if (childCaption) {
+        <app-game-item-list [gameInput]="data" [captionInput]="childCaption"
+                            (clickWishlistButtonEvent)="onClickWishlistEventHandler($event)"
+                            (clickItemEvent)="onClickGameEventHandler($event)"/>
+      }
     }
   </div>
 </div>
+
+

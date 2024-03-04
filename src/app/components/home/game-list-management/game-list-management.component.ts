@@ -1,6 +1,7 @@
 import {Component, EventEmitter, input, Output} from '@angular/core';
-import {GameCategoryEnum} from "../enums/category-types.enum";
 import {GameListItemDto} from "../dtos/game-list-item-dto";
+import {CategoryType} from "../enums/category-type.enum";
+import {GameListInputModel} from "../models/game-list-input.model";
 
 @Component({
   selector: 'app-game-list-management',
@@ -14,7 +15,66 @@ export class GameListManagementComponent {
 
   @Output() clickGameEvent = new EventEmitter<string>();
   @Output() clickWishlistEvent = new EventEmitter<string>();
-  @Output() clickViewMoreButtonEvent = new EventEmitter<GameCategoryEnum>();
+  @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
+  public childInput: GameListInputModel = {
+    categoryItemData: [
+      {
+        id: '16',
+        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+        name: "Game 16",
+        discountPercent: 0,
+        basePrice: 29.99,
+        finalPrice: 29.99,
+        isFree: false,
+        isPublished: false,
+      },
+      {
+        id: '16',
+        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+        name: "Game 16",
+        discountPercent: 0,
+        basePrice: 29.99,
+        finalPrice: 29.99,
+        isFree: false,
+        publishDate: new Date(),
+        isPublished: false,
+      },
+      {
+        id: '16',
+        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+        name: "Game 16",
+        discountPercent: 0,
+        basePrice: 29.99,
+        finalPrice: 29.99,
+        isFree: false,
+        isPublished: false,
+      },
+      {
+        id: '16',
+        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+        name: "Game 16",
+        discountPercent: 0,
+        basePrice: 29.99,
+        finalPrice: 29.99,
+        isFree: false,
+        isPublished: false,
+      },
+      {
+        id: '16',
+        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+        name: "Game 16",
+        discountPercent: 0,
+        basePrice: 29.99,
+        finalPrice: 29.99,
+        isFree: false,
+        isPublished: false,
+      }
+
+    ],
+    title: ['Top Sellers', 'Top Sellers', 'Top Sellers'],
+    categoryType: CategoryType.MOST_PLAYED
+  }
+
   //endregion
 
   //region Handler methods
@@ -26,7 +86,7 @@ export class GameListManagementComponent {
     this.clickWishlistEvent.emit(gameId);
   }
 
-  public onClickViewMoreButtonEventHandler(categoryType: GameCategoryEnum): void {
+  public onClickViewMoreButtonEventHandler(categoryType: CategoryType): void {
     this.clickViewMoreButtonEvent.emit(categoryType);
   }
 

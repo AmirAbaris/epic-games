@@ -1,5 +1,5 @@
-export enum CategoryTypeEnum {
-  TopSellers = 'Top Sellers',
-  MostPlayed = 'Most Played',
-  TopUpcomingWishlisted = 'Top Upcoming Wishlisted'
+export enum CategoryType {
+  TOP_SELLERS = "TOP_SELLERS",
+  MOST_PLAYED = "MOST_PLAYED",
+  TOP_UPCOMING_WISHLISTED = "Top Upcoming TOP_UPCOMING_WISHLISTED"
 }
