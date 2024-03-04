@@ -1,5 +1,3 @@
 <div class="my-12">
-  @for (game of gameInput(); track $index) {
-    <app-game-list [gameInput]="game" [captionInput]="captionInput()"/>
-  }
+  <app-game-list [gameItemInput]="gameItemInput()"/>
 </div>

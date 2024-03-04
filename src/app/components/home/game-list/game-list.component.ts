@@ -1,6 +1,6 @@
-import {Component, input} from '@angular/core';
-import {GameListItemDto} from '../dtos/game-list-item-dto';
-import {GameItemCaptionModel} from "../models/caption-models/game-item-caption.model";
+import {Component, EventEmitter, input, Output} from '@angular/core';
+import {GameCategoryEnum} from "../enums/category-types.enum";
+import {GameListItemDto} from "../dtos/game-list-item-dto";
 
 @Component({
   selector: 'app-game-list',
@@ -9,27 +9,26 @@ import {GameItemCaptionModel} from "../models/caption-models/game-item-caption.m
 })
 export class GameListComponent {
   //#region properties
-  gameInput = input.required<GameListItemDto>();
-  captionInput = input.required<GameItemCaptionModel>();
-  titleInput = input.required<string>();
-  categoryTypeInput = input.required<GameCategoryEnum>();
+  // gameListInputModelInput = input.required<GameListInputModel>();
+  gameItemInput = input.required<GameListItemDto[]>();
 
   @Output() clickGameEvent = new EventEmitter<string>();
   @Output() clickWishlistEvent = new EventEmitter<string>();
   @Output() clickViewMoreButtonEvent = new EventEmitter<GameCategoryEnum>();
 
-  //#endregion
+  protected GameCategoryEnum = Object.values(GameCategoryEnum);
+  //endregion
 
   //region Handler methods
-  emitClickGameEvent(gameId: string): void {
+  public onClickGameEventHandler(gameId: string): void {
     this.clickGameEvent.emit(gameId);
   }
 
-  emitClickWishlistEvent(gameId: string): void {
+  public onClickWishlistEventHandler(gameId: string): void {
     this.clickWishlistEvent.emit(gameId);
   }
 
-  emitClickViewMoreButtonEvent(categoryType: GameCategoryEnum): void {
+  public onClickViewMoreButtonEventHandler(categoryType: GameCategoryEnum): void {
     this.clickViewMoreButtonEvent.emit(categoryType);
   }
 
