@@ -1,20 +1,35 @@
-<div class="flex flex-col justify-start text-white">
-  <div class="flex justify-between items-center w-full">
-    @for (title of gameListInput().title; track $index) {
+<div class="grid grid-cols-3 w-full text-white">
+  @for (title of gameListInput().title; track $index) {
+    <div class="flex justify-between items-center w-80 mb-3">
       <h1>{{ title }}</h1>
-      <button mat-stroked-button>VIEW MORE</button>
-      <div class="top-0 right-0 p-2 w-1 h-96 bg-darkGray"></div>
-    }
-  </div>
-  <div class="flex flex-col gap-2 my-1">
-    @for (data of gameListInput().categoryItemData; track $index) {
-      @if (childCaption) {
-        <app-game-item-list [gameInput]="data" [captionInput]="childCaption"
-                            (clickWishlistButtonEvent)="onClickWishlistEventHandler($event)"
-                            (clickItemEvent)="onClickGameEventHandler($event)"/>
-      }
-    }
-  </div>
+      <div>
+        @if ($index === 0) {
+          <button mat-stroked-button
+                  (click)="onClickViewMoreButtonEventHandler(CategoryType.TOP_SELLERS)">VIEW MORE
+          </button>
+        } @else if ($index === 1) {
+          <button mat-stroked-button
+                  (click)="onClickViewMoreButtonEventHandler(CategoryType.MOST_PLAYED)">VIEW MORE
+          </button>
+        } @else if ($index === 2) {
+
+          <button mat-stroked-button
+                  (click)="onClickViewMoreButtonEventHandler(CategoryType.TOP_UPCOMING_WISHLISTED)">VIEW MORE
+          </button>
+        }
+      </div>
+    </div>
+  }
 </div>
+<div class="grid grid-cols-3 gap-y-1 text-white">
+  @for (data of gameListInput().categoryItemData; track $index) {
+    @if (childCaption) {
+      <app-game-item-list [gameInput]="data" [captionInput]="childCaption"
+                          (clickWishlistButtonEvent)="onClickWishlistEventHandler($event)"
+                          (clickItemEvent)="onClickGameEventHandler($event)"/>
+    }
+  }
+</div>
+
 
 

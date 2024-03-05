@@ -17,14 +17,16 @@ export class GameListComponent implements OnInit {
   @Output() clickWishlistEvent = new EventEmitter<string>();
   @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
 
-  protected readonly CategoryType = Object.values(CategoryType);
+  // to mock data for childs input
   protected childCaption: GameItemCaptionModel | undefined;
-  
+  //endregion
+  protected readonly CategoryType = CategoryType;
   // mock data for caption
   private _translateService = inject(TranslateService);
 
   //endregion
 
+  //region Lifecycle methods
   public ngOnInit(): void {
     this._translateService.get('home.GameItemList').subscribe((caption) => {
       this.childCaption = caption;
@@ -43,7 +45,7 @@ export class GameListComponent implements OnInit {
 
   public onClickViewMoreButtonEventHandler(categoryType: CategoryType): void {
     this.clickViewMoreButtonEvent.emit(categoryType);
-  }
 
-  //endregion
+    console.log(categoryType);
+  }
 }

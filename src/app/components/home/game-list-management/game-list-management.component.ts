@@ -10,12 +10,12 @@ import {GameListInputModel} from "../models/game-list-input.model";
 })
 export class GameListManagementComponent {
   //region Properties
-  // CategoryListData = input.required<GameListInputModel[]>();
   gameItemInput = input.required<GameListItemDto[]>();
 
   @Output() clickGameEvent = new EventEmitter<string>();
   @Output() clickWishlistEvent = new EventEmitter<string>();
   @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
+  
   public childInput: GameListInputModel = {
     categoryItemData: [
       {
@@ -71,8 +71,8 @@ export class GameListManagementComponent {
       }
 
     ],
-    title: ['Top Sellers', 'Top Sellers', 'Top Sellers'],
-    categoryType: CategoryType.MOST_PLAYED
+    title: ['Top Sellers', 'Most Played', 'Top Upcoming Wishlisted'],
+    categoryType: Object.values(CategoryType)
   }
 
   //endregion
