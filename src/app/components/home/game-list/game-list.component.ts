@@ -11,7 +11,7 @@ import {forkJoin} from "rxjs";
   styleUrl: './game-list.component.scss'
 })
 export class GameListComponent implements OnInit {
-  //region properties
+  //region Properties
   gameListInput = input.required<GameListInputModel>();
 
   @Output() clickGameEvent = new EventEmitter<string>();
@@ -19,10 +19,10 @@ export class GameListComponent implements OnInit {
   @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
 
   public viewMoreCaption: string | undefined;
+
   // to mock data for childs input
-  protected childCaption: GameItemCaptionModel | undefined;
-  //endregion
-  protected readonly CategoryType = CategoryType;
+  public childCaption: GameItemCaptionModel | undefined;
+
   private _captionRoutes = {
     gameItemListCaption: 'home.GameItemList',
     gameListCaption: 'home.GameList'
@@ -36,6 +36,8 @@ export class GameListComponent implements OnInit {
   public ngOnInit(): void {
     this._getCaption();
   }
+
+  //endregion
 
   //region Handler methods
   public onClickGameEventHandler(gameId: string): void {
@@ -52,6 +54,9 @@ export class GameListComponent implements OnInit {
     console.log(categoryType);
   }
 
+  //endregion
+
+  //region Main logic methods
   private _getCaption(): void {
     forkJoin([
       this._translateService.get(this._captionRoutes.gameItemListCaption),
