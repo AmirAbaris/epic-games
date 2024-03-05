@@ -3,6 +3,6 @@ import {CategoryType} from "../enums/category-type.enum";
 
 export interface GameListInputModel {
   categoryItemData: CategoryItemDataModel[];
-  title: string[];
-  categoryType: CategoryType[];
+  title: string;
+  categoryType: CategoryType;
 }

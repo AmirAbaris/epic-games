@@ -3,6 +3,7 @@ import {CategoryType} from "../enums/category-type.enum";
 import {GameListInputModel} from "../models/game-list-input.model";
 import {TranslateService} from "@ngx-translate/core";
 import {GameItemCaptionModel} from "../models/caption-models/game-item-caption.model";
+import {forkJoin} from "rxjs";
 
 @Component({
   selector: 'app-game-list',
@@ -17,10 +18,15 @@ export class GameListComponent implements OnInit {
   @Output() clickWishlistEvent = new EventEmitter<string>();
   @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
 
+  public viewMoreCaption: string | undefined;
   // to mock data for childs input
   protected childCaption: GameItemCaptionModel | undefined;
   //endregion
   protected readonly CategoryType = CategoryType;
+  private _captionRoutes = {
+    gameItemListCaption: 'home.GameItemList',
+    gameListCaption: 'home.GameList'
+  }
   // mock data for caption
   private _translateService = inject(TranslateService);
 
@@ -28,10 +34,7 @@ export class GameListComponent implements OnInit {
 
   //region Lifecycle methods
   public ngOnInit(): void {
-    this._translateService.get('home.GameItemList').subscribe((caption) => {
-      this.childCaption = caption;
-      console.log(this.childCaption);
-    });
+    this._getCaption();
   }
 
   //region Handler methods
@@ -47,5 +50,17 @@ export class GameListComponent implements OnInit {
     this.clickViewMoreButtonEvent.emit(categoryType);
 
     console.log(categoryType);
+  }
+
+  private _getCaption(): void {
+    forkJoin([
+      this._translateService.get(this._captionRoutes.gameItemListCaption),
+      this._translateService.get(this._captionRoutes.gameListCaption)
+    ]).subscribe(([gameItemCap, gameListCap]) => {
+      this.childCaption = gameItemCap;
+      this.viewMoreCaption = gameListCap.viewTitle;
+
+      console.log(this.viewMoreCaption);
+    });
   }
 }

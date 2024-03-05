@@ -1,27 +1,12 @@
-<div class="grid grid-cols-3 w-full text-white">
-  @for (title of gameListInput().title; track $index) {
-    <div class="flex justify-between items-center w-80 mb-3">
-      <h1>{{ title }}</h1>
-      <div>
-        @if ($index === 0) {
-          <button mat-stroked-button
-                  (click)="onClickViewMoreButtonEventHandler(CategoryType.TOP_SELLERS)">VIEW MORE
-          </button>
-        } @else if ($index === 1) {
-          <button mat-stroked-button
-                  (click)="onClickViewMoreButtonEventHandler(CategoryType.MOST_PLAYED)">VIEW MORE
-          </button>
-        } @else if ($index === 2) {
-
-          <button mat-stroked-button
-                  (click)="onClickViewMoreButtonEventHandler(CategoryType.TOP_UPCOMING_WISHLISTED)">VIEW MORE
-          </button>
-        }
-      </div>
-    </div>
-  }
+<div class="flex  w-full text-white">
+  <div class="flex justify-between items-center w-80 mb-3">
+    <h1>{{ gameListInput().title }}</h1>
+    <button (click)="onClickViewMoreButtonEventHandler(CategoryType.TOP_SELLERS)"
+            mat-stroked-button> {{ viewMoreCaption | uppercase }}
+    </button>
+  </div>
 </div>
-<div class="grid grid-cols-3 gap-y-1 text-white">
+<div class="flex flex-col gap-y-1 text-white">
   @for (data of gameListInput().categoryItemData; track $index) {
     @if (childCaption) {
       <app-game-item-list [gameInput]="data" [captionInput]="childCaption"
@@ -30,6 +15,3 @@
     }
   }
 </div>
-
-
-

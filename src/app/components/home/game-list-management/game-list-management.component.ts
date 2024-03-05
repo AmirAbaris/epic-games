@@ -15,7 +15,7 @@ export class GameListManagementComponent {
   @Output() clickGameEvent = new EventEmitter<string>();
   @Output() clickWishlistEvent = new EventEmitter<string>();
   @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
-  
+
   public childInput: GameListInputModel = {
     categoryItemData: [
       {
@@ -71,8 +71,8 @@ export class GameListManagementComponent {
       }
 
     ],
-    title: ['Top Sellers', 'Most Played', 'Top Upcoming Wishlisted'],
-    categoryType: Object.values(CategoryType)
+    title: 'Top Sellers',
+    categoryType: CategoryType.TOP_SELLERS
   }
 
   //endregion
