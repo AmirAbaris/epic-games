@@ -1,23 +1,29 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
-import {GameListItemDto} from "../dtos/game-list-item-dto";
+import {Component, EventEmitter, inject, input, OnInit, Output} from '@angular/core';
 import {CategoryType} from "../enums/category-type.enum";
-import {GameListInputModel} from "../models/game-list-input.model";
+import {CategoryItemModel} from "../models/category-item.model";
+import {CategoryListInputModel} from "../models/category-list-input.model";
+import {TranslateService} from "@ngx-translate/core";
+import {forkJoin} from "rxjs";
+import {CategoryListCaption} from "../models/caption-models/category-list-caption.model";
+import {CategoryItemCaption} from "../models/caption-models/category-item-caption.model";
 
 @Component({
-  selector: 'app-game-list-management',
-  templateUrl: './game-list-management.component.html',
-  styleUrl: './game-list-management.component.scss'
+  selector: 'app-category-management',
+  templateUrl: './category-management.component.html',
+  styleUrl: './category-management.component.scss'
 })
-export class GameListManagementComponent {
+export class CategoryManagementComponent implements OnInit {
   //region Properties
-  gameItemInput = input.required<GameListItemDto[]>();
+  categoryItem = input.required<CategoryItemModel[]>();
 
   @Output() clickGameEvent = new EventEmitter<string>();
   @Output() clickWishlistEvent = new EventEmitter<string>();
   @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
 
-  public childInput: GameListInputModel = {
-    categoryItemData: [
+  public categoryListCaption: CategoryListCaption | undefined;
+  public categoryItemCaption: CategoryItemCaption | undefined;
+  public categoryList: CategoryListInputModel = {
+    categoryItem: [
       {
         id: '16',
         thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
@@ -102,6 +108,30 @@ export class GameListManagementComponent {
     ],
     title: 'Top Sellers',
     categoryType: CategoryType.TOP_SELLERS
+  }
+
+  private _translateService = inject(TranslateService);
+
+  private readonly _captionRoutes = {
+    gameItemListCaption: 'home.GameItemList',
+    gameListCaption: 'home.GameList',
+  }
+
+  //endregion
+
+  public ngOnInit(): void {
+    this._getCaption();
+  }
+
+  //region Main logic methods
+  private _getCaption(): void {
+    forkJoin([
+      this._translateService.get(this._captionRoutes.gameItemListCaption),
+      this._translateService.get(this._captionRoutes.gameListCaption),
+    ]).subscribe(([gameItemCap, gameListCap]) => {
+      this.categoryItemCaption = gameItemCap;
+      this.categoryListCaption = gameListCap;
+    });
   }
 
   //endregion
