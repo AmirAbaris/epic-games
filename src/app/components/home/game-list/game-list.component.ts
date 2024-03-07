@@ -26,7 +26,7 @@ export class GameListComponent implements OnInit {
     gameItemListCaption: 'home.GameItemList',
     gameListCaption: 'home.GameList'
   }
-  
+
   private _translateService = inject(TranslateService);
 
   //endregion
@@ -42,6 +42,8 @@ export class GameListComponent implements OnInit {
   public onClickGameEventHandler(gameId: string): void {
     this.clickGameEvent.emit(gameId);
   }
+
+  //endregion
 
   public onClickWishlistEventHandler(gameId: string): void {
     this.clickWishlistEvent.emit(gameId);
@@ -63,4 +65,6 @@ export class GameListComponent implements OnInit {
       this.gameListCaption = gameListCap;
     });
   }
+
+  //endregion
 }
