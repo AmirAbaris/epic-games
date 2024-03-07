@@ -19,10 +19,10 @@ export class GameListComponent implements OnInit {
   @Output() clickWishlistEvent = new EventEmitter<string>();
   @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
 
+  private _translateService = inject(TranslateService);
+
   public gameListCaption: GameListCaptionModel | undefined;
   public gameItemListCaption: GameItemCaptionModel | undefined;
-
-  private _translateService = inject(TranslateService);
 
   private readonly _captionRoutes = {
     gameItemListCaption: 'home.GameItemList',
@@ -38,23 +38,6 @@ export class GameListComponent implements OnInit {
 
   //endregion
 
-  //region Handler methods
-  public onClickGameEventHandler(gameId: string): void {
-    this.clickGameEvent.emit(gameId);
-  }
-
-  //endregion
-
-  public onClickWishlistEventHandler(gameId: string): void {
-    this.clickWishlistEvent.emit(gameId);
-  }
-
-  public onClickViewMoreButtonEventHandler(categoryType: CategoryType): void {
-    this.clickViewMoreButtonEvent.emit(categoryType);
-
-    console.log(categoryType);
-  }
-
   //region Main logic methods
   private _getCaption(): void {
     forkJoin([
@@ -64,6 +47,23 @@ export class GameListComponent implements OnInit {
       this.gameItemListCaption = gameItemCap;
       this.gameListCaption = gameListCap;
     });
+  }
+
+  //endregion
+
+  //region Handler methods
+  public onClickGameEventHandler(gameId: string): void {
+    this.clickGameEvent.emit(gameId);
+  }
+
+  public onClickWishlistEventHandler(gameId: string): void {
+    this.clickWishlistEvent.emit(gameId);
+  }
+
+  public onClickViewMoreButtonEventHandler(categoryType: CategoryType): void {
+    this.clickViewMoreButtonEvent.emit(categoryType);
+
+    console.log(categoryType);
   }
 
   //endregion
