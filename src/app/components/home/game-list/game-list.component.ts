@@ -19,10 +19,10 @@ export class GameListComponent implements OnInit {
   @Output() clickWishlistEvent = new EventEmitter<string>();
   @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
 
-  private _translateService = inject(TranslateService);
-
   public gameListCaption: GameListCaptionModel | undefined;
   public gameItemListCaption: GameItemCaptionModel | undefined;
+
+  private _translateService = inject(TranslateService);
 
   private readonly _captionRoutes = {
     gameItemListCaption: 'home.GameItemList',
