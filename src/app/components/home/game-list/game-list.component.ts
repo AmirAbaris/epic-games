@@ -4,6 +4,7 @@ import {GameListInputModel} from "../models/game-list-input.model";
 import {TranslateService} from "@ngx-translate/core";
 import {GameItemCaptionModel} from "../models/caption-models/game-item-caption.model";
 import {forkJoin} from "rxjs";
+import {GameListCaptionModel} from "../models/caption-models/game-list-caption.model";
 
 @Component({
   selector: 'app-game-list',
@@ -18,16 +19,14 @@ export class GameListComponent implements OnInit {
   @Output() clickWishlistEvent = new EventEmitter<string>();
   @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
 
-  public viewMoreCaption: string | undefined;
+  public gameListCaption: GameListCaptionModel | undefined;
+  public gameItemListCaption: GameItemCaptionModel | undefined;
 
-  // to mock data for childs input
-  public childCaption: GameItemCaptionModel | undefined;
-
-  private _captionRoutes = {
+  private readonly _captionRoutes = {
     gameItemListCaption: 'home.GameItemList',
     gameListCaption: 'home.GameList'
   }
-  // mock data for caption
+  
   private _translateService = inject(TranslateService);
 
   //endregion
@@ -54,18 +53,14 @@ export class GameListComponent implements OnInit {
     console.log(categoryType);
   }
 
-  //endregion
-
   //region Main logic methods
   private _getCaption(): void {
     forkJoin([
       this._translateService.get(this._captionRoutes.gameItemListCaption),
       this._translateService.get(this._captionRoutes.gameListCaption)
     ]).subscribe(([gameItemCap, gameListCap]) => {
-      this.childCaption = gameItemCap;
-      this.viewMoreCaption = gameListCap.viewTitle;
-
-      console.log(this.viewMoreCaption);
+      this.gameItemListCaption = gameItemCap;
+      this.gameListCaption = gameListCap;
     });
   }
 }

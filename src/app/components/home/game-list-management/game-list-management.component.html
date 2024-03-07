@@ -1,5 +1,7 @@
 <div class="my-12">
-  <app-game-list (clickGameEvent)="onClickGameEventHandler($event)" (clickViewMoreButtonEvent)="onClickViewMoreButtonEventHandler($event)"
+  <app-game-list (clickGameEvent)="onClickGameEventHandler($event)"
+                 (clickViewMoreButtonEvent)="onClickViewMoreButtonEventHandler($event)"
                  (clickWishlistEvent)="onClickWishlistEventHandler($event)"
                  [gameListInput]="childInput"/>
+  
 </div>

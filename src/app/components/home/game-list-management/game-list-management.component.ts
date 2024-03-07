@@ -68,8 +68,37 @@ export class GameListManagementComponent {
         finalPrice: 29.99,
         isFree: false,
         isPublished: false,
+      },
+      {
+        id: '16',
+        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+        name: "Game 16",
+        discountPercent: 0,
+        basePrice: 29.99,
+        finalPrice: 29.99,
+        isFree: false,
+        isPublished: false,
+      },
+      {
+        id: '16',
+        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+        name: "Game 16",
+        discountPercent: 0,
+        basePrice: 29.99,
+        finalPrice: 29.99,
+        isFree: false,
+        isPublished: false,
+      },
+      {
+        id: '16',
+        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+        name: "Game 16",
+        discountPercent: 0,
+        basePrice: 29.99,
+        finalPrice: 29.99,
+        isFree: false,
+        isPublished: false,
       }
-
     ],
     title: 'Top Sellers',
     categoryType: CategoryType.TOP_SELLERS
