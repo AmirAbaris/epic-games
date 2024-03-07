@@ -22,12 +22,12 @@ export class GameListComponent implements OnInit {
   public gameListCaption: GameListCaptionModel | undefined;
   public gameItemListCaption: GameItemCaptionModel | undefined;
 
+  private _translateService = inject(TranslateService);
+
   private readonly _captionRoutes = {
     gameItemListCaption: 'home.GameItemList',
     gameListCaption: 'home.GameList'
   }
-
-  private _translateService = inject(TranslateService);
 
   //endregion
 
