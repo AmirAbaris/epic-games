@@ -22,96 +22,9 @@ export class CategoryManagementComponent implements OnInit {
 
   public categoryListCaption: CategoryListCaption | undefined;
   public categoryItemCaption: CategoryItemCaption | undefined;
-  public categoryList: CategoryListInputModel = {
-    categoryItem: [
-      {
-        id: '16',
-        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
-        name: "Game 16",
-        discountPercent: 0,
-        basePrice: 29.99,
-        finalPrice: 29.99,
-        isFree: false,
-        isPublished: false,
-      },
-      {
-        id: '16',
-        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
-        name: "Game 16",
-        discountPercent: 0,
-        basePrice: 29.99,
-        finalPrice: 29.99,
-        isFree: false,
-        publishDate: new Date(),
-        isPublished: false,
-      },
-      {
-        id: '16',
-        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
-        name: "Game 16",
-        discountPercent: 0,
-        basePrice: 29.99,
-        finalPrice: 29.99,
-        isFree: false,
-        isPublished: false,
-      },
-      {
-        id: '16',
-        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
-        name: "Game 16",
-        discountPercent: 0,
-        basePrice: 29.99,
-        finalPrice: 29.99,
-        isFree: false,
-        isPublished: false,
-      },
-      {
-        id: '16',
-        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
-        name: "Game 16",
-        discountPercent: 0,
-        basePrice: 29.99,
-        finalPrice: 29.99,
-        isFree: false,
-        isPublished: false,
-      },
-      {
-        id: '16',
-        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
-        name: "Game 16",
-        discountPercent: 0,
-        basePrice: 29.99,
-        finalPrice: 29.99,
-        isFree: false,
-        isPublished: false,
-      },
-      {
-        id: '16',
-        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
-        name: "Game 16",
-        discountPercent: 0,
-        basePrice: 29.99,
-        finalPrice: 29.99,
-        isFree: false,
-        isPublished: false,
-      },
-      {
-        id: '16',
-        thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
-        name: "Game 16",
-        discountPercent: 0,
-        basePrice: 29.99,
-        finalPrice: 29.99,
-        isFree: false,
-        isPublished: false,
-      }
-    ],
-    title: 'Top Sellers',
-    categoryType: CategoryType.TOP_SELLERS
-  }
+  public categoryList: CategoryListInputModel = mockData;
 
   private _translateService = inject(TranslateService);
-
   private readonly _captionRoutes = {
     gameItemListCaption: 'home.GameItemList',
     gameListCaption: 'home.GameList',
@@ -150,4 +63,93 @@ export class CategoryManagementComponent implements OnInit {
   }
 
   //endregion
+}
+
+// TODO MOCK, REMOVE
+const mockData: CategoryListInputModel = {
+  categoryItem: [
+    {
+      id: '16',
+      thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+      name: "Game 16",
+      discountPercent: 0,
+      basePrice: 29.99,
+      finalPrice: 29.99,
+      isFree: false,
+      isPublished: false,
+    },
+    {
+      id: '16',
+      thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+      name: "Game 16",
+      discountPercent: 0,
+      basePrice: 29.99,
+      finalPrice: 29.99,
+      isFree: false,
+      publishDate: new Date(),
+      isPublished: false,
+    },
+    {
+      id: '16',
+      thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+      name: "Game 16",
+      discountPercent: 0,
+      basePrice: 29.99,
+      finalPrice: 29.99,
+      isFree: false,
+      isPublished: false,
+    },
+    {
+      id: '16',
+      thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+      name: "Game 16",
+      discountPercent: 0,
+      basePrice: 29.99,
+      finalPrice: 29.99,
+      isFree: false,
+      isPublished: false,
+    },
+    {
+      id: '16',
+      thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+      name: "Game 16",
+      discountPercent: 0,
+      basePrice: 29.99,
+      finalPrice: 29.99,
+      isFree: false,
+      isPublished: false,
+    },
+    {
+      id: '16',
+      thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+      name: "Game 16",
+      discountPercent: 0,
+      basePrice: 29.99,
+      finalPrice: 29.99,
+      isFree: false,
+      isPublished: false,
+    },
+    {
+      id: '16',
+      thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+      name: "Game 16",
+      discountPercent: 0,
+      basePrice: 29.99,
+      finalPrice: 29.99,
+      isFree: false,
+      isPublished: false,
+    },
+    {
+      id: '16',
+      thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
+      name: "Game 16",
+      discountPercent: 0,
+      basePrice: 29.99,
+      finalPrice: 29.99,
+      isFree: false,
+      isPublished: false,
+    }
+  ],
+  title: 'Top Sellers',
+  categoryType: CategoryType.TOP_SELLERS
 }

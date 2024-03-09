@@ -18,8 +18,8 @@ export class CategoryListComponent {
   @Output() clickGameEvent = new EventEmitter<string>();
   @Output() clickWishlistEvent = new EventEmitter<string>();
   @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
-  
-  public itemMaxNumberIndex: number = 5;
+
+  public readonly maxNumberItemIndex: number = 5;
 
   //endregion
 

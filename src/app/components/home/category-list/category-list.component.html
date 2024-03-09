@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="flex flex-col gap-y-1 text-white">
-      @for (item of data().categoryItem | slice: 0 : itemMaxNumberIndex; track $index) {
+      @for (item of data().categoryItem | slice: 0 : maxNumberItemIndex; track $index) {
         <app-category-item [data]="item" [caption]="itemCaption()"
                            [isLoading]="true"
                            (clickWishlistButtonEvent)="onClickWishlistEventHandler($event)"
