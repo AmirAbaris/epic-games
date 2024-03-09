@@ -1,11 +1,11 @@
 import {Component, EventEmitter, inject, input, OnInit, Output} from '@angular/core';
 import {CategoryType} from "../enums/category-type.enum";
-import {CategoryItemModel} from "../models/category-item.model";
 import {CategoryListInputModel} from "../models/category-list-input.model";
 import {TranslateService} from "@ngx-translate/core";
 import {forkJoin} from "rxjs";
 import {CategoryListCaption} from "../models/caption-models/category-list-caption.model";
 import {CategoryItemCaption} from "../models/caption-models/category-item-caption.model";
+import {CategoryItemInputModel} from "../models/category-item-input.model";
 
 @Component({
   selector: 'app-category-management',
@@ -14,7 +14,7 @@ import {CategoryItemCaption} from "../models/caption-models/category-item-captio
 })
 export class CategoryManagementComponent implements OnInit {
   //region Properties
-  categoryItem = input.required<CategoryItemModel[]>();
+  categoryItem = input.required<CategoryItemInputModel[]>();
 
   @Output() clickGameEvent = new EventEmitter<string>();
   @Output() clickWishlistEvent = new EventEmitter<string>();
@@ -32,9 +32,12 @@ export class CategoryManagementComponent implements OnInit {
 
   //endregion
 
+  //region Lifecycle methods
   public ngOnInit(): void {
     this._getCaption();
   }
+
+  //endregion
 
   //region Main logic methods
   private _getCaption(): void {

@@ -1,8 +1,8 @@
-import {CategoryItemModel} from './category-item.model';
 import {CategoryType} from '../enums/category-type.enum';
+import {CategoryItemInputModel} from "./category-item-input.model";
 
 export interface CategoryListInputModel {
-  categoryItem: CategoryItemModel[];
+  categoryItem: CategoryItemInputModel[];
   title: string;
   categoryType: CategoryType;
 }

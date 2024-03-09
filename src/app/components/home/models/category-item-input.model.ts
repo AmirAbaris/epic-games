@@ -1,4 +1,4 @@
-export interface CategoryItemModel {
+export interface CategoryItemInputModel {
   id: string;
   thumbnailCover: string;
   name: string;

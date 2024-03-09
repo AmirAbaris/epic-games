@@ -3,7 +3,7 @@ import {PriceLabelModel} from '../models/price-label.model';
 import {finalize, interval, take, tap} from 'rxjs';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {SizeEnum} from '../enums/size.enum';
-import {CategoryItemModel} from '../models/category-item.model';
+import {CategoryItemInputModel} from '../models/category-item-input.model';
 import {CategoryItemCaption} from "../models/caption-models/category-item-caption.model";
 
 @Component({
@@ -31,12 +31,13 @@ import {CategoryItemCaption} from "../models/caption-models/category-item-captio
 })
 export class CategoryItemComponent implements OnInit {
   //region Properties
-  data = input.required<CategoryItemModel>();
+  data = input.required<CategoryItemInputModel>();
   caption = input.required<CategoryItemCaption>();
   @Input({required: true}) isLoading: boolean | undefined;
 
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   @Output() clickItemEvent = new EventEmitter<string>();
+  @Output() itemIndexValueEvent = new EventEmitter<number>();
 
   public SizeEnum = SizeEnum;
   public priceLabelData: PriceLabelModel | undefined;
@@ -84,7 +85,7 @@ export class CategoryItemComponent implements OnInit {
   //endregion
 
   //region Helper methods
-  private _convertCategoryItemModelToPriceLabelModel(item: CategoryItemModel): PriceLabelModel {
+  private _convertCategoryItemModelToPriceLabelModel(item: CategoryItemInputModel): PriceLabelModel {
     return {
       discountPercent: item.discountPercent,
       basePrice: item.basePrice,

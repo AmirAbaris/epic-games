@@ -1,6 +1,6 @@
 <section class="flex gap-4 p-12">
   <div>
-    <div class="flex  w-full text-white">
+    <div class="flex w-full text-white">
       <div class="flex justify-between items-center w-80 mb-3">
         <h1 class="text-xl">{{ data().title }}</h1>
         <button (click)="onClickViewMoreButtonEventHandler(data().categoryType)"
@@ -13,9 +13,9 @@
         <app-category-item [data]="item" [caption]="itemCaption()"
                            [isLoading]="true"
                            (clickWishlistButtonEvent)="onClickWishlistEventHandler($event)"
-                           (clickItemEvent)="onClickGameEventHandler($event)"/>
+                           (clickItemEvent)="onClickGameEventHandler($event)"
+        />
       }
     </div>
   </div>
-  <mat-divider vertical/>
 </section>
