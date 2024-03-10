@@ -1,8 +1,8 @@
 import {Component, EventEmitter, input, Output} from '@angular/core';
 import {CategoryType} from '../enums/category-type.enum';
 import {CategoryListInputModel} from "../models/category-list-input.model";
-import {CategoryListCaption} from "../models/caption-models/category-list-caption.model";
-import {CategoryItemCaption} from "../models/caption-models/category-item-caption.model";
+import {CategoryListCaptionModel} from "../models/caption-models/category-list-caption.model";
+import {CategoryItemCaptionModel} from "../models/caption-models/category-item-caption.model";
 
 @Component({
   selector: 'app-category-list',
@@ -12,8 +12,9 @@ import {CategoryItemCaption} from "../models/caption-models/category-item-captio
 export class CategoryListComponent {
   //region Properties
   data = input.required<CategoryListInputModel>();
-  caption = input.required<CategoryListCaption>();
-  itemCaption = input.required<CategoryItemCaption>();
+  caption = input.required<CategoryListCaptionModel>();
+  itemCaption = input.required<CategoryItemCaptionModel>();
+  isLoading = input.required<boolean>();
 
   @Output() clickGameEvent = new EventEmitter<string>();
   @Output() clickWishlistEvent = new EventEmitter<string>();

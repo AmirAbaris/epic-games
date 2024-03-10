@@ -1,7 +1,7 @@
-@if (isLoading) {
+@if (isLoading()) {
   <div
     class="loading-transition"
-    [@fadeInOut]="isLoading ? 'loading' : 'loaded'"
+    [@fadeInOut]="isLoading() ? 'loading' : 'loaded'"
   >
     <div
       class="animate-pulse flex flex-row gap-6 p-2 rounded-2xl w-80 h-24 bg-darkGray"

@@ -1,3 +1,3 @@
-export interface CategoryListCaption {
+export interface CategoryListCaptionModel {
   viewTitle: string;
 }

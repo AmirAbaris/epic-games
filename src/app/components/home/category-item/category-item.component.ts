@@ -1,10 +1,9 @@
-import {Component, EventEmitter, Input, input, OnInit, Output,} from '@angular/core';
+import {Component, EventEmitter, input, OnInit, Output,} from '@angular/core';
 import {PriceLabelModel} from '../models/price-label.model';
-import {finalize, interval, take, tap} from 'rxjs';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {SizeEnum} from '../enums/size.enum';
 import {CategoryItemInputModel} from '../models/category-item-input.model';
-import {CategoryItemCaption} from "../models/caption-models/category-item-caption.model";
+import {CategoryItemCaptionModel} from "../models/caption-models/category-item-caption.model";
 
 @Component({
   selector: 'app-category-item',
@@ -32,34 +31,20 @@ import {CategoryItemCaption} from "../models/caption-models/category-item-captio
 export class CategoryItemComponent implements OnInit {
   //region Properties
   data = input.required<CategoryItemInputModel>();
-  caption = input.required<CategoryItemCaption>();
-  @Input({required: true}) isLoading: boolean | undefined;
+  caption = input.required<CategoryItemCaptionModel>();
+  // @Input({required: true}) isLoading: boolean | undefined;
+  isLoading = input.required<boolean>();
 
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   @Output() clickItemEvent = new EventEmitter<string>();
-  @Output() itemIndexValueEvent = new EventEmitter<number>();
 
-  public SizeEnum = SizeEnum;
+  public readonly SizeEnum = SizeEnum;
   public priceLabelData: PriceLabelModel | undefined;
   //endregion
 
   //region Lifecycle methods
   public ngOnInit(): void {
-    this._completeLoading();
-  }
-
-  //endregion
-
-  //region Main logic methods
-  private _completeLoading(): void {
-    interval(5000).pipe(
-      take(1),
-      tap(() => {
-        this.priceLabelData = this._convertCategoryItemModelToPriceLabelModel(this.data())
-      }),
-      finalize(() => {
-        this.isLoading = false;
-      })).subscribe();
+    this._updatePriceLabelData();
   }
 
   //endregion
@@ -91,6 +76,10 @@ export class CategoryItemComponent implements OnInit {
       basePrice: item.basePrice,
       finalPrice: item.finalPrice,
     }
+  }
+
+  private _updatePriceLabelData(): void {
+    this.priceLabelData = this._convertCategoryItemModelToPriceLabelModel(this.data());
   }
 
   //endregion

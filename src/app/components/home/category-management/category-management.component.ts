@@ -2,10 +2,10 @@ import {Component, EventEmitter, inject, input, OnInit, Output} from '@angular/c
 import {CategoryType} from "../enums/category-type.enum";
 import {CategoryListInputModel} from "../models/category-list-input.model";
 import {TranslateService} from "@ngx-translate/core";
-import {forkJoin} from "rxjs";
-import {CategoryListCaption} from "../models/caption-models/category-list-caption.model";
-import {CategoryItemCaption} from "../models/caption-models/category-item-caption.model";
+import {finalize, forkJoin, interval, take} from "rxjs";
 import {CategoryItemInputModel} from "../models/category-item-input.model";
+import {CategoryListCaptionModel} from "../models/caption-models/category-list-caption.model";
+import {CategoryItemCaptionModel} from "../models/caption-models/category-item-caption.model";
 
 @Component({
   selector: 'app-category-management',
@@ -20,9 +20,10 @@ export class CategoryManagementComponent implements OnInit {
   @Output() clickWishlistEvent = new EventEmitter<string>();
   @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
 
-  public categoryListCaption: CategoryListCaption | undefined;
-  public categoryItemCaption: CategoryItemCaption | undefined;
+  public categoryListCaption: CategoryListCaptionModel | undefined;
+  public categoryItemCaption: CategoryItemCaptionModel | undefined;
   public categoryList: CategoryListInputModel = mockData;
+  public isLoading: boolean = true;
 
   private _translateService = inject(TranslateService);
   private readonly _captionRoutes = {
@@ -35,6 +36,7 @@ export class CategoryManagementComponent implements OnInit {
   //region Lifecycle methods
   public ngOnInit(): void {
     this._getCaption();
+    this._completeLoading();
   }
 
   //endregion
@@ -48,6 +50,14 @@ export class CategoryManagementComponent implements OnInit {
       this.categoryItemCaption = gameItemCap;
       this.categoryListCaption = gameListCap;
     });
+  }
+
+  private _completeLoading(): void {
+    interval(5000).pipe(
+      take(1),
+      finalize(() => {
+        this.isLoading = false;
+      })).subscribe();
   }
 
   //endregion

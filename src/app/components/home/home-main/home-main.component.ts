@@ -18,7 +18,7 @@ import {BannerDto} from "../dtos/banner-dto";
 import {BannerModel} from "../models/banner.model";
 import {GameListItemDto} from "../dtos/game-list-item-dto";
 import {forkJoin} from "rxjs";
-import {CategoryItemCaption} from "../models/caption-models/category-item-caption.model";
+import {CategoryItemCaptionModel} from "../models/caption-models/category-item-caption.model";
 
 @Component({
   selector: "app-home-main",
@@ -39,7 +39,7 @@ export class HomeMainComponent implements OnInit {
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameManagementCaption: freeGameCardManagementCaptionModel | undefined;
   public fortniteCaption: FortniteCardManagementCaptionModel | undefined;
-  public gameItemCaption: CategoryItemCaption | undefined;
+  public gameItemCaption: CategoryItemCaptionModel | undefined;
 
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
