@@ -1,11 +1,11 @@
-import { Component, DestroyRef, EventEmitter, OnInit, Output, inject, input } from '@angular/core';
-import { interval } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { LargeHighlightGameCaptionModel } from '../models/caption-models/large-highlight-game-caption.model';
-import { HighlightGamesDto } from '../dtos/highlight-games-dto';
+import {Component, DestroyRef, EventEmitter, inject, input, OnInit, Output} from '@angular/core';
+import {interval} from 'rxjs';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {LargeHighlightGameCaptionModel} from '../models/caption-models/large-highlight-game-caption.model';
+import {HighlightGamesDto} from '../dtos/highlight-games-dto';
 
 @Component({
-  selector: 'app-highlight-game-card',
+  selector: 'app-highlight-game-slider-item',
   templateUrl: './highlight-game-card.component.html',
   styleUrl: './highlight-game-card.component.scss'
 })
@@ -29,6 +29,7 @@ export class HighlightGameCardComponent implements OnInit {
   ngOnInit(): void {
     this._startSwitchingGames();
   }
+
   //#endregion
 
   //#region main logic methods
@@ -39,6 +40,7 @@ export class HighlightGameCardComponent implements OnInit {
       this.isActive = !this.isActive;
     });
   }
+
   //#endregion
 
   //#region handler methods
@@ -49,5 +51,6 @@ export class HighlightGameCardComponent implements OnInit {
   public onAddToWishlistButtonEvent(): void {
     this.playButtonEvent.emit();
   }
+
   //#endregion
 }

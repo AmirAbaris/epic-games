@@ -1,17 +1,17 @@
-<div class="flex justify-between overflow-x-auto">
-  @for (data of data(); track $index) {
-    <app-category-list
-      [data]="data"
-      [caption]="categoryListCaption()"
-      [itemCaption]="categoryItemCaption()"
-      [isLoading]="isLoading()"
-      (clickGameEvent)="onClickGameEventHandler($event)"
-      (clickViewMoreButtonEvent)="onClickViewMoreButtonEventHandler($event)"
-      (clickWishlistEvent)="onClickWishlistEventHandler($event)"
-    />
-    @if ($index < 2) {
-      <mat-divider vertical/>
+<div class="flex justify-between overflow-x-auto mt-40">
+    @for (data of data(); track $index) {
+        <app-category-list
+                [data]="data"
+                [caption]="categoryListCaption()"
+                [itemCaption]="categoryItemCaption()"
+                [isLoading]="isLoading()"
+                (clickGameEvent)="onClickGameEventHandler($event)"
+                (clickViewMoreButtonEvent)="onClickViewMoreButtonEventHandler($event)"
+                (clickWishlistEvent)="onClickWishlistEventHandler($event)"
+        />
+        @if ($index < 2) {
+            <mat-divider vertical/>
+        }
     }
-  }
 </div>
 

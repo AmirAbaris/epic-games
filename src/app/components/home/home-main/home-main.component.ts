@@ -23,6 +23,8 @@ import {CategoryListInputModel} from "../models/category-list-input.model";
 import {CategoryType} from "../enums/category-type.enum";
 import {CategoryListCaptionModel} from "../models/caption-models/category-list-caption.model";
 import {CategoryManagementInputModel} from "../models/category-management-input.model";
+import {GameSliderItemInputModel} from "../models/game-slider-item-input.model";
+import {GameSliderType} from "../enums/game-slider-type.enum";
 
 @Component({
   selector: "app-home-main",
@@ -40,6 +42,7 @@ export class HomeMainComponent implements OnInit {
   public nonGameBanners: BannerDto[] | undefined;
   public gameListItem: GameListItemDto[] | undefined;
   public categoryManagementData: CategoryManagementInputModel[] = mockData;
+  public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
   public isLoading: boolean = true;
 
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
@@ -512,4 +515,39 @@ const mockData: CategoryListInputModel[] = [
     title: 'Top Sellers',
     categoryType: CategoryType.TOP_SELLERS
   }
-]
+];
+
+const gameSliderItems: GameSliderItemInputModel[] = [
+  {
+    name: 'game 1',
+    type: GameSliderType.BASE,
+    cover: '../assets/game-covers/game-card-covers/1.jpeg',
+    basePrice: 29.99,
+    finalPrice: 14.99,
+    isFree: true
+  },
+  {
+    name: 'game 1',
+    type: GameSliderType.BASE,
+    cover: '../assets/game-covers/game-card-covers/2.jpeg',
+    basePrice: 29.99,
+    finalPrice: 14.99,
+    isFree: true
+  },
+  {
+    name: 'game 1',
+    type: GameSliderType.BASE,
+    cover: '../assets/game-covers/game-card-covers/4.jpeg',
+    basePrice: 29.99,
+    finalPrice: 14.99,
+    isFree: true
+  },
+  {
+    name: 'game 1',
+    type: GameSliderType.BASE,
+    cover: '../assets/game-covers/game-card-covers/2.jpeg',
+    basePrice: 29.99,
+    finalPrice: 14.99,
+    isFree: true
+  }
+];

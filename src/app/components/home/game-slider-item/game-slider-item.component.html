@@ -1,0 +1,21 @@
+@if (isLoading()) {
+  <section class="flex flex-col gap-4 animate-pulse">
+    <div class="bg-darkGray w-52 h-64 rounded-md"></div>
+    <div class="flex flex-col gap-2">
+      <div class="bg-darkSilver w-16 h-3"></div>
+      <div class="bg-darkSilver w-28 h-3"></div>
+      <div class="bg-darkSilver w-full h-3"></div>
+    </div>
+  </section>
+} @else {
+  <section class="text-white">
+    <img class="rounded-md" ngSrc="{{data().cover}}" priority width="208" height="256"
+         alt="{{data().name}}">
+    <h1 class="text-xs font-thin my-1">{{ data().type }}</h1>
+    <h2>{{ data().name }}</h2>
+
+    @if (priceLabelData) {
+      <app-price-label [priceLabelInput]="priceLabelData" [sizeInput]="SizeEnum.Medium"/>
+    }
+  </section>
+}
