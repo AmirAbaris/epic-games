@@ -18,7 +18,7 @@ import {BannerDto} from "../dtos/banner-dto";
 import {BannerModel} from "../models/banner.model";
 import {GameListItemDto} from "../dtos/game-list-item-dto";
 import {forkJoin} from "rxjs";
-import {GameItemCaptionModel} from "../models/caption-models/game-item-caption.model";
+import {CategoryItemCaptionModel} from "../models/caption-models/category-item-caption.model";
 
 @Component({
   selector: "app-home-main",
@@ -26,10 +26,9 @@ import {GameItemCaptionModel} from "../models/caption-models/game-item-caption.m
   styleUrl: "./home-main.component.scss",
 })
 export class HomeMainComponent implements OnInit {
-  //#region properties
+  //region properties
   public highlightGames: HighlightGamesDto | undefined;
   public gameCards: GameCardDto[] | undefined;
-  //#endregion
   public freeGameCards: FreeGameCardDto[] | undefined;
   public fortniteGameCards: FortniteCardDto[] | undefined;
   public banners: BannerDto[] | undefined;
@@ -40,11 +39,11 @@ export class HomeMainComponent implements OnInit {
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameManagementCaption: freeGameCardManagementCaptionModel | undefined;
   public fortniteCaption: FortniteCardManagementCaptionModel | undefined;
-  public gameItemCaption: GameItemCaptionModel | undefined;
+  public gameItemCaption: CategoryItemCaptionModel | undefined;
 
-  //#region inject functions
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
+
   private readonly captionPaths = {
     largeHighlightGame: "home.LargeHighlightGame",
     freeGameCardManagement: "home.FreeGameCardManagement",
@@ -52,9 +51,9 @@ export class HomeMainComponent implements OnInit {
     fortniteCardManagement: "home.FortniteCardManagement",
     gameItemList: 'home.GameItemList'
   };
-  //#endregion
+  //endregion
 
-  //#region lifecycle methods
+  //region lifecycle methods
   ngOnInit(): void {
     this._getAllGameData();
     this._filterGamesInGameBanners();
@@ -62,9 +61,9 @@ export class HomeMainComponent implements OnInit {
     this._getCaptions();
   }
 
-  //#endregion
+  //endregion
 
-  //#region main logic methods
+  //region main logic methods
   private _getAllGameData(): void {
     forkJoin([
       this._gameService.getHighlightGames(),
@@ -113,9 +112,9 @@ export class HomeMainComponent implements OnInit {
     this.nonGameBanners = this.banners?.filter((game) => !game.isAGame);
   }
 
-  //#endregion
+  //endregion
 
-  //#region helper methods
+  //region helper methods
   private _convertHighlightGamesModelToHighlightGamesDto(highlightGames: HighlightGamesModel): HighlightGamesDto {
     return {
       smallHighlightGames: highlightGames.smallHighlightGames,
@@ -220,5 +219,5 @@ export class HomeMainComponent implements OnInit {
     return gameItems;
   }
 
-  //#endregion
+  //endregion
 }

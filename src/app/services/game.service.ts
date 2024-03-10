@@ -508,5 +508,5 @@ const gameList: GameListItemModel[] = [
     publishDate: new Date(),
     isPublished: false,
     isFeatured: true
-  },
+  }
 ];

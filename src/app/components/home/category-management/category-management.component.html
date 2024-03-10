@@ -1,0 +1,11 @@
+<div class="my-12" *ngIf="categoryListCaption && categoryItemCaption">
+  <app-category-list
+    [data]="categoryList"
+    [caption]="categoryListCaption"
+    [itemCaption]="categoryItemCaption"
+    [isLoading]="isLoading"
+    (clickGameEvent)="onClickGameEventHandler($event)"
+    (clickViewMoreButtonEvent)="onClickViewMoreButtonEventHandler($event)"
+    (clickWishlistEvent)="onClickWishlistEventHandler($event)"
+  />
+</div>

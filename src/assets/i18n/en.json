@@ -21,6 +21,9 @@
       "comingSoonTitle": "Coming Soon",
       "availableTitle": "Available"
     },
+    "GameList": {
+      "viewTitle": "View More"
+    },
     "WishListButton": {
       "addTitle": "Add to Wishlist"
     }
