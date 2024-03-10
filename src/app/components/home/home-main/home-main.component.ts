@@ -22,6 +22,7 @@ import {CategoryItemCaptionModel} from "../models/caption-models/category-item-c
 import {CategoryListInputModel} from "../models/category-list-input.model";
 import {CategoryType} from "../enums/category-type.enum";
 import {CategoryListCaptionModel} from "../models/caption-models/category-list-caption.model";
+import {CategoryManagementInputModel} from "../models/category-management-input.model";
 
 @Component({
   selector: "app-home-main",
@@ -38,7 +39,7 @@ export class HomeMainComponent implements OnInit {
   public gameBanners: BannerDto[] | undefined;
   public nonGameBanners: BannerDto[] | undefined;
   public gameListItem: GameListItemDto[] | undefined;
-  public categoryManagementData: CategoryListInputModel[] = mockData;
+  public categoryManagementData: CategoryManagementInputModel[] = mockData;
   public isLoading: boolean = true;
 
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;

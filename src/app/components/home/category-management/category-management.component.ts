@@ -2,7 +2,7 @@ import {Component, EventEmitter, input, Output} from '@angular/core';
 import {CategoryType} from "../enums/category-type.enum";
 import {CategoryListCaptionModel} from "../models/caption-models/category-list-caption.model";
 import {CategoryItemCaptionModel} from "../models/caption-models/category-item-caption.model";
-import {CategoryListInputModel} from "../models/category-list-input.model";
+import {CategoryManagementInputModel} from "../models/category-management-input.model";
 
 @Component({
   selector: 'app-category-management',
@@ -11,7 +11,7 @@ import {CategoryListInputModel} from "../models/category-list-input.model";
 })
 export class CategoryManagementComponent {
   //region Properties
-  data = input.required<CategoryListInputModel[]>();
+  data = input.required<CategoryManagementInputModel[]>();
   categoryListCaption = input.required<CategoryListCaptionModel>();
   categoryItemCaption = input.required<CategoryItemCaptionModel>();
   isLoading = input.required<boolean>();
