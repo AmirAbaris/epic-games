@@ -44,13 +44,13 @@ export class CategoryItemComponent implements OnInit {
 
     //region Lifecycle methods
     public ngOnInit(): void {
-        this._updatePriceLabelData();
+        this._setPriceLabelData();
     }
 
     //endregion
 
     //region Main logic method
-    private _updatePriceLabelData(): void {
+    private _setPriceLabelData(): void {
         this.priceLabelData = this._convertCategoryItemModelToPriceLabelModel(this.data());
     }
 

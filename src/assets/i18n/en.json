@@ -16,12 +16,12 @@
       "mainTitle": "Fortnite Experience",
       "websiteTitle": "VISIT FORTNITE.COM"
     },
-    "GameItemList": {
+    "CategoryItem": {
       "freeTitle": "FREE",
       "comingSoonTitle": "Coming Soon",
       "availableTitle": "Available"
     },
-    "GameList": {
+    "CategoryList": {
       "viewTitle": "View More"
     },
     "WishListButton": {
