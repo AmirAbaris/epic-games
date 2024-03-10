@@ -32,7 +32,6 @@ export class CategoryItemComponent implements OnInit {
   //region Properties
   data = input.required<CategoryItemInputModel>();
   caption = input.required<CategoryItemCaptionModel>();
-  // @Input({required: true}) isLoading: boolean | undefined;
   isLoading = input.required<boolean>();
 
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
@@ -40,6 +39,7 @@ export class CategoryItemComponent implements OnInit {
 
   public readonly SizeEnum = SizeEnum;
   public priceLabelData: PriceLabelModel | undefined;
+  
   //endregion
 
   //region Lifecycle methods

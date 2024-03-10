@@ -21,7 +21,7 @@ export class CategoryListComponent {
   @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
 
   public readonly maxNumberItemIndex: number = 5;
-
+  
   //endregion
 
   //region Handler methods
