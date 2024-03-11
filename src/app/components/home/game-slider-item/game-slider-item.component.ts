@@ -12,8 +12,8 @@ import {GameSliderCaptionModel} from "../models/caption-models/game-slider-capti
 export class GameSliderItemComponent implements OnInit {
   //region Properties
   data = input.required<GameSliderItemInputModel>();
-  isLoading = input.required<boolean>();
   caption = input.required<GameSliderCaptionModel>();
+  isLoading = input.required<boolean>();
 
   @Output() clickItemEvent = new EventEmitter<string>();
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
