@@ -9,8 +9,16 @@
   </section>
 } @else {
   <section class="text-white">
-    <img class="rounded-md" ngSrc="{{data().cover}}" priority width="208" height="256"
-         alt="{{data().name}}">
+    <div class="relative cursor-pointer" activateWishlistDir>
+      <img class="rounded-md" ngSrc="{{data().cover}}" priority width="208" height="256"
+           alt="{{data().name}}">
+      <div class="absolute top-1 right-1 text-black z-10">
+        <app-wish-list-button
+          class="wishlist"
+          (click)="onClickWishlistButtonEventHandler(data().name)"
+        />
+      </div>
+    </div>
     <h1 class="text-xs font-thin my-1">{{ data().type }}</h1>
     <h2>{{ data().name }}</h2>
 
