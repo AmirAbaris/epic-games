@@ -44,15 +44,10 @@ export class CategoryItemComponent implements OnInit {
 
     // Emit the clickWishlistButtonEvent
     this.clickWishlistButtonEvent.emit(gameId);
-
-    console.log(gameId);
-    console.log('wishlist called');
   }
 
   public onClickItemHandler(gameId: string): void {
     this.clickItemEvent.emit(gameId);
-
-    console.log('clicked called');
   }
 
   //endregion
