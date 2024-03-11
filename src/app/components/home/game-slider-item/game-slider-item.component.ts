@@ -38,10 +38,17 @@ export class GameSliderItemComponent implements OnInit {
   //region Handler methods
   public onClickItemEventHandler(id: string): void {
     this.clickItemEvent.emit(id);
+
+    console.log('item click emited');
   }
 
-  public onClickWishlistButtonEventHandler(id: string): void {
+  public onClickWishlistButtonEventHandler(event: MouseEvent, id: string): void {
+    // Prevent event propagation
+    event.stopPropagation();
+
     this.clickWishlistButtonEvent.emit(id);
+
+    console.log('wish emited');
   }
 
   //endregion
