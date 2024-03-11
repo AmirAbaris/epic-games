@@ -1,5 +1,5 @@
 <div class="grid grid-cols-5 gap-2 mt-20">
   @for (game of gameCardInputs().slice(0, 5); track $index) {
-    <app-game-slider-item [data]="game" [isLoading]="isLoading()"/>
+    <app-game-slider-item [data]="game" [caption]="gameItemCaption" [isLoading]="isLoading()"/>
   }
 </div>

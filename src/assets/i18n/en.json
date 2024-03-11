@@ -26,6 +26,9 @@
     },
     "WishListButton": {
       "addTitle": "Add to Wishlist"
+    },
+    "GameSliderItem": {
+      "freeTitle": "Free"
     }
   }
 }

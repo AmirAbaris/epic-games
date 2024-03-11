@@ -1,5 +1,5 @@
 @if (isLoading()) {
-  <section class="flex flex-col gap-4 animate-pulse">
+  <section class="flex flex-col gap-2 w-full animate-pulse">
     <div class="bg-darkGray w-52 h-64 rounded-md"></div>
     <div class="flex flex-col gap-2">
       <div class="bg-darkSilver w-16 h-3"></div>
@@ -8,23 +8,23 @@
     </div>
   </section>
 } @else {
-  <section class="text-white">
-    <div class="relative cursor-pointer" (click)="onClickItemEventHandler(data().name)" activateWishlistDir>
+  <section class="text-white font-inter cursor-pointer" (click)="onClickItemEventHandler(data().id)">
+    <div class="relative hover:brightness-125 hover:transition duration-300"
+         activateWishlistDir>
       <img class="rounded-md" ngSrc="{{data().cover}}" priority width="208" height="256"
            alt="{{data().name}}">
       <div class="absolute top-1 right-2 text-black z-10">
         <app-wish-list-button
           class="wishlist"
-          (click)="onClickWishlistButtonEventHandler($event, data().name)"
+          (click)="onClickWishlistButtonEventHandler($event, data().id)"
         />
       </div>
     </div>
-    <h1 class="text-xs font-thin my-1">{{ data().type }}</h1>
-    <h2>{{ data().name }}</h2>
+    <h1 class="text-xs font-thin my-1 ">{{ data().type }}</h1>
+    <h2 class="text-sm">{{ data().name }}</h2>
 
     @if (data().isFree) {
-      <!--TODO add caption-->
-      <h3 class="text-sm">Free</h3>
+      <h3 class="text-xs mt-1">{{ caption().freeTitle | uppercase }}</h3>
     } @else {
       @if (priceLabelData) {
         <app-price-label [priceLabelInput]="priceLabelData" [sizeInput]="SizeEnum.Medium"/>

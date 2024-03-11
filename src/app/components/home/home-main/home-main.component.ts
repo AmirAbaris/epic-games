@@ -519,6 +519,7 @@ const mockData: CategoryListInputModel[] = [
 
 const gameSliderItems: GameSliderItemInputModel[] = [
   {
+    id: "1",
     name: 'game 1',
     type: GameSliderType.BASE,
     cover: '../assets/game-covers/game-card-covers/1.jpeg',
@@ -527,6 +528,7 @@ const gameSliderItems: GameSliderItemInputModel[] = [
     isFree: true
   },
   {
+    id: "2",
     name: 'game 1',
     type: GameSliderType.BASE,
     cover: '../assets/game-covers/game-card-covers/2.jpeg',
@@ -535,6 +537,7 @@ const gameSliderItems: GameSliderItemInputModel[] = [
     isFree: true
   },
   {
+    id: "3",
     name: 'game 1',
     type: GameSliderType.BASE,
     cover: '../assets/game-covers/game-card-covers/4.jpeg',
@@ -543,6 +546,7 @@ const gameSliderItems: GameSliderItemInputModel[] = [
     isFree: true
   },
   {
+    id: "4",
     name: 'game 1',
     type: GameSliderType.BASE,
     cover: '../assets/game-covers/game-card-covers/2.jpeg',
