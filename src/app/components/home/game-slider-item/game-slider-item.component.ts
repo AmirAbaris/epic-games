@@ -27,15 +27,15 @@ export class GameSliderItemComponent implements OnInit {
 
     //region Lifecycle methods
     ngOnInit(): void {
-        this.captionForGameType = this.getCaptionForType(this.data().type);
-        
+        this.captionForGameType = this._getCaptionForType(this.data().type);
+
         this._setPriceLabelData();
     }
 
     //endregion
 
     //region Main logic methods
-    public getCaptionForType(type: GameType): string {
+    private _getCaptionForType(type: GameType): string {
         switch (type) {
             case GameType.BASE_GAME:
                 return this.caption().gameType.BASE_GAME;
