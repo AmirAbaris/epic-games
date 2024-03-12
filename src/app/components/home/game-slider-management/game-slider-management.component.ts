@@ -12,13 +12,13 @@ export class GameSliderManagementComponent {
     gameCardInputs = input.required<GameSliderItemInputModel[]>();
     isLoading = input.required<boolean>();
 
-    public gameSliderItemCaption: GameSliderCaptionModel = {
+    public caption: GameSliderCaptionModel = {
         freeTitle: 'Free',
         gameType: {
             BASE_GAME: 'Base Game',
             EDITION: 'Edition'
         }
     }
-    
+
     //endregion
 }

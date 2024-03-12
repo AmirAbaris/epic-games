@@ -3,6 +3,7 @@ import {GameSliderItemInputModel} from "../models/game-slider-item-input.model";
 import {SizeEnum} from "../enums/size.enum";
 import {PriceLabelModel} from "../models/price-label.model";
 import {GameSliderCaptionModel} from "../models/caption-models/game-slider-caption.model";
+import {GameType} from "../enums/game-type.enum";
 
 @Component({
     selector: 'app-game-slider-item',
@@ -31,6 +32,20 @@ export class GameSliderItemComponent implements OnInit {
     //endregion
 
     //region Main logic methods
+
+
+    public getCaptionForType(type: GameType): string {
+        switch (type) {
+            case GameType.BASE_GAME:
+                return this.caption().gameType.BASE_GAME;
+            case GameType.EDITION:
+                return this.caption().gameType.EDITION;
+
+            default:
+                return this.caption().gameType.BASE_GAME;
+        }
+    }
+
     private _setPriceLabelData(): void {
         this.priceLabelData = this._convertGameSliderItemInputModelToPriceLabelModel(this.data());
     }
@@ -61,4 +76,5 @@ export class GameSliderItemComponent implements OnInit {
     }
 
     //endregion
+    protected readonly GameType = GameType;
 }
