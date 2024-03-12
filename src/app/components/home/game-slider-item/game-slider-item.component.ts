@@ -21,19 +21,20 @@ export class GameSliderItemComponent implements OnInit {
 
     public readonly SizeEnum = SizeEnum;
     public priceLabelData: PriceLabelModel | undefined;
+    public captionForGameType: string | undefined;
 
     //endregion
 
     //region Lifecycle methods
     ngOnInit(): void {
+        this.captionForGameType = this.getCaptionForType(this.data().type);
+        
         this._setPriceLabelData();
     }
 
     //endregion
 
     //region Main logic methods
-
-
     public getCaptionForType(type: GameType): string {
         switch (type) {
             case GameType.BASE_GAME:
@@ -76,5 +77,4 @@ export class GameSliderItemComponent implements OnInit {
     }
 
     //endregion
-    protected readonly GameType = GameType;
 }
