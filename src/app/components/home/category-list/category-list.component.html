@@ -1,21 +1,17 @@
-<section class="flex gap-4 p-12">
-  <div>
-    <div class="flex w-full text-white">
-      <div class="flex justify-between items-center w-80 mb-3">
-        <h1 class="text-xl">{{ data().title }}</h1>
-        <button (click)="onClickViewMoreButtonEventHandler(data().categoryType)"
-                mat-stroked-button> {{ caption().viewTitle | uppercase }}
-        </button>
-      </div>
-    </div>
-    <div class="flex flex-col gap-y-1 text-white">
-      @for (item of data().categoryItem | slice: 0 : maxNumberItemIndex; track $index) {
-        <app-category-item [data]="item" [caption]="itemCaption()"
-                           [isLoading]="isLoading()"
-                           (clickWishlistButtonEvent)="onClickWishlistEventHandler($event)"
-                           (clickItemEvent)="onClickGameEventHandler($event)"
-        />
-      }
-    </div>
+<section class="text-white">
+  <div class="flex justify-between items-center gap-2 w-80 mb-3">
+    <h1 class="text-xl">{{ data().title }}</h1>
+    <button (click)="onClickViewMoreButtonEventHandler(data().categoryType)"
+            mat-stroked-button> {{ caption().viewTitle | uppercase }}
+    </button>
+  </div>
+  <div class="flex flex-col gap-y-1">
+    @for (item of data().categoryItem | slice: 0 : maxNumberItemIndex; track $index) {
+      <app-category-item [data]="item" [caption]="itemCaption()"
+                         [isLoading]="isLoading()"
+                         (clickWishlistButtonEvent)="onClickWishlistEventHandler($event)"
+                         (clickItemEvent)="onClickGameEventHandler($event)"
+      />
+    }
   </div>
 </section>

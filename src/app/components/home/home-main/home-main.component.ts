@@ -17,8 +17,11 @@ import {FortniteCardManagementCaptionModel} from "../models/caption-models/fortn
 import {BannerDto} from "../dtos/banner-dto";
 import {BannerModel} from "../models/banner.model";
 import {GameListItemDto} from "../dtos/game-list-item-dto";
-import {forkJoin} from "rxjs";
+import {finalize, forkJoin, interval, take} from "rxjs";
 import {CategoryItemCaptionModel} from "../models/caption-models/category-item-caption.model";
+import {CategoryListCaptionModel} from "../models/caption-models/category-list-caption.model";
+import {CategoryManagementInputModel} from "../models/category-management-input.model";
+import {CategoryType} from "../enums/category-type.enum";
 
 @Component({
   selector: "app-home-main",
@@ -35,11 +38,16 @@ export class HomeMainComponent implements OnInit {
   public gameBanners: BannerDto[] | undefined;
   public nonGameBanners: BannerDto[] | undefined;
   public gameListItem: GameListItemDto[] | undefined;
+  public categoryManagementData: CategoryManagementInputModel = mockData;
+  public isLoading: boolean = true;
+
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameManagementCaption: freeGameCardManagementCaptionModel | undefined;
   public fortniteCaption: FortniteCardManagementCaptionModel | undefined;
   public gameItemCaption: CategoryItemCaptionModel | undefined;
+  public categoryListCaption: CategoryListCaptionModel | undefined;
+  public categoryItemCaption: CategoryItemCaptionModel | undefined;
 
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
@@ -49,7 +57,9 @@ export class HomeMainComponent implements OnInit {
     freeGameCardManagement: "home.FreeGameCardManagement",
     freeGameCard: "home.FreeGameCard",
     fortniteCardManagement: "home.FortniteCardManagement",
-    gameItemList: 'home.GameItemList'
+    gameItemList: 'home.GameItemList',
+    categoryList: 'home.CategoryList',
+    categoryItem: 'home.CategoryItem',
   };
   //endregion
 
@@ -59,6 +69,7 @@ export class HomeMainComponent implements OnInit {
     this._filterGamesInGameBanners();
     this._filterNonGamesInGameBanners();
     this._getCaptions();
+    this._completeLoading();
   }
 
   //endregion
@@ -88,20 +99,35 @@ export class HomeMainComponent implements OnInit {
     const freeGamesCaption = this._translateService.get(this.captionPaths.freeGameCard);
     const fortniteCaption = this._translateService.get(this.captionPaths.fortniteCardManagement);
     const gameItemCaption = this._translateService.get(this.captionPaths.gameItemList);
+    const categoryListCaption = this._translateService.get(this.captionPaths.categoryList);
+    const categoryItemCaption = this._translateService.get(this.captionPaths.categoryItem);
 
     forkJoin([
       largeHighlightGameCaption,
       freeGameManagementCaption,
       freeGamesCaption,
       fortniteCaption,
-      gameItemCaption
-    ]).subscribe(([largeHighlightGameCaption, freeGameManagementCaption, freeGamesCaption, fortniteCaption, gameItemCaption]) => {
+      gameItemCaption,
+      categoryListCaption,
+      categoryItemCaption
+    ]).subscribe(([largeHighlightGameCaption, freeGameManagementCaption, freeGamesCaption, fortniteCaption, gameItemCaption, categoryListCaption, categoryItemCaption]) => {
       this.largeHighlightGameCaption = largeHighlightGameCaption;
       this.freeGameManagementCaption = freeGameManagementCaption;
       this.freeGamesCaption = freeGamesCaption;
       this.fortniteCaption = fortniteCaption;
       this.gameItemCaption = gameItemCaption;
+      this.categoryListCaption = categoryListCaption;
+      this.categoryItemCaption = categoryItemCaption;
+
     });
+  }
+
+  private _completeLoading(): void {
+    interval(5000).pipe(
+      take(1),
+      finalize(() => {
+        this.isLoading = false;
+      })).subscribe();
   }
 
   private _filterGamesInGameBanners(): void {
@@ -221,3 +247,106 @@ export class HomeMainComponent implements OnInit {
 
   //endregion
 }
+
+// TODO, REMOVE
+const mockData: CategoryManagementInputModel = {
+  categoryListData: [
+    {
+      title: 'Top Sellers',
+      categoryType: CategoryType.TOP_SELLERS,
+      categoryItem: [
+        {
+          id: '1',
+          thumbnailCover: "../assets/game-covers/game-list/l1.jpeg",
+          name: "Game 1",
+          discountPercent: 10,
+          basePrice: 39.99,
+          finalPrice: 35.99,
+          isFree: false,
+          publishDate: new Date(),
+          isPublished: true,
+        },
+        {
+          id: '2',
+          thumbnailCover: "../assets/game-covers/game-list/l2.jpeg",
+          name: "Game 2",
+          discountPercent: 20,
+          basePrice: 29.99,
+          finalPrice: 23.99,
+          isFree: false,
+          publishDate: new Date(),
+          isPublished: true,
+        },
+        {
+          id: '3',
+          thumbnailCover: "../assets/game-covers/game-list/l2.jpeg",
+          name: "Game 2",
+          discountPercent: 20,
+          basePrice: 29.99,
+          finalPrice: 23.99,
+          isFree: false,
+          publishDate: new Date(),
+          isPublished: true,
+        },
+        {
+          id: '2',
+          thumbnailCover: "../assets/game-covers/game-list/l2.jpeg",
+          name: "Game 2",
+          discountPercent: 20,
+          basePrice: 29.99,
+          finalPrice: 23.99,
+          isFree: false,
+          publishDate: new Date(),
+          isPublished: true,
+        },
+        {
+          id: '2',
+          thumbnailCover: "../assets/game-covers/game-list/l2.jpeg",
+          name: "Game 2",
+          discountPercent: 20,
+          basePrice: 29.99,
+          finalPrice: 23.99,
+          isFree: false,
+          publishDate: new Date(),
+          isPublished: true,
+        }
+      ]
+    },
+    {
+      title: 'Most Played',
+      categoryType: CategoryType.MOST_PLAYED,
+      categoryItem: [
+        {
+          id: '3',
+          thumbnailCover: "../assets/game-covers/game-list/l3.jpeg",
+          name: "Game 3",
+          discountPercent: 0,
+          basePrice: 19.99,
+          finalPrice: 19.99,
+          isFree: false,
+          publishDate: new Date(),
+          isPublished: true,
+        }
+      ]
+    },
+    {
+      title: 'Most Played',
+      categoryType: CategoryType.MOST_PLAYED,
+      categoryItem: [
+        {
+          id: '3',
+          thumbnailCover: "../assets/game-covers/game-list/l3.jpeg",
+          name: "Game 3",
+          discountPercent: 0,
+          basePrice: 19.99,
+          finalPrice: 19.99,
+          isFree: false,
+          publishDate: new Date(),
+          isPublished: true,
+        }
+      ]
+    }
+  ]
+}
+
+

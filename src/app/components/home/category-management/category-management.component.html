@@ -1,11 +1,17 @@
-<div class="my-12" *ngIf="categoryListCaption && categoryItemCaption">
-  <app-category-list
-    [data]="categoryList"
-    [caption]="categoryListCaption"
-    [itemCaption]="categoryItemCaption"
-    [isLoading]="isLoading"
-    (clickGameEvent)="onClickGameEventHandler($event)"
-    (clickViewMoreButtonEvent)="onClickViewMoreButtonEventHandler($event)"
-    (clickWishlistEvent)="onClickWishlistEventHandler($event)"
-  />
+<div class="flex flex-col justify-center gap-4 md:flex-row">
+    @for (data of data().categoryListData; track $index) {
+        <app-category-list
+                [data]="data"
+                [caption]="categoryListCaption()"
+                [itemCaption]="categoryItemCaption()"
+                [isLoading]="isLoading()"
+                (clickGameEvent)="onClickGameEventHandler($event)"
+                (clickViewMoreButtonEvent)="onClickViewMoreButtonEventHandler($event)"
+                (clickWishlistEvent)="onClickWishlistEventHandler($event)"
+        />
+        @if (!$last) {
+            <mat-divider vertical/>
+        }
+    }
 </div>
+
