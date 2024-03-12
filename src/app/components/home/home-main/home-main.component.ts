@@ -24,7 +24,7 @@ import {CategoryType} from "../enums/category-type.enum";
 import {CategoryListCaptionModel} from "../models/caption-models/category-list-caption.model";
 import {CategoryManagementInputModel} from "../models/category-management-input.model";
 import {GameSliderItemInputModel} from "../models/game-slider-item-input.model";
-import {GameType} from "../enums/game-type.enum";
+import {GameType} from "../../../enums/game-type.enum";
 
 @Component({
   selector: "app-home-main",

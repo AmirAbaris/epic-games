@@ -1,4 +1,4 @@
-import {GameType} from "../enums/game-type.enum";
+import {GameType} from "../../../enums/game-type.enum";
 
 export interface GameSliderItemInputModel {
   id: string;
