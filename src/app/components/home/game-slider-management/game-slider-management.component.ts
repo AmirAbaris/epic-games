@@ -10,8 +10,15 @@ import {GameSliderCaptionModel} from "../models/caption-models/game-slider-capti
 export class GameSliderManagementComponent {
     //region properties
     gameCardInputs = input.required<GameSliderItemInputModel[]>();
-    gameSliderItemCaption = input.required<GameSliderCaptionModel>();
     isLoading = input.required<boolean>();
 
+    public gameSliderItemCaption: GameSliderCaptionModel = {
+        freeTitle: 'Free',
+        gameType: {
+            BASE_GAME: 'Base Game',
+            EDITION: 'Edition'
+        }
+    }
+    
     //endregion
 }

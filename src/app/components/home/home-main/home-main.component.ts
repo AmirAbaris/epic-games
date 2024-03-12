@@ -25,7 +25,6 @@ import {CategoryListCaptionModel} from "../models/caption-models/category-list-c
 import {CategoryManagementInputModel} from "../models/category-management-input.model";
 import {GameSliderItemInputModel} from "../models/game-slider-item-input.model";
 import {GameType} from "../enums/game-type.enum";
-import {GameSliderCaptionModel} from "../models/caption-models/game-slider-caption.model";
 
 @Component({
   selector: "app-home-main",
@@ -53,7 +52,7 @@ export class HomeMainComponent implements OnInit {
   public gameItemCaption: CategoryItemCaptionModel | undefined;
   public categoryListCaption: CategoryListCaptionModel | undefined;
   public categoryItemCaption: CategoryItemCaptionModel | undefined;
-  public gameSliderCaption: GameSliderCaptionModel | undefined;
+  // public gameSliderCaption: GameSliderCaptionModel | undefined;
 
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
@@ -109,8 +108,6 @@ export class HomeMainComponent implements OnInit {
     const gameItemCaption = this._translateService.get(this.captionPaths.gameItemList);
     const categoryListCaption = this._translateService.get(this.captionPaths.categoryList);
     const categoryItemCaption = this._translateService.get(this.captionPaths.categoryItem);
-    const gameSliderItemCaption = this._translateService.get(this.captionPaths.gameSliderItem);
-    const gameTypeCaption = this._translateService.get(this.captionPaths.gameType);
 
     forkJoin([
       largeHighlightGameCaption,
@@ -119,10 +116,8 @@ export class HomeMainComponent implements OnInit {
       fortniteCaption,
       gameItemCaption,
       categoryListCaption,
-      categoryItemCaption,
-      gameSliderItemCaption,
-      gameTypeCaption
-    ]).subscribe(([largeHighlightGameCaption, freeGameManagementCaption, freeGamesCaption, fortniteCaption, gameItemCaption, categoryListCaption, categoryItemCaption, gameSliderItemCaption, gameTypeCaption]) => {
+      categoryItemCaption
+    ]).subscribe(([largeHighlightGameCaption, freeGameManagementCaption, freeGamesCaption, fortniteCaption, gameItemCaption, categoryListCaption, categoryItemCaption]) => {
       this.largeHighlightGameCaption = largeHighlightGameCaption;
       this.freeGameManagementCaption = freeGameManagementCaption;
       this.freeGamesCaption = freeGamesCaption;
@@ -130,11 +125,6 @@ export class HomeMainComponent implements OnInit {
       this.gameItemCaption = gameItemCaption;
       this.categoryListCaption = categoryListCaption;
       this.categoryItemCaption = categoryItemCaption;
-
-      if (this.gameSliderCaption && this.gameSliderCaption.freeTitle && this.gameSliderCaption.gameType) {
-        this.gameSliderCaption.freeTitle = gameSliderItemCaption;
-        this.gameSliderCaption.gameType = gameTypeCaption;
-      }
     });
   }
 
