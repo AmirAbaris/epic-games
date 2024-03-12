@@ -1,4 +1,4 @@
 export interface GameTypeCaptionModel {
-  'BASE GAME': string;
-  'EDITION': string;
+  BASE_GAME: string;
+  EDITION: string;
 }

@@ -1,4 +1,4 @@
 export enum GameType {
-  BASE_GAME = "BASE GAME",
+  BASE_GAME = "BASE_GAME",
   EDITION = "EDITION"
 }

@@ -15,8 +15,8 @@ export class GameSliderManagementComponent {
     public caption: GameSliderCaptionModel = {
         freeTitle: 'Free',
         gameType: {
-            'BASE GAME': 'Base Game',
-            'EDITION': 'EDITION'
+            BASE_GAME: 'Base Game',
+            EDITION: 'EDITION'
         }
     }
 
