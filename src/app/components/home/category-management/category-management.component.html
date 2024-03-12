@@ -1,5 +1,5 @@
-<div class="flex flex-wrap justify-center gap-4">
-    @for (data of data(); track $index) {
+<div class="flex flex-col justify-center gap-4 md:flex-row">
+    @for (data of data().categoryListData; track $index) {
         <app-category-list
                 [data]="data"
                 [caption]="categoryListCaption()"

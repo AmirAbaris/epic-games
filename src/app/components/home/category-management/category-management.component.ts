@@ -11,7 +11,7 @@ import {CategoryManagementInputModel} from "../models/category-management-input.
 })
 export class CategoryManagementComponent {
   //region Properties
-  data = input.required<CategoryManagementInputModel[]>();
+  data = input.required<CategoryManagementInputModel>();
   categoryListCaption = input.required<CategoryListCaptionModel>();
   categoryItemCaption = input.required<CategoryItemCaptionModel>();
   isLoading = input.required<boolean>();
