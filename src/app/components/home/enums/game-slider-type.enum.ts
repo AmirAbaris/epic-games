@@ -1,4 +1,4 @@
 export enum GameSliderType {
-  BASE = "BASE",
+  BASE_GAME = "BASE GAME",
   EDITION = "EDITION"
 }

@@ -521,7 +521,7 @@ const gameSliderItems: GameSliderItemInputModel[] = [
   {
     id: "1",
     name: 'game 1',
-    type: GameSliderType.BASE,
+    type: GameSliderType.BASE_GAME,
     cover: '../assets/game-covers/game-card-covers/1.jpeg',
     basePrice: 29.99,
     finalPrice: 14.99,
@@ -530,7 +530,7 @@ const gameSliderItems: GameSliderItemInputModel[] = [
   {
     id: "2",
     name: 'game 1',
-    type: GameSliderType.BASE,
+    type: GameSliderType.BASE_GAME,
     cover: '../assets/game-covers/game-card-covers/2.jpeg',
     basePrice: 29.99,
     finalPrice: 14.99,
@@ -539,7 +539,7 @@ const gameSliderItems: GameSliderItemInputModel[] = [
   {
     id: "3",
     name: 'game 1',
-    type: GameSliderType.BASE,
+    type: GameSliderType.BASE_GAME,
     cover: '../assets/game-covers/game-card-covers/4.jpeg',
     basePrice: 29.99,
     finalPrice: 14.99,
@@ -548,7 +548,7 @@ const gameSliderItems: GameSliderItemInputModel[] = [
   {
     id: "4",
     name: 'game 1',
-    type: GameSliderType.BASE,
+    type: GameSliderType.BASE_GAME,
     cover: '../assets/game-covers/game-card-covers/2.jpeg',
     basePrice: 29.99,
     finalPrice: 14.99,
