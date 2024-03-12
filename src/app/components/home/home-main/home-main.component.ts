@@ -24,7 +24,8 @@ import {CategoryType} from "../enums/category-type.enum";
 import {CategoryListCaptionModel} from "../models/caption-models/category-list-caption.model";
 import {CategoryManagementInputModel} from "../models/category-management-input.model";
 import {GameSliderItemInputModel} from "../models/game-slider-item-input.model";
-import {GameSliderType} from "../enums/game-slider-type.enum";
+import {GameType} from "../enums/game-type.enum";
+import {GameSliderCaptionModel} from "../models/caption-models/game-slider-caption.model";
 
 @Component({
   selector: "app-home-main",
@@ -52,6 +53,7 @@ export class HomeMainComponent implements OnInit {
   public gameItemCaption: CategoryItemCaptionModel | undefined;
   public categoryListCaption: CategoryListCaptionModel | undefined;
   public categoryItemCaption: CategoryItemCaptionModel | undefined;
+  public gameSliderCaption: GameSliderCaptionModel | undefined;
 
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
@@ -64,7 +66,9 @@ export class HomeMainComponent implements OnInit {
     gameItemList: 'home.GameItemList',
     categoryList: 'home.CategoryList',
     categoryItem: 'home.CategoryItem',
-  };
+    gameSliderItem: 'home.GameSliderItem',
+    gameType: 'home.enum-captions.gameType'
+  }
   //endregion
 
   //region lifecycle methods
@@ -105,6 +109,8 @@ export class HomeMainComponent implements OnInit {
     const gameItemCaption = this._translateService.get(this.captionPaths.gameItemList);
     const categoryListCaption = this._translateService.get(this.captionPaths.categoryList);
     const categoryItemCaption = this._translateService.get(this.captionPaths.categoryItem);
+    const gameSliderItemCaption = this._translateService.get(this.captionPaths.gameSliderItem);
+    const gameTypeCaption = this._translateService.get(this.captionPaths.gameType);
 
     forkJoin([
       largeHighlightGameCaption,
@@ -113,8 +119,10 @@ export class HomeMainComponent implements OnInit {
       fortniteCaption,
       gameItemCaption,
       categoryListCaption,
-      categoryItemCaption
-    ]).subscribe(([largeHighlightGameCaption, freeGameManagementCaption, freeGamesCaption, fortniteCaption, gameItemCaption, categoryListCaption, categoryItemCaption]) => {
+      categoryItemCaption,
+      gameSliderItemCaption,
+      gameTypeCaption
+    ]).subscribe(([largeHighlightGameCaption, freeGameManagementCaption, freeGamesCaption, fortniteCaption, gameItemCaption, categoryListCaption, categoryItemCaption, gameSliderItemCaption, gameTypeCaption]) => {
       this.largeHighlightGameCaption = largeHighlightGameCaption;
       this.freeGameManagementCaption = freeGameManagementCaption;
       this.freeGamesCaption = freeGamesCaption;
@@ -123,6 +131,10 @@ export class HomeMainComponent implements OnInit {
       this.categoryListCaption = categoryListCaption;
       this.categoryItemCaption = categoryItemCaption;
 
+      if (this.gameSliderCaption && this.gameSliderCaption.freeTitle && this.gameSliderCaption.gameType) {
+        this.gameSliderCaption.freeTitle = gameSliderItemCaption;
+        this.gameSliderCaption.gameType = gameTypeCaption;
+      }
     });
   }
 
@@ -521,7 +533,7 @@ const gameSliderItems: GameSliderItemInputModel[] = [
   {
     id: "1",
     name: 'game 1',
-    type: GameSliderType.BASE_GAME,
+    type: GameType.BASE_GAME,
     cover: '../assets/game-covers/game-card-covers/1.jpeg',
     basePrice: 29.99,
     finalPrice: 14.99,
@@ -530,7 +542,7 @@ const gameSliderItems: GameSliderItemInputModel[] = [
   {
     id: "2",
     name: 'game 1',
-    type: GameSliderType.BASE_GAME,
+    type: GameType.BASE_GAME,
     cover: '../assets/game-covers/game-card-covers/2.jpeg',
     basePrice: 29.99,
     finalPrice: 14.99,
@@ -539,16 +551,17 @@ const gameSliderItems: GameSliderItemInputModel[] = [
   {
     id: "3",
     name: 'game 1',
-    type: GameSliderType.BASE_GAME,
+    type: GameType.BASE_GAME,
     cover: '../assets/game-covers/game-card-covers/4.jpeg',
+    discountPercent: 12,
     basePrice: 29.99,
     finalPrice: 14.99,
-    isFree: true
+    isFree: false
   },
   {
     id: "4",
     name: 'game 1',
-    type: GameSliderType.BASE_GAME,
+    type: GameType.BASE_GAME,
     cover: '../assets/game-covers/game-card-covers/2.jpeg',
     basePrice: 29.99,
     finalPrice: 14.99,

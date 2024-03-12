@@ -29,6 +29,12 @@
     },
     "GameSliderItem": {
       "freeTitle": "Free"
+    },
+    "enum-captions": {
+      "gameType": {
+        "BASE_GAME": "Base Game",
+        "EDITION": "Edition"
+      }
     }
   }
 }

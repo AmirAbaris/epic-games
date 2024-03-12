@@ -39,6 +39,7 @@ import {PriceLabelComponent} from '../components/home/price-label/price-label.co
 import {CategoryManagementComponent} from '../components/home/category-management/category-management.component';
 import {CategoryListComponent} from '../components/home/category-list/category-list.component';
 import {CategoryItemComponent} from '../components/home/category-item/category-item.component';
+import {TranslateModule} from "@ngx-translate/core";
 
 const homeRoutes: Routes = [{path: '', component: HomeMainComponent}];
 
@@ -75,7 +76,8 @@ const homeRoutes: Routes = [{path: '', component: HomeMainComponent}];
     MatCardModule,
     MatDividerModule,
     MatTooltipModule,
-    RouterModule.forChild(homeRoutes)
+    RouterModule.forChild(homeRoutes),
+    TranslateModule
   ],
   providers: [GameService]
 })

@@ -1,4 +1,4 @@
-import {GameSliderType} from "../enums/game-slider-type.enum";
+import {GameType} from "../enums/game-type.enum";
 
 export interface GameSliderItemInputModel {
   id: string;
@@ -8,5 +8,5 @@ export interface GameSliderItemInputModel {
   basePrice?: number;
   finalPrice?: number;
   isFree: boolean;
-  type: GameSliderType;
+  type: GameType;
 }
