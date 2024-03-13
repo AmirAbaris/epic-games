@@ -2,15 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'swiper/css/bundle';
+//@import 'swiper/css/bundle';
 
 html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color: #121212;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #121212;
 }

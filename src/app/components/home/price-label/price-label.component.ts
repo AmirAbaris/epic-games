@@ -26,15 +26,15 @@ export class PriceLabelComponent implements OnInit {
   private _setTextSize(): void {
     // return size for tailwind based on SizeEnum
     switch (this.sizeInput()) {
-      case SizeEnum.Small:
+      case SizeEnum.SMALL:
         this.textSize = 'text-sm';
         return;
 
-      case SizeEnum.Medium:
+      case SizeEnum.MEDIUM:
         this.textSize = 'text-md';
         return;
 
-      case SizeEnum.Big:
+      case SizeEnum.BIG:
         this.textSize = 'text-lg';
         return;
 

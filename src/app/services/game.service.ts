@@ -114,7 +114,7 @@ const gameCards: GameCardModel[] = [
   {
     name: 'game 1',
     type: 'RPG',
-    cover: '../assets/game-covers/game-card-covers/1.jpeg',
+    cover: '../assets/game-covers/game-slider-item-covers/1.jpeg',
     basePrice: 29.99,
     finalPrice: 14.99,
     isFree: true,
@@ -123,7 +123,7 @@ const gameCards: GameCardModel[] = [
   {
     name: 'game 2',
     type: 'FPS',
-    cover: '../assets/game-covers/game-card-covers/2.jpeg',
+    cover: '../assets/game-covers/game-slider-item-covers/2.jpeg',
     basePrice: 29.99,
     finalPrice: 14.99,
     isFree: false,
@@ -132,7 +132,7 @@ const gameCards: GameCardModel[] = [
   {
     name: 'game 3',
     type: 'Adventure',
-    cover: '../assets/game-covers/game-card-covers/33.jpg',
+    cover: '../assets/game-covers/game-slider-item-covers/33.jpg',
     basePrice: 39.99,
     finalPrice: 39.99,
     isFree: false,
@@ -141,7 +141,7 @@ const gameCards: GameCardModel[] = [
   {
     name: 'game 4',
     type: 'Simulation',
-    cover: '../assets/game-covers/game-card-covers/4.jpeg',
+    cover: '../assets/game-covers/game-slider-item-covers/4.jpeg',
     basePrice: 49.99,
     finalPrice: 49.99,
     isFree: false,
@@ -150,7 +150,7 @@ const gameCards: GameCardModel[] = [
   {
     name: 'game 5',
     type: 'Puzzle',
-    cover: '../assets/game-covers/game-card-covers/5.jpeg',
+    cover: '../assets/game-covers/game-slider-item-covers/5.jpeg',
     discountPercent: 25,
     basePrice: 9.99,
     finalPrice: 7.49,
@@ -160,7 +160,7 @@ const gameCards: GameCardModel[] = [
   {
     name: 'game 1',
     type: 'RPG',
-    cover: '../assets/game-covers/game-card-covers/1.jpeg',
+    cover: '../assets/game-covers/game-slider-item-covers/1.jpeg',
     basePrice: 29.99,
     finalPrice: 14.99,
     isFree: true,
@@ -169,7 +169,7 @@ const gameCards: GameCardModel[] = [
   {
     name: 'game 2',
     type: 'FPS',
-    cover: '../assets/game-covers/game-card-covers/2.jpeg',
+    cover: '../assets/game-covers/game-slider-item-covers/2.jpeg',
     basePrice: 29.99,
     finalPrice: 14.99,
     isFree: false,
@@ -178,7 +178,7 @@ const gameCards: GameCardModel[] = [
   {
     name: 'game 3',
     type: 'Adventure',
-    cover: '../assets/game-covers/game-card-covers/33.jpg',
+    cover: '../assets/game-covers/game-slider-item-covers/33.jpg',
     basePrice: 39.99,
     finalPrice: 39.99,
     isFree: false,
@@ -187,7 +187,7 @@ const gameCards: GameCardModel[] = [
   {
     name: 'game 4',
     type: 'Simulation',
-    cover: '../assets/game-covers/game-card-covers/4.jpeg',
+    cover: '../assets/game-covers/game-slider-item-covers/4.jpeg',
     basePrice: 49.99,
     finalPrice: 49.99,
     isFree: false,
@@ -196,7 +196,7 @@ const gameCards: GameCardModel[] = [
   {
     name: 'game 5',
     type: 'Puzzle',
-    cover: '../assets/game-covers/game-card-covers/5.jpeg',
+    cover: '../assets/game-covers/game-slider-item-covers/5.jpeg',
     discountPercent: 25,
     basePrice: 9.99,
     finalPrice: 7.49,
