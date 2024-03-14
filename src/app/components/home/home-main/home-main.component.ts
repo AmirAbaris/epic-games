@@ -22,8 +22,9 @@ import {CategoryItemCaptionModel} from "../models/caption-models/category-item-c
 import {CategoryType} from "../enums/category-type.enum";
 import {CategoryListCaptionModel} from "../models/caption-models/category-list-caption.model";
 import {CategoryManagementInputModel} from "../models/category-management-input.model";
-import {GameSliderItemInputModel} from "../models/game-slider-item-input.model";
 import {GameType} from "../../../enums/game-type.enum";
+import {GameSliderItemCaptionModel} from "../models/caption-models/game-slider-item-caption.model";
+import {GameSliderInputModel} from "../models/game-slider-input.model";
 
 @Component({
   selector: "app-home-main",
@@ -41,7 +42,7 @@ export class HomeMainComponent implements OnInit {
   public nonGameBanners: BannerDto[] | undefined;
   public gameListItem: GameListItemDto[] | undefined;
   public categoryManagementData: CategoryManagementInputModel = mockData;
-  public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
+  public gameSliderData: GameSliderInputModel = gameSliderData;
   public isLoading: boolean = true;
 
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
@@ -52,6 +53,13 @@ export class HomeMainComponent implements OnInit {
   public categoryListCaption: CategoryListCaptionModel | undefined;
   public categoryItemCaption: CategoryItemCaptionModel | undefined;
   // public gameSliderCaption: GameSliderCaptionModel | undefined;
+  public gameSliderItemCaption: GameSliderItemCaptionModel = {
+    freeTitle: 'Free',
+    gameType: {
+      BASE_GAME: 'Base Game',
+      EDITION: 'EDITION'
+    }
+  }
 
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
@@ -275,42 +283,27 @@ const mockData: CategoryManagementInputModel = {
   ]
 }
 
-const gameSliderItems: GameSliderItemInputModel[] = [
-  {
-    id: "1",
-    name: 'game 1',
-    type: GameType.BASE_GAME,
-    cover: '../assets/game-covers/game-card-covers/1.jpeg',
-    basePrice: 29.99,
-    finalPrice: 14.99,
-    isFree: true
-  },
-  {
-    id: "2",
-    name: 'game 1',
-    type: GameType.BASE_GAME,
-    cover: '../assets/game-covers/game-card-covers/2.jpeg',
-    basePrice: 29.99,
-    finalPrice: 14.99,
-    isFree: true
-  },
-  {
-    id: "3",
-    name: 'game 1',
-    type: GameType.BASE_GAME,
-    cover: '../assets/game-covers/game-card-covers/4.jpeg',
-    discountPercent: 12,
-    basePrice: 29.99,
-    finalPrice: 14.99,
-    isFree: false
-  },
-  {
-    id: "4",
-    name: 'game 1',
-    type: GameType.BASE_GAME,
-    cover: '../assets/game-covers/game-card-covers/2.jpeg',
-    basePrice: 29.99,
-    finalPrice: 14.99,
-    isFree: true
-  }
-];
+const gameSliderData: GameSliderInputModel = {
+  gameSliderItemData: [
+    {
+      id: "4",
+      name: 'game 1',
+      type: GameType.BASE_GAME,
+      cover: '../assets/game-covers/game-card-covers/2.jpeg',
+      basePrice: 29.99,
+      finalPrice: 14.99,
+      isFree: true
+    },
+    {
+      id: "4",
+      name: 'game 1',
+      type: GameType.BASE_GAME,
+      cover: '../assets/game-covers/game-card-covers/2.jpeg',
+      basePrice: 29.99,
+      finalPrice: 14.99,
+      isFree: true
+    }
+  ],
+  title: 'idk Title',
+  titleIsClickable: true
+}

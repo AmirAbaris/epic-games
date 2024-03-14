@@ -8,9 +8,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {HttpClientModule} from '@angular/common/http';
 import {HighlightGameCardComponent} from '../components/home/highlight-game-card/highlight-game-card.component';
-import {
-  GameSliderManagementComponent
-} from '../components/home/game-slider-management/game-slider-management.component';
+import {GameSliderComponent} from '../components/home/game-slider/game-slider.component';
 import {GameSliderItemComponent} from '../components/home/game-slider-item/game-slider-item.component';
 import {MatCardModule} from '@angular/material/card';
 import {
@@ -50,7 +48,7 @@ const homeRoutes: Routes = [{path: '', component: HomeMainComponent}];
     SmallHighlightGameComponent,
     HighlightGameCardComponent,
     GameSliderItemComponent,
-    GameSliderManagementComponent,
+    GameSliderComponent,
     FreeGameCardManagementComponent,
     FreeGameCardComponent,
     FortniteCardManagementComponent,

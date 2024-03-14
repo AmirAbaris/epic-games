@@ -2,10 +2,12 @@
 freeGameManagementCaption && fortniteGameCards && fortniteCaption && gameItemCaption && categoryItemCaption && categoryListCaption && gameBanners && nonGameBanners && gameListItem) {
   <!--  <app-highlight-game-slider-item [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption"/>-->
 
-  <app-game-slider-item-management [gameCardInputs]="gameSliderItemData" [isLoading]="isLoading"/>
-  <!--  <app-game-slider-management/>-->
+  <!--  <app-game-slider-item [gameCardInputs]="gameSliderItemData" [item] [isLoading]="isLoading"/>-->
+  <!--  <app-game-slider-item-management />-->
+  <app-game-slider-item-management [data]="gameSliderData" [itemCaption]="gameSliderItemCaption"
+                                   [isLoading]="isLoading"/>
 
-    <!--  <app-free-game-slider-item-management [gameInputs]="freeGameCards" [cardCaption]="freeGamesCaption"-->
+  <!--  <app-free-game-slider-item-management [gameInputs]="freeGameCards" [cardCaption]="freeGamesCaption"-->
     <!--                                 [managementCaption]="freeGameManagementCaption" [iconInput]="'redeem'"/>-->
 
     <!--  <app-fortnite-card-management [gameInput]="fortniteGameCards" [captionInput]="fortniteCaption"/>-->

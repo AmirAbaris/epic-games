@@ -1,0 +1,15 @@
+<div class="bg-red-700">
+  @if (data().titleIsClickable) {
+    <div class="flex gap-2">
+      <h1>{{ data().title }}</h1>
+      <mat-icon class="icon-display">arrow_forward_ios</mat-icon>
+    </div>
+  }
+</div>
+<div class="grid grid-cols-5 gap-2 bg-blue-700">
+  @for (data of data().gameSliderItemData; track $index) {
+    <app-game-slider-item [data]="data" [caption]="itemCaption()" [isLoading]="isLoading()"/>
+  }
+</div>
+
+
