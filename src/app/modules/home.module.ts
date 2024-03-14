@@ -8,7 +8,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {HttpClientModule} from '@angular/common/http';
 import {HighlightGameCardComponent} from '../components/home/highlight-game-card/highlight-game-card.component';
-import {GameSliderComponent} from '../components/home/game-slider/game-slider.component';
 import {GameSliderItemComponent} from '../components/home/game-slider-item/game-slider-item.component';
 import {MatCardModule} from '@angular/material/card';
 import {
@@ -38,6 +37,7 @@ import {CategoryManagementComponent} from '../components/home/category-managemen
 import {CategoryListComponent} from '../components/home/category-list/category-list.component';
 import {CategoryItemComponent} from '../components/home/category-item/category-item.component';
 import {TranslateModule} from "@ngx-translate/core";
+import {GameSliderComponent} from "../components/home/game-slider/game-slider.component";
 
 const homeRoutes: Routes = [{path: '', component: HomeMainComponent}];
 
@@ -47,8 +47,8 @@ const homeRoutes: Routes = [{path: '', component: HomeMainComponent}];
     LargeHighlightGameComponent,
     SmallHighlightGameComponent,
     HighlightGameCardComponent,
-    GameSliderItemComponent,
     GameSliderComponent,
+    GameSliderItemComponent,
     FreeGameCardManagementComponent,
     FreeGameCardComponent,
     FortniteCardManagementComponent,

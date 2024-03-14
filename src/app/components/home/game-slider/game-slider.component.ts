@@ -3,7 +3,7 @@ import {GameSliderItemCaptionModel} from "../models/caption-models/game-slider-i
 import {GameSliderInputModel} from "../models/game-slider-input.model";
 
 @Component({
-  selector: 'app-game-slider-item-management',
+  selector: 'app-game-slider',
   templateUrl: './game-slider.component.html',
   styleUrl: './game-slider.component.scss'
 })
