@@ -7,10 +7,10 @@ import {provideAnimationsAsync} from '@angular/platform-browser/animations/async
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {register} from 'swiper/element/bundle';
 import {NgOptimizedImage} from '@angular/common';
 import {MatButton} from '@angular/material/button';
 import {MatDivider} from '@angular/material/divider';
+import {register} from 'swiper/element/bundle';
 
 register();
 
