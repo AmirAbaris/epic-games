@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FreeGameCardComponent } from './free-game-card.component';
+import { FreeGameItemComponent } from './free-game-item.component';
 
-describe('FreeGameCardComponent', () => {
-  let component: FreeGameCardComponent;
-  let fixture: ComponentFixture<FreeGameCardComponent>;
+describe('FreeGameItemComponent', () => {
+  let component: FreeGameItemComponent;
+  let fixture: ComponentFixture<FreeGameItemComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FreeGameCardComponent]
+      declarations: [FreeGameItemComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(FreeGameCardComponent);
+    fixture = TestBed.createComponent(FreeGameItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

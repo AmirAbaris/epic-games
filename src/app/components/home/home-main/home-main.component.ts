@@ -24,6 +24,7 @@ import {CategoryListCaptionModel} from "../models/caption-models/category-list-c
 import {CategoryManagementInputModel} from "../models/category-management-input.model";
 import {GameSliderItemInputModel} from "../models/game-slider-item-input.model";
 import {GameType} from "../../../enums/game-type.enum";
+import {FreeGameItemInputModel} from "../models/free-game-item-input.model";
 
 @Component({
   selector: "app-home-main",
@@ -47,6 +48,7 @@ export class HomeMainComponent implements OnInit {
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameManagementCaption: freeGameCardManagementCaptionModel | undefined;
+  public freeGameItem: FreeGameItemInputModel = freeGameItemMockData;
   public fortniteCaption: FortniteCardManagementCaptionModel | undefined;
   public gameItemCaption: CategoryItemCaptionModel | undefined;
   public categoryListCaption: CategoryListCaptionModel | undefined;
@@ -314,3 +316,30 @@ const gameSliderItems: GameSliderItemInputModel[] = [
     isFree: true
   }
 ];
+
+const freeGameItemMockData: FreeGameItemInputModel = {
+  freeGameItemData: [
+    {
+      id: '1',
+      cover: '../assets/game-covers/free-games/f1.jpeg',
+      coverWidth: 200,
+      name: 'Game 1',
+      freeStartDate: new Date('2024-03-01'),
+      freeEndDate: new Date('2024-03-15')
+    },
+    {
+      id: '2',
+      cover: '../assets/game-covers/free-games/f2.jpg',
+      coverWidth: 250,
+      name: 'Game 2',
+      freeStartDate: new Date('2024-03-10'),
+      freeEndDate: new Date('2024-03-20')
+    },
+    {
+      id: '3',
+      cover: '../assets/game-covers/free-games/f2.jpg',
+      coverWidth: 250,
+      name: 'Game 3'
+    }
+  ]
+}

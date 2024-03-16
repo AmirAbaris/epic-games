@@ -1,0 +1,6 @@
+<!--loading image-->
+@if (isLoading()) {
+  @for (item of data().freeGameItemData; track $index) {
+    <img ngSrc="{{item.cover}}" width="{{item.coverWidth}}" height="200" alt="{{item.name}}">
+  }
+}
