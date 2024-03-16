@@ -38,6 +38,7 @@ import {CategoryListComponent} from '../components/home/category-list/category-l
 import {CategoryItemComponent} from '../components/home/category-item/category-item.component';
 import {TranslateModule} from "@ngx-translate/core";
 import {GameSliderComponent} from "../components/home/game-slider/game-slider.component";
+import {TitleHoverDirective} from "../directives/title-hover.directive";
 
 const homeRoutes: Routes = [{path: '', component: HomeMainComponent}];
 
@@ -62,6 +63,7 @@ const homeRoutes: Routes = [{path: '', component: HomeMainComponent}];
     CategoryItemComponent,
     WishListButtonComponent,
     ActivateWishlistDirective,
+    TitleHoverDirective,
     PriceLabelComponent
   ],
   imports: [

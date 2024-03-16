@@ -15,10 +15,11 @@ export class GameSliderComponent {
 
   @Output() clickGameEvent = new EventEmitter<string>();
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
-  @Output() clickTitleEvent = new EventEmitter<boolean>();
+  @Output() clickTitleEvent = new EventEmitter();
 
   //endregion
 
+  //region Handler methods
   public onClickGameEventHandler(gameId: string): void {
     this.clickGameEvent.emit(gameId);
   }
@@ -27,9 +28,11 @@ export class GameSliderComponent {
     this.clickWishlistButtonEvent.emit(gameId);
   }
 
-  public onClickTitleEventHandler(titleClickable: boolean): void {
+  public onClickTitleEventHandler(): void {
     if (this.data().titleIsClickable) {
-      this.clickTitleEvent.emit(titleClickable);
+      this.clickTitleEvent.emit();
     }
   }
+
+  //endregion
 }
