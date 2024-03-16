@@ -4,5 +4,5 @@ export interface FreeGameItemDataModel {
   coverWidth: number;
   name: string;
   freeStartDate?: Date;
-  freeEndDate?: Date;
+  freeEndDate: Date;
 }

@@ -1,6 +1,26 @@
 <!--loading image-->
-@if (isLoading()) {
-  @for (item of data().freeGameItemData; track $index) {
-    <img ngSrc="{{item.cover}}" width="{{item.coverWidth}}" height="200" alt="{{item.name}}">
+@for (item of data().freeGameItemData; track $index) {
+  @if (isLoading()) {
+    <div [style.width.px]="item.coverWidth" class="rounded-md h-72 bg-darkSilver"></div>
+  } @else {
+    <img class="rounded-t-md" ngSrc="{{item.cover}}" alt="{{item.name}}" width="{{item.coverWidth}}" height="288">
+    @if (!item.freeStartDate) {
+      <div [style.width.px]="item.coverWidth" class="bg-vividBlue text-white text-center py-1 rounded-b-md">Free now
+      </div>
+    } @else {
+      <div [style.width.px]="item.coverWidth" class="bg-darkGray text-lightGray text-center py-1 rounded-b-md">Coming
+        Soon
+      </div>
+    }
   }
+  <h1 class="text-white">{{ item.name }}</h1>
+  <div class="flex gap2 text-white">
+    @if (item.freeStartDate) {
+      <h2>{{ item.freeStartDate | date }}</h2>
+    } @else {
+      <h3>Free now</h3>
+    }
+    <span>&nbsp; - &nbsp;</span>
+    <h4>{{ item.freeEndDate | date }}</h4>
+  </div>
 }
