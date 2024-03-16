@@ -329,6 +329,41 @@ const gameSliderData: GameSliderInputModel = {
       basePrice: 29.99,
       finalPrice: 14.99,
       isFree: true
+    },
+    {
+      id: "4",
+      name: 'game 1',
+      type: GameType.BASE_GAME,
+      cover: '../assets/game-covers/game-card-covers/2.jpeg',
+      basePrice: 29.99,
+      finalPrice: 14.99,
+      isFree: true
+    },
+    {
+      id: "4",
+      name: 'game 1',
+      type: GameType.BASE_GAME,
+      cover: '../assets/game-covers/game-card-covers/2.jpeg',
+      basePrice: 29.99,
+      finalPrice: 14.99,
+      isFree: true
+    }, {
+      id: "4",
+      name: 'game 1',
+      type: GameType.BASE_GAME,
+      cover: '../assets/game-covers/game-card-covers/2.jpeg',
+      basePrice: 29.99,
+      finalPrice: 14.99,
+      isFree: true
+    }
+    , {
+      id: "4",
+      name: 'game 1',
+      type: GameType.BASE_GAME,
+      cover: '../assets/game-covers/game-card-covers/2.jpeg',
+      basePrice: 29.99,
+      finalPrice: 14.99,
+      isFree: true
     }
   ],
   title: 'idk Title',

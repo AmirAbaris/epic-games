@@ -1,13 +1,14 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, input, Output} from '@angular/core';
 import {GameSliderItemCaptionModel} from "../models/caption-models/game-slider-item-caption.model";
 import {GameSliderInputModel} from "../models/game-slider-input.model";
+import Swiper from "swiper";
 
 @Component({
   selector: 'app-game-slider',
   templateUrl: './game-slider.component.html',
   styleUrl: './game-slider.component.scss'
 })
-export class GameSliderComponent {
+export class GameSliderComponent implements AfterViewInit {
   //region Properties
   data = input.required<GameSliderInputModel>();
   isLoading = input.required<boolean>();
@@ -16,6 +17,20 @@ export class GameSliderComponent {
   @Output() clickGameEvent = new EventEmitter<string>();
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   @Output() clickTitleEvent = new EventEmitter();
+
+  //endregion
+
+  //region Lifecycle methods
+  ngAfterViewInit(): void {
+    const swiper = new Swiper('.swiper-container', {
+      slidesPerView: 5,
+      spaceBetween: 2,
+      navigation: {
+        nextEl: '.next-btn',
+        prevEl: '.prev-btn',
+      }
+    });
+  }
 
   //endregion
 
