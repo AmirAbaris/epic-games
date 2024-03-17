@@ -25,6 +25,7 @@ import {CategoryManagementInputModel} from "../models/category-management-input.
 import {GameSliderItemInputModel} from "../models/game-slider-item-input.model";
 import {GameType} from "../../../enums/game-type.enum";
 import {FreeGameItemInputModel} from "../models/free-game-item-input.model";
+import {FreeGameItemCaptionModel} from "../models/caption-models/free-game-item-caption.model";
 
 @Component({
   selector: "app-home-main",
@@ -54,6 +55,7 @@ export class HomeMainComponent implements OnInit {
   public categoryListCaption: CategoryListCaptionModel | undefined;
   public categoryItemCaption: CategoryItemCaptionModel | undefined;
   // public gameSliderCaption: GameSliderCaptionModel | undefined;
+  public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
 
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
@@ -67,6 +69,7 @@ export class HomeMainComponent implements OnInit {
     categoryList: 'home.CategoryList',
     categoryItem: 'home.CategoryItem',
     gameSliderItem: 'home.GameSliderItem',
+    freeGameItem: 'home.FreeGameItem',
     gameType: 'home.enum-captions.gameType'
   }
   //endregion
@@ -109,6 +112,7 @@ export class HomeMainComponent implements OnInit {
     const gameItemCaption = this._translateService.get(this.captionPaths.gameItemList);
     const categoryListCaption = this._translateService.get(this.captionPaths.categoryList);
     const categoryItemCaption = this._translateService.get(this.captionPaths.categoryItem);
+    const freeGameItemCaption = this._translateService.get(this.captionPaths.freeGameItem);
 
     forkJoin([
       largeHighlightGameCaption,
@@ -117,8 +121,9 @@ export class HomeMainComponent implements OnInit {
       fortniteCaption,
       gameItemCaption,
       categoryListCaption,
-      categoryItemCaption
-    ]).subscribe(([largeHighlightGameCaption, freeGameManagementCaption, freeGamesCaption, fortniteCaption, gameItemCaption, categoryListCaption, categoryItemCaption]) => {
+      categoryItemCaption,
+      freeGameItemCaption
+    ]).subscribe(([largeHighlightGameCaption, freeGameManagementCaption, freeGamesCaption, fortniteCaption, gameItemCaption, categoryListCaption, categoryItemCaption, freeGameItemCaption]) => {
       this.largeHighlightGameCaption = largeHighlightGameCaption;
       this.freeGameManagementCaption = freeGameManagementCaption;
       this.freeGamesCaption = freeGamesCaption;
@@ -126,6 +131,7 @@ export class HomeMainComponent implements OnInit {
       this.gameItemCaption = gameItemCaption;
       this.categoryListCaption = categoryListCaption;
       this.categoryItemCaption = categoryItemCaption;
+      this.freeGameItemCaption = freeGameItemCaption;
     });
   }
 
@@ -322,7 +328,7 @@ const freeGameItemMockData: FreeGameItemInputModel = {
     {
       id: '1',
       cover: '../assets/game-covers/free-games/f1.jpeg',
-      coverWidth: 300,
+      coverWidth: 180,
       name: 'Game 1',
       freeStartDate: new Date('2024-03-01'),
       freeEndDate: new Date('2024-03-15')
@@ -330,7 +336,7 @@ const freeGameItemMockData: FreeGameItemInputModel = {
     {
       id: '2',
       cover: '../assets/game-covers/free-games/f2.jpg',
-      coverWidth: 300,
+      coverWidth: 180,
       name: 'Game 2',
       freeStartDate: new Date('2024-03-10'),
       freeEndDate: new Date('2024-03-20')
@@ -338,7 +344,7 @@ const freeGameItemMockData: FreeGameItemInputModel = {
     {
       id: '3',
       cover: '../assets/game-covers/free-games/f2.jpg',
-      coverWidth: 200,
+      coverWidth: 180,
       name: 'Game 3',
       freeEndDate: new Date('2025-02-01')
     }
