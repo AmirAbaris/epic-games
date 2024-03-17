@@ -24,7 +24,7 @@ export class GameSliderComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     const swiper = new Swiper('.swiper-container', {
       slidesPerView: 5,
-      spaceBetween: 2,
+      spaceBetween: 20,
       navigation: {
         nextEl: '.next-btn',
         prevEl: '.prev-btn',
