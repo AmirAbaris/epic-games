@@ -1,25 +1,29 @@
-<div class="text-white font-inter">
+<div class="text-white font-inter flex justify-between items-center mb-2">
+  <div>
     @if (data().titleIsClickable) {
-        <div class="flex cursor-pointer" titleHoverDir>
-            <h1>{{ data().title }}</h1>
-            <mat-icon class="icon-display">chevron_right</mat-icon>
-        </div>
+      <div class="flex cursor-pointer" titleHoverDir>
+        <h1>{{ data().title }}</h1>
+        <mat-icon class="icon-display">chevron_right</mat-icon>
+      </div>
     } @else {
-        <h2>{{ data().title }}</h2>
+      <h2>{{ data().title }}</h2>
     }
-</div>
-<div class="swiper-container">
+  </div>
+  <div class="flex">
     <button class="prev-btn" mat-mini-fab>
-        <mat-icon>arrow_forward_ios</mat-icon>
+      <mat-icon>arrow_forward_ios</mat-icon>
     </button>
     <button class="next-btn" mat-mini-fab>
-        <mat-icon>arrow_forward_ios</mat-icon>
+      <mat-icon>arrow_forward_ios</mat-icon>
     </button>
-    <div class="swiper-wrapper">
-        @for (data of data().gameSliderItemData; track $index) {
-            <div class="swiper-slide">
-                <app-game-slider-item [data]="data" [caption]="itemCaption()" [isLoading]="isLoading()"/>
-            </div>
-        }
-    </div>
+  </div>
+</div>
+<div class="swiper-container overflow-hidden">
+  <div class="swiper-wrapper">
+    @for (data of data().gameSliderItemData; track $index) {
+      <div class="swiper-slide">
+        <app-game-slider-item [data]="data" [caption]="itemCaption()" [isLoading]="isLoading()"/>
+      </div>
+    }
+  </div>
 </div>
