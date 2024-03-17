@@ -24,6 +24,7 @@ import {CategoryListCaptionModel} from "../models/caption-models/category-list-c
 import {CategoryManagementInputModel} from "../models/category-management-input.model";
 import {GameSliderItemInputModel} from "../models/game-slider-item-input.model";
 import {GameType} from "../../../enums/game-type.enum";
+import {HomeCardGameInputModel} from "../models/home-card-game-input.model";
 
 @Component({
   selector: "app-home-main",
@@ -42,6 +43,7 @@ export class HomeMainComponent implements OnInit {
   public gameListItem: GameListItemDto[] | undefined;
   public categoryManagementData: CategoryManagementInputModel = mockData;
   public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
+  public homeCardGame: HomeCardGameInputModel = homeCardGame;
   public isLoading: boolean = true;
 
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
@@ -314,3 +316,39 @@ const gameSliderItems: GameSliderItemInputModel[] = [
     isFree: true
   }
 ];
+
+const homeCardGame: HomeCardGameInputModel = {
+  homeCardData: [
+    {
+      basicPrice: 29.99,
+      finalPrice: 19.99,
+      discountPercent: 33,
+      id: 'game1',
+      cover: '../assets/game-covers/game-banner/b1.jpg',
+      description: 'A thrilling adventure awaits in this action-packed game!',
+      name: 'Adventure Quest',
+      hasWishlist: true
+    },
+    {
+      basicPrice: 29.99,
+      finalPrice: 19.99,
+      discountPercent: 33,
+      id: 'game1',
+      cover: '../assets/game-covers/game-banner/b1.jpg',
+      description: 'A thrilling adventure awaits in this action-packed game!',
+      name: 'Adventure Quest',
+      hasWishlist: true,
+    },
+    {
+      basicPrice: 29.99,
+      finalPrice: 19.99,
+      discountPercent: 33,
+      id: 'game1',
+      cover: '../assets/game-covers/game-banner/b1.jpg',
+      description: 'A thrilling adventure awaits in this action-packed game!',
+      name: 'Adventure Quest',
+      hasWishlist: true,
+    }
+  ]
+}
+

@@ -40,6 +40,7 @@ import {CategoryManagementComponent} from '../components/home/category-managemen
 import {CategoryListComponent} from '../components/home/category-list/category-list.component';
 import {CategoryItemComponent} from '../components/home/category-item/category-item.component';
 import {TranslateModule} from "@ngx-translate/core";
+import {HomeCardGameComponent} from "../components/home/home-card-game/home-card-game.component";
 
 const homeRoutes: Routes = [{path: '', component: HomeMainComponent}];
 
@@ -62,6 +63,7 @@ const homeRoutes: Routes = [{path: '', component: HomeMainComponent}];
     CategoryManagementComponent,
     CategoryListComponent,
     CategoryItemComponent,
+    HomeCardGameComponent,
     WishListButtonComponent,
     ActivateWishlistDirective,
     PriceLabelComponent
