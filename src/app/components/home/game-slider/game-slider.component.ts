@@ -28,7 +28,22 @@ export class GameSliderComponent implements AfterViewInit {
       navigation: {
         nextEl: '.next-btn',
         prevEl: '.prev-btn',
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 10,
+        },
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 15,
+        },
+        1024: {
+          slidesPerView: 5,
+          spaceBetween: 20,
+        }
       }
+
     });
   }
 
