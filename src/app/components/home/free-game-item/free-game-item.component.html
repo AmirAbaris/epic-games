@@ -1,37 +1,39 @@
 @for (item of data().freeGameItemData; track $index) {
-    @if (isLoading()) {
-        <div [style.width.px]="item.coverWidth" class="animate-pulse rounded-md h-72 bg-darkSilver"></div>
-    } @else {
-        <section class="cursor-pointer text-center" (click)="onClickEventHandler()">
-            <img class="h-72 object-cover hover:brightness-125 hover:transition duration-300" src="{{item.cover}}"
-                 alt="{{item.name}}" width="{{item.coverWidth}}">
-            @if (!item.freeStartDate) {
-                <div [style.width.px]="item.coverWidth"
-                     class="bg-vividBlue text-white py-1 rounded-b-md font-medium text-sm">{{ caption().freeNowTitle | uppercase }}
-                </div>
-            } @else {
-                <div [style.width.px]="item.coverWidth"
-                     class="bg-darkGray text-lightGray py-1 rounded-b-md font-medium text-sm">{{ caption().comingSoonTitle | uppercase }}
-                </div>
-            }
-        </section>
-    }
-    <section [style.width.px]="item.coverWidth" class="flex flex-col gap-2 mt-4 cursor-pointer"
-             (click)="onClickEventHandler()">
-        <h1 class="text-white text-sm">{{ item.name }}</h1>
-        <div class="flex flex-wrap text-sm text-lightDarkGray">
-            @if (item.freeStartDate) {
-                <h3>{{ caption().freeTitle }}&nbsp;</h3>
-                <h2>{{ item.freeStartDate | date: 'MMM dd' }}</h2>
-            } @else {
-                <h4>{{ caption().freeNowTitle }}</h4>
-            }
-            <span>&nbsp; - &nbsp;</span>
-            <h4>{{ item.freeEndDate | date: 'MMM dd' }}</h4>
-            @if (item.freeEndDate && item.freeEndDate.getHours()) {
-                <span>&nbsp;{{ caption().atTitle }}&nbsp;</span>
-                <h5>{{ item.freeEndDate | date: 'shortTime' }}</h5>
-            }
+  <!--  TODO, leave for loop -->
+  @if (isLoading()) {
+    <div [style.width.px]="item.coverWidth" class="animate-pulse rounded-md h-72 bg-darkSilver"></div>
+  } @else {
+    <section class="cursor-pointer text-center" (click)="onClickEventHandler()">
+      <img class="h-72 object-cover hover:brightness-125 hover:transition duration-300" src="{{item.cover}}"
+           alt="{{item.name}}" width="{{item.coverWidth}}">
+      @if (!item.freeStartDate) {
+        <div [style.width.px]="item.coverWidth"
+             class="bg-vividBlue text-white py-1 rounded-b-md font-medium text-sm">{{ caption().freeNowTitle | uppercase }}
         </div>
+      } @else {
+        <div [style.width.px]="item.coverWidth"
+             class="bg-darkGray text-lightGray py-1 rounded-b-md font-medium text-sm">{{ caption().comingSoonTitle | uppercase }}
+        </div>
+      }
     </section>
+  }
+  <section [style.width.px]="item.coverWidth" class="flex flex-col gap-2 mt-4 cursor-pointer"
+           (click)="onClickEventHandler()">
+    <h1 class="text-white text-sm">{{ item.name }}</h1>
+    <div class="flex flex-wrap text-sm text-lightDarkGray">
+      @if (item.freeStartDate) {
+        <h3>{{ caption().freeTitle }}&nbsp;</h3>
+        <h2>{{ item.freeStartDate | date: 'MMM dd' }}</h2>
+      } @else {
+        <h4>{{ caption().freeNowTitle }}</h4>
+      }
+      <span>&nbsp; - &nbsp;</span>
+      <h4>{{ item.freeEndDate | date: 'MMM dd' }}</h4>
+      @if (item.freeEndDate.getHours()) {
+        <!--        TODO fix if condition-->
+        <span>&nbsp;{{ caption().atTitle }}&nbsp;</span>
+        <h5>{{ item.freeEndDate | date: 'shortTime' }}</h5>
+      }
+    </div>
+  </section>
 }

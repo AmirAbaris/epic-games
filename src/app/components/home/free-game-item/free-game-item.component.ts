@@ -13,7 +13,7 @@ export class FreeGameItemComponent {
   caption = input.required<FreeGameItemCaptionModel>();
   isLoading = input.required<boolean>();
 
-  @Output() clickEvent = new EventEmitter();
+  @Output() clickEvent = new EventEmitter<string>();
 
   //endregion
 
