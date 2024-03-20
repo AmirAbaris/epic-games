@@ -1,39 +1,45 @@
 @for (item of data().freeGameItemData; track $index) {
-  <!--  TODO, leave for loop -->
-  @if (isLoading()) {
-    <div [style.width.px]="item.coverWidth" class="animate-pulse rounded-md h-72 bg-darkSilver"></div>
-  } @else {
-    <section class="cursor-pointer text-center" (click)="onClickEventHandler()">
-      <img class="h-72 object-cover hover:brightness-125 hover:transition duration-300" src="{{item.cover}}"
-           alt="{{item.name}}" width="{{item.coverWidth}}">
-      @if (!item.freeStartDate) {
-        <div [style.width.px]="item.coverWidth"
-             class="bg-vividBlue text-white py-1 rounded-b-md font-medium text-sm">{{ caption().freeNowTitle | uppercase }}
-        </div>
-      } @else {
-        <div [style.width.px]="item.coverWidth"
-             class="bg-darkGray text-lightGray py-1 rounded-b-md font-medium text-sm">{{ caption().comingSoonTitle | uppercase }}
-        </div>
-      }
-    </section>
-  }
-  <section [style.width.px]="item.coverWidth" class="flex flex-col gap-2 mt-4 cursor-pointer"
-           (click)="onClickEventHandler()">
-    <h1 class="text-white text-sm">{{ item.name }}</h1>
-    <div class="flex flex-wrap text-sm text-lightDarkGray">
-      @if (item.freeStartDate) {
+@if (isLoading()) {
+<section class="flex flex-col gap-2">
+  <div class="animate-pulse rounded-md h-80 w-64 bg-darkSilver"></div>
+  <div class="flex flex-col gap-2">
+    <div class="bg-darkCharcoal w-4/5 h-2 rounded-md"></div>
+    <div class="bg-darkCharcoal w-1/2 h-2 rounded-md"></div>
+    <div></div>
+  </div>
+</section>
+} @else {
+<section class="cursor-pointer" (click)="onClickEventHandler(item.id)">
+  <img class="rounded-t-md h-80 w-64 hover:brightness-125 hover:transition duration-300" [src]="item.cover"
+    [alt]="item.name">
+  <div class="text-center">
+    @if (!item.freeStartDate) {
+    <div class="bg-vividBlue text-lightGray py-1 rounded-b-md font-medium text-sm">{{
+      caption().freeNowTitle | uppercase }}
+    </div>
+    } @else {
+    <div class="bg-darkGray text-lightGray py-1 rounded-b-md  font-medium text-sm">{{
+      caption().comingSoonTitle | uppercase }}
+    </div>
+    }
+    <div class="flex flex-col items-start">
+      <h1 class="text-white text-sm">{{ item.name }}</h1>
+      <div class="flex flex-wrap text-sm text-lightDarkGray">
+        @if (item.freeStartDate) {
         <h3>{{ caption().freeTitle }}&nbsp;</h3>
         <h2>{{ item.freeStartDate | date: 'MMM dd' }}</h2>
-      } @else {
+        } @else {
         <h4>{{ caption().freeNowTitle }}</h4>
-      }
-      <span>&nbsp; - &nbsp;</span>
-      <h4>{{ item.freeEndDate | date: 'MMM dd' }}</h4>
-      @if (item.freeEndDate.getHours()) {
-        <!--        TODO fix if condition-->
+        }
+        <span>&nbsp; - &nbsp;</span>
+        <h4>{{ item.freeEndDate | date: 'MMM dd' }}</h4>
+        @if (!item.freeStartDate) {
         <span>&nbsp;{{ caption().atTitle }}&nbsp;</span>
         <h5>{{ item.freeEndDate | date: 'shortTime' }}</h5>
-      }
+        }
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+}
 }

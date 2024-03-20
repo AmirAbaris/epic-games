@@ -328,7 +328,6 @@ const freeGameItemMockData: FreeGameItemInputModel = {
     {
       id: '1',
       cover: '../assets/game-covers/free-games/f1.jpeg',
-      coverWidth: 180,
       name: 'Game 1',
       freeStartDate: new Date('2024-03-01'),
       freeEndDate: new Date('2024-03-15')
@@ -336,7 +335,6 @@ const freeGameItemMockData: FreeGameItemInputModel = {
     {
       id: '2',
       cover: '../assets/game-covers/free-games/f2.jpg',
-      coverWidth: 180,
       name: 'Game 2',
       freeStartDate: new Date('2024-03-10'),
       freeEndDate: new Date('2024-03-20')
@@ -344,7 +342,6 @@ const freeGameItemMockData: FreeGameItemInputModel = {
     {
       id: '3',
       cover: '../assets/game-covers/free-games/f2.jpg',
-      coverWidth: 180,
       name: 'Game 3',
       freeEndDate: new Date('2025-02-01')
     }

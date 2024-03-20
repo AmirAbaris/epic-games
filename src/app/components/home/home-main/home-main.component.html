@@ -1,23 +1,25 @@
 @if (highlightGames && largeHighlightGameCaption && gameCards && freeGameCards && freeGamesCaption &&
-freeGameManagementCaption && fortniteGameCards && fortniteCaption && freeGameItemCaption && gameItemCaption && categoryItemCaption && categoryListCaption && gameBanners && nonGameBanners && gameListItem) {
-  <!--  <app-highlight-game-slider-item [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption"/>-->
+freeGameManagementCaption && fortniteGameCards && fortniteCaption && freeGameItemCaption && gameItemCaption &&
+categoryItemCaption && categoryListCaption && gameBanners && nonGameBanners && gameListItem) {
+<!--  <app-highlight-game-slider-item [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption"/>-->
 
-  <app-game-slider-item-management [gameCardInputs]="gameSliderItemData" [isLoading]="isLoading"/>
+<!-- <app-game-slider-item-management [gameCardInputs]="gameSliderItemData" [isLoading]="isLoading" /> -->
 
-  <app-free-game-item [data]="freeGameItem" [caption]="freeGameItemCaption" [isLoading]="isLoading"/>
-  <!--  <app-game-slider-management/>-->
+<app-free-game-item [data]="freeGameItem" [caption]="freeGameItemCaption" [isLoading]="isLoading"
+  (clickEvent)="$event" />
+<!--  <app-game-slider-management/>-->
 
-    <!--  <app-free-game-slider-item-management [gameInputs]="freeGameCards" [cardCaption]="freeGamesCaption"-->
-    <!--                                 [managementCaption]="freeGameManagementCaption" [iconInput]="'redeem'"/>-->
+<!--  <app-free-game-slider-item-management [gameInputs]="freeGameCards" [cardCaption]="freeGamesCaption"-->
+<!--                                 [managementCaption]="freeGameManagementCaption" [iconInput]="'redeem'"/>-->
 
-    <!--  <app-fortnite-card-management [gameInput]="fortniteGameCards" [captionInput]="fortniteCaption"/>-->
+<!--  <app-fortnite-card-management [gameInput]="fortniteGameCards" [captionInput]="fortniteCaption"/>-->
 
-    <!--  <app-game-banner-management [gameInput]="gameBanners.slice(0, 2)"/>-->
+<!--  <app-game-banner-management [gameInput]="gameBanners.slice(0, 2)"/>-->
 
-    <!--  <app-category-management [data]="categoryManagementData" [categoryListCaption]="categoryListCaption"-->
-    <!--                           [categoryItemCaption]="categoryItemCaption" [isLoading]="isLoading"/>-->
+<!--  <app-category-management [data]="categoryManagementData" [categoryListCaption]="categoryListCaption"-->
+<!--                           [categoryItemCaption]="categoryItemCaption" [isLoading]="isLoading"/>-->
 
-    <!--  <app-game-banner-management [gameInput]="gameBanners.slice(2)"/>-->
+<!--  <app-game-banner-management [gameInput]="gameBanners.slice(2)"/>-->
 
-    <!--  <app-game-banner-management [gameInput]="nonGameBanners"/>-->
+<!--  <app-game-banner-management [gameInput]="nonGameBanners"/>-->
 }
