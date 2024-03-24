@@ -49,7 +49,7 @@ export class HomeMainComponent implements OnInit {
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameManagementCaption: freeGameCardManagementCaptionModel | undefined;
-  public freeGameItem: FreeGameItemInputModel = freeGameItemMockData;
+  public freeGameItem: FreeGameItemInputModel[] = freeGameItemMockData;
   public fortniteCaption: FortniteCardManagementCaptionModel | undefined;
   public gameItemCaption: CategoryItemCaptionModel | undefined;
   public categoryListCaption: CategoryListCaptionModel | undefined;
@@ -323,27 +323,25 @@ const gameSliderItems: GameSliderItemInputModel[] = [
   }
 ];
 
-const freeGameItemMockData: FreeGameItemInputModel = {
-  freeGameItemData: [
-    {
-      id: '1',
-      cover: '../assets/game-covers/free-games/a1.jpg',
-      name: 'Game 1',
-      freeStartDate: new Date('2024-03-01'),
-      freeEndDate: new Date('2024-03-15')
-    },
-    {
-      id: '2',
-      cover: '../assets/game-covers/free-games/a1.jpg',
-      name: 'Game 2',
-      freeStartDate: new Date('2024-03-10'),
-      freeEndDate: new Date('2024-03-20')
-    },
-    {
-      id: '3',
-      cover: '../assets/game-covers/free-games/a1.jpg',
-      name: 'Game 3',
-      freeEndDate: new Date('2025-02-01')
-    }
-  ]
-}
+const freeGameItemMockData: FreeGameItemInputModel[] = [
+  {
+    id: '1',
+    cover: '../assets/game-covers/free-games/a1.jpg',
+    name: 'Game 1',
+    freeStartDate: new Date('2024-03-01'),
+    freeEndDate: new Date('2024-03-15')
+  },
+  {
+    id: '2',
+    cover: '../assets/game-covers/free-games/a1.jpg',
+    name: 'Game 2',
+    freeStartDate: new Date('2024-03-10'),
+    freeEndDate: new Date('2024-03-20')
+  },
+  {
+    id: '3',
+    cover: '../assets/game-covers/free-games/a1.jpg',
+    name: 'Game 3',
+    freeEndDate: new Date('2025-02-01')
+  }
+];

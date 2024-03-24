@@ -1,5 +1,7 @@
-import {FreeGameItemDataModel} from "./free-game-item-data.model";
-
 export interface FreeGameItemInputModel {
-  freeGameItemData: FreeGameItemDataModel[];
+  id: string;
+  cover: string;
+  name: string;
+  freeStartDate?: Date;
+  freeEndDate: Date;
 }
