@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, EventEmitter, input, Output} from '@angular/core';
-import {GameSliderItemCaptionModel} from "../models/caption-models/game-slider-item-caption.model";
-import {GameSliderInputModel} from "../models/game-slider-input.model";
+import { AfterViewInit, Component, input, output } from '@angular/core';
+import { GameSliderItemCaptionModel } from "../models/caption-models/game-slider-item-caption.model";
+import { GameSliderInputModel } from "../models/game-slider-input.model";
 import Swiper from "swiper";
 
 @Component({
@@ -14,9 +14,9 @@ export class GameSliderComponent implements AfterViewInit {
   isLoading = input.required<boolean>();
   itemCaption = input.required<GameSliderItemCaptionModel>();
 
-  @Output() clickGameEvent = new EventEmitter<string>();
-  @Output() clickWishlistButtonEvent = new EventEmitter<string>();
-  @Output() clickTitleEvent = new EventEmitter();
+  clickGameEvent = output<string>();
+  clickWishlistButtonEvent = output<string>();
+  clickTitleEvent = output();
 
   //endregion
 
@@ -29,22 +29,8 @@ export class GameSliderComponent implements AfterViewInit {
         nextEl: '.next-btn',
         prevEl: '.prev-btn',
       },
-      breakpoints: {
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 10,
-        },
-        768: {
-          slidesPerView: 4,
-          spaceBetween: 15,
-        },
-        1024: {
-          slidesPerView: 5,
-          spaceBetween: 20,
-        }
-      }
-
-    });
+    }
+    );
   }
 
   //endregion
