@@ -1,8 +1,8 @@
 @for (item of data().freeGameItemData; track $index) {
 @if (isLoading()) {
-<section class="flex flex-col gap-2">
-  <div class="animate-pulse rounded-md h-80 w-64 bg-darkSilver"></div>
-  <div class="flex flex-col gap-2">
+<section class="flex flex-col gap-2 animate-pulse">
+  <div class="rounded-md min-w-72 h-96 bg-darkSilver"></div>
+  <div class="flex flex-col gap-2 mt-6">
     <div class="bg-darkCharcoal w-4/5 h-2 rounded-md"></div>
     <div class="bg-darkCharcoal w-1/2 h-2 rounded-md"></div>
     <div></div>
@@ -10,8 +10,8 @@
 </section>
 } @else {
 <section class="cursor-pointer" (click)="onClickEventHandler(item.id)">
-  <img class="rounded-t-md h-80 w-64 hover:brightness-125 hover:transition duration-300" [src]="item.cover"
-    [alt]="item.name">
+  <img class="object-cover rounded-t-md min-w-72 h-96 hover:brightness-110 hover:transition duration-300"
+    [src]="item.cover" [alt]="item.name">
   <div class="text-center">
     @if (!item.freeStartDate) {
     <div class="bg-vividBlue text-lightGray py-1 rounded-b-md font-medium text-sm">{{
@@ -22,7 +22,7 @@
       caption().comingSoonTitle | uppercase }}
     </div>
     }
-    <div class="flex flex-col items-start">
+    <div class="flex flex-col gap-2 items-start mt-6">
       <h1 class="text-white text-sm">{{ item.name }}</h1>
       <div class="flex flex-wrap text-sm text-lightDarkGray">
         @if (item.freeStartDate) {

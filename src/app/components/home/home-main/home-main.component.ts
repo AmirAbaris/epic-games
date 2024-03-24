@@ -1,31 +1,31 @@
-import {Component, inject, OnInit} from "@angular/core";
-import {TranslateService} from "@ngx-translate/core";
-import {GameService} from "../../../services/game.service";
-import {HighlightGamesModel} from "../models/highlight-games-model";
-import {GameListItemModel} from "../models/game-list-item.model";
-import {GameCardModel} from "../models/game-card.model";
-import {FreeGameCardModel} from "../models/free-game-card.model";
-import {FortniteCardModel} from "../models/fortnite-card.model";
-import {LargeHighlightGameCaptionModel} from "../models/caption-models/large-highlight-game-caption.model";
-import {HighlightGamesDto} from "../dtos/highlight-games-dto";
-import {GameCardDto} from "../dtos/game-card-dto";
-import {FreeGameCardDto} from "../dtos/free-game-card-dto";
-import {FreeGameCardCaptionModel} from "../models/caption-models/free-game-card-caption.model";
-import {freeGameCardManagementCaptionModel} from "../models/caption-models/free-game-card-management-caption.model";
-import {FortniteCardDto} from "../dtos/fortnite-card-dto";
-import {FortniteCardManagementCaptionModel} from "../models/caption-models/fortnite-management-caption.model";
-import {BannerDto} from "../dtos/banner-dto";
-import {BannerModel} from "../models/banner.model";
-import {GameListItemDto} from "../dtos/game-list-item-dto";
-import {finalize, forkJoin, interval, take} from "rxjs";
-import {CategoryItemCaptionModel} from "../models/caption-models/category-item-caption.model";
-import {CategoryType} from "../enums/category-type.enum";
-import {CategoryListCaptionModel} from "../models/caption-models/category-list-caption.model";
-import {CategoryManagementInputModel} from "../models/category-management-input.model";
-import {GameSliderItemInputModel} from "../models/game-slider-item-input.model";
-import {GameType} from "../../../enums/game-type.enum";
-import {FreeGameItemInputModel} from "../models/free-game-item-input.model";
-import {FreeGameItemCaptionModel} from "../models/caption-models/free-game-item-caption.model";
+import { Component, inject, OnInit } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
+import { GameService } from "../../../services/game.service";
+import { HighlightGamesModel } from "../models/highlight-games-model";
+import { GameListItemModel } from "../models/game-list-item.model";
+import { GameCardModel } from "../models/game-card.model";
+import { FreeGameCardModel } from "../models/free-game-card.model";
+import { FortniteCardModel } from "../models/fortnite-card.model";
+import { LargeHighlightGameCaptionModel } from "../models/caption-models/large-highlight-game-caption.model";
+import { HighlightGamesDto } from "../dtos/highlight-games-dto";
+import { GameCardDto } from "../dtos/game-card-dto";
+import { FreeGameCardDto } from "../dtos/free-game-card-dto";
+import { FreeGameCardCaptionModel } from "../models/caption-models/free-game-card-caption.model";
+import { freeGameCardManagementCaptionModel } from "../models/caption-models/free-game-card-management-caption.model";
+import { FortniteCardDto } from "../dtos/fortnite-card-dto";
+import { FortniteCardManagementCaptionModel } from "../models/caption-models/fortnite-management-caption.model";
+import { BannerDto } from "../dtos/banner-dto";
+import { BannerModel } from "../models/banner.model";
+import { GameListItemDto } from "../dtos/game-list-item-dto";
+import { finalize, forkJoin, interval, take } from "rxjs";
+import { CategoryItemCaptionModel } from "../models/caption-models/category-item-caption.model";
+import { CategoryType } from "../enums/category-type.enum";
+import { CategoryListCaptionModel } from "../models/caption-models/category-list-caption.model";
+import { CategoryManagementInputModel } from "../models/category-management-input.model";
+import { GameSliderItemInputModel } from "../models/game-slider-item-input.model";
+import { GameType } from "../../../enums/game-type.enum";
+import { FreeGameItemInputModel } from "../models/free-game-item-input.model";
+import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-item-caption.model";
 
 @Component({
   selector: "app-home-main",
@@ -327,21 +327,21 @@ const freeGameItemMockData: FreeGameItemInputModel = {
   freeGameItemData: [
     {
       id: '1',
-      cover: '../assets/game-covers/free-games/f1.jpeg',
+      cover: '../assets/game-covers/free-games/a1.jpg',
       name: 'Game 1',
       freeStartDate: new Date('2024-03-01'),
       freeEndDate: new Date('2024-03-15')
     },
     {
       id: '2',
-      cover: '../assets/game-covers/free-games/f2.jpg',
+      cover: '../assets/game-covers/free-games/a1.jpg',
       name: 'Game 2',
       freeStartDate: new Date('2024-03-10'),
       freeEndDate: new Date('2024-03-20')
     },
     {
       id: '3',
-      cover: '../assets/game-covers/free-games/f2.jpg',
+      cover: '../assets/game-covers/free-games/a1.jpg',
       name: 'Game 3',
       freeEndDate: new Date('2025-02-01')
     }

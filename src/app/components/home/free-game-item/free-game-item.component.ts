@@ -13,7 +13,6 @@ export class FreeGameItemComponent {
   caption = input.required<FreeGameItemCaptionModel>();
   isLoading = input.required<boolean>();
 
-  // TODO, add parameter!
   clickEvent = output<string>();
 
   //endregion
