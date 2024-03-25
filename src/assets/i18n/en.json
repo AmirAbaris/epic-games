@@ -4,14 +4,6 @@
       "buyButton": "BUY NOW",
       "addToWishlistButton": "ADD TO WISHLIST"
     },
-    "FreeGameCardManagement": {
-      "freeGamesTitle": "Free Games",
-      "viewMoreTitle": "View More"
-    },
-    "FreeGameCard": {
-      "freeNowTitle": "FREE NOW",
-      "comingSoonTitle": "COMING SOON"
-    },
     "FortniteCardManagement": {
       "mainTitle": "Fortnite Experience",
       "websiteTitle": "VISIT FORTNITE.COM"
@@ -29,6 +21,13 @@
     },
     "GameSliderItem": {
       "freeTitle": "Free"
+    },
+    "FreeGameItem": {
+      "freeNowTitle": "Free Now",
+      "comingSoonTitle": "Coming Soon",
+      "freeTitle": "Free",
+      "nowTitle": "Now",
+      "atTitle": "at"
     }
   },
   "enum-captions": {

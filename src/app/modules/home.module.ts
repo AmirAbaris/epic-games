@@ -13,10 +13,6 @@ import {
 } from '../components/home/game-slider-management/game-slider-management.component';
 import {GameSliderItemComponent} from '../components/home/game-slider-item/game-slider-item.component';
 import {MatCardModule} from '@angular/material/card';
-import {
-  FreeGameCardManagementComponent
-} from '../components/home/free-game-card-management/free-game-card-management.component';
-import {FreeGameCardComponent} from '../components/home/free-game-card/free-game-card.component';
 import {GameService} from '../services/game.service';
 import {FortniteCardComponent} from '../components/home/fortnite-card/fortnite-card.component';
 import {
@@ -40,6 +36,7 @@ import {CategoryManagementComponent} from '../components/home/category-managemen
 import {CategoryListComponent} from '../components/home/category-list/category-list.component';
 import {CategoryItemComponent} from '../components/home/category-item/category-item.component';
 import {TranslateModule} from "@ngx-translate/core";
+import {FreeGameItemComponent} from "../components/home/free-game-item/free-game-item.component";
 
 const homeRoutes: Routes = [{path: '', component: HomeMainComponent}];
 
@@ -51,8 +48,6 @@ const homeRoutes: Routes = [{path: '', component: HomeMainComponent}];
     HighlightGameCardComponent,
     GameSliderItemComponent,
     GameSliderManagementComponent,
-    FreeGameCardManagementComponent,
-    FreeGameCardComponent,
     FortniteCardManagementComponent,
     FortniteCardComponent,
     LargeHighlightGameMobileComponent,
@@ -63,6 +58,7 @@ const homeRoutes: Routes = [{path: '', component: HomeMainComponent}];
     CategoryListComponent,
     CategoryItemComponent,
     WishListButtonComponent,
+    FreeGameItemComponent,
     ActivateWishlistDirective,
     PriceLabelComponent
   ],

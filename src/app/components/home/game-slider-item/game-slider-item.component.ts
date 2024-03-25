@@ -1,8 +1,8 @@
-import {Component, EventEmitter, input, OnInit, Output} from '@angular/core';
-import {GameSliderItemInputModel} from "../models/game-slider-item-input.model";
-import {SizeEnum} from "../enums/size.enum";
-import {PriceLabelModel} from "../models/price-label.model";
-import {GameSliderCaptionModel} from "../models/caption-models/game-slider-caption.model";
+import { Component, EventEmitter, input, OnInit, Output } from '@angular/core';
+import { GameSliderItemInputModel } from "../models/game-slider-item-input.model";
+import { SizeEnum } from "../enums/size.enum";
+import { PriceLabelModel } from "../models/price-label.model";
+import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
 
 @Component({
     selector: 'app-game-slider-item',
