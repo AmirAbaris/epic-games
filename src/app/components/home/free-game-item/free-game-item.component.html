@@ -9,7 +9,7 @@
 </section>
 } @else {
 <section class="cursor-pointer" (click)="onClickEventHandler(data().id)">
-  <img class="object-cover rounded-t-md min-w-72 h-96 hover:brightness-110 hover:transition duration-300"
+  <img class="object-cover w-full rounded-t-md min-w-72 h-96 hover:brightness-110 hover:transition duration-300"
     [src]="data().cover" [alt]="data().name">
   <div class="text-center">
     @if (!data().freeStartDate) {
@@ -17,13 +17,13 @@
       caption().freeNowTitle | uppercase }}
     </div>
     } @else {
-    <div class="bg-darkGray text-lightGray py-1 rounded-b-md  font-medium text-sm">{{
+    <div class="bg-black text-lightGray py-1 rounded-b-md  font-medium text-sm">{{
       caption().comingSoonTitle | uppercase }}
     </div>
     }
     <div class="flex flex-col gap-2 data()s-start mt-6">
       <h1 class="flex text-white text-sm">{{ data().name }}</h1>
-      <div class="flex flex-wrap text-sm text-lightDarkGray">
+      <div class="flex flex-wrap text-sm text-mediumGray">
         @if (data().freeStartDate) {
         <h3>{{ caption().freeTitle }}&nbsp;</h3>
         <h2>{{ data().freeStartDate | date: 'MMM dd' }}</h2>
