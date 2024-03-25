@@ -30,7 +30,7 @@ module.exports = {
         mediumGray: '#a4a4a4',
         darkGray: '#2a2a2a',
         lightDarkGray: '#666666',
-        darkBackground: '#424242',
+        darkBackground: '#2a2a2a',
         nightRider: '#383434',
         darkSlate: '#121212',
         charcoal: '#1c1c1c',

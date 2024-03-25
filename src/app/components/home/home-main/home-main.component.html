@@ -1,13 +1,12 @@
 @if (highlightGames && largeHighlightGameCaption && gameCards && freeGameCards && freeGamesCaption &&
 freeGameManagementCaption && fortniteGameCards && fortniteCaption && freeGameItemCaption && gameItemCaption &&
-categoryItemCaption && categoryListCaption && gameBanners && nonGameBanners && gameListItem) {
+categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption && nonGameBanners && gameListItem) {
 <!--  <app-highlight-game-slider-item [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption"/>-->
 
 <!-- <app-game-slider-item-management [gameCardInputs]="gameSliderItemData" [isLoading]="isLoading" /> -->
-
-@for (item of freeGameItem; track $index) {
-<app-free-game-item [data]="item" [caption]="freeGameItemCaption" [isLoading]="isLoading" (clickEvent)="$event" />
-}
+<!-- <app-free-game-item [data]="item" [caption]="freeGameItemCaption" [isLoading]="isLoading" (clickEvent)="$event" /> -->
+<app-free-game-list [data]="freeGameList" [isLoading]="isLoading" [gameItemCaption]="freeGameItemCaption"
+    [caption]="freeGameListCaption" (itemClicked)="$event" (viewMoreClicked)="$event" />
 <!--  <app-game-slider-management/>-->
 
 <!--  <app-free-game-slider-item-management [gameInputs]="freeGameCards" [cardCaption]="freeGamesCaption"-->
