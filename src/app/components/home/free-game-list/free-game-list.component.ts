@@ -15,8 +15,8 @@ export class FreeGameListComponent {
   caption = input.required<FreeGameListCaptionModel>();
   gameItemCaption = input.required<FreeGameItemCaptionModel>();
 
-  @Output('itemClicked') clickEvent = new EventEmitter<string>();
-  @Output('viewMoreClicked') viewMoreClickEvent = new EventEmitter();
+  @Output() clickEvent = new EventEmitter<string>();
+  @Output() viewMoreClickEvent = new EventEmitter<void>();
   //#endregion
 
   //#region Handler methods
@@ -24,7 +24,7 @@ export class FreeGameListComponent {
     this.clickEvent.emit(gameId);
   }
 
-  public onViewMoreClickEventHandler(): void {
+  public onClickViewMoreEventHandler(): void {
     this.viewMoreClickEvent.emit();
   }
   //#endregion
