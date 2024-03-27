@@ -1,0 +1,22 @@
+@if (isLoading()) {
+<section class="animate-pulse flex flex-col gap-4">
+    <div [style.height.px]="data().height" class="bg-darkCharcoal w-[400px] rounded-xl"></div>
+    <div class="flex flex-col gap-2">
+        <div class="bg-darkGray h-2 w-3/4 rounded-sm"></div>
+        <div class="bg-darkGray h-2 rounded-sm"></div>
+    </div>
+</section>
+} @else {
+<section class="flex flex-col gap-4 relative" activateWishlistDir>
+    <app-wish-list-button *ngIf="data().hasWishlist" (click)="onClickWishlistButton(data().id)"
+        class="wishlist absolute right-4 top-2 cursor-pointer z-10" />
+    <img class="h-full min-w-full object-cover rounded-xl cursor-pointer hover:brightness-110 transform ease-out duration-200"
+        (click)="onClickCardEventHandler()" [ngSrc]="data().cover" [alt]="data().name" [height]="data().height"
+        width="400" priority>
+    <div class="flex flex-col flex-wrap justify-start text-white font-inter gap-2 w-[400px]">
+        <h1 class="text-base leading-6">{{data().name}}</h1>
+        <h2 class="text-mediumGray text-sm">{{data().description}}</h2>
+    </div>
+    <ng-content class="p-2" #name></ng-content>
+</section>
+}
