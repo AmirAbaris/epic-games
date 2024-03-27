@@ -16,11 +16,11 @@ export class HomeCardComponent {
   //#endregion
 
   //#region Handler methods
-  public onClickCardEventHandler = (): void => {
+  public onClickCardEventHandler(): void {
     this.clickCardEvent.emit();
   }
 
-  public onClickWishlistButton = (id: string): void => {
+  public onClickWishlistButton(id: string): void {
     if (this.data().hasWishlist) {
       this.clickWishlistButton.emit(id);
     } else {
