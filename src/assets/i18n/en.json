@@ -22,6 +22,10 @@
     "GameSliderItem": {
       "freeTitle": "Free"
     },
+    "FreeGameList": {
+      "freeGamesTitle": "Free Games",
+      "viewMoreTitle": "View More"
+    },
     "FreeGameItem": {
       "freeNowTitle": "Free Now",
       "comingSoonTitle": "Coming Soon",
