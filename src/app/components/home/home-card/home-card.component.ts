@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input, output } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 import { HomeCardInputModel } from '../models/home-card-input.model';
 
 @Component({
@@ -12,7 +12,7 @@ export class HomeCardComponent {
   isLoading = input.required<boolean>();
 
   @Output() clickCardEvent = new EventEmitter<void>();
-  @Output() clickWishlistButton = new EventEmitter<string>();
+  @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   //#endregion
 
   //#region Handler methods
@@ -20,11 +20,9 @@ export class HomeCardComponent {
     this.clickCardEvent.emit();
   }
 
-  public onClickWishlistButton(id: string): void {
-    if (this.data().hasWishlist) {
-      this.clickWishlistButton.emit(id);
-    } else {
-      return;
+  public onClickWishlistButtonEventHandler(id: string | undefined): void {
+    if (this.data().hasWishlist && this.data().id) {
+      this.clickWishlistButtonEvent.emit(id);
     }
   }
   //#endregion

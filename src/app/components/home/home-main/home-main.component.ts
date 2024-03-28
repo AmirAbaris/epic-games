@@ -141,7 +141,7 @@ export class HomeMainComponent implements OnInit {
   }
 
   private _completeLoading(): void {
-    interval(5000).pipe(
+    interval(2000).pipe(
       take(1),
       finalize(() => {
         this.isLoading = false;

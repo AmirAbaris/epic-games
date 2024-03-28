@@ -1,8 +1,7 @@
 export interface HomeCardInputModel {
-    id: string; // can't be nullable!
+    id?: string;
     cover: string;
     description?: string;
     name: string;
     hasWishlist: boolean;
-    height: number;
 }
