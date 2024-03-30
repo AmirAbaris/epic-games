@@ -1,5 +1,5 @@
 @if (isLoading()) {
-<section class="animate-pulse flex flex-col gap-y-4">
+<section class="animate-pulse flex flex-col gap-y-4 w-[854px] h-[480px]">
     <div class="bg-darkGray rounded-xl aspect-video mb-2"></div>
     <div class="flex flex-col gap-y-2">
         <div class="bg-darkCharcoal h-3 w-3/4 rounded-sm"></div>
@@ -14,10 +14,12 @@
     <img class="object-cover rounded-xl cursor-pointer hover:brightness-110 transform ease-out duration-200 aspect-video mb-2"
         (click)="onClickCardEventHandler()" [ngSrc]="data().cover" [alt]="data().name" height="480" width="854"
         priority>
-    <div class="flex flex-col flex-wrap justify-start text-white font-inter gap-y-2">
-        <h1 class="text-base leading-6">{{data().name}}</h1>
+    <div class="flex flex-col justify-start text-white font-inter gap-y-2">
+        <h1 class="text-[22px] leading-6">{{data().name}}</h1>
         @if (data().description) {
-        <p class="text-mediumGray text-sm">{{data().description}}</p>
+        <div class="min-h-20 bg-red-700">
+            <p class="text-mediumGray text-base">{{data().description}}</p>
+        </div>
         }
     </div>
     <ng-content #name></ng-content>
