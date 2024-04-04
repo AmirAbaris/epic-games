@@ -27,6 +27,7 @@ import { GameType } from "../../../enums/game-type.enum";
 import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-item-caption.model";
 import { FreeGameListInputModel } from "../models/free-game-list-input.model";
 import { FreeGameListCaptionModel } from "../models/caption-models/free-game-list-caption.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-home-main",
@@ -60,6 +61,7 @@ export class HomeMainComponent implements OnInit {
 
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
+  private _router = inject(Router);
 
   private readonly captionPaths = {
     largeHighlightGame: "home.LargeHighlightGame",
@@ -88,6 +90,11 @@ export class HomeMainComponent implements OnInit {
   //endregion
 
   //region main logic methods
+  public clickCard(): void {
+    // needs refactor after implementing the routes!
+    return;
+  }
+
   private _getAllGameData(): void {
     forkJoin([
       this._gameService.getHighlightGames(),
