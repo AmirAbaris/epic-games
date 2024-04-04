@@ -5,13 +5,22 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
 
 <!-- <app-game-slider-item-management [gameCardInputs]="gameSliderItemData" [isLoading]="isLoading" /> -->
 
-<app-home-card [data]="{
+<!-- <app-home-card [data]="{
   id: '123456',
   cover: '../assets/game-covers/home-card-cover/rl.jpg',
   description: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet',
   name: 'Example Card',
   hasWishlist: true
-}" [isLoading]="isLoading" (clickWishlistButton)="$event" (clickCardEvent)="$event" />
+}" [isLoading]="isLoading" (clickWishlistButton)="$event" (clickCardEvent)="$event" /> -->
+
+<app-highlight-preview-item [data]="{
+      id: '11',
+    cover: '../assets/game-covers/highlight-preview-item-cover/scu.jpg',
+    logo: '../assets/game-covers/highlight-preview-item-cover/slogo.png',
+    description: 'test test est testest testest testest test test test est testest testest testest test test test est testest testest testest test test test est testest testest testest test',
+    price: 55,
+    highlightButtonType: highlightPrevButtonTypeEnum,
+}" [isLoading]="isLoading" />
 
 <!-- @for (item of freeGameItem; track $index) {
 <app-free-game-item [data]="item" [caption]="freeGameItemCaption" [isLoading]="isLoading" (clickEvent)="$event" />

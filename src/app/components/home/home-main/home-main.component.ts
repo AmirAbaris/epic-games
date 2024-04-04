@@ -27,6 +27,7 @@ import { GameType } from "../../../enums/game-type.enum";
 import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-item-caption.model";
 import { FreeGameListInputModel } from "../models/free-game-list-input.model";
 import { FreeGameListCaptionModel } from "../models/caption-models/free-game-list-caption.model";
+import { HighlightButtonEnum } from "../enums/highlight-button.enum";
 
 @Component({
   selector: "app-home-main",
@@ -57,6 +58,7 @@ export class HomeMainComponent implements OnInit {
   // public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
+  public highlightPrevButtonTypeEnum: HighlightButtonEnum = HighlightButtonEnum.ARTICLE;
 
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
