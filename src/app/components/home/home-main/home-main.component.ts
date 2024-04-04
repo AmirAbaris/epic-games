@@ -58,6 +58,17 @@ export class HomeMainComponent implements OnInit {
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
 
+  public highlightSmallItemData = [{
+    isActive: true,
+    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    name: 'squad'
+  },
+  {
+    isActive: true,
+    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    name: 'squad'
+  }];
+
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
 

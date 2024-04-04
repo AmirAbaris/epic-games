@@ -39,6 +39,7 @@ import { CategoryItemComponent } from '../components/home/category-item/category
 import { TranslateModule } from "@ngx-translate/core";
 import { FreeGameItemComponent } from "../components/home/free-game-item/free-game-item.component";
 import { FreeGameListComponent } from '../components/home/free-game-list/free-game-list.component';
+import { HighlightSmallItemComponent } from '../components/home/highlight-small-item/highlight-small-item.component';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -63,6 +64,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     FreeGameItemComponent,
     HomeCardComponent,
     FreeGameListComponent,
+    HighlightSmallItemComponent,
     ActivateWishlistDirective,
     PriceLabelComponent
   ],
