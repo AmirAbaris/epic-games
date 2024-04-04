@@ -1,3 +1,9 @@
+@if (isLoading()) {
+<section class="animate-pulse flex gap-x-4 pl-3 pr-20 py-4 rounded-xl items-center bg-darkCharcoal">
+    <div class="rounded-xl w-[85px] h-[60px] bg-darkGray"></div>
+    <div class="bg-darkGray w-3/4 h-2 rounded-md"></div>
+</section>
+} @else {
 <section changeBackgroundColorDir>
     <div class="container flex gap-x-4 pl-3 pr-20 py-4 rounded-xl items-center cursor-pointer text-white w-full"
         (click)="manageItemActiveStatus()" scaleOnActivateDir>
@@ -5,3 +11,4 @@
         <h1 class="flex flex-wrap">{{data().name}}</h1>
     </div>
 </section>
+}
