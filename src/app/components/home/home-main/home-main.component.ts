@@ -59,12 +59,12 @@ export class HomeMainComponent implements OnInit {
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
 
   public highlightSmallItemData = [{
-    isActive: true,
+    isActive: false,
     cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
     name: 'squad'
   },
   {
-    isActive: true,
+    isActive: false,
     cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
     name: 'squad'
   }];

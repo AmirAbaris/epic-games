@@ -1,4 +1,7 @@
-<section class="flex gap-x-4 pl-3 pr-20 py-4 bg-darkCharcoal rounded-xl items-center text-white w-full">
-    <img class="rounded-md" [ngSrc]="data().cover" [alt]="data().name" width="45" height="60" priority>
-    <h1 class="flex flex-wrap">{{data().name}}</h1>
+<section changeBackgroundColorDir>
+    <div class="container flex gap-x-4 pl-3 pr-20 py-4 rounded-xl items-center cursor-pointer text-white w-full"
+        (click)="manageItemActiveStatus()" scaleOnActivateDir>
+        <img class="item-cover rounded-md" [ngSrc]="data().cover" [alt]="data().name" width="45" height="60" priority>
+        <h1 class="flex flex-wrap">{{data().name}}</h1>
+    </div>
 </section>
