@@ -32,6 +32,14 @@
       "freeTitle": "Free",
       "nowTitle": "Now",
       "atTitle": "at"
+    },
+    "HighlightButtonType": {
+      "freePlay": "Play for free",
+      "wishlistPlay": "Wishlist now",
+      "buyPlay": "Buy now"
+    },
+    "HighlightPreviewTitle": {
+      "addWishlist": "Add to Wishlist"
     }
   },
   "enum-captions": {

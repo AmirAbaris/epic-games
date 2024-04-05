@@ -1,13 +1,22 @@
-<section class="relative">
-    <img class="rounded-2xl" [ngSrc]="data().cover" [alt]="'game cover'" width="1280" height="720" priority>
+<section class="relative font-inter">
+    <img class="rounded-2xl object-cover" [ngSrc]="data().cover" [alt]="'game-cover'" width="1280" height="720"
+        priority>
     <div class="flex flex-col gap-y-2 absolute top-0 left-16">
-        <div class="w-40 h-40">
-            <img [ngSrc]="data().logo" alt="'game logo'" width="250" height="250">
+        <div class="w-20 h-20 object-cover lg:w-40 lg:h-40">
+            <img [ngSrc]="data().logo" alt="'game-logo'" width="250" height="250">
         </div>
-        <p class="flex flex-wrap h-40 mt-20 w-72 text-lg font-inter">{{data().description}}</p>
-        <div class="flex gap-x-4">
-            <button mat-flat-button>test</button>
-            <button mat-stroked-button>fkjdafjkdl;safjdkl;as</button>
+        <p class="flex flex-wrap items-center justify-center h-40 w-72 mt-8 text-sm lg:mt-20 lg:text-lg">
+            {{data().description}}
+        </p>
+        <div class="flex gap-x-4 mt-8 lg:mt-20">
+            <app-highlight-button-type [buttonTypeEnumInput]="data().highlightButtonType"
+                [caption]="highlightButtonTypeCaptionData" />
+            <button class="wishlist-btn" mat-button>
+                <mat-icon>
+                    add_circle
+                </mat-icon>
+                <span>{{caption().addWishlist | uppercase}}</span>
+            </button>
         </div>
     </div>
 </section>
