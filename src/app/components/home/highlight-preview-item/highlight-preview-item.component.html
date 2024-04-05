@@ -1,6 +1,20 @@
+@if (isLoading()) {
+<section class="animate-pulse relative">
+    <div class="bg-darkCharcoal w-[1000px] h-[600px] relative rounded-2xl aspect-video">
+    </div>
+    <div class="flex flex-col gap-y-2 absolute top-0 left-16">
+        <div class="bg-darkGray h-40 w-40 aspect-square rounded-xl"></div>
+        <div class="bg-darkGray w-72 h-64 rounded-xl"></div>
+        <div class="flex gap-x-4 mt-8">
+            <div class="bg-darkGray w-32 h-14 rounded-lg"></div>
+            <div class="bg-darkGray w-32 h-14 rounded-lg"></div>
+        </div>
+    </div>
+</section>
+} @else {
 <section class="relative font-inter">
-    <img class="rounded-2xl object-cover" [ngSrc]="data().cover" [alt]="'game-cover'" width="1280" height="720"
-        priority>
+    <img class="rounded-2xl object-cover aspect-video" [ngSrc]="data().cover" [alt]="'game-cover'" width="1280"
+        height="720" priority>
     <div class="flex flex-col gap-y-2 absolute top-0 left-16">
         <div class="w-20 h-20 object-cover lg:w-40 lg:h-40">
             <img [ngSrc]="data().logo" alt="'game-logo'" width="250" height="250">
@@ -10,7 +24,7 @@
         </p>
         <div class="flex gap-x-4 mt-8 lg:mt-20">
             <app-highlight-button-type [buttonTypeEnumInput]="data().highlightButtonType"
-                [caption]="highlightButtonTypeCaptionData" />
+                [caption]="highlightButtonTypeCaptionData" (clickItemButtonEvent)="onClickItemEvent()" />
             <button class="wishlist-btn" mat-button>
                 <mat-icon>
                     add_circle
@@ -20,3 +34,4 @@
         </div>
     </div>
 </section>
+}
