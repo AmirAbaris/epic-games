@@ -1,5 +1,5 @@
 export interface HighlightSmallItemInputModel {
-    isActive: boolean;
+    // isActive: boolean;
     cover: string;
     name: string;
 }

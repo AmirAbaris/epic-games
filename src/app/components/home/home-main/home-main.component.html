@@ -2,7 +2,7 @@
 freeGameManagementCaption && fortniteGameCards && fortniteCaption && freeGameItemCaption && gameItemCaption &&
 categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption && nonGameBanners && gameListItem) { -->
 @for (item of highlightSmallItemData; track $index) {
-<app-highlight-small-item [data]="item" [isLoading]="isLoading" />
+<app-highlight-small-item [data]="item" [isLoading]="isLoading" [isActive]="isActive" />
 }
 <!--  <app-highlight-game-slider-item [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption"/>-->
 
