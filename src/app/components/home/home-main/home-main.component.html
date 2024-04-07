@@ -14,11 +14,9 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
 }" [isLoading]="isLoading" (clickWishlistButton)="$event" (clickCardEvent)="$event" />
 
 <app-home-card-game [data]="{
-  priceData: {
   basePrice: 50,
   finalPrice : 40,
-  discountPercent : 20
-  },
+  discountPercent : 20,
   cardData: {
     id: '1234567',
     cover: '../assets/game-covers/home-card-cover/rl.jpg',
