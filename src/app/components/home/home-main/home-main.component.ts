@@ -61,7 +61,6 @@ export class HomeMainComponent implements OnInit {
 
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
-  private _router = inject(Router);
 
   private readonly captionPaths = {
     largeHighlightGame: "home.LargeHighlightGame",
@@ -92,7 +91,7 @@ export class HomeMainComponent implements OnInit {
   //region main logic methods
   public clickCard(): void {
     // needs refactor after implementing the routes!
-    return;
+    console.log('click card works');
   }
 
   private _getAllGameData(): void {

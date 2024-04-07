@@ -1,5 +1,5 @@
 <app-home-card [data]="data().cardData" [isLoading]="isLoading()"
     (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" (clickCardEvent)="onClickCardEventHandler()">
-    <a (click)=" data().clickCardFn"
-        class="w-fit text-lg text-white border-b-[1px] border-lightDarkGray cursor-pointer hover:border-white">{{data().actionName}}</a>
+    <a (click)="data().clickCardFn"
+        class="w-fit text-[22px] text-white border-b-[1px] border-lightDarkGray cursor-pointer hover:border-white">{{data().actionName}}</a>
 </app-home-card>

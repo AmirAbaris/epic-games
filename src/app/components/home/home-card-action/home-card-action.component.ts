@@ -19,9 +19,9 @@ export class HomeCardActionComponent {
   public onClickCardEventHandler(): void {
     this.clickCardEvent.emit();
   }
-  
+
   public onClickWishlistButtonEventHandler(id: string): void {
     this.clickWishlistButtonEvent.emit(id);
   }
+  //#endregion
 }
-//#endregion
