@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, EventEmitter, Output, input, model } from '@angular/core';
 import { HomeCardActionInputModel } from '../models/home-card-action-input.model';
 
 @Component({
@@ -22,6 +22,10 @@ export class HomeCardActionComponent {
 
   public onClickWishlistButtonEventHandler(id: string): void {
     this.clickWishlistButtonEvent.emit(id);
+  }
+
+  public clickCardFnHandler(): void {
+    this.data().clickCardFn();
   }
   //#endregion
 }
