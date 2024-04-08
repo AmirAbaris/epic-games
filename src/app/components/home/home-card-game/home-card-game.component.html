@@ -1,0 +1,4 @@
+<app-home-card [data]="data().cardData" [isLoading]="isLoading()"
+  (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" (clickCardEvent)="onClickCardEventHandler()">
+  <app-price-label *ngIf="priceLabelData" [priceLabelInput]="priceLabelData" [sizeInput]="priceLabelSize" />
+</app-home-card>
