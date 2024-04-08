@@ -40,7 +40,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { FreeGameItemComponent } from "../components/home/free-game-item/free-game-item.component";
 import { FreeGameListComponent } from '../components/home/free-game-list/free-game-list.component';
 import { HighlightPreviewItemComponent } from '../components/home/highlight-preview-item/highlight-preview-item.component';
-import { HighlightButtonTypeComponent } from '../components/home/helpers/highlight-button-type/highlight-button-type.component';
+import { HighlightButtonComponent } from '../components/home/helpers/highlight-button/highlight-button.component';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -66,7 +66,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     HomeCardComponent,
     FreeGameListComponent,
     HighlightPreviewItemComponent,
-    HighlightButtonTypeComponent,
+    HighlightButtonComponent,
     ActivateWishlistDirective,
     PriceLabelComponent
   ],

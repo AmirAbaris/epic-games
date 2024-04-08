@@ -3,11 +3,11 @@ import { HighlightButtonEnum } from '../../enums/highlight-button.enum';
 import { HighlightButtonTypeEnumCaptionModel } from '../../models/caption-models/highlight-button-type-caption.model';
 
 @Component({
-  selector: 'app-highlight-button-type',
-  templateUrl: './highlight-button-type.component.html',
-  styleUrl: './highlight-button-type.component.scss'
+  selector: 'app-highlight-button',
+  templateUrl: './highlight-button.component.html',
+  styleUrl: './highlight-button.component.scss'
 })
-export class HighlightButtonTypeComponent {
+export class HighlightButtonComponent {
   //#region Properties
   buttonTypeEnumInput = input.required<HighlightButtonEnum>();
   caption = input.required<HighlightButtonTypeEnumCaptionModel>();
@@ -19,7 +19,6 @@ export class HighlightButtonTypeComponent {
   //#region Handler methods
   public onClickItemButtonEventHandler(): void {
     this.clickItemButtonEvent.emit();
-    console.log('clicked');
   }
   //#endregion
 }

@@ -14,13 +14,18 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
 }" [isLoading]="isLoading" (clickWishlistButton)="$event" (clickCardEvent)="$event" /> -->
 
 <app-highlight-preview-item [data]="{
-      id: '11',
+    id: '11',
     cover: '../assets/game-covers/highlight-preview-item-cover/scu.jpg',
     logo: '../assets/game-covers/highlight-preview-item-cover/slogo.png',
     description: 'test test est testest testest testest test test test est testest testest testest test test test est testest testest testest test test test est testest testest testest test',
     price: 55,
     highlightButtonType: highlightPrevButtonTypeEnum,
-}" [isLoading]="isLoading" [caption]="highlightPrevCaption" />
+}" [isLoading]="isLoading" [caption]="highlightPrevCaption" [highlightButtonTypeCaptionData]="{
+    freePlay: 'Play for free',
+    wishlistPlay: 'Wishlist now',
+    buyPlay: 'Buy now',
+    saveNow: 'Save now'
+  }" [isAddToWishlistLoading]="false" />
 
 <!-- @for (item of freeGameItem; track $index) {
 <app-free-game-item [data]="item" [caption]="freeGameItemCaption" [isLoading]="isLoading" (clickEvent)="$event" />

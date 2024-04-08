@@ -1,0 +1,19 @@
+<section class="font-inter" (click)="onClickItemButtonEventHandler()">
+    @switch (buttonTypeEnumInput()) {
+    @case (buttonTypeEnum.FREE) {
+    <button class="buy-btn" mat-raised-button>{{caption().freePlay}}</button>
+    }
+    @case (buttonTypeEnum.NOT_PUBLISHED) {
+    <button class="buy-btn" mat-raised-button>{{caption().wishlistPlay | uppercase}}</button>
+    }
+    @case (buttonTypeEnum.ARTICLE) {
+    <button class="buy-btn" mat-raised-button>{{caption().saveNow | uppercase}}</button>
+    }
+    @case (buttonTypeEnum.PUBLISHED) {
+    <button class="buy-btn" mat-raised-button>{{caption().buyPlay | uppercase}}</button>
+    }
+    @default {
+    <button class="buy-btn" mat-raised-button>{{caption().buyPlay | uppercase}}</button>
+    }
+    }
+</section>

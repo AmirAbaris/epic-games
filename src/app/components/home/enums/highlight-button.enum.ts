@@ -1,6 +1,6 @@
 export enum HighlightButtonEnum {
-    ARTICLE = 'ARTICLE',
-    PUBLISHED = 'PUBLISHED',
+    FREE = 'FREE',
     NOT_PUBLISHED = 'NOT_PUBLISHED',
-    FREE = 'FREE'
+    ARTICLE = 'ARTICLE',
+    PUBLISHED = 'PUBLISHED'
 }

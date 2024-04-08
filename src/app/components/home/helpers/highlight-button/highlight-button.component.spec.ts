@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HighlightButtonTypeComponent } from './highlight-button-type.component';
+import { HighlightButtonComponent } from './highlight-button.component';
 
 describe('HighlightButtonTypeComponent', () => {
-  let component: HighlightButtonTypeComponent;
-  let fixture: ComponentFixture<HighlightButtonTypeComponent>;
+  let component: HighlightButtonComponent;
+  let fixture: ComponentFixture<HighlightButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HighlightButtonTypeComponent]
+      declarations: [HighlightButtonComponent]
     })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(HighlightButtonTypeComponent);
+      .compileComponents();
+
+    fixture = TestBed.createComponent(HighlightButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
