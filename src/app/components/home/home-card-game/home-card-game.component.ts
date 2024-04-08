@@ -19,13 +19,17 @@ export class HomeCardGameComponent implements OnInit {
   @Output() clickCardEvent = new EventEmitter<void>();
   //#endregion
 
+  //#region Lifecycle methods
   ngOnInit(): void {
     this._setInitValueOfData();
   }
+  //#endregion
 
+  //#region Main logic methods
   private _setInitValueOfData(): void {
     this.priceLabelData = this._convertDataToPriceLabelModel(this.data());
   }
+  //#endregion
 
   //#region Handler methods
   public onClickWishlistButtonEventHandler(id: string): void {
