@@ -1,7 +1,7 @@
 <section class="font-inter" (click)="onClickItemButtonEventHandler()">
     @switch (buttonTypeEnumInput()) {
     @case (buttonTypeEnum.FREE) {
-    <button class="buy-btn" mat-raised-button>{{caption().freePlay}}</button>
+    <button class="buy-btn" mat-raised-button>{{caption().freePlay | uppercase}}</button>
     }
     @case (buttonTypeEnum.NOT_PUBLISHED) {
     <button class="buy-btn" mat-raised-button>{{caption().wishlistPlay | uppercase}}</button>
