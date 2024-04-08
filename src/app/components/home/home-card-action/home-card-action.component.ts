@@ -15,7 +15,7 @@ export class HomeCardActionComponent {
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   //#endregion
 
-  //#region HandlerMethods
+  //#region Handler methods
   public onClickCardEventHandler(): void {
     this.clickCardEvent.emit();
   }
