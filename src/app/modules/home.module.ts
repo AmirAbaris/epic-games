@@ -41,7 +41,6 @@ import { FreeGameItemComponent } from "../components/home/free-game-item/free-ga
 import { FreeGameListComponent } from '../components/home/free-game-list/free-game-list.component';
 import { HighlightSmallItemComponent } from '../components/home/highlight-small-item/highlight-small-item.component';
 import { ScaleOnActivateDirective } from '../directives/scale-on-activate.directive';
-import { ChangeBackgroundColorDirective } from '../directives/change-background-color.directive';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -69,7 +68,6 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     HighlightSmallItemComponent,
     ActivateWishlistDirective,
     ScaleOnActivateDirective,
-    ChangeBackgroundColorDirective,
     PriceLabelComponent
   ],
   imports: [

@@ -5,7 +5,7 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class ScaleOnActivateDirective {
   //#region Properties
-  private readonly SCALE_DURATION = 150; // milliseconds
+  private readonly _SCALE_DURATION = 150; // milliseconds
   //#endregion
 
   //#region Constructor
@@ -21,7 +21,7 @@ export class ScaleOnActivateDirective {
     this._scaleUpCover(targetElement);
     setTimeout(() => {
       this._scaleDownCover(targetElement);
-    }, this.SCALE_DURATION);
+    }, this._SCALE_DURATION);
   }
 
   private _getTargetElement(): HTMLElement {
