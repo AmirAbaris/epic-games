@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
 import { HighlightSmallItemInputModel } from '../models/highlight-small-item-input.model';
-import { state, style, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-highlight-small-item',
