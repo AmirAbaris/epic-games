@@ -13,8 +13,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
       state('rotation-remove', style({
         transform: 'rotate(360deg)',
       })),
-      // transition('* => rotation-add', [animate('1000ms')]),
-      transition('rotation-add <=> rotation-remove', [animate('1000ms')])
+      transition('rotation-remove <=> rotation-add', [animate('1000ms')])
     ])
   ]
 })
@@ -22,14 +21,14 @@ export class WishListButtonComponent {
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
 
   public itemId = '12';
-  caption = '';
-  public loading = false; // input it
+  // caption = '';
   public isInWishlist = false;
+  public operationInProgress = false;
   public wishlistClicked = false;
   public removedFromWishlist = false;
 
   public onClickWishlistHandler(id: string): void {
-    this._wishlistButtonClicked();
+    this.wishlistClicked = true;
     this._wishlistButtonEventHandler(id);
 
     if (!this.isInWishlist) {
@@ -39,43 +38,37 @@ export class WishListButtonComponent {
     }
   }
 
-  public getTooltipMessage(): string {
-    if (this.removedFromWishlist) {
-      return 'Removed';
-    } else if (this.isInWishlist) {
-      return 'SAVED! See all of your wishlist items';
-    } else {
-      return 'Remove From Wishlist';
-    }
-  }
-
-  private _wishlistButtonClicked(): void {
-    this.wishlistClicked = true;
-  }
-
-  private _wishlistButtonEventHandler(id: string): void {
-    this.clickWishlistButtonEvent.emit(id);
-  }
-
-  /**
-   * just to test the animation; it can be removed!
-   */
   private _addToWishlistHandler(): void {
-    this.loading = true;
+    // Update the state when the button is clicked
+    this.wishlistClicked = true;
+
+    this.operationInProgress = true;
 
     setTimeout(() => {
-      this.loading = false;
+      this.operationInProgress = false;
       this.isInWishlist = true;
     }, 2000);
   }
 
   private _removeFromWishlist(): void {
-    this.loading = true;
+    this.operationInProgress = true;
 
     setTimeout(() => {
-      this.loading = false;
+      this.operationInProgress = false;
       this.isInWishlist = false;
       this.removedFromWishlist = true;
     }, 2000);
+  }
+
+  getTooltipMessage(): string {
+    if (this.isInWishlist) {
+      return 'SAVED! See all of your wishlist items';
+    } else {
+      return 'Removed';
+    }
+  }
+
+  private _wishlistButtonEventHandler(id: string): void {
+    this.clickWishlistButtonEvent.emit(id);
   }
 }
