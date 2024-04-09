@@ -16,7 +16,7 @@ export class HighlightSmallItemComponent {
   //#endregion
 
   //#region Main logic method
-  public activateItem(): void {
+  private _activateItem(): void {
     this.isActive.set(true);
   }
   //#region 
@@ -27,7 +27,7 @@ export class HighlightSmallItemComponent {
   }
 
   public handleItemClick(): void {
-    this.activateItem();
+    this._activateItem();
     this.clickItemEventHandler();
   }
   //#endregion
