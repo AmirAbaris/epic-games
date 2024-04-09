@@ -5,22 +5,3 @@
     background-color: rgb(255, 255, 255) !important;
     color: rgb(0, 0, 0) !important;
 }
-
-.wishlist-btn {
-    font-size: 0.75rem;
-    height: 50px;
-    width: 180px;
-
-    mat-icon {
-        background-color: white;
-        color: black;
-        border-radius: 2rem;
-        scale: .7;
-    }
-
-    span {
-        display: flex;
-        align-items: center;
-        row-gap: 4px;
-    }
-}

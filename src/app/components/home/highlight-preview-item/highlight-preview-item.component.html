@@ -15,25 +15,7 @@
             <app-highlight-button [buttonTypeEnumInput]="data().highlightButtonType"
                 [caption]="highlightButtonTypeCaptionData()" (clickItemButtonEvent)="onClickItemEvent()" />
             @if (data().highlightButtonType !== buttonTypeEnum.ARTICLE) {
-            <button class="wishlist-btn" (click)="addToWishlistHandler()" mat-button>
-
-                @if (isInWishlist) {
-                <span>
-                    <mat-icon>
-                        check_circle
-                    </mat-icon>
-                    IN WISHLIST
-                </span>
-                } @else {
-                <span>
-                    <mat-icon [@spin-icon]="isAddToWishlistLoading ? 'rotate' : ''">
-                        add_circle
-                    </mat-icon>
-                    {{caption().addWishlist | uppercase}}
-                </span>
-                }
-
-            </button>
+            <app-wish-list-button />
             }
         </div>
     </div>

@@ -1,25 +1,81 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-wish-list-button',
   templateUrl: './wish-list-button.component.html',
   styleUrl: './wish-list-button.component.scss',
+  animations: [
+    trigger('spin-icon', [
+      state('rotation-add', style({
+        transform: 'rotate(-360deg)',
+      })),
+      state('rotation-remove', style({
+        transform: 'rotate(360deg)',
+      })),
+      // transition('* => rotation-add', [animate('1000ms')]),
+      transition('rotation-add <=> rotation-remove', [animate('1000ms')])
+    ])
+  ]
 })
 export class WishListButtonComponent {
-  //region Properties
-  @Output() clickButtonEvent = new EventEmitter();
+  @Output() clickWishlistButtonEvent = new EventEmitter<string>();
 
-  private _translateService = inject(TranslateService);
+  public itemId = '12';
+  caption = '';
+  public loading = false; // input it
+  public isInWishlist = false;
+  public wishlistClicked = false;
+  public removedFromWishlist = false;
 
-  public tooltipMessage: string = this._translateService.instant(
-    'home.WishListButton.addTitle',
-  );
-  //endregion
+  public onClickWishlistHandler(id: string): void {
+    this._wishlistButtonClicked();
+    this._wishlistButtonEventHandler(id);
 
-  //region Handler methods
-  public onClickButtonEventHandler(): void {
-    this.clickButtonEvent.emit();
+    if (!this.isInWishlist) {
+      this._addToWishlistHandler();
+    } else {
+      this._removeFromWishlist();
+    }
   }
-  //endregion
+
+  public getTooltipMessage(): string {
+    if (this.removedFromWishlist) {
+      return 'Removed';
+    } else if (this.isInWishlist) {
+      return 'SAVED! See all of your wishlist items';
+    } else {
+      return 'Remove From Wishlist';
+    }
+  }
+
+  private _wishlistButtonClicked(): void {
+    this.wishlistClicked = true;
+  }
+
+  private _wishlistButtonEventHandler(id: string): void {
+    this.clickWishlistButtonEvent.emit(id);
+  }
+
+  /**
+   * just to test the animation; it can be removed!
+   */
+  private _addToWishlistHandler(): void {
+    this.loading = true;
+
+    setTimeout(() => {
+      this.loading = false;
+      this.isInWishlist = true;
+    }, 2000);
+  }
+
+  private _removeFromWishlist(): void {
+    this.loading = true;
+
+    setTimeout(() => {
+      this.loading = false;
+      this.isInWishlist = false;
+      this.removedFromWishlist = true;
+    }, 2000);
+  }
 }

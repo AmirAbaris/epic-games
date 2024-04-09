@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, input, model } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item-input.model';
 import { HighlightButtonEnum } from '../enums/highlight-button.enum';
 import { HighlightButtonTypeEnumCaptionModel } from '../models/caption-models/highlight-button-type-caption.model';
@@ -11,12 +11,14 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   styleUrl: './highlight-preview-item.component.scss',
   animations: [
     trigger('spin-icon', [
-      state('rotate', style({
+      state('add-rotation', style({
         transform: 'rotate(-360deg)',
       })),
-      transition('* => rotate', [
-        animate('1000ms')
-      ])
+      state('remove-rotation', style({
+        transform: 'rotate(360deg)',
+      })),
+      transition('* => add-rotation', [animate('1000ms')]),
+      transition('* => remove-rotation', [animate('1000ms')]),
     ])
   ]
 })
@@ -24,8 +26,6 @@ export class HighlightPreviewItemComponent {
   //#region Properties
   data = input.required<HighlightPreviewItemInputModel>();
   isLoading = input.required<boolean>();
-  isAddToWishlistLoading = false;
-  isInWishlist = false;
   caption = input.required<HighlightPreviewItemCaptionModel>();
   highlightButtonTypeCaptionData = input.required<HighlightButtonTypeEnumCaptionModel>();
   public buttonTypeEnum: typeof HighlightButtonEnum = HighlightButtonEnum;
@@ -35,21 +35,8 @@ export class HighlightPreviewItemComponent {
   //#endregion
 
   //#region Handler methods
-  public onClickWishlistButtonEventHandler(id: string): void {
-    this.clickWishlistButtonEvent.emit(id);
-  }
-
   public onClickItemEvent(): void {
     this.clickItemEvent.emit();
-  }
-
-  public addToWishlistHandler(): void {
-    this.isAddToWishlistLoading = true;
-
-    setTimeout(() => {
-      this.isAddToWishlistLoading = false;
-      this.isInWishlist = true;
-    }, 2000);
   }
   //#endregion
 }
