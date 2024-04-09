@@ -24,7 +24,7 @@ export class HomeCardActionComponent {
     this.clickWishlistButtonEvent.emit(id);
   }
 
-  public clickCardFnHandler(): void {
+  public onClickCardFnHandler(): void {
     this.data().clickCardFn();
   }
   //#endregion
