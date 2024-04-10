@@ -28,7 +28,6 @@ import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-ite
 import { FreeGameListInputModel } from "../models/free-game-list-input.model";
 import { FreeGameListCaptionModel } from "../models/caption-models/free-game-list-caption.model";
 import { HighlightButtonEnum } from "../enums/highlight-button.enum";
-import { HighlightPreviewItemCaptionModel } from "../models/caption-models/highlight-preview-item-caption.model";
 
 @Component({
   selector: "app-home-main",
@@ -60,9 +59,6 @@ export class HomeMainComponent implements OnInit {
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
   public highlightPrevButtonTypeEnum: HighlightButtonEnum = HighlightButtonEnum.FREE;
-  public highlightPrevCaption: HighlightPreviewItemCaptionModel = {
-    addWishlist: 'Add to Wishlist'
-  }
 
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);

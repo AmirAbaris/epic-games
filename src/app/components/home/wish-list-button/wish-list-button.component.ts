@@ -1,5 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
+import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-button-caption.model';
 
 @Component({
   selector: 'app-wish-list-button',
@@ -13,54 +14,20 @@ import { Component, EventEmitter, Output } from '@angular/core';
       state('rotation-remove', style({
         transform: 'rotate(360deg)',
       })),
-      transition('rotation-remove <=> rotation-add', [animate('1000ms')])
+      transition('* => rotation-add', [animate('1000ms')]),
+      transition('* => rotation-remove', [animate('1000ms')]),
     ])
   ]
 })
 export class WishListButtonComponent {
+  itemId = input.required<string>();
+  caption = input.required<WishListButtonCaptionModel>();
+
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
 
-  public itemId = '12';
-  // caption = '';
   public isInWishlist = false;
-  public operationInProgress = false;
-  public wishlistClicked = false;
-  public removedFromWishlist = false;
 
-  public onClickWishlistHandler(id: string): void {
-    this.wishlistClicked = true;
-    this._wishlistButtonEventHandler(id);
-
-    if (!this.isInWishlist) {
-      this._addToWishlistHandler();
-    } else {
-      this._removeFromWishlist();
-    }
-  }
-
-  private _addToWishlistHandler(): void {
-    // Update the state when the button is clicked
-    this.wishlistClicked = true;
-
-    this.operationInProgress = true;
-
-    setTimeout(() => {
-      this.operationInProgress = false;
-      this.isInWishlist = true;
-    }, 2000);
-  }
-
-  private _removeFromWishlist(): void {
-    this.operationInProgress = true;
-
-    setTimeout(() => {
-      this.operationInProgress = false;
-      this.isInWishlist = false;
-      this.removedFromWishlist = true;
-    }, 2000);
-  }
-
-  getTooltipMessage(): string {
+  public getTooltipMessage(): string {
     if (this.isInWishlist) {
       return 'SAVED! See all of your wishlist items';
     } else {
@@ -68,7 +35,7 @@ export class WishListButtonComponent {
     }
   }
 
-  private _wishlistButtonEventHandler(id: string): void {
+  public onClickWishlistHandler(id: string): void {
     this.clickWishlistButtonEvent.emit(id);
   }
 }

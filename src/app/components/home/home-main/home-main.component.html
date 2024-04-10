@@ -20,7 +20,10 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
     description: 'test test est testest testest testest test test test est testest testest testest test test test est testest testest testest test test test est testest testest testest test',
     price: 55,
     highlightButtonType: highlightPrevButtonTypeEnum,
-}" [isLoading]="isLoading" [caption]="highlightPrevCaption" [highlightButtonTypeCaptionData]="{
+}" [isLoading]="isLoading" [wishlistButtonCaption]="{
+  inTitle: 'in wishlist',
+    addTitle: 'add to wishlist'
+  }" [highlightButtonTypeCaptionData]="{
     freePlay: 'Play for free',
     wishlistPlay: 'Wishlist now',
     buyPlay: 'Buy now',

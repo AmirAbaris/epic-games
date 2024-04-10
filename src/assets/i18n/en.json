@@ -17,6 +17,7 @@
       "viewTitle": "View More"
     },
     "WishListButton": {
+      "inTitle": "In wishlist",
       "addTitle": "Add to Wishlist"
     },
     "GameSliderItem": {
