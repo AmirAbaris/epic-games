@@ -15,20 +15,9 @@ export class HighlightSmallItemComponent {
   @Output() clickItemEvent = new EventEmitter<void>();
   //#endregion
 
-  //#region Main logic method
-  private _activateItem(): void {
-    this.isActive.set(true);
-  }
-  //#region 
-
   //#region Handler methods
-  public clickItemEventHandler(): void {
+  public onClickItemEventHandler(): void {
     this.clickItemEvent.emit();
-  }
-
-  public handleItemClick(): void {
-    this._activateItem();
-    this.clickItemEventHandler();
   }
   //#endregion
 }

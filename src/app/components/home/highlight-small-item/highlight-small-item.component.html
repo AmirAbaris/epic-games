@@ -6,7 +6,7 @@
 } @else {
 <section [class.bg-darkCharcoal]="isActive()"
     class="flex gap-x-4 pl-3 pr-20 py-4 rounded-xl items-center cursor-pointer text-white w-full"
-    (click)="handleItemClick()" scaleOnActivateDir [isActive]="isActive()">
+    (click)="onClickItemEventHandler()" scaleOnActivateDir [isActive]="isActive()">
     <img class="item-cover rounded-md" [ngSrc]="data().cover" [alt]="data().name" width="45" height="60" priority>
     <h1 class="flex flex-wrap">{{data().name}}</h1>
 </section>
