@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, OnChanges, SimpleChanges, model } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, OnChanges, SimpleChanges, inject, model } from '@angular/core';
 
 @Directive({
   selector: '[scaleOnActivateDir]'
@@ -7,11 +7,8 @@ export class ScaleOnActivateDirective implements OnChanges, AfterViewInit {
   //#region Properties
   isActive = model.required<boolean>();
   public targetElement: HTMLElement | undefined;
+  private _elementRef = inject(ElementRef);
   private readonly _SCALE_DURATION = 150; // milliseconds
-  //#endregion
-
-  //#region Constructor
-  constructor(private elementRef: ElementRef) { }
   //#endregion
 
   //#region Lifecycle methods
@@ -44,7 +41,7 @@ export class ScaleOnActivateDirective implements OnChanges, AfterViewInit {
   }
 
   private _setTargetElement(): void {
-    this.targetElement = this.elementRef.nativeElement.querySelector('.item-cover');
+    this.targetElement = this._elementRef.nativeElement;
   }
 
   private _scaleUpCover(element: HTMLElement | undefined): void {
