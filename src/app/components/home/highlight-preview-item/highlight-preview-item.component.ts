@@ -37,8 +37,12 @@ export class HighlightPreviewItemComponent implements OnInit {
   //#endregion
 
   //#region Handler methods
-  public onClickItemEvent(): void {
+  public onClickItemEventHandler(): void {
     this.clickItemEvent.emit();
+  }
+
+  public onCLickWishlistButtonEventHandler(id: string): void {
+    this.clickWishlistButtonEvent.emit(id);
   }
   //#endregion
 

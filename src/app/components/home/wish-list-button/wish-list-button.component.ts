@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges, input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
 import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-button-caption.model';
 
 @Component({
@@ -6,53 +6,44 @@ import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-bu
   templateUrl: './wish-list-button.component.html',
   styleUrl: './wish-list-button.component.scss'
 })
-export class WishListButtonComponent implements OnChanges, OnInit {
+export class WishListButtonComponent implements OnInit {
   //#region Properties
   itemId = input.required<string>();
-  isItemInWishlist = input.required<boolean>();
-  isAddingToWishlistInProgress: boolean | undefined;
+  isInWishlist = input.required<boolean>();
   caption = input.required<WishListButtonCaptionModel>();
-
-  public wishlistToolTipText: string | null | undefined;
+  public isAddingToWishlistInProgress = false;
+  public showTooltip = false;
 
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   //#endregion
-
-  // TODO: add a output for router link in tooltip
 
   //#region Lifecycle methods
   ngOnInit(): void {
     this._manageWishlistProgress();
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if ('isInWishlist' in changes) {
-      this._setTooltipMessage();
-    }
-  }
   //#endregion
 
   //#region Main logic methods
-  private _setTooltipMessage(): void {
-    // TODO: make it enums
-    if (this.isItemInWishlist()) {
-      this.wishlistToolTipText = 'SAVED! See all of your wishlist items';
-    } else {
-      this.wishlistToolTipText = 'Removed';
-    }
-  }
-
   /**
    * changes the loading value based of the isInWishlist methods value
    * if the the item was not in wishlist, it loads, else it will not load
    */
   private _manageWishlistProgress(): void {
-    this.isAddingToWishlistInProgress = !this.isItemInWishlist();
+    this.isAddingToWishlistInProgress = !this.isInWishlist();
+  }
+
+  private _displayTooltip(): void {
+    this.showTooltip = true;
   }
   //#endregion
 
   //#region Handler methods
-  public onClickWishlistHandler(id: string): void {
+  public handleWishlistButtonClickEvents(id: string): void {
+    this._onClickWishlistButtonEventHandler(id);
+    this._displayTooltip();
+
+  }
+  private _onClickWishlistButtonEventHandler(id: string): void {
     this.clickWishlistButtonEvent.emit(id);
   }
   //#endregion

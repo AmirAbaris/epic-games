@@ -1,6 +1,7 @@
-<button class="wishlist-btn" *ngIf="wishlistToolTipText" (click)="onClickWishlistHandler(itemId())" mat-button
-  [matTooltip]="isItemInWishlist() ? wishlistToolTipText : ''" matTooltipPosition="below">
-  @if (isItemInWishlist()) {
+<button class="wishlist-btn" (click)="handleWishlistButtonClickEvents(itemId())"
+  [matTooltip]="isInWishlist() ? caption().savedTitle : caption().removeTitle" [matTooltipDisabled]="!showTooltip"
+  matTooltipPosition="below" mat-button>
+  @if (isInWishlist()) {
   <span>
     <mat-icon>
       check_circle
