@@ -5,7 +5,7 @@ import { AfterViewInit, Directive, ElementRef, OnChanges, SimpleChanges, model }
 })
 export class ScaleOnActivateDirective implements OnChanges, AfterViewInit {
   //#region Properties
-  scaleOnActivateDir = model.required<boolean>();
+  isActive = model.required<boolean>();
   public targetElement: HTMLElement | undefined;
   private readonly _SCALE_DURATION = 150; // milliseconds
   //#endregion
@@ -35,7 +35,7 @@ export class ScaleOnActivateDirective implements OnChanges, AfterViewInit {
 
   //#region Main logic methods
   private _applyScale(): void {
-    if (!this.scaleOnActivateDir()) return;
+    if (!this.isActive()) return;
 
     this._scaleUpCover(this.targetElement);
     setTimeout(() => {
