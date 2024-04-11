@@ -1,0 +1,5 @@
+<div class="bg-red-800 flex gap-x-4 aspect-video">
+    @for (item of data().homeCardActionData; track $index) {
+    <app-home-card-action [data]="item" [isLoading]="isLoading()" />
+    }
+</div>

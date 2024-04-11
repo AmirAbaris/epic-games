@@ -5,7 +5,7 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
 
 <!-- <app-game-slider-item-management [gameCardInputs]="gameSliderItemData" [isLoading]="isLoading" /> -->
 
-<app-home-card [data]="{
+<!-- <app-home-card [data]="{
   id: '123456',
   cover: '../assets/game-covers/home-card-cover/rl.jpg',
   description: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet',
@@ -24,9 +24,9 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
     name: 'Example Card',
     hasWishlist: true
   }
-}" [isLoading]="isLoading" />
+}" [isLoading]="isLoading" /> -->
 
-<app-home-card-action [data]="{
+<!-- <app-home-card-action [data]="{
   actionName: 'play',
   cardData: {
   id: '123456',
@@ -36,7 +36,46 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
   hasWishlist: true
   },
   clickCardFn: clickCard
-}" [isLoading]="isLoading" />
+}" [isLoading]="isLoading" /> -->
+
+<app-card-list [isLoading]="isLoading" [data]="{
+  homeCardActionData: [{
+    actionName: 'fda',
+    cardData: {
+      id: '123456',
+      cover: '../assets/game-covers/home-card-cover/rl.jpg',
+      description: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet',
+      name: 'Example Card',
+      hasWishlist: true
+    },
+    clickCardFn: clickCard
+  },
+  {
+    actionName: 'fda',
+    cardData: {
+      id: '123456',
+      cover: '../assets/game-covers/home-card-cover/rl.jpg',
+      description: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet',
+      name: 'Example Card',
+      hasWishlist: true
+    },
+    clickCardFn: clickCard
+  },
+  {
+    actionName: 'fda',
+    cardData: {
+      id: '123456',
+      cover: '../assets/game-covers/home-card-cover/rl.jpg',
+      description: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet',
+      name: 'Example Card',
+      hasWishlist: true
+    },
+    clickCardFn: clickCard
+  }]
+}">
+</app-card-list>
+
+
 
 <!-- @for (item of freeGameItem; track $index) {
 <app-free-game-item [data]=" item" [caption]="freeGameItemCaption" [isLoading]="isLoading" (clickEvent)="$event" />
