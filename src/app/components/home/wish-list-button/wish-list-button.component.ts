@@ -1,41 +1,59 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges, input } from '@angular/core';
 import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-button-caption.model';
 
 @Component({
   selector: 'app-wish-list-button',
   templateUrl: './wish-list-button.component.html',
-  styleUrl: './wish-list-button.component.scss',
-  animations: [
-    trigger('spin-icon', [
-      state('rotation-add', style({
-        transform: 'rotate(-360deg)',
-      })),
-      state('rotation-remove', style({
-        transform: 'rotate(360deg)',
-      })),
-      transition('* => rotation-add', [animate('1000ms')]),
-      transition('* => rotation-remove', [animate('1000ms')]),
-    ])
-  ]
+  styleUrl: './wish-list-button.component.scss'
 })
-export class WishListButtonComponent {
+export class WishListButtonComponent implements OnChanges, OnInit {
+  //#region Properties
   itemId = input.required<string>();
+  isItemInWishlist = input.required<boolean>();
+  isAddingToWishlistInProgress: boolean | undefined;
   caption = input.required<WishListButtonCaptionModel>();
 
+  public wishlistToolTipText: string | null | undefined;
+
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
+  //#endregion
 
-  public isInWishlist = false;
+  // TODO: add a output for router link in tooltip
 
-  public getTooltipMessage(): string {
-    if (this.isInWishlist) {
-      return 'SAVED! See all of your wishlist items';
+  //#region Lifecycle methods
+  ngOnInit(): void {
+    this._manageWishlistProgress();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if ('isInWishlist' in changes) {
+      this._setTooltipMessage();
+    }
+  }
+  //#endregion
+
+  //#region Main logic methods
+  private _setTooltipMessage(): void {
+    // TODO: make it enums
+    if (this.isItemInWishlist()) {
+      this.wishlistToolTipText = 'SAVED! See all of your wishlist items';
     } else {
-      return 'Removed';
+      this.wishlistToolTipText = 'Removed';
     }
   }
 
+  /**
+   * changes the loading value based of the isInWishlist methods value
+   * if the the item was not in wishlist, it loads, else it will not load
+   */
+  private _manageWishlistProgress(): void {
+    this.isAddingToWishlistInProgress = !this.isItemInWishlist();
+  }
+  //#endregion
+
+  //#region Handler methods
   public onClickWishlistHandler(id: string): void {
     this.clickWishlistButtonEvent.emit(id);
   }
+  //#endregion
 }

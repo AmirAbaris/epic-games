@@ -1,6 +1,6 @@
-<button class="wishlist-btn" (click)="onClickWishlistHandler(itemId())" mat-button [matTooltip]="getTooltipMessage()"
-  matTooltipPosition="below">
-  @if (isInWishlist) {
+<button class="wishlist-btn" *ngIf="wishlistToolTipText" (click)="onClickWishlistHandler(itemId())" mat-button
+  [matTooltip]="isItemInWishlist() ? wishlistToolTipText : ''" matTooltipPosition="below">
+  @if (isItemInWishlist()) {
   <span>
     <mat-icon>
       check_circle
@@ -9,7 +9,7 @@
   </span>
   } @else {
   <span>
-    <mat-icon [@spin-icon]>
+    <mat-icon [class.rotate-animation]="isAddingToWishlistInProgress">
       add_circle
     </mat-icon>
     {{caption().addTitle | uppercase}}

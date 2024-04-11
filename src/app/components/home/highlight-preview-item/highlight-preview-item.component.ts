@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, input, model } from '@angular/core';
 import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item-input.model';
 import { HighlightButtonEnum } from '../enums/highlight-button.enum';
 import { HighlightButtonTypeEnumCaptionModel } from '../models/caption-models/highlight-button-type-caption.model';
@@ -13,6 +13,8 @@ export class HighlightPreviewItemComponent implements OnInit {
   //#region Properties
   data = input.required<HighlightPreviewItemInputModel>();
   isLoading = input.required<boolean>();
+  isInWishlist = model.required<boolean>();
+  wishlistAddProcessing = model.required<boolean>();
   wishlistButtonCaption = input.required<WishListButtonCaptionModel>();
   highlightButtonTypeCaptionData = input.required<HighlightButtonTypeEnumCaptionModel>();
   public buttonTypeEnum: typeof HighlightButtonEnum = HighlightButtonEnum;
@@ -24,12 +26,12 @@ export class HighlightPreviewItemComponent implements OnInit {
 
   //#region Lifecycle methods
   ngOnInit(): void {
-    this._setItemIdInit();
+    this._setItemIdValue();
   }
   //#endregion
 
   //#region Main logic methods
-  private _setItemIdInit(): void {
+  private _setItemIdValue(): void {
     this.itemId = this._convertDataToItemId();
   }
   //#endregion

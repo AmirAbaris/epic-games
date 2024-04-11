@@ -15,7 +15,8 @@
             <app-highlight-button [buttonTypeEnumInput]="data().highlightButtonType"
                 [caption]="highlightButtonTypeCaptionData()" (clickItemButtonEvent)="onClickItemEvent()" />
             @if (data().highlightButtonType !== buttonTypeEnum.ARTICLE) {
-            <app-wish-list-button *ngIf="itemId" [itemId]="itemId" [caption]="wishlistButtonCaption()" />
+            <app-wish-list-button *ngIf="itemId" [itemId]="'fd'" [caption]="wishlistButtonCaption()"
+                [isItemInWishlist]="false" />
             }
         </div>
     </div>
