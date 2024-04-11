@@ -1,12 +1,13 @@
 @if (isLoading()) {
-<section class="animate-pulse flex gap-x-4 pl-3 pr-20 py-4 rounded-xl items-center bg-darkCharcoal">
+<section class="animate-pulse flex gap-x-4 px-4  py-4 rounded-xl items-center bg-darkCharcoal">
     <div class="rounded-xl w-[85px] h-[60px] bg-darkGray"></div>
     <div class="bg-darkGray w-3/4 h-2 rounded-md"></div>
 </section>
 } @else {
 <section [class.bg-darkCharcoal]="isActive()"
-    class="flex gap-x-4 pl-3 pr-20 py-4 rounded-xl items-center cursor-pointer text-white w-full"
-    (click)="onClickItemEventHandler()" scaleOnActivateDir [isActive]="isActive()">
+    class="flex gap-x-4 px-4 py-4 rounded-xl items-center cursor-pointer text-white w-full"
+    (click)="onClickItemEventHandler()" [scaleOnActivateDir]="isActive()">
+    <!-- TODO add view child || view content -->
     <img class="item-cover rounded-md" [ngSrc]="data().cover" [alt]="data().name" width="45" height="60" priority>
     <h1 class="flex flex-wrap">{{data().name}}</h1>
 </section>
