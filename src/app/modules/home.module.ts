@@ -40,6 +40,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { FreeGameItemComponent } from "../components/home/free-game-item/free-game-item.component";
 import { FreeGameListComponent } from '../components/home/free-game-list/free-game-list.component';
 import { HomeCardGameComponent } from '../components/home/home-card-game/home-card-game.component';
+import { HomeCardActionComponent } from '../components/home/home-card-action/home-card-action.component';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -65,8 +66,9 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     HomeCardComponent,
     FreeGameListComponent,
     HomeCardGameComponent,
+    HomeCardActionComponent,
+    PriceLabelComponent,
     ActivateWishlistDirective,
-    PriceLabelComponent
   ],
   imports: [
     CommonModule,
