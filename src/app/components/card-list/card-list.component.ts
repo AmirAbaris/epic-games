@@ -14,4 +14,14 @@ export class CardListComponent {
   @Output() clickCardEvent = new EventEmitter<void>();
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   //#endregion
+
+  //#region Handler methods
+  public onClickCardEventHandler(): void {
+    this.clickCardEvent.emit();
+  }
+
+  public onClickWishlistButtonEventHandler(id: string): void {
+    this.clickWishlistButtonEvent.emit(id);
+  }
+  //#endregion
 }
