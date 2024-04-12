@@ -9,7 +9,7 @@ export class ActivateWishlistDirective implements AfterViewInit {
   private _renderer = inject(Renderer2);
   private _wishlistClasses = ['absolute', 'right-4', 'top-2', 'cursor-pointer', 'z-10'];
   private _targetElement: HTMLElement | undefined;
-  private _hoverListenElementTarget: HTMLElement | null | undefined;
+  private _imageElement: HTMLElement | null | undefined;
   //#endregion
 
   //#region Lifecycle methods
@@ -20,18 +20,17 @@ export class ActivateWishlistDirective implements AfterViewInit {
   //#endregion
 
   //#region Main logic methods
-  @HostListener('mouseover', ['$event']) onMouseOver(event: MouseEvent): void {
-    if (event.target === this._hoverListenElementTarget) {
-      console.log('Mouse is over the _hoverListenElementTarget');
-      // Add additional logic here to activate the rest of the directive functionality
+  @HostListener('mouseover', ['$event'])
+  onMouseOver(event: MouseEvent): void {
+    if (event.target === this._imageElement) {
       this._toggleWishlistVisibility(true);
     }
   }
 
-  @HostListener('mouseleave') onMouseLeave(): void {
+  @HostListener('mouseleave', ['$event'])
+  onMouseLeave(event: MouseEvent): void {
     this._toggleWishlistVisibility(false);
     this._removeWishlistClasses();
-
   }
 
   /**
@@ -53,7 +52,7 @@ export class ActivateWishlistDirective implements AfterViewInit {
 
   private _setElementValues(): void {
     this._targetElement = this._elementRef.nativeElement.querySelector('.wishlist');
-    this._hoverListenElementTarget = this._elementRef.nativeElement.querySelector('.item-cover');
+    this._imageElement = this._elementRef.nativeElement.querySelector('.item-cover');
   }
 
   private _setElementDisplayStyle(displayStyle: string): void {
