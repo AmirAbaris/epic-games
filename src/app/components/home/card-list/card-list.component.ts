@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
-import { CardListInputModel } from '../home/models/card-list-input.model';
+import { CardListInputType } from '../types/card-list-input.type';
 
 @Component({
   selector: 'app-card-list',
@@ -8,7 +8,7 @@ import { CardListInputModel } from '../home/models/card-list-input.model';
 })
 export class CardListComponent {
   //#region Properties
-  data = input.required<CardListInputModel>();
+  data = input.required<CardListInputType>();
   isLoading = input.required<boolean>();
 
   @Output() clickCardEvent = new EventEmitter<void>();

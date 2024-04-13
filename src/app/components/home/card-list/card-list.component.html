@@ -1,0 +1,10 @@
+<div class="flex gap-x-4">
+    @for (item of data(); track $index) {
+    <ng-container *ngIf="item instanceof HomeCardActionInputModel">
+        <app-home-card-action [data]="item" [isLoading]="isLoading()" />
+    </ng-container>
+    <ng-container *ngIf="item instanceof HomeCardGameInputModel">
+        <app-home-card-game [data]="item" [isLoading]="isLoading()" />
+    </ng-container>
+    }
+</div>

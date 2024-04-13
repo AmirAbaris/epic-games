@@ -38,8 +38,7 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
   clickCardFn: clickCard
 }" [isLoading]="isLoading" /> -->
 
-<app-card-list [isLoading]="isLoading" [data]="{
-  homeCardActionData: [{
+<app-card-list [isLoading]="isLoading" [data]="[{
     actionName: 'fda',
     cardData: {
       id: '123456',
@@ -50,7 +49,6 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
     },
     clickCardFn: clickCard
   },
-
   {
     actionName: 'fda',
     cardData: {
@@ -61,8 +59,7 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
       hasWishlist: true
     },
     clickCardFn: clickCard
-  }]
-}" (clickWishlistButtonEvent)="$event" (clickCardEvent)="$event">
+  }]" (clickWishlistButtonEvent)="$event" (clickCardEvent)="$event">
 </app-card-list>
 
 
