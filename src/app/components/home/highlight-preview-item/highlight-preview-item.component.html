@@ -1,14 +1,17 @@
 @if (isLoading()) {
 <div class="animate-pulse bg-darkCharcoal w-[1000px] h-[600px] rounded-2xl aspect-video"></div>
 } @else {
+<app-image-color-tone #imageColorTone />
 <section class="relative font-inter cursor-pointer" (click)="onClickItemEventHandler($event)">
+    <canvas #canvas class="hidden"></canvas>
     <img class="rounded-2xl object-cover aspect-video" [ngSrc]="data().cover" [alt]="'game-cover'" width="1280"
-        height="720" priority>
+        height="720" priority (load)="imageColorTone.loadImageAndAnalyzeColor(data().cover)">
     <div class="flex flex-col gap-y-2 absolute top-32 left-16">
         <div class="w-20 h-16 object-cover md:w-36 md:h-28 lg:w-64 lg:h-40">
             <img [ngSrc]="data().logo" alt="'game-logo'" width="250" height="250" priority>
         </div>
-        <p class="flex flex-wrap items-center justify-center w-72 text-sm mt-12 md:text-md">
+        <p [ngClass]="{'text-black': imageColorTone.isImageColorToneLight}"
+            class="flex flex-wrap items-center justify-center w-72 text-sm mt-12  md:text-md">
             {{data().description}}
         </p>
         <div class="hidden gap-x-4 mt-8 lg:flex">
