@@ -8,14 +8,14 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 export class ImageColorToneComponent implements AfterViewInit {
   //#region Properties
   @ViewChild('canvas') canvas: ElementRef<HTMLCanvasElement> | undefined;
-  isImageColorToneLight: boolean | undefined;
+  public isImageColorToneLight: boolean | undefined;
   //#endregion
 
   //#region Lifecycle methods
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.loadImageAndAnalyzeColor('../../assets/game-covers/highlight-preview-item-cover/egg.jpg');
-    }, 100); // Adjust the delay as needed
+    }, 100);
   }
   //#endregion
 
