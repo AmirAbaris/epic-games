@@ -11,6 +11,7 @@ export class WishListButtonComponent implements OnInit {
   itemId = input.required<string>();
   isInWishlist = input.required<boolean>();
   caption = input.required<WishListButtonCaptionModel>();
+  
   public isAddingToWishlistInProgress = false;
   public showTooltip = false;
 
