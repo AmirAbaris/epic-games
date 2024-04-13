@@ -38,7 +38,7 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
   clickCardFn: clickCard
 }" [isLoading]="isLoading" /> -->
 
-<app-card-list [isLoading]="isLoading" [data]="[{
+<!-- <app-card-list [isLoading]="isLoading" [data]="[{
     actionName: 'fda',
     cardData: {
       id: '123456',
@@ -60,7 +60,22 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
     },
     clickCardFn: clickCard
   }]" (clickWishlistButtonEvent)="$event" (clickCardEvent)="$event">
-</app-card-list>
+</app-card-list> -->
+
+<app-card-list [data]="[
+{
+  basePrice: 50,
+  finalPrice : 40,
+  discountPercent : 20,
+  cardData: {
+    id: '1234567',
+    cover: '../assets/game-covers/home-card-cover/rl.jpg',
+    description: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet',
+    name: 'Example Card',
+    hasWishlist: true
+  }
+}
+]" [isLoading]="isLoading" />
 
 
 

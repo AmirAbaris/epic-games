@@ -70,7 +70,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     HomeCardActionComponent,
     PriceLabelComponent,
     CardListComponent,
-    ActivateWishlistDirective,
+    ActivateWishlistDirective
   ],
   imports: [
     CommonModule,
