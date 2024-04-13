@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, input, model } from '@angular/core';
 import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item-input.model';
 import { HighlightButtonEnum } from '../enums/highlight-button.enum';
-import { HighlightButtonTypeEnumCaptionModel } from '../models/caption-models/highlight-button-type-caption.model';
+import { HighlightButtonTypeEnumCaptionModel } from '../models/caption-models/highlight-button-type-enum-caption.model';
 import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-button-caption.model';
 
 @Component({
@@ -16,7 +16,7 @@ export class HighlightPreviewItemComponent implements OnInit {
   isInWishlist = model.required<boolean>();
   wishlistAddProcessing = model.required<boolean>();
   wishlistButtonCaption = input.required<WishListButtonCaptionModel>();
-  highlightButtonTypeCaptionData = input.required<HighlightButtonTypeEnumCaptionModel>();
+  highlightButtonTypeCaption = input.required<HighlightButtonTypeEnumCaptionModel>();
   public buttonTypeEnum: typeof HighlightButtonEnum = HighlightButtonEnum;
   public itemId: string | undefined;
 
@@ -30,19 +30,34 @@ export class HighlightPreviewItemComponent implements OnInit {
   }
   //#endregion
 
+  //#region Handler methods
+  public onClickItemEventHandler(event: MouseEvent): void {
+    let isOnWishlistButton = this._isOnWishlistButton(event);
+
+    if (isOnWishlistButton) return;
+
+    this.clickItemEvent.emit();
+  }
+
+  public onClickWishlistButtonEventHandler(id: string): void {
+    this.clickWishlistButtonEvent.emit(id);
+  }
+  //#endregion
+
   //#region Main logic methods
   private _setItemIdValue(): void {
     this.itemId = this._convertDataToItemId();
   }
-  //#endregion
 
-  //#region Handler methods
-  public onClickItemEventHandler(): void {
-    this.clickItemEvent.emit();
-  }
+  /**
+   * checks if the mouse is just on the target we want; (not wishlist button!)
+   * @param target 
+   * @returns if the mouse is on the wishlist button or not
+   */
+  private _isOnWishlistButton(event: MouseEvent): boolean {
+    const target = event.target as HTMLElement;
 
-  public onCLickWishlistButtonEventHandler(id: string): void {
-    this.clickWishlistButtonEvent.emit(id);
+    return !!target.closest('.wishlist');
   }
   //#endregion
 

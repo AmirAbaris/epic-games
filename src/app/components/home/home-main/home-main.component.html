@@ -15,8 +15,8 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
 
 <app-highlight-preview-item [data]="{
     id: '11',
-    cover: '../assets/game-covers/highlight-preview-item-cover/scu.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/slogo.png',
+    cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
     description: 'test test est testest testest testest test test test est testest testest testest test test test est testest testest testest test test test est testest testest testest test',
     price: 55,
     highlightButtonType: highlightPrevButtonTypeEnum,
@@ -25,11 +25,11 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
     addTitle: 'add to wishlist',
     savedTitle: 'Saved',
       removeTitle: 'Remove'
-  }" [highlightButtonTypeCaptionData]="{
-    freePlay: 'Play for free',
-    wishlistPlay: 'Wishlist now',
-    buyPlay: 'Buy now',
-    saveNow: 'Save now'
+  }" [highlightButtonTypeCaption]="{
+    FREE: 'Play for free',
+    NOT_PUBLISHED: 'Wishlist now',
+    ARTICLE: 'Save now',
+    PUBLISHED: 'Buy now',
   }" [isInWishlist]="false" [wishlistAddProcessing]="true" />
 
 <!-- @for (item of freeGameItem; track $index) {

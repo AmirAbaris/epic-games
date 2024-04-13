@@ -49,6 +49,12 @@
     "gameType": {
       "BASE_GAME": "Base Game",
       "EDITION": "Edition"
+    },
+    "HighlightButtonType": {
+      "FREE": "Play for free",
+      "NOT_PUBLISHED": "Wishlist now",
+      "ARTICLE": "Save now",
+      "PUBLISHED": "Buy now"
     }
   }
 }
