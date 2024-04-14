@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, effect, input, model, untracked, viewChild } from '@angular/core';
+import { AfterContentChecked, Component, ElementRef, EventEmitter, Output, input, model, viewChild } from '@angular/core';
 import { HighlightSmallItemInputModel } from '../models/highlight-small-item-input.model';
 
 @Component({
