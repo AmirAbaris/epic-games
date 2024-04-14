@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-button-caption.model';
 
 @Component({
@@ -8,15 +8,12 @@ import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-bu
 })
 export class WishListButtonComponent implements OnInit {
   //#region Properties
-  itemId = input.required<string>();
   isInWishlist = input.required<boolean>();
   iconInput = input.required<string>();
   caption = input.required<WishListButtonCaptionModel>();
 
   public isAddingToWishlistInProgress = false;
   public showTooltip = false;
-
-  @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   //#endregion
 
   //#region Lifecycle methods
@@ -26,6 +23,10 @@ export class WishListButtonComponent implements OnInit {
   //#endregion
 
   //#region Main logic methods
+  public displayTooltip(): void {
+    this.showTooltip = true;
+  }
+
   /**
    * changes the loading value based of the isInWishlist methods value
    * if the the item was not in wishlist, it loads, else it will not load
@@ -34,19 +35,5 @@ export class WishListButtonComponent implements OnInit {
     this.isAddingToWishlistInProgress = !this.isInWishlist();
   }
 
-  private _displayTooltip(): void {
-    this.showTooltip = true;
-  }
-  //#endregion
-
-  //#region Handler methods
-  public handleWishlistButtonClickEvents(id: string): void {
-    this._onClickWishlistButtonEventHandler(id);
-    this._displayTooltip();
-
-  }
-  private _onClickWishlistButtonEventHandler(id: string): void {
-    this.clickWishlistButtonEvent.emit(id);
-  }
   //#endregion
 }

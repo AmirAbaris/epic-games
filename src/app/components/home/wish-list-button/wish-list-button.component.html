@@ -1,6 +1,5 @@
-<button class="wishlist-btn" (click)="handleWishlistButtonClickEvents(itemId())"
-  [matTooltip]="isInWishlist() ? caption().savedTitle : caption().removeTitle" [matTooltipDisabled]="!showTooltip"
-  matTooltipPosition="below" mat-button>
+<button class="wishlist-btn" [matTooltip]="isInWishlist() ? caption().savedTitle : caption().removeTitle"
+  [matTooltipDisabled]="!showTooltip" matTooltipPosition="below" (click)="displayTooltip()" mat-button>
   <span>
     <mat-icon [class.rotate-animation]="isAddingToWishlistInProgress && iconInput() === 'add_circle'">
       {{iconInput()}}

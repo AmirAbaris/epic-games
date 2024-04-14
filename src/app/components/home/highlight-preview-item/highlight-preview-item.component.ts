@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, input, model } from '@angular/core';
+import { Component, EventEmitter, Output, input, model } from '@angular/core';
 import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item-input.model';
 import { HighlightButtonEnum } from '../enums/highlight-button.enum';
 import { HighlightButtonTypeEnumCaptionModel } from '../models/caption-models/highlight-button-type-enum-caption.model';
@@ -9,7 +9,7 @@ import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-bu
   templateUrl: './highlight-preview-item.component.html',
   styleUrl: './highlight-preview-item.component.scss'
 })
-export class HighlightPreviewItemComponent implements OnInit {
+export class HighlightPreviewItemComponent {
   //#region Properties
   data = input.required<HighlightPreviewItemInputModel>();
   isLoading = input.required<boolean>();
@@ -18,16 +18,9 @@ export class HighlightPreviewItemComponent implements OnInit {
   wishlistButtonCaption = input.required<WishListButtonCaptionModel>();
   highlightButtonTypeCaption = input.required<HighlightButtonTypeEnumCaptionModel>();
   public buttonTypeEnum: typeof HighlightButtonEnum = HighlightButtonEnum;
-  public itemId: string | undefined;
 
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   @Output() clickItemEvent = new EventEmitter<void>();
-  //#endregion
-
-  //#region Lifecycle methods
-  ngOnInit(): void {
-    this._setItemIdValue();
-  }
   //#endregion
 
   //#region Handler methods
@@ -45,10 +38,6 @@ export class HighlightPreviewItemComponent implements OnInit {
   //#endregion
 
   //#region Main logic methods
-  private _setItemIdValue(): void {
-    this.itemId = this._convertDataToItemId();
-  }
-
   /**
    * checks if the mouse is just on the target we want; (not wishlist button!)
    * @param target 
@@ -60,10 +49,4 @@ export class HighlightPreviewItemComponent implements OnInit {
     return !!target.closest('.wishlist');
   }
   //#endregion
-
-  //#region Helper methods
-  private _convertDataToItemId(): string {
-    return this.data().id;
-  }
-  //#endregion 
 }

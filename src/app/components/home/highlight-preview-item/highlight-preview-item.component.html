@@ -13,14 +13,16 @@
             {{data().description}}
         </p>
         <div class="hidden gap-x-4 mt-8 lg:flex">
-            <app-highlight-button [buttonTypeEnumInput]="data().highlightButtonType"
-                [caption]="highlightButtonTypeCaption()" />
-            @if (data().highlightButtonType !== buttonTypeEnum.ARTICLE) {
-            <app-wish-list-button class="wishlist" *ngIf="itemId" [itemId]="itemId" [caption]="wishlistButtonCaption()"
-                [isInWishlist]="isInWishlist()" [iconInput]="isInWishlist() ? 'check_circle' : 'add_circle'"
-                (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)">
-            </app-wish-list-button>
+            <!-- Highlight button -->
+            <button class="buy-btn font-inter"
+                mat-raised-button>{{highlightButtonTypeCaption()[data().highlightButtonType]}}</button>
 
+            <!-- wishlist button -->
+            @if (data().highlightButtonType !== buttonTypeEnum.ARTICLE) {
+            <app-wish-list-button class="wishlist" [caption]="wishlistButtonCaption()" [isInWishlist]="isInWishlist()"
+                [iconInput]="isInWishlist() ? 'check_circle' : 'add_circle'"
+                (click)="onClickWishlistButtonEventHandler(data().id)">
+            </app-wish-list-button>
             }
         </div>
     </div>
