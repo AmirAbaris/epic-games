@@ -5,9 +5,10 @@ import { AfterViewInit, Directive, ElementRef, OnChanges, SimpleChanges, inject,
 })
 export class ScaleOnActivateDirective implements OnChanges, AfterViewInit {
   //#region Properties
+  private _elementRef = inject(ElementRef);
+
   isActive = model.required<boolean>();
   public targetElement: HTMLElement | undefined;
-  private _elementRef = inject(ElementRef);
   private readonly _SCALE_DURATION = 150; // milliseconds
   //#endregion
 

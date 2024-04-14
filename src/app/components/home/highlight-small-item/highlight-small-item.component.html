@@ -4,11 +4,10 @@
     <div class="bg-darkGray w-3/4 h-2 rounded-md"></div>
 </section>
 } @else {
-<section [class.bg-darkCharcoal]="isActive()"
-    class="flex gap-x-4 px-4 py-4 rounded-xl items-center cursor-pointer text-white w-full"
+<section #section class="flex gap-x-4 px-4 py-4 rounded-xl items-center cursor-pointer text-white w-full"
     (click)="onClickItemEventHandler()">
-    <img #itemCover class="rounded-md" scaleOnActivateDir [isActive]="isActive()" [ngSrc]="data().cover"
-        [alt]="data().name" width="45" height="60" priority>
+    <img class="rounded-md" scaleOnActivateDir [isActive]="isActive()" [ngSrc]="data().cover" [alt]="data().name"
+        width="45" height="60" priority>
     <h1 class="flex flex-wrap">{{data().name}}</h1>
 </section>
 }
