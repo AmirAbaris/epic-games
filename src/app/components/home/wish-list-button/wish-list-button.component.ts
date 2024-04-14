@@ -10,8 +10,9 @@ export class WishListButtonComponent implements OnInit {
   //#region Properties
   itemId = input.required<string>();
   isInWishlist = input.required<boolean>();
+  iconInput = input.required<string>();
   caption = input.required<WishListButtonCaptionModel>();
-  
+
   public isAddingToWishlistInProgress = false;
   public showTooltip = false;
 

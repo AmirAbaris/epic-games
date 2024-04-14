@@ -41,7 +41,6 @@ import { FreeGameItemComponent } from "../components/home/free-game-item/free-ga
 import { FreeGameListComponent } from '../components/home/free-game-list/free-game-list.component';
 import { HighlightPreviewItemComponent } from '../components/home/highlight-preview-item/highlight-preview-item.component';
 import { HighlightButtonComponent } from '../components/home/helpers/highlight-button/highlight-button.component';
-import { ImageColorToneComponent } from '../components/helpers/image-color-tone/image-color-tone.component';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -68,7 +67,6 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     FreeGameListComponent,
     HighlightPreviewItemComponent,
     HighlightButtonComponent,
-    ImageColorToneComponent,
     ActivateWishlistDirective,
     PriceLabelComponent
   ],
