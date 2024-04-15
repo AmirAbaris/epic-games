@@ -19,12 +19,8 @@ export class WishListButtonComponent {
   //#region Handler methods
   public onClickWishlistButtonEventHandler(): void {
     this.clickWishlistButtonEvent.emit();
-  }
-  //#endregion
-
-  //#region Main logic methods
-  public displayTooltip(): void {
     this.showTooltip = !this.showTooltip;
   }
   //#endregion
+
 }

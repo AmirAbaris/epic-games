@@ -19,7 +19,6 @@
     "WishListButton": {
       "inTitle": "In wishlist",
       "addTitle": "Add to Wishlist",
-      "savedTitle": "Saved",
       "removeTitle": "Remove From Wishlist"
     },
     "GameSliderItem": {
