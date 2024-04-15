@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, ElementRef, EventEmitter, Output, input, model, viewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, input, model, viewChild } from '@angular/core';
 import { HighlightSmallItemInputModel } from '../models/highlight-small-item-input.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { HighlightSmallItemInputModel } from '../models/highlight-small-item-inp
   templateUrl: './highlight-small-item.component.html',
   styleUrl: './highlight-small-item.component.scss',
 })
-export class HighlightSmallItemComponent implements AfterContentChecked {
+export class HighlightSmallItemComponent {
   //#region Properties
   data = input.required<HighlightSmallItemInputModel>();
   isLoading = input.required<boolean>();
@@ -16,30 +16,9 @@ export class HighlightSmallItemComponent implements AfterContentChecked {
   targetSection = viewChild<ElementRef<HTMLElement>>('section');
   //#endregion
 
-  //#region Lifecycle methods
-  ngAfterContentChecked(): void {
-    this._toggleBackgroundColor();
-  }
-  //#endregion
-
   //#region Handler methods
   public onClickItemEventHandler(): void {
     this.clickItemEvent.emit();
-  }
-  //#endregion
-
-  //#region Main logic methods
-  /**
-   * manipulate the section based on isActive input value to change the background color of the section
-   */
-  private _toggleBackgroundColor(): void {
-    const sectionElement = this.targetSection()?.nativeElement;
-
-    if (this.isActive() && sectionElement) {
-      sectionElement.classList.add('bg-darkCharcoal');
-    } else if (sectionElement) {
-      sectionElement.classList.remove('bg-darkCharcoal');
-    }
   }
   //#endregion
 }
