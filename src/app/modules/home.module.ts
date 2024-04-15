@@ -42,6 +42,7 @@ import { FreeGameListComponent } from '../components/home/free-game-list/free-ga
 import { HomeCardGameComponent } from '../components/home/home-card-game/home-card-game.component';
 import { HomeCardActionComponent } from '../components/home/home-card-action/home-card-action.component';
 import { CardListComponent } from '../components/home/card-list/card-list.component';
+import { IsHomeCardActionPipe } from '../pipes/is-home-card-action.pipe';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -70,6 +71,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     HomeCardActionComponent,
     PriceLabelComponent,
     CardListComponent,
+    IsHomeCardActionPipe,
     ActivateWishlistDirective
   ],
   imports: [
