@@ -43,6 +43,7 @@ import { HomeCardGameComponent } from '../components/home/home-card-game/home-ca
 import { HomeCardActionComponent } from '../components/home/home-card-action/home-card-action.component';
 import { CardListComponent } from '../components/home/card-list/card-list.component';
 import { IsHomeCardActionPipe } from '../pipes/is-home-card-action.pipe';
+import { TruncateLinePipe } from '../pipes/truncate-line.pipe';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -72,6 +73,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     PriceLabelComponent,
     CardListComponent,
     IsHomeCardActionPipe,
+    TruncateLinePipe,
     ActivateWishlistDirective
   ],
   imports: [

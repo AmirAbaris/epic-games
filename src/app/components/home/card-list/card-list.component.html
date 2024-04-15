@@ -1,9 +1,11 @@
 <div class="flex flex-1 gap-x-4">
     @for (item of data(); track $index) {
-    @if (item | isHomeCardAction) {
-    <app-home-card-action [data]="item" [isLoading]="isLoading()" />
-    } @else {
-    <app-home-card-game [data]="item" [isLoading]="isLoading()" />
-    }
+    <div class="flex-1">
+        @if (item | isHomeCardAction) {
+        <app-home-card-action [data]="item" [isLoading]="isLoading()" />
+        } @else {
+        <app-home-card-game [data]="item" [isLoading]="isLoading()" />
+        }
+    </div>
     }
 </div>
