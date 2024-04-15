@@ -19,6 +19,9 @@ export class CardListComponent {
 
   //#region Main logic methods
   public isHomeCardAction(item: HomeCardActionInputModel | HomeCardGameInputModel): item is HomeCardActionInputModel {
+    console.log(item);
+    // TODO: make it pipe!
+
     return (item as HomeCardActionInputModel).actionName !== undefined;
   }
   //#endregion
