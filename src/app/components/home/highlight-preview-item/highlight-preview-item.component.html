@@ -1,7 +1,7 @@
 @if (isLoading()) {
 <div class="animate-pulse bg-darkCharcoal w-[1000px] h-[600px] rounded-2xl aspect-video"></div>
 } @else {
-<section class="relative font-inter cursor-pointer" (click)="onClickItemEventHandler()">
+<section class="relative font-inter cursor-pointer" (click)="onClickItemEventHandler(data().id)">
     <img class="rounded-2xl object-cover aspect-video" [ngSrc]="data().cover" [alt]="'game-cover'" width="1280"
         height="720" priority>
     <div class="flex flex-col gap-y-2 absolute top-32 left-16">
@@ -19,7 +19,7 @@
             <!-- wishlist button -->
             @if (data().highlightButtonType !== buttonTypeEnum.ARTICLE) {
             <app-wish-list-button class="wishlist" [caption]="wishlistButtonCaption()" [isInWishlist]="isInWishlist()"
-                [iconInput]="isInWishlist() ? 'check_circle' : 'add_circle'"
+                [isWishlistProcessing]="isWishlistProcessing()"
                 (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler(data().id)">
             </app-wish-list-button>
             }

@@ -24,13 +24,13 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
     inTitle: 'in wishlist',
     addTitle: 'add to wishlist',
     savedTitle: 'Saved',
-      removeTitle: 'Remove'
+    removeTitle: 'Remove From Wishlist'
   }" [highlightButtonTypeCaption]="{
     FREE: 'Play for free',
     NOT_PUBLISHED: 'Wishlist now',
     ARTICLE: 'Save now',
     PUBLISHED: 'Buy now',
-  }" [isInWishlist]="false" [wishlistAddProcessing]="true" />
+  }" [isInWishlist]="false" [isWishlistProcessing]="true" />
 
 <!-- @for (item of freeGameItem; track $index) {
 <app-free-game-item [data]="item" [caption]="freeGameItemCaption" [isLoading]="isLoading" (clickEvent)="$event" />

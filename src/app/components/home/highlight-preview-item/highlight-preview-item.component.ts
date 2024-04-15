@@ -14,23 +14,21 @@ export class HighlightPreviewItemComponent {
   data = input.required<HighlightPreviewItemInputModel>();
   isLoading = input.required<boolean>();
   isInWishlist = model.required<boolean>();
-  wishlistAddProcessing = model.required<boolean>();
+  isWishlistProcessing = model.required<boolean>();
   wishlistButtonCaption = input.required<WishListButtonCaptionModel>();
   highlightButtonTypeCaption = input.required<HighlightButtonTypeEnumCaptionModel>();
   public buttonTypeEnum: typeof HighlightButtonEnum = HighlightButtonEnum;
 
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
-  @Output() clickItemEvent = new EventEmitter<void>();
+  @Output() clickItemEvent = new EventEmitter<string>();
   //#endregion
 
   //#region Handler methods
-  public onClickItemEventHandler(): void {
-    console.log('item click');
-    this.clickItemEvent.emit();
+  public onClickItemEventHandler(id: string): void {
+    this.clickItemEvent.emit(id);
   }
 
   public onClickWishlistButtonEventHandler(id: string): void {
-    console.log('wish click');
     this.clickWishlistButtonEvent.emit(id);
   }
   //#endregion

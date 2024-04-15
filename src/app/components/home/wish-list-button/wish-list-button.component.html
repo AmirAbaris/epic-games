@@ -3,9 +3,15 @@
   [matTooltipDisabled]="!showTooltip" matTooltipPosition="below" (click)="displayTooltip()"
   (click)="onClickWishlistButtonEventHandler(); $event.stopImmediatePropagation()" mat-button>
   <span>
-    <mat-icon [class.rotate-animation]="isAddingToWishlistInProgress && iconInput() === 'add_circle'">
-      {{iconInput()}}
+    @if (isWishlistProcessing()) {
+    <mat-icon [ngClass]="'rotate-animation'">
+      add_circle
     </mat-icon>
+    } @else {
+    <mat-icon>
+      check_circle
+    </mat-icon>
+    }
     {{ (isInWishlist() ? caption().inTitle : caption().addTitle) | uppercase }}
   </span>
 </button>
