@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
 import { CardListInputType } from '../types/card-list-input.type';
-import { HomeCardActionInputModel } from '../models/home-card-action-input.model';
-import { HomeCardGameInputModel } from '../models/home-card-game-input.model';
 
 @Component({
   selector: 'app-card-list',
@@ -15,16 +13,6 @@ export class CardListComponent {
 
   @Output() clickCardEvent = new EventEmitter<void>();
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
-  //#endregion
-
-  //#region Main logic methods
-  public isHomeCardAction(item: HomeCardActionInputModel | HomeCardGameInputModel): item is HomeCardActionInputModel {
-    console.log(item);
-
-    // TODO: make it pipe!
-
-    return (item as HomeCardActionInputModel).actionName !== undefined;
-  }
   //#endregion
 
   //#region Handler methods
