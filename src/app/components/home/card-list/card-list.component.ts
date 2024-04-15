@@ -8,7 +8,7 @@ import { CardListInputType } from '../types/card-list-input.type';
 })
 export class CardListComponent {
   //#region Properties
-  data = input.required<CardListInputType>();
+  data = input.required<CardListInputType[]>();
   isLoading = input.required<boolean>();
 
   @Output() clickCardEvent = new EventEmitter<void>();
