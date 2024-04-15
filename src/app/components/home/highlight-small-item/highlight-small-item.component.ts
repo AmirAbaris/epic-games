@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Output, input, model, viewChild } from '@angular/core';
+import { Component, EventEmitter, Output, input, model } from '@angular/core';
 import { HighlightSmallItemInputModel } from '../models/highlight-small-item-input.model';
 
 @Component({
@@ -13,7 +13,6 @@ export class HighlightSmallItemComponent {
   isActive = model.required<boolean>();
 
   @Output() clickItemEvent = new EventEmitter<void>();
-  targetSection = viewChild<ElementRef<HTMLElement>>('section');
   //#endregion
 
   //#region Handler methods
