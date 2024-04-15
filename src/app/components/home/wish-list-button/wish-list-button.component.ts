@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
 import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-button-caption.model';
 
 @Component({
@@ -12,6 +12,8 @@ export class WishListButtonComponent implements OnInit {
   iconInput = input.required<string>();
   caption = input.required<WishListButtonCaptionModel>();
 
+  @Output() clickWishlistButtonEvent = new EventEmitter<void>();
+
   public isAddingToWishlistInProgress = false;
   public showTooltip = false;
   //#endregion
@@ -19,6 +21,13 @@ export class WishListButtonComponent implements OnInit {
   //#region Lifecycle methods
   ngOnInit(): void {
     this._manageWishlistProgress();
+  }
+  //#endregion
+
+  //#region Handler methods
+  public onClickWishlistButtonEventHandler(): void {
+    console.log('chld');
+    this.clickWishlistButtonEvent.emit();
   }
   //#endregion
 

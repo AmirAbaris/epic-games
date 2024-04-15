@@ -24,29 +24,14 @@ export class HighlightPreviewItemComponent {
   //#endregion
 
   //#region Handler methods
-  public onClickItemEventHandler(event: MouseEvent): void {
-    let isOnWishlistButton = this._isOnWishlistButton(event);
-
-    if (isOnWishlistButton) return;
-
+  public onClickItemEventHandler(): void {
+    console.log('item click');
     this.clickItemEvent.emit();
   }
 
   public onClickWishlistButtonEventHandler(id: string): void {
+    console.log('wish click');
     this.clickWishlistButtonEvent.emit(id);
-  }
-  //#endregion
-
-  //#region Main logic methods
-  /**
-   * checks if the mouse is just on the target we want; (not wishlist button!)
-   * @param target 
-   * @returns if the mouse is on the wishlist button or not
-   */
-  private _isOnWishlistButton(event: MouseEvent): boolean {
-    const target = event.target as HTMLElement;
-
-    return !!target.closest('.wishlist');
   }
   //#endregion
 }

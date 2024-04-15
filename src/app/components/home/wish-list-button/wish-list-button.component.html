@@ -1,5 +1,7 @@
+<!-- Angular passes Mouse Event type automatically to $event and we can call methods on $event! -->
 <button class="wishlist-btn" [matTooltip]="isInWishlist() ? caption().savedTitle : caption().removeTitle"
-  [matTooltipDisabled]="!showTooltip" matTooltipPosition="below" (click)="displayTooltip()" mat-button>
+  [matTooltipDisabled]="!showTooltip" matTooltipPosition="below" (click)="displayTooltip()"
+  (click)="onClickWishlistButtonEventHandler(); $event.stopImmediatePropagation()" mat-button>
   <span>
     <mat-icon [class.rotate-animation]="isAddingToWishlistInProgress && iconInput() === 'add_circle'">
       {{iconInput()}}
