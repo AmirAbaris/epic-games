@@ -90,6 +90,11 @@ export class HomeMainComponent implements OnInit {
   //endregion
 
   //region main logic methods
+  public clickCard(): void {
+    // needs refactor after implementing the routes!
+    console.log('click card works');
+  }
+
   private _getAllGameData(): void {
     forkJoin([
       this._gameService.getHighlightGames(),
