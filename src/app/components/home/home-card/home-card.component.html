@@ -17,7 +17,7 @@
     <div class="flex flex-1 flex-col justify-start text-white font-inter gap-y-2">
         <h1 (click)="onClickCardEventHandler()" class="text-[22px] leading-6 cursor-pointer">{{data().name}}</h1>
         @if (data().description) {
-        <p class="text-mediumGray text-base break-all">{{data().description | truncateLine }}</p>
+        <p class="text-mediumGray text-base break-all line-clamp-3">{{data().description }}</p>
         }
     </div>
     <ng-content />

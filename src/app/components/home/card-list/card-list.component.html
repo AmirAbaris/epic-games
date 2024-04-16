@@ -2,10 +2,12 @@
     @for (item of data(); track $index) {
     <div class="flex-1">
         @if (item | isHomeCardAction) {
-        <app-home-card-action [data]="item" [isLoading]="isLoading()" (clickCardEvent)="onClickCardEventHandler()"
+        <app-home-card-action [data]="item" [isLoading]="isLoading()"
+            (clickCardEvent)="onClickCardEventHandler(item.cardData.id)"
             (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
         } @else {
-        <app-home-card-game [data]="item" [isLoading]="isLoading()" (clickCardEvent)="onClickCardEventHandler()"
+        <app-home-card-game [data]="item" [isLoading]="isLoading()"
+            (clickCardEvent)="onClickCardEventHandler(item.cardData.id)"
             (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
         }
     </div>
