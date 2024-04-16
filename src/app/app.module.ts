@@ -23,8 +23,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HomeModule,
+    AppRoutingModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

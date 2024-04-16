@@ -27,6 +27,7 @@ import { GameType } from "../../../enums/game-type.enum";
 import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-item-caption.model";
 import { FreeGameListInputModel } from "../models/free-game-list-input.model";
 import { FreeGameListCaptionModel } from "../models/caption-models/free-game-list-caption.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-home-main",
@@ -100,6 +101,11 @@ export class HomeMainComponent implements OnInit {
   //endregion
 
   //region main logic methods
+  public clickCard(): void {
+    // needs refactor after implementing the routes!
+    console.log('click card works');
+  }
+
   private _getAllGameData(): void {
     forkJoin([
       this._gameService.getHighlightGames(),
