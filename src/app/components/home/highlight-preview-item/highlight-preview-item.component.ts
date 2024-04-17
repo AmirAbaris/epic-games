@@ -26,11 +26,15 @@ export class HighlightPreviewItemComponent implements AfterViewChecked {
 
   //#region Lifecycle methods
   ngAfterViewChecked(): void {
-    console.log(this.bgContainerRef);
-    setTimeout(() => {
-      const linear = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),'
-      this.bgContainerRef().nativeElement.style.backgroundImage = `${linear} url(${this.data().cover})`;
-    }, 1000)
+    this._applyBackGroundImage();
+
+  }
+  //#endregion
+
+  //#region Main logic methods
+  private _applyBackGroundImage(): void {
+    const linear = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),'
+    this.bgContainerRef().nativeElement.style.backgroundImage = `${linear} url(${this.data().cover})`;
   }
   //#endregion
 
