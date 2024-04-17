@@ -74,7 +74,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     PriceLabelComponent,
     CardListComponent,
     IsHomeCardActionPipe,
-    ActivateWishlistDirective
+    ActivateWishlistDirective,
     HighlightSmallItemComponent,
     ActivateWishlistDirective,
     ScaleOnActivateDirective
