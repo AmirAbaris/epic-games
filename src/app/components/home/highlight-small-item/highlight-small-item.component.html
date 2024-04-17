@@ -1,0 +1,14 @@
+@if (isLoading()) {
+<section class="animate-pulse flex gap-x-4 px-4  py-4 rounded-xl items-center bg-darkCharcoal">
+    <div class="rounded-xl w-[85px] h-[60px] bg-darkGray"></div>
+    <div class="bg-darkGray w-3/4 h-2 rounded-md"></div>
+</section>
+} @else {
+<section [class.bg-darkCharcoal]="isActive()"
+    class="flex gap-x-4 px-4 py-4 rounded-xl items-center cursor-pointer text-white w-full"
+    (click)="onClickItemEventHandler()">
+    <img class="rounded-md" scaleOnActivateDir [isActive]="isActive()" [ngSrc]="data().cover" [alt]="data().name"
+        width="45" height="60" priority>
+    <h1 class="flex flex-wrap">{{data().name}}</h1>
+</section>
+}
