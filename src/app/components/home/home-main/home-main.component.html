@@ -1,10 +1,14 @@
-@if (highlightGames && largeHighlightGameCaption && gameCards && freeGameCards && freeGamesCaption &&
+<!-- @if (highlightGames && largeHighlightGameCaption && gameCards && freeGameCards && freeGamesCaption &&
 freeGameManagementCaption && fortniteGameCards && fortniteCaption && freeGameItemCaption && gameItemCaption &&
-categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption && nonGameBanners && gameListItem) {
+categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption && nonGameBanners && gameListItem) { -->
+@for (item of highlightSmallItemData; track $index) {
+<app-highlight-small-item [data]="item" [isLoading]="isLoading" [isActive]="true" />
+}
 <!--  <app-highlight-game-slider-item [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption"/>-->
 
 <!-- <app-game-slider-item-management [gameCardInputs]="gameSliderItemData" [isLoading]="isLoading" /> -->
 
+<!-- <app-home-card [data]="{
 <!-- <app-home-card [data]="{
   id: '123456',
   cover: '../assets/game-covers/home-card-cover/rl.jpg',
@@ -78,4 +82,4 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
 <!--  <app-game-banner-management [gameInput]="gameBanners.slice(2)"/>-->
 
 <!--  <app-game-banner-management [gameInput]="nonGameBanners"/>-->
-}
+<!-- } -->
