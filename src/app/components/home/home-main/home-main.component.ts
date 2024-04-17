@@ -25,8 +25,20 @@ export class HomeMainComponent implements OnInit {
   public categoryManagementData: CategoryManagementInputModel = mockData;
   public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
   public isLoading: boolean = true;
+  public isActive = true;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameList: FreeGameListInputModel = freeGameItemMockData;
+  public sliderGameType: GameType = GameType.BASE_GAME;
+  public highlightSmallItemData = [{
+    isActive: false,
+    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    name: 'squad'
+  },
+  {
+    isActive: false,
+    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    name: 'squad'
+  }];
 
   public gameItemCaption: CategoryItemCaptionModel | undefined;
   public categoryListCaption: CategoryListCaptionModel | undefined;
@@ -34,7 +46,6 @@ export class HomeMainComponent implements OnInit {
   public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
-  public sliderGameType: GameType = GameType.BASE_GAME;
 
   private readonly captionPaths = {
     freeGameCard: "home.FreeGameCard",

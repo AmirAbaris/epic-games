@@ -24,6 +24,8 @@ import { FreeGameItemComponent } from "../components/home/free-game-item/free-ga
 import { FreeGameListComponent } from '../components/home/free-game-list/free-game-list.component';
 import { HomeCardGameComponent } from '../components/home/home-card-game/home-card-game.component';
 import { HomeCardActionComponent } from '../components/home/home-card-action/home-card-action.component';
+import { HighlightSmallItemComponent } from '../components/home/highlight-small-item/highlight-small-item.component';
+import { ScaleOnActivateDirective } from '../directives/scale-on-activate.directive';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -42,7 +44,9 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     HomeCardGameComponent,
     HomeCardActionComponent,
     PriceLabelComponent,
+    HighlightSmallItemComponent,
     ActivateWishlistDirective,
+    ScaleOnActivateDirective
   ],
   imports: [
     CommonModule,

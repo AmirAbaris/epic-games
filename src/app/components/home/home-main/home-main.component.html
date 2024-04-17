@@ -4,7 +4,7 @@
   description: 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet',
   name: 'Example Card',
   hasWishlist: true
-}" [isLoading]="isLoading" (clickWishlistButton)="$event" (clickCardEvent)="$event" />
+}" [isLoading]="isLoading" (clickWishlistButton)="$event" (clickCardEvent)="$event" /> -->
 
 <app-home-card-game [data]="{
   basePrice: 50,
@@ -47,3 +47,7 @@
 <app-category-management [data]="categoryManagementData" [categoryListCaption]="categoryListCaption"
   [categoryItemCaption]="categoryItemCaption" [isLoading]="isLoading" />
 }
+
+@for (item of highlightSmallItemData; track $index) {
+  <app-highlight-small-item [data]="item" [isLoading]="isLoading" [isActive]="true" />
+  }
