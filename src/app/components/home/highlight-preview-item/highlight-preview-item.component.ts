@@ -31,13 +31,6 @@ export class HighlightPreviewItemComponent implements AfterViewChecked {
   }
   //#endregion
 
-  //#region Main logic methods
-  private _applyBackGroundImage(): void {
-    const linear = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),'
-    this.bgContainerRef().nativeElement.style.backgroundImage = `${linear} url(${this.data().cover})`;
-  }
-  //#endregion
-
   //#region Handler methods
   public onClickItemEventHandler(id: string): void {
     this.clickItemEvent.emit(id);
@@ -45,6 +38,13 @@ export class HighlightPreviewItemComponent implements AfterViewChecked {
 
   public onClickWishlistButtonEventHandler(id: string): void {
     this.clickWishlistButtonEvent.emit(id);
+  }
+  //#endregion
+
+  //#region Main logic methods
+  private _applyBackGroundImage(): void {
+    const linear = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),'
+    this.bgContainerRef().nativeElement.style.backgroundImage = `${linear} url(${this.data().cover})`;
   }
   //#endregion
 }
