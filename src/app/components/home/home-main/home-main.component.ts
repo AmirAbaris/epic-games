@@ -25,7 +25,6 @@ export class HomeMainComponent implements OnInit {
   public categoryManagementData: CategoryManagementInputModel = mockData;
   public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
   public isLoading: boolean = true;
-
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameList: FreeGameListInputModel = freeGameItemMockData;
 
@@ -38,14 +37,10 @@ export class HomeMainComponent implements OnInit {
   public sliderGameType: GameType = GameType.BASE_GAME;
 
   private readonly captionPaths = {
-    largeHighlightGame: "home.LargeHighlightGame",
-    freeGameCardManagement: "home.FreeGameCardManagement",
     freeGameCard: "home.FreeGameCard",
-    fortniteCardManagement: "home.FortniteCardManagement",
     gameItemList: 'home.GameItemList',
     categoryList: 'home.CategoryList',
     categoryItem: 'home.CategoryItem',
-    gameSliderItem: 'home.GameSliderItem',
     freeGameList: 'home.FreeGameList',
     freeGameItem: 'home.FreeGameItem',
     gameType: 'home.enum-captions.gameType'
