@@ -11,7 +11,7 @@ export class CardListComponent {
   data = input.required<CardListInputType[]>();
   isLoading = input.required<boolean>();
 
-  @Output() clickCardEvent = new EventEmitter<string | undefined>();
+  @Output() clickCardEvent = new EventEmitter<string>();
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   //#endregion
 

@@ -11,13 +11,12 @@ export class HomeCardActionComponent {
   data = input.required<HomeCardActionInputModel>();
   isLoading = input.required<boolean>();
 
-  @Output() clickCardEvent = new EventEmitter<void>();
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   //#endregion
 
   //#region Handler methods
   public onClickCardEventHandler(): void {
-    this.clickCardEvent.emit();
+    this.data().clickCardFn();
   }
 
   public onClickWishlistButtonEventHandler(id: string): void {
