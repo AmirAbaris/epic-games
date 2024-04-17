@@ -43,6 +43,8 @@ import { HomeCardGameComponent } from '../components/home/home-card-game/home-ca
 import { HomeCardActionComponent } from '../components/home/home-card-action/home-card-action.component';
 import { CardListComponent } from '../components/home/card-list/card-list.component';
 import { IsHomeCardActionPipe } from '../pipes/is-home-card-action.pipe';
+import { HighlightSmallItemComponent } from '../components/home/highlight-small-item/highlight-small-item.component';
+import { ScaleOnActivateDirective } from '../directives/scale-on-activate.directive';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -73,6 +75,9 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     CardListComponent,
     IsHomeCardActionPipe,
     ActivateWishlistDirective
+    HighlightSmallItemComponent,
+    ActivateWishlistDirective,
+    ScaleOnActivateDirective
   ],
   imports: [
     CommonModule,

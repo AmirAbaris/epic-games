@@ -47,6 +47,7 @@ export class HomeMainComponent implements OnInit {
   public categoryManagementData: CategoryManagementInputModel = mockData;
   public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
   public isLoading: boolean = true;
+  public isActive = true;
   public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameManagementCaption: freeGameCardManagementCaptionModel | undefined;
@@ -58,6 +59,17 @@ export class HomeMainComponent implements OnInit {
   // public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
+
+  public highlightSmallItemData = [{
+    isActive: false,
+    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    name: 'squad'
+  },
+  {
+    isActive: false,
+    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    name: 'squad'
+  }];
 
   private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
