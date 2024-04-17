@@ -22,5 +22,4 @@ export class WishListButtonComponent {
     this.showTooltip = !this.showTooltip;
   }
   //#endregion
-
 }
