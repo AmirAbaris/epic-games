@@ -1,10 +1,3 @@
-@if (highlightGames && largeHighlightGameCaption && gameCards && freeGameCards && freeGamesCaption &&
-freeGameManagementCaption && fortniteGameCards && fortniteCaption && freeGameItemCaption && gameItemCaption &&
-categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption && nonGameBanners && gameListItem) {
-<!--  <app-highlight-game-slider-item [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption"/>-->
-
-<!-- <app-game-slider-item-management [gameCardInputs]="gameSliderItemData" [isLoading]="isLoading" /> -->
-
 <app-home-card [data]="{
   id: '123456',
   cover: '../assets/game-covers/home-card-cover/rl.jpg',
@@ -38,26 +31,19 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
   clickCardFn: clickCard
 }" [isLoading]="isLoading" />
 
-<!-- @for (item of freeGameItem; track $index) {
-<app-free-game-item [data]=" item" [caption]="freeGameItemCaption" [isLoading]="isLoading" (clickEvent)="$event" />
-} -->
+@for (item of freeGameList.freeGameItemData; track $index) {
+@if (freeGameItemCaption) {
+<app-free-game-item [data]="item" [caption]="freeGameItemCaption" [isLoading]="isLoading" (clickEvent)="$event" />
+}
+}
+@if (freeGameItemCaption && freeGameListCaption) {
+<app-free-game-list [data]="freeGameList" [isLoading]="isLoading" [gameItemCaption]="freeGameItemCaption"
+  [caption]="freeGameListCaption" (clickEvent)="$event" (viewMoreClickEvent)="$event" />
+}
 
-<!-- <app-free-game-item [data]="item" [caption]="freeGameItemCaption" [isLoading]="isLoading" (clickEvent)="$event" /> -->
-<!-- <app-free-game-list [data]="freeGameList" [isLoading]="isLoading" [gameItemCaption]="freeGameItemCaption"
-    [caption]="freeGameListCaption" (clickEvent)="$event" (viewMoreClickEvent)="$event" /> -->
-<!--  <app-game-slider-management/>-->
+<app-game-slider-management [gameCardInputs]="gameSliderItemData" [isLoading]="isLoading" />
 
-<!--  <app-free-game-slider-item-management [gameInputs]="freeGameCards" [cardCaption]="freeGamesCaption"-->
-<!--                                 [managementCaption]="freeGameManagementCaption" [iconInput]="'redeem'"/>-->
-
-<!--  <app-fortnite-card-management [gameInput]="fortniteGameCards" [captionInput]="fortniteCaption"/>-->
-
-<!--  <app-game-banner-management [gameInput]="gameBanners.slice(0, 2)"/>-->
-
-<!--  <app-category-management [data]="categoryManagementData" [categoryListCaption]="categoryListCaption"-->
-<!--                           [categoryItemCaption]="categoryItemCaption" [isLoading]="isLoading"/>-->
-
-<!--  <app-game-banner-management [gameInput]="gameBanners.slice(2)"/>-->
-
-<!--  <app-game-banner-management [gameInput]="nonGameBanners"/>-->
+@if (categoryItemCaption && categoryListCaption) {
+<app-category-management [data]="categoryManagementData" [categoryListCaption]="categoryListCaption"
+  [categoryItemCaption]="categoryItemCaption" [isLoading]="isLoading" />
 }
