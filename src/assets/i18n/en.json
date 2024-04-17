@@ -1,9 +1,5 @@
 {
   "home": {
-    "LargeHighlightGame": {
-      "buyButton": "BUY NOW",
-      "addToWishlistButton": "ADD TO WISHLIST"
-    },
     "CategoryItem": {
       "freeTitle": "FREE",
       "comingSoonTitle": "Coming Soon",
