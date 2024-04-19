@@ -16,9 +16,12 @@ export class WishListButtonComponent {
   //#endregion
 
   //#region Handler methods
-  public onClickButtonEventHandler(): void {
+  public onClickButtonEventHandler(event: MouseEvent): void {
+    // to just call this method if there was another click event for the parent
+    // it will not let both methods to be called when clicked on the wishlist button, just calls this one!
+    event.stopPropagation();
+
     this.clickButtonEvent.emit();
-    console.log(this.tooltipMessage);
   }
   //#endregion
 }

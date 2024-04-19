@@ -3,15 +3,15 @@
     matTooltipPosition="below" (click)="onClickWishlistButtonEventHandler(); $event.stopImmediatePropagation()"
     mat-button>
     <span>
-        @if (isInWishlist()) {
-        <mat-icon [class.rotate-animation]="isWishlistProcessing()">
-            add_circle
-        </mat-icon>
-        } @else {
+        @if (isInWishlist() && !isWishlistProcessing()) {
         <mat-icon>
             check_circle
         </mat-icon>
+        } @else {
+        <mat-icon [class.rotate-animation]="isWishlistProcessing()">
+            add_circle
+        </mat-icon>
         }
-        {{ (isInWishlist() ? caption().addTitle : caption().inTitle) | uppercase }}
+        {{ (isInWishlist() ? caption().inTitle : caption().addTitle) | uppercase }}
     </span>
 </button>

@@ -1,8 +1,8 @@
-<!-- @if (isLoading()) {
-<div class="animate-pulse bg-darkCharcoal w-[1000px] h-[600px] rounded-2xl aspect-video"></div>
-} @else { -->
+@if (isLoading()) {
+<div class="animate-pulse bg-darkCharcoal min-h-[400px] rounded-2xl aspect-square sm:aspect-video"></div>
+} @else {
 <section class="font-inter cursor-pointer relative" (click)="onClickItemEventHandler(data().id)" activateWishlistDir>
-    <app-wish-list-button class="wishlist" />
+    <app-wish-list-button class="wishlist" (clickButtonEvent)="onClickWishlistButtonEventHandler(data().id)" />
     <div
         class="relative rounded-2xl overflow-hidden after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-gradient-to-b after:from-transparent after:to-semiTransparent sm:after:bg-gradient-to-l">
         <img class="rounded-2xl object-cover aspect-square sm:aspect-video" [ngSrc]="data().cover" [alt]="'game-cover'"
@@ -28,4 +28,4 @@
         </div>
     </div>
 </section>
-<!-- } -->
+}
