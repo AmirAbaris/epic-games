@@ -16,7 +16,7 @@ export class HomeCardActionComponent {
 
   //#region Handler methods
   public onClickCardEventHandler(): void {
-    this.data().clickCardFn();
+    this._callClickCardFn();
   }
 
   public onClickWishlistButtonEventHandler(id: string): void {
@@ -24,6 +24,15 @@ export class HomeCardActionComponent {
   }
 
   public onClickCardFnHandler(): void {
+    this._callClickCardFn();
+  }
+  //#endregion
+
+  //#region Main logic methods
+  /**
+   * because we call this fun multiple times, by giving it a separate func it'll make the logic more readable
+   */
+  private _callClickCardFn(): void {
     this.data().clickCardFn();
   }
   //#endregion
