@@ -9,8 +9,8 @@
 </section>
 } @else {
 <section class="flex flex-col gap-y-4 relative" activateWishlistDir>
-    <!-- <app-wish-list-button *ngIf="data().hasWishlist" (click)="onClickWishlistButtonEventHandler(data().id)"
-        class="wishlist" /> -->
+    <app-wish-list-button *ngIf="data().hasWishlist" (click)="onClickWishlistButtonEventHandler(data().id)"
+        class="wishlist" />
     <img class="object-cover rounded-xl cursor-pointer hover:brightness-110 transform ease-out duration-200 aspect-video mb-2"
         (click)="onClickCardEventHandler()" [ngSrc]="data().cover" [alt]="data().name" height="480" width="854"
         priority>

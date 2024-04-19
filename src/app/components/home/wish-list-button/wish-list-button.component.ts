@@ -1,36 +1,25 @@
-import { Component, EventEmitter, OnChanges, Output, SimpleChanges, input } from '@angular/core';
-import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-button-caption.model';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-wish-list-button',
   templateUrl: './wish-list-button.component.html',
   styleUrl: './wish-list-button.component.scss'
 })
-export class WishListButtonComponent implements OnChanges {
+export class WishListButtonComponent {
   //#region Properties
-  isInWishlist = input.required<boolean>();
-  isWishlistProcessing = input.required<boolean>();
-  caption = input.required<WishListButtonCaptionModel>();
-  public showTooltip = true;
+  private _translateService = inject(TranslateService);
+  
+  @Output() clickButtonEvent = new EventEmitter();
 
-  @Output() clickWishlistButtonEvent = new EventEmitter<void>();
-  //#endregion
-
-  //#region Lifecycle methods
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['isInWishlist']) {
-      this._toggleTooltip();
-    }
-  }
+  public tooltipMessage: string = this._translateService.instant(
+    'home.WishListButton.addTitle',
+  );
   //#endregion
 
   //#region Handler methods
-  public onClickWishlistButtonEventHandler(): void {
-    this.clickWishlistButtonEvent.emit();
-  }
-
-  private _toggleTooltip(): void {
-    this.showTooltip = !this.showTooltip;
+  public onClickButtonEventHandler(): void {
+    this.clickButtonEvent.emit();
   }
   //#endregion
 }
