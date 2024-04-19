@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, EventEmitter, Output, input, viewChild } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item-input.model';
 import { HighlightButtonEnum } from '../enums/highlight-button.enum';
 import { HighlightButtonTypeEnumCaptionModel } from '../models/caption-models/highlight-button-type-enum-caption.model';
@@ -9,7 +9,7 @@ import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-bu
   templateUrl: './highlight-preview-item.component.html',
   styleUrl: './highlight-preview-item.component.scss'
 })
-export class HighlightPreviewItemComponent implements AfterViewChecked {
+export class HighlightPreviewItemComponent {
   //#region Properties
   data = input.required<HighlightPreviewItemInputModel>();
   isLoading = input.required<boolean>();
@@ -21,14 +21,6 @@ export class HighlightPreviewItemComponent implements AfterViewChecked {
 
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   @Output() clickItemEvent = new EventEmitter<string>();
-  bgContainerRef = viewChild.required<ElementRef<HTMLDivElement>>('bgContainer');
-  //#endregion
-
-  //#region Lifecycle methods
-  ngAfterViewChecked(): void {
-    this._applyBackGroundImage();
-
-  }
   //#endregion
 
   //#region Handler methods
@@ -37,14 +29,9 @@ export class HighlightPreviewItemComponent implements AfterViewChecked {
   }
 
   public onClickWishlistButtonEventHandler(id: string): void {
-    this.clickWishlistButtonEvent.emit(id);
-  }
-  //#endregion
+    if (this.isInWishlist()) return;
 
-  //#region Main logic methods
-  private _applyBackGroundImage(): void {
-    const linear = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),'
-    this.bgContainerRef().nativeElement.style.backgroundImage = `${linear} url(${this.data().cover})`;
+    this.clickWishlistButtonEvent.emit(id);
   }
   //#endregion
 }
