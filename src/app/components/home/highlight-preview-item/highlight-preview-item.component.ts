@@ -27,13 +27,14 @@ export class HighlightPreviewItemComponent {
 
   //#region Handler methods
   public onClickItemEventHandler(id: string): void {
-    console.log('fuck');
     this.clickItemEvent.emit(id);
+    console.log('item clicked!');
   }
 
   public onClickWishlistButtonEventHandler(id: string): void {
     if (!this.isInWishlist()) {
       this.clickWishlistButtonEvent.emit(id);
+      console.log('wishlist clicked!');
     }
   }
   //#endregion

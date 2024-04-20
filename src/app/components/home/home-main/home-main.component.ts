@@ -60,6 +60,8 @@ export class HomeMainComponent implements OnInit {
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
   public highlightPrevButtonTypeEnum: HighlightButtonEnum = HighlightButtonEnum.FREE;
+  public isInWishlist = false;
+  public isWishlistProcessing = false;
 
   public highlightSmallItemData = [{
     isActive: false,
@@ -97,6 +99,7 @@ export class HomeMainComponent implements OnInit {
     this._filterNonGamesInGameBanners();
     this._getCaptions();
     this._completeLoading();
+    this._simulateWishlistFunctionality();
   }
 
   //endregion
@@ -165,6 +168,37 @@ export class HomeMainComponent implements OnInit {
       finalize(() => {
         this.isLoading = false;
       })).subscribe();
+  }
+
+  private _simulateWishlistFunctionality(): void {
+    this._addItemToWishlist();
+    this._removeItemFromWishlist();
+  }
+
+  private _addItemToWishlist(): void {
+    // lets simulate when user adds an item to the wishlist
+    setTimeout(() => {
+      this.isWishlistProcessing = true;
+    }, 5000);
+
+    setTimeout(() => {
+      this.isInWishlist = true;
+      this.isWishlistProcessing = false;
+      console.log('first step (adding the item)');
+    }, 8000);
+  }
+
+  private _removeItemFromWishlist(): void {
+    // and after adding the item, removes it
+    setTimeout(() => {
+      this.isWishlistProcessing = true;
+      console.log('second step (removing the item)');
+    }, 20000);
+
+    setTimeout(() => {
+      this.isInWishlist = false;
+      this.isWishlistProcessing = false;
+    }, 30000);
   }
 
   private _filterGamesInGameBanners(): void {
