@@ -32,10 +32,10 @@ export class HighlightPreviewItemComponent {
   }
 
   public onClickWishlistButtonEventHandler(id: string): void {
-    if (!this.isInWishlist()) {
-      this.clickWishlistButtonEvent.emit(id);
-      console.log('wishlist clicked!');
-    }
+    if (this.isWishlistProcessing()) return;
+
+    this.clickWishlistButtonEvent.emit(id);
+    console.log('wishlist clicked!');
   }
   //#endregion
 }
