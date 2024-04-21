@@ -1,13 +1,47 @@
-.buy-btn {
-    font-size: 12px;
-    height: 50px;
-    width: 150px;
-    background-color: rgb(255, 255, 255) !important;
-    color: rgb(0, 0, 0) !important;
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-.wishlist {
-    @media (min-width: 640px) {
-        display: none !important;
+.buttons {
+    .buy-btn {
+        font-size: 12px;
+        height: 50px;
+        width: 150px;
+        background-color: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
+    }
+
+    .wishlist-btn {
+        font-size: 0.75rem;
+        height: 50px;
+        width: 180px;
+        color: white;
+
+        mat-icon {
+            background-color: white;
+            color: black;
+            border-radius: 2rem;
+            scale: .7;
+        }
+
+        span {
+            display: flex;
+            align-items: center;
+            row-gap: 4px;
+        }
+
+        .rotate-animation {
+            animation: rotate 2s infinite linear;
+        }
+
+        // @media (min-width: 640px) {
+        //     display: none !important;
+        // }
     }
 }

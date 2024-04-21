@@ -99,7 +99,7 @@ export class HomeMainComponent implements OnInit {
     this._filterNonGamesInGameBanners();
     this._getCaptions();
     this._completeLoading();
-    this._simulateWishlistFunctionality();
+    // this._simulateWishlistFunctionality();
   }
 
   //endregion
@@ -170,16 +170,29 @@ export class HomeMainComponent implements OnInit {
       })).subscribe();
   }
 
-  private _simulateWishlistFunctionality(): void {
+  // private _simulateWishlistFunctionality(): void {
+  //   this._addItemToWishlist();
+  //   this._removeItemFromWishlist();
+  // }
+
+  public testClickEvent(event: any): void {
+    console.log(event);
+    if (!event) return;
+  }
+
+  public testClickWishlistEvent(event: any): void {
+    console.log(event);
+
     this._addItemToWishlist();
-    this._removeItemFromWishlist();
+
+    if (this.isInWishlist) {
+      this._removeItemFromWishlist();
+    }
   }
 
   private _addItemToWishlist(): void {
     // lets simulate when user adds an item to the wishlist
-    setTimeout(() => {
-      this.isWishlistProcessing = true;
-    }, 5000);
+    this.isWishlistProcessing = true;
 
     setTimeout(() => {
       this.isInWishlist = true;
@@ -208,7 +221,6 @@ export class HomeMainComponent implements OnInit {
   private _filterNonGamesInGameBanners(): void {
     this.nonGameBanners = this.banners?.filter((game) => !game.isAGame);
   }
-
   //endregion
 
   //region helper methods

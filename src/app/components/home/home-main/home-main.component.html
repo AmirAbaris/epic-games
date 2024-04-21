@@ -24,7 +24,7 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
     description: 'test test est testest testest testestestest testest test test test est testest testest testest test',
     price: 55,
     highlightButtonType: highlightPrevButtonTypeEnum,
-}" [isLoading]="isLoading" [wishlistButtonCaption]="{
+}" [isLoading]="isLoading" [caption]="{
     inTitle: 'in wishlist',
     addTitle: 'add to wishlist',
     removeTitle: 'Remove From Wishlist'
@@ -33,7 +33,8 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
     NOT_PUBLISHED: 'Wishlist now',
     ARTICLE: 'Save now',
     PUBLISHED: 'Buy now',
-  }" [isInWishlist]="isInWishlist" [isWishlistProcessing]="isWishlistProcessing" />
+  }" [isInWishlist]="isInWishlist" [isWishlistProcessing]="isWishlistProcessing"
+  (clickItemEvent)="testClickEvent($event)" (clickWishlistButtonEvent)="testClickWishlistEvent($event)" />
 
 <!-- <app-home-card-game [data]="{
   basePrice: 50,
