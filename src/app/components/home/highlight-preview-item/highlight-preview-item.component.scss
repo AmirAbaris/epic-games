@@ -39,9 +39,11 @@
         .rotate-animation {
             animation: rotate 2s infinite linear;
         }
+    }
+}
 
-        // @media (min-width: 640px) {
-        //     display: none !important;
-        // }
+.wishlist {
+    @media (min-width: 640px) {
+        display: none !important;
     }
 }

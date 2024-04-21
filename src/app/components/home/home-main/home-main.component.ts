@@ -28,6 +28,7 @@ import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-ite
 import { FreeGameListInputModel } from "../models/free-game-list-input.model";
 import { FreeGameListCaptionModel } from "../models/caption-models/free-game-list-caption.model";
 import { HighlightButtonEnum } from "../enums/highlight-button.enum";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-home-main",
@@ -36,6 +37,9 @@ import { HighlightButtonEnum } from "../enums/highlight-button.enum";
 })
 export class HomeMainComponent implements OnInit {
   //region properties
+  private _gameService = inject(GameService);
+  private _translateService = inject(TranslateService);
+
   public highlightGames: HighlightGamesDto | undefined;
   public gameCards: GameCardDto[] | undefined;
   public freeGameCards: FreeGameCardDto[] | undefined;
@@ -74,9 +78,6 @@ export class HomeMainComponent implements OnInit {
     name: 'squad'
   }];
 
-  private _gameService = inject(GameService);
-  private _translateService = inject(TranslateService);
-
   private readonly captionPaths = {
     largeHighlightGame: "home.LargeHighlightGame",
     freeGameCardManagement: "home.FreeGameCardManagement",
@@ -99,7 +100,6 @@ export class HomeMainComponent implements OnInit {
     this._filterNonGamesInGameBanners();
     this._getCaptions();
     this._completeLoading();
-    // this._simulateWishlistFunctionality();
   }
 
   //endregion
@@ -170,48 +170,44 @@ export class HomeMainComponent implements OnInit {
       })).subscribe();
   }
 
-  // private _simulateWishlistFunctionality(): void {
-  //   this._addItemToWishlist();
-  //   this._removeItemFromWishlist();
-  // }
+  public testClickItemEvent(id: string): void {
+    if (!id) return;
 
-  public testClickItemEvent(event: string): void {
-    console.log(event);
-    if (!event) return;
+    console.log(`routed to games/${id}`);
   }
 
-  public testClickWishlistEvent(event: string): void {
-    console.log(event);
+  public testClickWishlistEvent(id: string): void {
+    console.log(id);
 
     this._addItemToWishlist();
 
-    if (this.isInWishlist) {
-      this._removeItemFromWishlist();
-    }
+    this._removeItemFromWishlist();
   }
 
   private _addItemToWishlist(): void {
     // lets simulate when user adds an item to the wishlist
+    if (this.isInWishlist) return;
+
     this.isWishlistProcessing = true;
 
     setTimeout(() => {
       this.isInWishlist = true;
       this.isWishlistProcessing = false;
       console.log('first step (adding the item)');
-    }, 8000);
+      console.log(this.isInWishlist);
+    }, 1000);
   }
 
   private _removeItemFromWishlist(): void {
     // and after adding the item, removes it
-    setTimeout(() => {
-      this.isWishlistProcessing = true;
-      console.log('second step (removing the item)');
-    }, 20000);
+    if (!this.isInWishlist) return;
+
+    this.isWishlistProcessing = true;
 
     setTimeout(() => {
       this.isInWishlist = false;
       this.isWishlistProcessing = false;
-    }, 30000);
+    }, 3000);
   }
 
   private _filterGamesInGameBanners(): void {
