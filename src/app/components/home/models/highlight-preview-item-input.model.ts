@@ -6,5 +6,6 @@ export interface HighlightPreviewItemInputModel {
     logo: string
     description: string
     price?: number;
+    hasWishlist: boolean;
     highlightButtonType: HighlightButtonEnum;
 }

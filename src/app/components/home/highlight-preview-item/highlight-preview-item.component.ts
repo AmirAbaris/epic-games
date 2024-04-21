@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnChanges, Output, SimpleChanges, input } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item-input.model';
 import { HighlightButtonEnum } from '../enums/highlight-button.enum';
 import { HighlightButtonTypeEnumCaptionModel } from '../models/caption-models/highlight-button-type-enum-caption.model';
@@ -9,28 +9,20 @@ import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-bu
   templateUrl: './highlight-preview-item.component.html',
   styleUrl: './highlight-preview-item.component.scss'
 })
-export class HighlightPreviewItemComponent implements OnChanges {
+export class HighlightPreviewItemComponent {
   //#region Properties
   data = input.required<HighlightPreviewItemInputModel>();
   isLoading = input.required<boolean>();
   isInWishlist = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
-  caption = input.required<WishListButtonCaptionModel>();
+
+  wishlistButtonCaption = input.required<WishListButtonCaptionModel>();
   highlightButtonTypeCaption = input.required<HighlightButtonTypeEnumCaptionModel>();
 
   public buttonTypeEnum: typeof HighlightButtonEnum = HighlightButtonEnum;
-  public showTooltip = true;
 
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   @Output() clickItemEvent = new EventEmitter<string>();
-  //#endregion
-
-  //#region Lifecycle methods
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['isInWishlist']) {
-      this._toggleTooltip();
-    }
-  }
   //#endregion
 
   //#region Handler methods
@@ -44,10 +36,6 @@ export class HighlightPreviewItemComponent implements OnChanges {
 
     this.clickWishlistButtonEvent.emit(id);
     console.log('wishlist clicked!');
-  }
-
-  private _toggleTooltip(): void {
-    this.showTooltip = !this.showTooltip;
   }
   //#endregion
 }
