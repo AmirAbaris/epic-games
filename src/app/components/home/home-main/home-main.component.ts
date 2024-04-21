@@ -175,12 +175,12 @@ export class HomeMainComponent implements OnInit {
   //   this._removeItemFromWishlist();
   // }
 
-  public testClickEvent(event: any): void {
+  public testClickItemEvent(event: string): void {
     console.log(event);
     if (!event) return;
   }
 
-  public testClickWishlistEvent(event: any): void {
+  public testClickWishlistEvent(event: string): void {
     console.log(event);
 
     this._addItemToWishlist();
