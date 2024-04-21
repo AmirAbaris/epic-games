@@ -170,44 +170,20 @@ export class HomeMainComponent implements OnInit {
       })).subscribe();
   }
 
-  public testClickItemEvent(id: string): void {
-    if (!id) return;
+  public testClickItemEvent($event: string): void {
+    if (!$event) return;
 
-    console.log(`routed to games/${id}`);
+    console.log(`routed to games/${$event}`);
   }
 
-  public testClickWishlistEvent(id: string): void {
-    console.log(id);
-
-    this._addItemToWishlist();
-
-    this._removeItemFromWishlist();
-  }
-
-  private _addItemToWishlist(): void {
-    // lets simulate when user adds an item to the wishlist
-    if (this.isInWishlist) return;
-
+  public testClickWishlistButtonEvent($event: string): void {
     this.isWishlistProcessing = true;
-
     setTimeout(() => {
-      this.isInWishlist = true;
+      this.isInWishlist = !this.isInWishlist;
       this.isWishlistProcessing = false;
-      console.log('first step (adding the item)');
-      console.log(this.isInWishlist);
+
+      console.log($event);
     }, 1000);
-  }
-
-  private _removeItemFromWishlist(): void {
-    // and after adding the item, removes it
-    if (!this.isInWishlist) return;
-
-    this.isWishlistProcessing = true;
-
-    setTimeout(() => {
-      this.isInWishlist = false;
-      this.isWishlistProcessing = false;
-    }, 3000);
   }
 
   private _filterGamesInGameBanners(): void {
