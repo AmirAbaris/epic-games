@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
 import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-button-caption.model';
 import { HighlightButtonTypeEnumCaptionModel } from '../models/caption-models/highlight-button-type-enum-caption.model';
-import { HighlightMainInputType } from '../types/highlight-main-input.type';
+import { HighlightMainInputModel } from '../types/highlight-main-input.type';
 
 @Component({
   selector: 'app-highlight-main',
@@ -10,7 +10,7 @@ import { HighlightMainInputType } from '../types/highlight-main-input.type';
 })
 export class HighlightMainComponent {
   //#region Properties
-  data = input.required<HighlightMainInputType>();
+  data = input.required<HighlightMainInputModel>();
   isLoading = input.required<boolean>();
   isActive = input.required<boolean>();
   isInWishlist = input.required<boolean>();

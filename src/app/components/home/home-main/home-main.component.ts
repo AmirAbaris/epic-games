@@ -13,9 +13,7 @@ import { FreeGameListInputModel } from "../models/free-game-list-input.model";
 import { FreeGameListCaptionModel } from "../models/caption-models/free-game-list-caption.model";
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
 import { HighlightButtonEnum } from "../enums/highlight-button.enum";
-import { HighlightMainInputType } from "../types/highlight-main-input.type";
-import { HighlightPreviewItemInputModel } from "../models/highlight-preview-item-input.model";
-import { HighlightSmallItemInputModel } from "../models/highlight-small-item-input.model";
+import { HighlightMainInputModel } from "../types/highlight-main-input.type";
 
 @Component({
   selector: "app-home-main",
@@ -41,10 +39,7 @@ export class HomeMainComponent implements OnInit {
   public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
-  public highlightMainMockData: HighlightMainInputType = [
-    ...highlightPreviewMockData,
-    ...highlightSmallMockData
-  ];
+  public highlightMainData = highlightPreviewMockData;
 
   private readonly captionPaths = {
     freeGameCard: "home.FreeGameCard",
@@ -194,27 +189,26 @@ const freeGameItemMockData: FreeGameListInputModel =
   ]
 }
 
-const highlightPreviewMockData: HighlightPreviewItemInputModel[] = [
-  {
-    id: '1',
-    cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 1',
-    price: 10,
-    highlightButtonType: HighlightButtonEnum.PUBLISHED,
-  },
-  {
-    id: '2',
-    cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 2',
-    highlightButtonType: HighlightButtonEnum.FREE,
-  }
-];
-
-const highlightSmallMockData: HighlightSmallItemInputModel[] = [
-  {
+const highlightPreviewMockData: HighlightMainInputModel = {
+  highlightPreviewItem: [
+    {
+      id: '1',
+      cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+      logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+      description: 'Description 1',
+      price: 10,
+      highlightButtonType: HighlightButtonEnum.PUBLISHED,
+    },
+    {
+      id: '2',
+      cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+      logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+      description: 'Description 2',
+      highlightButtonType: HighlightButtonEnum.FREE,
+    }
+  ],
+  highlightSmallItem: [{
     cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
     name: 'item'
-  }
-];
+  }]
+};

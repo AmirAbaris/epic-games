@@ -1,11 +1,11 @@
 <section class="flex gap-x-10">
-    @for (item of data(); track $index) {
-    @if (item | isHighlightPreview) {
-    <app-highlight-preview-item [data]="item" [isLoading]="isLoading()" [isInWishlist]="isInWishlist()"
+    <!-- TODO add outputs -->
+    @for (previewItem of data().highlightPreviewItem; track $index) {
+    <app-highlight-preview-item [data]="previewItem" [isLoading]="isLoading()" [isInWishlist]="isInWishlist()"
         [isWishlistProcessing]="isWishlistProcessing()" [wishlistButtonCaption]="wishlistButtonCaption()"
         [highlightButtonTypeCaption]="highlightButtonTypeCaption()" />
-    } @else {
-    <app-highlight-small-item [data]="item" [isLoading]="isLoading()" [isActive]="isActive()" />
     }
+    @for (smallItem of data().highlightSmallItem; track $index) {
+    <app-highlight-small-item [data]="smallItem" [isLoading]="isLoading()" [isActive]="isActive()" />
     }
 </section>
