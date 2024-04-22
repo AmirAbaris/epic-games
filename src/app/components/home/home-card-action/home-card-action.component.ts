@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input, model } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 import { HomeCardActionInputModel } from '../models/home-card-action-input.model';
 
 @Component({
@@ -11,13 +11,12 @@ export class HomeCardActionComponent {
   data = input.required<HomeCardActionInputModel>();
   isLoading = input.required<boolean>();
 
-  @Output() clickCardEvent = new EventEmitter<void>();
   @Output() clickWishlistButtonEvent = new EventEmitter<string>();
   //#endregion
 
   //#region Handler methods
   public onClickCardEventHandler(): void {
-    this.clickCardEvent.emit();
+    this._callClickCardFn();
   }
 
   public onClickWishlistButtonEventHandler(id: string): void {
@@ -25,6 +24,15 @@ export class HomeCardActionComponent {
   }
 
   public onClickCardFnHandler(): void {
+    this._callClickCardFn();
+  }
+  //#endregion
+
+  //#region Main logic methods
+  /**
+   * because we call this fun multiple times, by giving it a separate func it'll make the logic more readable
+   */
+  private _callClickCardFn(): void {
     this.data().clickCardFn();
   }
   //#endregion

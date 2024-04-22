@@ -1,29 +1,34 @@
-import { AfterViewInit, Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostListener, Renderer2, inject } from '@angular/core';
 
 @Directive({
   selector: '[activateWishlistDir]'
 })
 export class ActivateWishlistDirective implements AfterViewInit {
   //#region Properties
+  private _elementRef = inject(ElementRef);
+  private _renderer = inject(Renderer2);
   private _wishlistClasses = ['absolute', 'right-4', 'top-2', 'cursor-pointer', 'z-10'];
-  //#endregion
-
-  //#region Constructor
-  constructor(private el: ElementRef, private renderer: Renderer2) { }
+  private _targetElement: HTMLElement | undefined;
+  private _imageElement: HTMLElement | null | undefined;
   //#endregion
 
   //#region Lifecycle methods
   ngAfterViewInit() {
+    this._setElementValues();
     this._toggleWishlistVisibility(false);
   }
   //#endregion
 
   //#region Main logic methods
-  @HostListener('mouseenter') onMouseEnter(): void {
-    this._toggleWishlistVisibility(true);
+  @HostListener('mouseover', ['$event'])
+  onMouseOver(event: MouseEvent): void {
+    if (event.target === this._imageElement) {
+      this._toggleWishlistVisibility(true);
+    }
   }
 
-  @HostListener('mouseleave') onMouseLeave(): void {
+  @HostListener('mouseleave', ['$event'])
+  onMouseLeave(event: MouseEvent): void {
     this._toggleWishlistVisibility(false);
     this._removeWishlistClasses();
   }
@@ -33,39 +38,36 @@ export class ActivateWishlistDirective implements AfterViewInit {
    * @param isVisible 
    */
   private _toggleWishlistVisibility(isVisible: boolean): void {
-    const wishlistElement = this._getWishlistElement();
-
-    if (wishlistElement) {
+    if (this._targetElement) {
       // determine the display style based on visibility
       const displayStyle = isVisible ? 'block' : 'none';
 
       // add wishlist classes to the element
-      this._addWishlistClasses(wishlistElement);
+      this._addClassesToElement();
 
       // sets wishlist tailwind classes
-      this._setElementDisplayStyle(wishlistElement, displayStyle);
+      this._setElementDisplayStyle(displayStyle);
     }
   }
 
-  private _getWishlistElement(): HTMLElement | null {
-    return this.el.nativeElement.querySelector('.wishlist');
+  private _setElementValues(): void {
+    this._targetElement = this._elementRef.nativeElement.querySelector('.wishlist');
+    this._imageElement = this._elementRef.nativeElement.querySelector('.item-cover');
   }
 
-  private _setElementDisplayStyle(element: HTMLElement, displayStyle: string): void {
-    this.renderer.setStyle(element, 'display', displayStyle);
+  private _setElementDisplayStyle(displayStyle: string): void {
+    this._renderer.setStyle(this._targetElement, 'display', displayStyle);
   }
 
-  private _addWishlistClasses(element: HTMLElement): void {
+  private _addClassesToElement(): void {
     this._wishlistClasses.forEach((className: string) => {
-      this.renderer.addClass(element, className);
+      this._renderer.addClass(this._targetElement, className);
     });
   }
 
   private _removeWishlistClasses(): void {
-    const wishlistElement = this._getWishlistElement();
-
     this._wishlistClasses.forEach((className: string) => {
-      this.renderer.removeClass(wishlistElement, className);
+      this._renderer.removeClass(this._targetElement, className);
     });
   }
   //#endregion
