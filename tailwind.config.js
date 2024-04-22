@@ -39,7 +39,8 @@ module.exports = {
         vividBlue: '#0074e4',
         electricBlue: '#037aee',
         brightBlue: '#0078f2',
-        lightGray: '#f8f8f8'
+        lightGray: '#f8f8f8',
+        semiTransparent: '#00000080'
       }
     },
   },

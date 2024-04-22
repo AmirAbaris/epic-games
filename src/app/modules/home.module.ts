@@ -22,10 +22,12 @@ import { CategoryItemComponent } from '../components/home/category-item/category
 import { TranslateModule } from "@ngx-translate/core";
 import { FreeGameItemComponent } from "../components/home/free-game-item/free-game-item.component";
 import { FreeGameListComponent } from '../components/home/free-game-list/free-game-list.component';
+import { HighlightPreviewItemComponent } from '../components/home/highlight-preview-item/highlight-preview-item.component';
 import { HomeCardGameComponent } from '../components/home/home-card-game/home-card-game.component';
 import { HomeCardActionComponent } from '../components/home/home-card-action/home-card-action.component';
 import { HighlightSmallItemComponent } from '../components/home/highlight-small-item/highlight-small-item.component';
 import { ScaleOnActivateDirective } from '../directives/scale-on-activate.directive';
+import { PreviewWishListButtonComponent } from '../components/home/preview-wish-list-button/preview-wish-list-button.component';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -41,10 +43,12 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     FreeGameItemComponent,
     HomeCardComponent,
     FreeGameListComponent,
+    HighlightPreviewItemComponent,
     HomeCardGameComponent,
     HomeCardActionComponent,
     PriceLabelComponent,
     HighlightSmallItemComponent,
+    PreviewWishListButtonComponent,
     ActivateWishlistDirective,
     ScaleOnActivateDirective
   ],

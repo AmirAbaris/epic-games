@@ -1,39 +1,34 @@
 @if (isLoading()) {
-  <section class="flex flex-col gap-2 w-full animate-pulse">
-    <div class="bg-darkGray w-52 h-64 mb-2 rounded-md"></div>
-    <div class="flex flex-col gap-1">
-      <div class="bg-darkSilver w-16 h-3"></div>
-      <div class="bg-darkSilver w-28 h-3"></div>
-      <div class="bg-darkSilver w-full h-3 mt-1"></div>
-    </div>
-  </section>
+<section class="flex flex-col gap-2 w-full animate-pulse">
+  <div class="bg-darkGray w-52 h-64 mb-2 rounded-md"></div>
+  <div class="flex flex-col gap-1">
+    <div class="bg-darkSilver w-16 h-3"></div>
+    <div class="bg-darkSilver w-28 h-3"></div>
+    <div class="bg-darkSilver w-full h-3 mt-1"></div>
+  </div>
+</section>
 } @else {
-  <section class="text-white font-inter cursor-pointer" (click)="onClickItemEventHandler(data().id)">
-    <div class="relative hover:brightness-125 hover:transition duration-300"
-         activateWishlistDir>
-      <img class="rounded-md mb-2" ngSrc="{{data().cover}}" priority width="208" height="256"
-           alt="{{data().name}}">
-      <div class="absolute top-1 right-2 text-black z-10">
-        <app-wish-list-button
-          class="wishlist"
-          (click)="onClickWishlistButtonEventHandler($event, data().id)"
-        />
-      </div>
+<section class="text-white font-inter cursor-pointer" (click)="onClickItemEventHandler(data().id)">
+  <div class="relative hover:brightness-125 hover:transition duration-300" activateWishlistDir>
+    <img class="rounded-md mb-2" ngSrc="{{data().cover}}" priority width="208" height="256" alt="{{data().name}}">
+    <div class="absolute top-1 right-2 text-black z-10">
+      <app-wish-list-button class="wishlist" (click)="onClickWishlistButtonEventHandler($event, data().id)" />
     </div>
-    <div class="flex flex-col gap-1">
-      <h1 class="text-[9px] font-thin">{{ caption().gameType[data().type] | uppercase }}</h1>
-      <h2 class="text-sm">{{ data().name }}</h2>
-      <div>
-        @if (data().isFree) {
-          <h3 class="text-xs">{{ caption().freeTitle | uppercase }}</h3>
-        } @else {
-          @if (priceLabelData) {
-            <div class="mt-1">
-              <app-price-label [priceLabelInput]="priceLabelData" [sizeInput]="SizeEnum.MEDIUM"/>
-            </div>
-          }
-        }
+  </div>
+  <div class="flex flex-col gap-1">
+    <h1 class="text-[9px] font-thin">{{ caption().gameType[data().type] | uppercase }}</h1>
+    <h2 class="text-sm">{{ data().name }}</h2>
+    <div>
+      @if (data().isFree) {
+      <h3 class="text-xs">{{ caption().freeTitle | uppercase }}</h3>
+      } @else {
+      @if (priceLabelData) {
+      <div class="mt-1">
+        <app-price-label [priceLabelInput]="priceLabelData" [sizeInput]="SizeEnum.MEDIUM" />
       </div>
+      }
+      }
     </div>
-  </section>
+  </div>
+</section>
 }

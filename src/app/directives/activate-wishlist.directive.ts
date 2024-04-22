@@ -10,7 +10,6 @@ export class ActivateWishlistDirective implements AfterViewInit {
 
   //#region Constructor
   constructor(private el: ElementRef, private renderer: Renderer2) { }
-
   //#endregion
 
   //#region Lifecycle methods
