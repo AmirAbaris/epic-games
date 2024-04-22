@@ -1,8 +1,9 @@
-import { Component, EventEmitter, input, OnInit, Output } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import { GameSliderItemInputModel } from "../models/game-slider-item-input.model";
 import { SizeEnum } from "../enums/size.enum";
 import { PriceLabelModel } from "../models/price-label.model";
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
+import { output } from "@angular/core";
 
 @Component({
     selector: 'app-game-slider-item',
@@ -15,8 +16,8 @@ export class GameSliderItemComponent implements OnInit {
     caption = input.required<GameSliderCaptionModel>();
     isLoading = input.required<boolean>();
 
-    @Output() clickItemEvent = new EventEmitter<string>();
-    @Output() clickWishlistButtonEvent = new EventEmitter<string>();
+    clickItemEvent = output<string>();
+    clickWishlistButtonEvent = output<string>();
 
     public readonly SizeEnum = SizeEnum;
     public priceLabelData: PriceLabelModel | undefined;

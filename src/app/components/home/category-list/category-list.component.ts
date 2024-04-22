@@ -1,8 +1,9 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
-import {CategoryType} from '../enums/category-type.enum';
-import {CategoryListInputModel} from "../models/category-list-input.model";
-import {CategoryListCaptionModel} from "../models/caption-models/category-list-caption.model";
-import {CategoryItemCaptionModel} from "../models/caption-models/category-item-caption.model";
+import { Component, input } from '@angular/core';
+import { CategoryType } from '../enums/category-type.enum';
+import { CategoryListInputModel } from "../models/category-list-input.model";
+import { CategoryListCaptionModel } from "../models/caption-models/category-list-caption.model";
+import { CategoryItemCaptionModel } from "../models/caption-models/category-item-caption.model";
+import { output } from "@angular/core";
 
 @Component({
   selector: 'app-category-list',
@@ -16,12 +17,12 @@ export class CategoryListComponent {
   itemCaption = input.required<CategoryItemCaptionModel>();
   isLoading = input.required<boolean>();
 
-  @Output() clickGameEvent = new EventEmitter<string>();
-  @Output() clickWishlistEvent = new EventEmitter<string>();
-  @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
+  clickGameEvent = output<string>();
+  clickWishlistEvent = output<string>();
+  clickViewMoreButtonEvent = output<CategoryType>();
 
   public readonly maxNumberItemIndex: number = 5;
-  
+
   //endregion
 
   //region Handler methods

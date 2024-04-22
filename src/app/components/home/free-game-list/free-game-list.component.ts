@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, input } from '@angular/core';
 import { FreeGameListInputModel } from '../models/free-game-list-input.model';
 import { FreeGameItemCaptionModel } from '../models/caption-models/free-game-item-caption.model';
 import { FreeGameListCaptionModel } from '../models/caption-models/free-game-list-caption.model';
+import { output } from "@angular/core";
 
 @Component({
   selector: 'app-free-game-list',
@@ -15,8 +16,8 @@ export class FreeGameListComponent {
   caption = input.required<FreeGameListCaptionModel>();
   gameItemCaption = input.required<FreeGameItemCaptionModel>();
 
-  @Output() clickEvent = new EventEmitter<string>();
-  @Output() viewMoreClickEvent = new EventEmitter<void>();
+  clickEvent = output<string>();
+  viewMoreClickEvent = output<void>();
   //#endregion
 
   //#region Handler methods

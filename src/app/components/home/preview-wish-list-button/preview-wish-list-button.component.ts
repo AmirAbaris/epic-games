@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, SimpleChanges, input } from '@angular/core';
 import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-button-caption.model';
+import { output } from "@angular/core";
 
 @Component({
   selector: 'app-preview-wish-list-button',
@@ -13,7 +14,8 @@ export class PreviewWishListButtonComponent {
   caption = input.required<WishListButtonCaptionModel>();
   public showTooltip = true;
 
-  @Output() clickWishlistButtonEvent = new EventEmitter<void>();
+  //#endregion
+    clickWishlistButtonEvent = output<void>();
   //#endregion
 
   //#region Lifecycle methods
@@ -33,4 +35,5 @@ export class PreviewWishListButtonComponent {
     this.showTooltip = !this.showTooltip;
   }
   //#endregion
+;
 }

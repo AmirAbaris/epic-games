@@ -4,6 +4,7 @@ import { HighlightButtonTypeEnumCaptionModel } from '../models/caption-models/hi
 import { HighlightMainInputModel } from '../types/highlight-main-input.type';
 import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item-input.model';
 import { HighlightSmallItemInputModel } from '../models/highlight-small-item-input.model';
+import { output } from "@angular/core";
 
 @Component({
   selector: 'app-highlight-main',
@@ -24,8 +25,8 @@ export class HighlightMainComponent implements OnInit {
   public highlightSmallData: HighlightSmallItemInputModel[] = [];
   public currentIndex = 0;
 
-  @Output() clickWishlistButtonEvent = new EventEmitter<string>();
-  @Output() clickItemEvent = new EventEmitter<string>();
+  clickWishlistButtonEvent = output<string>();
+  clickItemEvent = output<string>();
   //#endregion
 
   ngOnInit(): void {

@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { HomeCardGameInputModel } from '../models/home-card-game-input.model';
 import { SizeEnum } from '../enums/size.enum';
 import { PriceLabelModel } from '../models/price-label.model';
+import { output } from "@angular/core";
 
 @Component({
   selector: 'app-home-card-game',
@@ -15,8 +16,8 @@ export class HomeCardGameComponent implements OnInit {
   public priceLabelSize: SizeEnum = SizeEnum.BIG;
   public priceLabelData: PriceLabelModel | undefined;
 
-  @Output() clickWishlistButtonEvent = new EventEmitter<string>();
-  @Output() clickCardEvent = new EventEmitter<void>();
+  clickWishlistButtonEvent = output<string>();
+  clickCardEvent = output<void>();
   //#endregion
 
   //#region Lifecycle methods

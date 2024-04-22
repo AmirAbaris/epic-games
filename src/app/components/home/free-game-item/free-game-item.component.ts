@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { FreeGameItemInputModel } from "../models/free-game-item-input.model";
 import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-item-caption.model";
+import { output } from "@angular/core";
 
 @Component({
   selector: 'app-free-game-item',
@@ -13,7 +14,7 @@ export class FreeGameItemComponent {
   caption = input.required<FreeGameItemCaptionModel>();
   isLoading = input.required<boolean>();
 
-  @Output() clickEvent = new EventEmitter<string>();
+  clickEvent = output<string>();
 
   //endregion
 

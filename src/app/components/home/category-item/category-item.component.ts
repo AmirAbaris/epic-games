@@ -1,8 +1,9 @@
-import {Component, EventEmitter, input, OnInit, Output,} from '@angular/core';
-import {PriceLabelModel} from '../models/price-label.model';
-import {SizeEnum} from '../enums/size.enum';
-import {CategoryItemInputModel} from '../models/category-item-input.model';
-import {CategoryItemCaptionModel} from "../models/caption-models/category-item-caption.model";
+import { Component, input, OnInit } from '@angular/core';
+import { PriceLabelModel } from '../models/price-label.model';
+import { SizeEnum } from '../enums/size.enum';
+import { CategoryItemInputModel } from '../models/category-item-input.model';
+import { CategoryItemCaptionModel } from "../models/caption-models/category-item-caption.model";
+import { output } from "@angular/core";
 
 @Component({
   selector: 'app-category-item',
@@ -15,8 +16,8 @@ export class CategoryItemComponent implements OnInit {
   caption = input.required<CategoryItemCaptionModel>();
   isLoading = input.required<boolean>();
 
-  @Output() clickWishlistButtonEvent = new EventEmitter<string>();
-  @Output() clickItemEvent = new EventEmitter<string>();
+  clickWishlistButtonEvent = output<string>();
+  clickItemEvent = output<string>();
 
   public readonly SizeEnum = SizeEnum;
   public priceLabelData: PriceLabelModel | undefined;
