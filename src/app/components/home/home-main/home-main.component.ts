@@ -14,6 +14,8 @@ import { FreeGameListCaptionModel } from "../models/caption-models/free-game-lis
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
 import { HighlightButtonEnum } from "../enums/highlight-button.enum";
 import { HighlightMainInputType } from "../types/highlight-main-input.type";
+import { HighlightPreviewItemInputModel } from "../models/highlight-preview-item-input.model";
+import { HighlightSmallItemInputModel } from "../models/highlight-small-item-input.model";
 
 @Component({
   selector: "app-home-main",
@@ -39,7 +41,10 @@ export class HomeMainComponent implements OnInit {
   public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
-  public highlightMainData = highlightMainMockData;
+  public highlightMainMockData: HighlightMainInputType = [
+    ...highlightPreviewMockData,
+    ...highlightSmallMockData
+  ];
 
   private readonly captionPaths = {
     freeGameCard: "home.FreeGameCard",
@@ -189,7 +194,7 @@ const freeGameItemMockData: FreeGameListInputModel =
   ]
 }
 
-const highlightMainMockData: HighlightMainInputType = [
+const highlightPreviewMockData: HighlightPreviewItemInputModel[] = [
   {
     id: '1',
     cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
@@ -197,7 +202,6 @@ const highlightMainMockData: HighlightMainInputType = [
     description: 'Description 1',
     price: 10,
     highlightButtonType: HighlightButtonEnum.PUBLISHED,
-    name: 'Item 1'
   },
   {
     id: '2',
@@ -205,6 +209,12 @@ const highlightMainMockData: HighlightMainInputType = [
     logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
     description: 'Description 2',
     highlightButtonType: HighlightButtonEnum.FREE,
-    name: 'Item 2'
+  }
+];
+
+const highlightSmallMockData: HighlightSmallItemInputModel[] = [
+  {
+    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    name: 'item'
   }
 ];
