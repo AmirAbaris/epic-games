@@ -1,0 +1,11 @@
+<section>
+    @for (item of data(); track $index | isHighlightPreview) {
+    @if (item | isHighlightPreview) {
+    <app-highlight-preview-item [data]="item" [isLoading]="isLoading()" [isInWishlist]="isInWishlist()"
+        [isWishlistProcessing]="isWishlistProcessing()" [wishlistButtonCaption]="wishlistButtonCaption()"
+        [highlightButtonTypeCaption]="highlightButtonTypeCaption()" />
+    } @else {
+    <app-highlight-small-item [data]="item" [isLoading]="isLoading()" [isActive]="isActive()" />
+    }
+    }
+</section>
