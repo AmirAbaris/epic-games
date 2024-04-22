@@ -1,11 +1,13 @@
 <!-- TODO add outputs -->
 
-<section class="flex gap-x-4">
-    <app-highlight-preview-item *ngFor="let item of highlightPreviewData" [data]="item" [isLoading]="isLoading()"
+<section class="flex items-center gap-x-4 w-full">
+    <app-highlight-preview-item [data]="data().highlightPreviewItem[currentIndex]" [isLoading]="isLoading()"
         [isInWishlist]="isInWishlist()" [isWishlistProcessing]="isWishlistProcessing()"
         [wishlistButtonCaption]="wishlistButtonCaption()" [highlightButtonTypeCaption]="highlightButtonTypeCaption()" />
-    <div class="flex flex-col gap-y-2">
-        <app-highlight-small-item class="flex-shrink-0" *ngFor="let item of highlightSmallData" [data]="item"
-            [isLoading]="isLoading()" [isActive]="isActive()" />
+
+    <div class="flex flex-col gap-y-2 flex-shrink-0">
+        @for (item of data().highlightSmallItem; track $index) {
+        <app-highlight-small-item [data]="item" [isLoading]="isLoading()" [isActive]="isActive()" />
+        }
     </div>
 </section>

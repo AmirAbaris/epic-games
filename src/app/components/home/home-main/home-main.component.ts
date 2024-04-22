@@ -39,7 +39,7 @@ export class HomeMainComponent implements OnInit {
   public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
-  public highlightMainData = highlightPreviewMockData;
+  public highlightMainData: HighlightMainInputModel = highlightPreviewMockData;
 
   private readonly captionPaths = {
     freeGameCard: "home.FreeGameCard",
@@ -56,6 +56,7 @@ export class HomeMainComponent implements OnInit {
   ngOnInit(): void {
     this._getCaptions();
     this._completeLoading();
+    this._toggleIsActive();
   }
 
   //endregion
@@ -97,6 +98,14 @@ export class HomeMainComponent implements OnInit {
       finalize(() => {
         this.isLoading = false;
       })).subscribe();
+  }
+
+  private _toggleIsActive(): void {
+    // TODO unsub!
+    setInterval(() => {
+      this.isActive = !this.isActive;
+      console.log(this.isActive);
+    }, 2000);
   }
   //endregion
 }
@@ -189,48 +198,42 @@ const freeGameItemMockData: FreeGameListInputModel =
   ]
 }
 
-const highlightPreviewMockData: HighlightMainInputModel[] = [
-  {
-    id: '2',
-    cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 2',
-    highlightButtonType: HighlightButtonEnum.FREE,
-    smallCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+const highlightPreviewMockData: HighlightMainInputModel = {
+  highlightPreviewItem: [
+    {
+      id: '1',
+      cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+      logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+      description: 'Description 1',
+      price: 10,
+      highlightButtonType: HighlightButtonEnum.PUBLISHED,
+    },
+    {
+      id: '2',
+      cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+      logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+      description: 'Description 2',
+      highlightButtonType: HighlightButtonEnum.FREE,
+    }
+  ],
+  highlightSmallItem: [{
+    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
     name: 'item'
   },
   {
-    id: '2',
-    cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 2',
-    highlightButtonType: HighlightButtonEnum.FREE,
-    smallCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    name: 'item'
-  }, {
-    id: '2',
-    cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 2',
-    highlightButtonType: HighlightButtonEnum.FREE,
-    smallCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    name: 'item'
-  }, {
-    id: '2',
-    cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 2',
-    highlightButtonType: HighlightButtonEnum.FREE,
-    smallCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
     name: 'item'
   },
   {
-    id: '2',
-    cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 2',
-    highlightButtonType: HighlightButtonEnum.FREE,
-    smallCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
     name: 'item'
-  }
-];
+  },
+  {
+    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    name: 'item'
+  }, {
+    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    name: 'item'
+  },
+  ]
+};

@@ -5,12 +5,6 @@ import { HighlightSmallItemInputModel } from "../models/highlight-small-item-inp
 export type HighlightMainInputType = Array<HighlightPreviewItemInputModel | HighlightSmallItemInputModel>;
 
 export interface HighlightMainInputModel {
-    id: string;
-    cover: string;
-    logo: string
-    description: string
-    price?: number;
-    highlightButtonType: HighlightButtonEnum;
-    smallCover: string;
-    name: string;
+    highlightPreviewItem: HighlightPreviewItemInputModel[];
+    highlightSmallItem: HighlightSmallItemInputModel[];
 }
