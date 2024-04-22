@@ -26,6 +26,8 @@ export class HomeMainComponent implements OnInit {
   public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
   public isLoading: boolean = true;
   public isActive = true;
+  public isInWishlist = true;
+  public isWishlistProcessing = false;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameList: FreeGameListInputModel = freeGameItemMockData;
   public sliderGameType: GameType = GameType.BASE_GAME;

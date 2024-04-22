@@ -6,4 +6,5 @@ export interface HighlightMainInputModel {
     highlightSmallInputData: HighlightSmallItemInputModel[];
 }
 
-export type HighlightMainInputType = Array<HighlightPreviewItemInputModel | HighlightSmallItemInputModel>;
+// TODO fix interface
+export type HighlightMainInputType = Array<HighlightPreviewItemInputModel & HighlightSmallItemInputModel>;
