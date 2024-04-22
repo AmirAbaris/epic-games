@@ -1,13 +1,5 @@
 {
   "home": {
-    "LargeHighlightGame": {
-      "buyButton": "BUY NOW",
-      "addToWishlistButton": "ADD TO WISHLIST"
-    },
-    "FortniteCardManagement": {
-      "mainTitle": "Fortnite Experience",
-      "websiteTitle": "VISIT FORTNITE.COM"
-    },
     "CategoryItem": {
       "freeTitle": "FREE",
       "comingSoonTitle": "Coming Soon",
@@ -17,7 +9,9 @@
       "viewTitle": "View More"
     },
     "WishListButton": {
-      "addTitle": "Add to Wishlist"
+      "inTitle": "In wishlist",
+      "addTitle": "Add to Wishlist",
+      "removeTitle": "Remove From Wishlist"
     },
     "GameSliderItem": {
       "freeTitle": "Free"
@@ -32,12 +26,26 @@
       "freeTitle": "Free",
       "nowTitle": "Now",
       "atTitle": "at"
+    },
+    "HighlightButtonType": {
+      "freePlay": "Play for free",
+      "wishlistPlay": "Wishlist now",
+      "buyPlay": "Buy now"
+    },
+    "HighlightPreviewTitle": {
+      "addWishlist": "Add to Wishlist"
     }
   },
   "enum-captions": {
     "gameType": {
       "BASE_GAME": "Base Game",
       "EDITION": "Edition"
+    },
+    "HighlightButtonType": {
+      "FREE": "Play for free",
+      "NOT_PUBLISHED": "Wishlist now",
+      "ARTICLE": "Save now",
+      "PUBLISHED": "Buy now"
     }
   }
 }
