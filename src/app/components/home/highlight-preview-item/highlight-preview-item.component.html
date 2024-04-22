@@ -2,7 +2,7 @@
 <div class="animate-pulse bg-darkCharcoal min-h-[400px] rounded-2xl aspect-square sm:aspect-video"></div>
 } @else {
 <section class="font-inter cursor-pointer relative" (click)="onClickItemEventHandler(data().id)">
-    @if (data().hasWishlist) {
+    @if (buttonTypeEnumInput !== buttonTypeEnum.ARTICLE) {
     <!-- if input data has wishlist this will be shown to user in mobile size screens -->
     <app-wish-list-button class="wishlist absolute top-2 right-4 z-10"
         (clickButtonEvent)="onClickWishlistButtonEventHandler(data().id)" />
@@ -23,7 +23,7 @@
             <button class="buy-btn font-inter"
                 mat-raised-button>{{highlightButtonTypeCaption()[data().highlightButtonType]}}</button>
 
-            @if (data().highlightButtonType !== buttonTypeEnum.ARTICLE) {
+            @if (buttonTypeEnumInput !== buttonTypeEnum.ARTICLE) {
             <!-- Angular passes Mouse Event type automatically to $event and we can call methods on $event! -->
             <app-preview-wish-list-button [caption]="wishlistButtonCaption()" [isInWishlist]="isInWishlist()"
                 [isWishlistProcessing]="isWishlistProcessing()"
