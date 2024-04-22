@@ -12,6 +12,8 @@ import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-ite
 import { FreeGameListInputModel } from "../models/free-game-list-input.model";
 import { FreeGameListCaptionModel } from "../models/caption-models/free-game-list-caption.model";
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
+import { HighlightButtonEnum } from "../enums/highlight-button.enum";
+import { HighlightMainInputType } from "../types/highlight-main-input.type";
 
 @Component({
   selector: "app-home-main",
@@ -31,23 +33,13 @@ export class HomeMainComponent implements OnInit {
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameList: FreeGameListInputModel = freeGameItemMockData;
   public sliderGameType: GameType = GameType.BASE_GAME;
-  public highlightSmallItemData = [{
-    isActive: false,
-    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    name: 'squad'
-  },
-  {
-    isActive: false,
-    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    name: 'squad'
-  }];
-
   public gameItemCaption: CategoryItemCaptionModel | undefined;
   public categoryListCaption: CategoryListCaptionModel | undefined;
   public categoryItemCaption: CategoryItemCaptionModel | undefined;
   public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
+  public highlightMainData = highlightMainMockData;
 
   private readonly captionPaths = {
     freeGameCard: "home.FreeGameCard",
@@ -196,3 +188,23 @@ const freeGameItemMockData: FreeGameListInputModel =
     }
   ]
 }
+
+const highlightMainMockData: HighlightMainInputType = [
+  {
+    id: '1',
+    cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+    description: 'Description 1',
+    price: 10,
+    highlightButtonType: HighlightButtonEnum.PUBLISHED,
+    name: 'Item 1'
+  },
+  {
+    id: '2',
+    cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+    description: 'Description 2',
+    highlightButtonType: HighlightButtonEnum.FREE,
+    name: 'Item 2'
+  }
+];

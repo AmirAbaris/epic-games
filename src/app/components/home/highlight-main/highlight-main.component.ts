@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
-import { HighlightMainInputType } from '../models/highlight-main-input.model';
 import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-button-caption.model';
 import { HighlightButtonTypeEnumCaptionModel } from '../models/caption-models/highlight-button-type-enum-caption.model';
+import { HighlightMainInputType } from '../types/highlight-main-input.type';
 
 @Component({
   selector: 'app-highlight-main',

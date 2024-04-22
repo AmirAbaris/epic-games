@@ -11,7 +11,6 @@ import { register } from 'swiper/element/bundle';
 import { NgOptimizedImage } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatDivider } from '@angular/material/divider';
-import { IsHighlightPreviewPipe } from './pipes/is-highlight-preview.pipe';
 
 register();
 

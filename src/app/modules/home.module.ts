@@ -29,7 +29,6 @@ import { HighlightSmallItemComponent } from '../components/home/highlight-small-
 import { ScaleOnActivateDirective } from '../directives/scale-on-activate.directive';
 import { PreviewWishListButtonComponent } from '../components/home/preview-wish-list-button/preview-wish-list-button.component';
 import { HighlightMainComponent } from '../components/home/highlight-main/highlight-main.component';
-import { IsHighlightPreviewPipe } from '../pipes/is-highlight-preview.pipe';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -53,8 +52,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     PreviewWishListButtonComponent,
     HighlightMainComponent,
     ActivateWishlistDirective,
-    ScaleOnActivateDirective,
-    IsHighlightPreviewPipe
+    ScaleOnActivateDirective
   ],
   imports: [
     CommonModule,
