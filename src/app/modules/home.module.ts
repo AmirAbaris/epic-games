@@ -53,8 +53,8 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     PreviewWishListButtonComponent,
     HighlightMainComponent,
     ActivateWishlistDirective,
-    IsHighlightPreviewPipe,
-    ScaleOnActivateDirective
+    ScaleOnActivateDirective,
+    IsHighlightPreviewPipe
   ],
   imports: [
     CommonModule,
