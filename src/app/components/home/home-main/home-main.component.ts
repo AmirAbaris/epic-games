@@ -1,22 +1,6 @@
 import { Component, inject, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { GameService } from "../../../services/game.service";
-import { HighlightGamesModel } from "../models/highlight-games-model";
-import { GameListItemModel } from "../models/game-list-item.model";
-import { GameCardModel } from "../models/game-card.model";
-import { FreeGameCardModel } from "../models/free-game-card.model";
-import { FortniteCardModel } from "../models/fortnite-card.model";
-import { LargeHighlightGameCaptionModel } from "../models/caption-models/large-highlight-game-caption.model";
-import { HighlightGamesDto } from "../dtos/highlight-games-dto";
-import { GameCardDto } from "../dtos/game-card-dto";
-import { FreeGameCardDto } from "../dtos/free-game-card-dto";
 import { FreeGameCardCaptionModel } from "../models/caption-models/free-game-card-caption.model";
-import { freeGameCardManagementCaptionModel } from "../models/caption-models/free-game-card-management-caption.model";
-import { FortniteCardDto } from "../dtos/fortnite-card-dto";
-import { FortniteCardManagementCaptionModel } from "../models/caption-models/fortnite-management-caption.model";
-import { BannerDto } from "../dtos/banner-dto";
-import { BannerModel } from "../models/banner.model";
-import { GameListItemDto } from "../dtos/game-list-item-dto";
 import { finalize, forkJoin, interval, take } from "rxjs";
 import { CategoryItemCaptionModel } from "../models/caption-models/category-item-caption.model";
 import { CategoryType } from "../enums/category-type.enum";
@@ -27,8 +11,7 @@ import { GameType } from "../../../enums/game-type.enum";
 import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-item-caption.model";
 import { FreeGameListInputModel } from "../models/free-game-list-input.model";
 import { FreeGameListCaptionModel } from "../models/caption-models/free-game-list-caption.model";
-import { HighlightButtonEnum } from "../enums/highlight-button.enum";
-import { Router } from "@angular/router";
+import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
 
 @Component({
   selector: "app-home-main",
@@ -37,36 +20,15 @@ import { Router } from "@angular/router";
 })
 export class HomeMainComponent implements OnInit {
   //region properties
-  private _gameService = inject(GameService);
   private _translateService = inject(TranslateService);
 
-  public highlightGames: HighlightGamesDto | undefined;
-  public gameCards: GameCardDto[] | undefined;
-  public freeGameCards: FreeGameCardDto[] | undefined;
-  public fortniteGameCards: FortniteCardDto[] | undefined;
-  public banners: BannerDto[] | undefined;
-  public gameBanners: BannerDto[] | undefined;
-  public nonGameBanners: BannerDto[] | undefined;
-  public gameListItem: GameListItemDto[] | undefined;
   public categoryManagementData: CategoryManagementInputModel = mockData;
   public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
   public isLoading: boolean = true;
   public isActive = true;
-  public largeHighlightGameCaption: LargeHighlightGameCaptionModel | undefined;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
-  public freeGameManagementCaption: freeGameCardManagementCaptionModel | undefined;
   public freeGameList: FreeGameListInputModel = freeGameItemMockData;
-  public fortniteCaption: FortniteCardManagementCaptionModel | undefined;
-  public gameItemCaption: CategoryItemCaptionModel | undefined;
-  public categoryListCaption: CategoryListCaptionModel | undefined;
-  public categoryItemCaption: CategoryItemCaptionModel | undefined;
-  // public gameSliderCaption: GameSliderCaptionModel | undefined;
-  public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
-  public freeGameListCaption: FreeGameListCaptionModel | undefined;
-  public highlightPrevButtonTypeEnum: HighlightButtonEnum = HighlightButtonEnum.FREE;
-  public isInWishlist = false;
-  public isWishlistProcessing = false;
-
+  public sliderGameType: GameType = GameType.BASE_GAME;
   public highlightSmallItemData = [{
     isActive: false,
     cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
@@ -78,15 +40,18 @@ export class HomeMainComponent implements OnInit {
     name: 'squad'
   }];
 
+  public gameItemCaption: CategoryItemCaptionModel | undefined;
+  public categoryListCaption: CategoryListCaptionModel | undefined;
+  public categoryItemCaption: CategoryItemCaptionModel | undefined;
+  public gameSliderCaption: GameSliderCaptionModel | undefined;
+  public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
+  public freeGameListCaption: FreeGameListCaptionModel | undefined;
+
   private readonly captionPaths = {
-    largeHighlightGame: "home.LargeHighlightGame",
-    freeGameCardManagement: "home.FreeGameCardManagement",
     freeGameCard: "home.FreeGameCard",
-    fortniteCardManagement: "home.FortniteCardManagement",
     gameItemList: 'home.GameItemList',
     categoryList: 'home.CategoryList',
     categoryItem: 'home.CategoryItem',
-    gameSliderItem: 'home.GameSliderItem',
     freeGameList: 'home.FreeGameList',
     freeGameItem: 'home.FreeGameItem',
     gameType: 'home.enum-captions.gameType'
@@ -95,9 +60,6 @@ export class HomeMainComponent implements OnInit {
 
   //region lifecycle methods
   ngOnInit(): void {
-    this._getAllGameData();
-    this._filterGamesInGameBanners();
-    this._filterNonGamesInGameBanners();
     this._getCaptions();
     this._completeLoading();
   }
@@ -110,29 +72,8 @@ export class HomeMainComponent implements OnInit {
     console.log('click card works');
   }
 
-  private _getAllGameData(): void {
-    forkJoin([
-      this._gameService.getHighlightGames(),
-      this._gameService.getGameCards(),
-      this._gameService.getFreeGames(),
-      this._gameService.getFortniteGames(),
-      this._gameService.getGameBanners(),
-      this._gameService.getGameList()
-    ]).subscribe(([highlightGames, gameCards, freeGames, fortniteGames, gameBanner, gameItems]) => {
-      this.highlightGames = this._convertHighlightGamesModelToHighlightGamesDto(highlightGames);
-      this.gameCards = this._convertGameCardModelToGameCardDto(gameCards);
-      this.freeGameCards = this._convertFreeGameModelToFreeGamesDto(freeGames);
-      this.fortniteGameCards = this._convertFortniteCardModelToFortniteCardDto(fortniteGames);
-      this.banners = this._convertGameBannerModelToGameBannerDto(gameBanner);
-      this.gameListItem = this._convertGameListItemModelToGameListItemDto(gameItems);
-    });
-  }
-
   private _getCaptions(): void {
-    const largeHighlightGameCaption = this._translateService.get(this.captionPaths.largeHighlightGame);
-    const freeGameManagementCaption = this._translateService.get(this.captionPaths.freeGameCardManagement);
     const freeGamesCaption = this._translateService.get(this.captionPaths.freeGameCard);
-    const fortniteCaption = this._translateService.get(this.captionPaths.fortniteCardManagement);
     const gameItemCaption = this._translateService.get(this.captionPaths.gameItemList);
     const categoryListCaption = this._translateService.get(this.captionPaths.categoryList);
     const categoryItemCaption = this._translateService.get(this.captionPaths.categoryItem);
@@ -140,20 +81,14 @@ export class HomeMainComponent implements OnInit {
     const freeGameListCaption = this._translateService.get(this.captionPaths.freeGameList);
 
     forkJoin([
-      largeHighlightGameCaption,
-      freeGameManagementCaption,
       freeGamesCaption,
-      fortniteCaption,
       gameItemCaption,
       categoryListCaption,
       categoryItemCaption,
       freeGameItemCaption,
       freeGameListCaption
-    ]).subscribe(([largeHighlightGameCaption, freeGameManagementCaption, freeGamesCaption, fortniteCaption, gameItemCaption, categoryListCaption, categoryItemCaption, freeGameItemCaption, freeGameList]) => {
-      this.largeHighlightGameCaption = largeHighlightGameCaption;
-      this.freeGameManagementCaption = freeGameManagementCaption;
+    ]).subscribe(([freeGamesCaption, gameItemCaption, categoryListCaption, categoryItemCaption, freeGameItemCaption, freeGameList]) => {
       this.freeGamesCaption = freeGamesCaption;
-      this.fortniteCaption = fortniteCaption;
       this.gameItemCaption = gameItemCaption;
       this.categoryListCaption = categoryListCaption;
       this.categoryItemCaption = categoryItemCaption;
@@ -169,137 +104,6 @@ export class HomeMainComponent implements OnInit {
         this.isLoading = false;
       })).subscribe();
   }
-
-  public testClickItemEvent($event: string): void {
-    if (!$event) return;
-
-    console.log(`routed to games/${$event}`);
-  }
-
-  public testClickWishlistButtonEvent($event: string): void {
-    this.isWishlistProcessing = true;
-    setTimeout(() => {
-      this.isInWishlist = !this.isInWishlist;
-      this.isWishlistProcessing = false;
-
-      console.log($event);
-    }, 1000);
-  }
-
-  private _filterGamesInGameBanners(): void {
-    this.gameBanners = this.banners?.filter((game) => game.isAGame);
-  }
-
-  private _filterNonGamesInGameBanners(): void {
-    this.nonGameBanners = this.banners?.filter((game) => !game.isAGame);
-  }
-  //endregion
-
-  //region helper methods
-  private _convertHighlightGamesModelToHighlightGamesDto(highlightGames: HighlightGamesModel): HighlightGamesDto {
-    return {
-      smallHighlightGames: highlightGames.smallHighlightGames,
-      largeHighlightGames: highlightGames.largeHighlightGames
-    };
-  }
-
-  private _convertGameCardModelToGameCardDto(gameCards: GameCardModel[]): GameCardDto[] {
-    const gameCardsDto: GameCardDto[] = [];
-
-    gameCards.forEach((gameCard) => {
-      const gameCardDto: GameCardDto = {
-        name: gameCard.name,
-        type: gameCard.type,
-        cover: gameCard.cover,
-        discountPercent: gameCard.discountPercent,
-        basePrice: gameCard.basePrice,
-        finalPrice: gameCard.finalPrice,
-        isFree: gameCard.isFree
-      }
-
-      gameCardsDto.push(gameCardDto);
-    });
-
-    return gameCardsDto;
-  }
-
-  private _convertFreeGameModelToFreeGamesDto(freeGame: FreeGameCardModel[]): FreeGameCardDto[] {
-    const freeGamesDto: FreeGameCardDto[] = [];
-
-    freeGame.forEach((game) => {
-      const gameCardDto: FreeGameCardDto = {
-        name: game.name,
-        type: game.type,
-        isFree: game.isFree,
-        cover: game.cover,
-        isPublished: game.isPublished
-      }
-
-      freeGamesDto.push(gameCardDto);
-    });
-
-    return freeGamesDto;
-  }
-
-  private _convertFortniteCardModelToFortniteCardDto(fortniteGames: FortniteCardModel[]): FortniteCardDto[] {
-    const fortniteCardsDto: FortniteCardDto[] = [];
-
-    fortniteGames.forEach((game) => {
-      const fortniteCard: FortniteCardDto = {
-        cover: game.cover,
-        name: game.name,
-        type: game.type
-
-      }
-
-      fortniteCardsDto.push(fortniteCard);
-    });
-
-    return fortniteCardsDto;
-  }
-
-  private _convertGameBannerModelToGameBannerDto(gameBannersModel: BannerModel[]): BannerDto[] {
-    const gameBanners: BannerDto[] = [];
-
-    gameBannersModel.forEach((game) => {
-      const gameBanner: BannerDto = {
-        cover: game.cover,
-        name: game.name,
-        bio: game.bio,
-        isFree: game.isFree,
-        price: game.price,
-        isAGame: game.isAGame,
-        playable: game.playable
-      }
-
-      gameBanners.push(gameBanner);
-    });
-
-    return gameBanners;
-  }
-
-  private _convertGameListItemModelToGameListItemDto(gameListItems: GameListItemModel[]): GameListItemDto[] {
-    const gameItems: GameListItemDto[] = [];
-
-    gameListItems.forEach((game) => {
-      const gameItem: GameListItemDto = {
-        id: game.id,
-        thumbnailCover: game.thumbnailCover,
-        name: game.name,
-        discountPercent: game.discountPercent,
-        basePrice: game.basePrice,
-        finalPrice: game.finalPrice,
-        isFree: game.isFree,
-        publishDate: game.publishDate,
-        isPublished: game.isPublished
-      }
-
-      gameItems.push(gameItem);
-    });
-
-    return gameItems;
-  }
-
   //endregion
 }
 
