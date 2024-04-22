@@ -1,13 +1,14 @@
 <!-- @if (highlightGames && largeHighlightGameCaption && gameCards && freeGameCards && freeGamesCaption &&
 freeGameManagementCaption && fortniteGameCards && fortniteCaption && freeGameItemCaption && gameItemCaption &&
 categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption && nonGameBanners && gameListItem) { -->
-@for (item of highlightSmallItemData; track $index) {
+<!-- @for (item of highlightSmallItemData; track $index) {
 <app-highlight-small-item [data]="item" [isLoading]="isLoading" [isActive]="true" />
-}
+} -->
 <!--  <app-highlight-game-slider-item [gameInputs]="highlightGames" [captionInputs]="largeHighlightGameCaption"/>-->
 
 <!-- <app-game-slider-item-management [gameCardInputs]="gameSliderItemData" [isLoading]="isLoading" /> -->
 
+<!-- <app-home-card [data]="{
 <!-- <app-home-card [data]="{
   id: '123456',
   cover: '../assets/game-covers/home-card-cover/rl.jpg',
@@ -16,7 +17,27 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
   hasWishlist: true
 }" [isLoading]="isLoading" (clickWishlistButton)="$event" (clickCardEvent)="$event" /> -->
 
-<app-home-card-game [data]="{
+<app-highlight-preview-item [data]="{
+    id: '11',
+    cover: '../assets/game-covers/highlight-preview-item-cover/scu.jpg',
+    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+    description: 'test test est testest testest testestestest testest test test test est testest testest testest test',
+    price: 55,
+    hasWishlist: true,
+    highlightButtonType: highlightPrevButtonTypeEnum,
+}" [isLoading]="isLoading" [wishlistButtonCaption]="{
+    inTitle: 'in wishlist',
+    addTitle: 'add to wishlist',
+    removeTitle: 'Remove From Wishlist'
+  }" [highlightButtonTypeCaption]="{
+    FREE: 'Play for free',
+    NOT_PUBLISHED: 'Wishlist now',
+    ARTICLE: 'Save now',
+    PUBLISHED: 'Buy now',
+  }" [isInWishlist]="isInWishlist" [isWishlistProcessing]="isWishlistProcessing"
+  (clickItemEvent)="testClickItemEvent($event)" (clickWishlistButtonEvent)="testClickWishlistButtonEvent($event)" />
+
+<!-- <app-home-card-game [data]="{
   basePrice: 50,
   finalPrice : 40,
   discountPercent : 20,
@@ -39,7 +60,7 @@ categoryItemCaption && categoryListCaption && gameBanners && freeGameListCaption
   hasWishlist: true
   },
   clickCardFn: clickCard
-}" [isLoading]="isLoading" />
+}" [isLoading]="isLoading" /> -->
 
 <!-- @for (item of freeGameItem; track $index) {
 <app-free-game-item [data]=" item" [caption]="freeGameItemCaption" [isLoading]="isLoading" (clickEvent)="$event" />

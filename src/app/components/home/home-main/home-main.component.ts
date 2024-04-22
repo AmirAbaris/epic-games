@@ -27,6 +27,7 @@ import { GameType } from "../../../enums/game-type.enum";
 import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-item-caption.model";
 import { FreeGameListInputModel } from "../models/free-game-list-input.model";
 import { FreeGameListCaptionModel } from "../models/caption-models/free-game-list-caption.model";
+import { HighlightButtonEnum } from "../enums/highlight-button.enum";
 import { Router } from "@angular/router";
 
 @Component({
@@ -36,6 +37,9 @@ import { Router } from "@angular/router";
 })
 export class HomeMainComponent implements OnInit {
   //region properties
+  private _gameService = inject(GameService);
+  private _translateService = inject(TranslateService);
+
   public highlightGames: HighlightGamesDto | undefined;
   public gameCards: GameCardDto[] | undefined;
   public freeGameCards: FreeGameCardDto[] | undefined;
@@ -59,6 +63,9 @@ export class HomeMainComponent implements OnInit {
   // public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
+  public highlightPrevButtonTypeEnum: HighlightButtonEnum = HighlightButtonEnum.FREE;
+  public isInWishlist = false;
+  public isWishlistProcessing = false;
 
   public highlightSmallItemData = [{
     isActive: false,
@@ -70,9 +77,6 @@ export class HomeMainComponent implements OnInit {
     cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
     name: 'squad'
   }];
-
-  private _gameService = inject(GameService);
-  private _translateService = inject(TranslateService);
 
   private readonly captionPaths = {
     largeHighlightGame: "home.LargeHighlightGame",
@@ -166,6 +170,22 @@ export class HomeMainComponent implements OnInit {
       })).subscribe();
   }
 
+  public testClickItemEvent($event: string): void {
+    if (!$event) return;
+
+    console.log(`routed to games/${$event}`);
+  }
+
+  public testClickWishlistButtonEvent($event: string): void {
+    this.isWishlistProcessing = true;
+    setTimeout(() => {
+      this.isInWishlist = !this.isInWishlist;
+      this.isWishlistProcessing = false;
+
+      console.log($event);
+    }, 1000);
+  }
+
   private _filterGamesInGameBanners(): void {
     this.gameBanners = this.banners?.filter((game) => game.isAGame);
   }
@@ -173,7 +193,6 @@ export class HomeMainComponent implements OnInit {
   private _filterNonGamesInGameBanners(): void {
     this.nonGameBanners = this.banners?.filter((game) => !game.isAGame);
   }
-
   //endregion
 
   //region helper methods
