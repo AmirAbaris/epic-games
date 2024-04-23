@@ -114,7 +114,7 @@ export class HomeMainComponent implements OnInit {
 
   public testClickItem(id: string): void {
     console.log(id);
-    this.isActive = true;
+    this.isActive = !this.isActive;
   }
   //endregion
 }
