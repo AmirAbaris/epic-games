@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item-input.model';
 import { HighlightButtonEnum } from '../enums/highlight-button.enum';
 import { HighlightButtonTypeEnumCaptionModel } from '../models/caption-models/highlight-button-type-enum-caption.model';
@@ -16,17 +16,14 @@ export class HighlightPreviewItemComponent implements OnInit {
   isLoading = input.required<boolean>();
   isInWishlist = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
-
   wishlistButtonCaption = input.required<WishListButtonCaptionModel>();
   highlightButtonTypeCaption = input.required<HighlightButtonTypeEnumCaptionModel>();
 
+  clickWishlistButtonEvent = output<string>();
+  clickItemEvent = output<string>();
+
   public buttonTypeEnum: typeof HighlightButtonEnum = HighlightButtonEnum;
   public buttonTypeEnumInput: HighlightButtonEnum | undefined;
-
-  //#endregion
-    clickWishlistButtonEvent = output<string>();
-  //#endregion
-    clickItemEvent = output<string>();
   //#endregion
 
   //#region Lifecycle methods
@@ -46,6 +43,4 @@ export class HighlightPreviewItemComponent implements OnInit {
     this.clickWishlistButtonEvent.emit(id);
   }
   //#endregion
-;
-;
 }

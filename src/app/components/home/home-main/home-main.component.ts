@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, DestroyRef, inject, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { FreeGameCardCaptionModel } from "../models/caption-models/free-game-card-caption.model";
 import { finalize, forkJoin, interval, take } from "rxjs";
@@ -14,6 +14,7 @@ import { FreeGameListCaptionModel } from "../models/caption-models/free-game-lis
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
 import { HighlightButtonEnum } from "../enums/highlight-button.enum";
 import { HighlightMainInputModel } from "../types/highlight-main-input.type";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
   selector: "app-home-main",
@@ -23,12 +24,13 @@ import { HighlightMainInputModel } from "../types/highlight-main-input.type";
 export class HomeMainComponent implements OnInit {
   //region properties
   private _translateService = inject(TranslateService);
+  protected _destroyRef = inject(DestroyRef);
 
   public categoryManagementData: CategoryManagementInputModel = mockData;
   public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
-  public isLoading: boolean = true;
-  public isActive = true;
-  public isInWishlist = true;
+  public isLoading: boolean = false;
+  public isActive = false;
+  public isInWishlist = false;
   public isWishlistProcessing = false;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameList: FreeGameListInputModel = freeGameItemMockData;
@@ -56,7 +58,7 @@ export class HomeMainComponent implements OnInit {
   ngOnInit(): void {
     this._getCaptions();
     this._completeLoading();
-    this._toggleIsActive();
+    // this._toggleIsActive();
   }
 
   //endregion
@@ -100,12 +102,19 @@ export class HomeMainComponent implements OnInit {
       })).subscribe();
   }
 
-  private _toggleIsActive(): void {
-    // TODO unsub!
-    setInterval(() => {
-      this.isActive = !this.isActive;
-      console.log(this.isActive);
-    }, 2000);
+  // private _toggleIsActive(): void {
+  //   interval(2000).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+  //     this.isActive = !this.isActive;
+  //   });
+  // }
+
+  public testClickWishlist(id: string): void {
+    console.log(id);
+  }
+
+  public testClickItem(id: string): void {
+    console.log(id);
+    this.isActive = true;
   }
   //endregion
 }
@@ -214,26 +223,47 @@ const highlightPreviewMockData: HighlightMainInputModel = {
       logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
       description: 'Description 2',
       highlightButtonType: HighlightButtonEnum.FREE,
+    },
+    {
+      id: '2',
+      cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+      logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+      description: 'Description 2',
+      highlightButtonType: HighlightButtonEnum.FREE,
+    },
+    {
+      id: '2',
+      cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+      logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+      description: 'Description 2',
+      highlightButtonType: HighlightButtonEnum.FREE,
+    },
+    {
+      id: '2',
+      cover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+      logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+      description: 'Description 2',
+      highlightButtonType: HighlightButtonEnum.FREE,
     }
   ],
   highlightSmallItem: [{
     cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    name: 'item'
+    name: 'itemitemitem itemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitem'
   },
   {
     cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    name: 'item'
+    name: 'itemitemitem itemitemitem'
   },
   {
     cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    name: 'item'
+    name: 'itemitemitem itemitemitem'
   },
   {
     cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    name: 'item'
+    name: 'itemitemitem itemitemitem'
   }, {
     cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    name: 'item'
+    name: 'itemitemitem itemitemitem'
   },
   ]
 };

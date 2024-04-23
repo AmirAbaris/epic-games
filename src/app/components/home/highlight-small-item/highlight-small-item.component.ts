@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { HighlightSmallItemInputModel } from '../models/highlight-small-item-input.model';
 import { output } from "@angular/core";
 
@@ -13,8 +13,7 @@ export class HighlightSmallItemComponent {
   isLoading = input.required<boolean>();
   isActive = input.required<boolean>();
 
-  //#endregion
-    clickItemEvent = output<void>();
+  clickItemEvent = output<void>();
   //#endregion
 
   //#region Handler methods
@@ -22,5 +21,4 @@ export class HighlightSmallItemComponent {
     this.clickItemEvent.emit();
   }
   //#endregion
-;
 }
