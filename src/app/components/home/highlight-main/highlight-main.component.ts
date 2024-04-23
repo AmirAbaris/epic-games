@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject, input, model } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject, input } from '@angular/core';
 import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-button-caption.model';
 import { HighlightButtonTypeEnumCaptionModel } from '../models/caption-models/highlight-button-type-enum-caption.model';
 import { HighlightMainInputModel } from '../types/highlight-main-input.type';
