@@ -51,8 +51,14 @@ export class HighlightMainComponent implements OnInit {
     this.clickItemEvent.emit(id);
   }
 
+  /**
+   * when user clicks on the small item, the index will replace preview item index
+   * and 2 components shows the same index and item (syncs 2 component indexes)
+   * @param index 
+   * @returns 
+   */
   public updateGlobalIndex(index: number): void {
-    // checks if length of the preview data is not null
+    // check if length of the preview data is not null
     if (index > this._previewItemLength) return;
 
     this.currentIndex = index;
@@ -60,6 +66,9 @@ export class HighlightMainComponent implements OnInit {
   //#endregion
 
   //#region Main logic methods
+  /**
+   * changed the preview items every 2 sec
+   */
   private _cyclePreviewItems(): void {
     interval(2000).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
       this.currentIndex = (this.currentIndex + 1) % this._previewItemLength;
