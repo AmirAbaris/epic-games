@@ -42,6 +42,8 @@ export class HomeMainComponent implements OnInit {
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
   public highlightMainData: HighlightMainInputModel = highlightPreviewMockData;
+  public highlightMainItemIndex = 0;
+  public highlightPreviewItemLength = 0;
 
   private readonly captionPaths = {
     freeGameCard: "home.FreeGameCard",
@@ -56,9 +58,10 @@ export class HomeMainComponent implements OnInit {
 
   //region lifecycle methods
   ngOnInit(): void {
+    this.highlightPreviewItemLength = this.highlightMainData.highlightPreviewItem.length;
     this._getCaptions();
     this._completeLoading();
-    // this._toggleIsActive();
+    this._cycleItems();
   }
 
   //endregion
@@ -102,18 +105,32 @@ export class HomeMainComponent implements OnInit {
       })).subscribe();
   }
 
-  // private _toggleIsActive(): void {
-  //   interval(2000).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-  //     this.isActive = !this.isActive;
-  //   });
-  // }
-
   public testClickWishlist(id: string): void {
     console.log(id);
+
+    this.isWishlistProcessing = true;
+    setTimeout(() => {
+      this.isInWishlist = !this.isInWishlist;
+      this.isWishlistProcessing = false;
+    }, 2000);
   }
 
   public testClickItem(id: string): void {
     console.log(id);
+  }
+
+  /**
+ * changed the preview items every 2 sec
+ */
+  private _cycleItems(): void {
+    interval(2000).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+      this.highlightMainItemIndex = (this.highlightMainItemIndex + 1) % this.highlightPreviewItemLength;
+
+      this._toggleIsActive();
+    });
+  }
+
+  private _toggleIsActive(): void {
     this.isActive = !this.isActive;
   }
   //endregion

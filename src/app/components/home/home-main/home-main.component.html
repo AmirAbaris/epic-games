@@ -8,4 +8,5 @@
         inTitle: 'In Wishlist',
         addTitle: 'Add to wishlist',
         removeTitle: 'Remove from wishlist'
-    }" (clickItemEvent)="testClickItem($event)" (clickWishlistButtonEvent)="testClickWishlist($event)" />
+    }" [currentIndex]="highlightMainItemIndex" (clickItemEvent)="testClickItem($event)"
+    (clickWishlistButtonEvent)="testClickWishlist($event)" />

@@ -1,6 +1,6 @@
 <section class="flex items-center gap-x-4">
     <div class="md:w-9/12 flex-1">
-        <app-highlight-preview-item [data]="data().highlightPreviewItem[currentIndex]" [isLoading]="isLoading()"
+        <app-highlight-preview-item [data]="data().highlightPreviewItem[currentIndex()]" [isLoading]="isLoading()"
             [isInWishlist]="isInWishlist()" [isWishlistProcessing]="isWishlistProcessing()"
             [wishlistButtonCaption]="wishlistButtonCaption()"
             [highlightButtonTypeCaption]="highlightButtonTypeCaption()"
@@ -10,9 +10,9 @@
 
     <div class="hidden md:flex md:flex-col md:gap-y-1 md:flex-shrink md:w-3/12 md:truncate">
         @for (item of data().highlightSmallItem; track $index) {
-        <app-highlight-small-item (click)="updateGlobalIndex($index)" [data]="item" [isLoading]="isLoading()"
+        <app-highlight-small-item (click)="onClickSmallItemEventHandler($index)" [data]="item" [isLoading]="isLoading()"
             [isActive]="isActive()"
-            (clickItemEvent)="onClickItemEventHandler(data().highlightPreviewItem[currentIndex].id)" />
+            (clickItemEvent)="onClickItemEventHandler(data().highlightPreviewItem[currentIndex()].id)" />
         }
     </div>
 </section>

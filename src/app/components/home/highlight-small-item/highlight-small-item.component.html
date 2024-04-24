@@ -9,7 +9,6 @@
     (click)="onClickItemEventHandler()">
     <img class="rounded-md" scaleOnActivateDir [isActive]="isActive()" [ngSrc]="data().cover" [alt]="data().name"
         width="45" height="60" priority>
-    <!-- added max-w to handle aspect of the page -->
     <h1 class="flex flex-wrap">{{data().name}}</h1>
 </section>
 }
