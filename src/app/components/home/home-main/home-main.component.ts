@@ -14,7 +14,6 @@ import { FreeGameListCaptionModel } from "../models/caption-models/free-game-lis
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
 import { HighlightButtonEnum } from "../enums/highlight-button.enum";
 import { HighlightMainInputModel } from "../types/highlight-main-input.type";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
   selector: "app-home-main",
@@ -100,20 +99,6 @@ export class HomeMainComponent implements OnInit {
       finalize(() => {
         this.isLoading = false;
       })).subscribe();
-  }
-
-  public testClickWishlist(id: string): void {
-    console.log(id);
-
-    this.isWishlistProcessing = true;
-    setTimeout(() => {
-      this.isInWishlist = !this.isInWishlist;
-      this.isWishlistProcessing = false;
-    }, 2000);
-  }
-
-  public testClickItem(id: string): void {
-    console.log(id);
   }
   //endregion
 }

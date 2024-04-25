@@ -11,5 +11,4 @@
         addTitle: 'Add to wishlist',
         removeTitle: 'Remove from wishlist'
     }
-}" [wishlistListIds]="[]" (clickItemEvent)="testClickItem($event)"
-    (clickWishlistButtonEvent)="testClickWishlist($event)" />
+}" [wishlistListIds]="[]" (clickItemEvent)="$event" (clickWishlistButtonEvent)="$event" />
