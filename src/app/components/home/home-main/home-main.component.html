@@ -1,12 +1,15 @@
-<app-highlight-main [data]="highlightMainData" [isLoading]="isLoading" [isActive]="isActive"
-    [isInWishlist]="isInWishlist" [isWishlistProcessing]="isWishlistProcessing" [highlightButtonTypeCaption]="{
+<app-highlight-main [data]="highlightMainData" [isLoading]="isLoading" [isWishlistProcessing]="isWishlistProcessing"
+    [caption]="{
+    highlightButtonTypeCaption: {
         FREE: 'FREE',
         NOT_PUBLISHED: 'NOT PUBLISHED',
-        ARTICLE: 'ARTICLE',
+        ARTICLE: 'SAVE NOW',
         PUBLISHED: 'PUBLISHED'
-    }" [wishlistButtonCaption]="{
+    },
+    wishlistButtonCaption: {
         inTitle: 'In Wishlist',
         addTitle: 'Add to wishlist',
         removeTitle: 'Remove from wishlist'
-    }" [currentIndex]="highlightMainItemIndex" (clickItemEvent)="testClickItem($event)"
+    }
+}" [wishlistListIds]="[]" (clickItemEvent)="testClickItem($event)"
     (clickWishlistButtonEvent)="testClickWishlist($event)" />

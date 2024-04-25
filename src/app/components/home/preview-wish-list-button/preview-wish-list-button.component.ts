@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, SimpleChanges, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-button-caption.model';
 import { output } from "@angular/core";
 
@@ -9,31 +9,17 @@ import { output } from "@angular/core";
 })
 export class PreviewWishListButtonComponent {
   //#region Properties
-  isInWishlist = input.required<boolean>();
+  wishlistListIds = input.required<string[]>();
   isWishlistProcessing = input.required<boolean>();
+  itemId = input.required<string>();
   caption = input.required<WishListButtonCaptionModel>();
-  public showTooltip = true;
 
-  //#endregion
-    clickWishlistButtonEvent = output<void>();
-  //#endregion
-
-  //#region Lifecycle methods
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['isInWishlist']) {
-      this._toggleTooltip();
-    }
-  }
+  clickWishlistButtonEvent = output<string>();
   //#endregion
 
   //#region Handler methods
-  public onClickWishlistButtonEventHandler(): void {
-    this.clickWishlistButtonEvent.emit();
-  }
-
-  private _toggleTooltip(): void {
-    this.showTooltip = !this.showTooltip;
+  public onClickWishlistButtonEventHandler(id: string): void {
+    this.clickWishlistButtonEvent.emit(id);
   }
   //#endregion
-;
 }

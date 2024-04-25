@@ -1,10 +1,12 @@
 import { HighlightButtonEnum } from "../enums/highlight-button.enum";
-import { HighlightPreviewItemInputModel } from "../models/highlight-preview-item-input.model";
-import { HighlightSmallItemInputModel } from "../models/highlight-small-item-input.model";
-
-export type HighlightMainInputType = Array<HighlightPreviewItemInputModel | HighlightSmallItemInputModel>;
 
 export interface HighlightMainInputModel {
-    highlightPreviewItem: HighlightPreviewItemInputModel[];
-    highlightSmallItem: HighlightSmallItemInputModel[];
+    id: string;
+    name: string;
+    minimalCover: string;
+    largeCover: string;
+    logo: string
+    description: string
+    price?: number;
+    highlightButtonType: HighlightButtonEnum;
 }

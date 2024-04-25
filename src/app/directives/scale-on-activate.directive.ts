@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, OnChanges, SimpleChanges, inject, model } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, OnChanges, SimpleChanges, inject, input } from '@angular/core';
 
 @Directive({
   selector: '[scaleOnActivateDir]'
@@ -7,7 +7,7 @@ export class ScaleOnActivateDirective implements OnChanges, AfterViewInit {
   //#region Properties
   private _elementRef = inject(ElementRef);
 
-  isActive = model.required<boolean>();
+  isActive = input.required<boolean>();
   public targetElement: HTMLElement | undefined;
   private readonly _SCALE_DURATION = 150; // milliseconds
   //#endregion
@@ -18,6 +18,7 @@ export class ScaleOnActivateDirective implements OnChanges, AfterViewInit {
     this._setTargetElement();
 
     this._applyScale();
+    console.log(this.isActive());
   }
 
   /**
@@ -25,7 +26,7 @@ export class ScaleOnActivateDirective implements OnChanges, AfterViewInit {
    * @param changes 
    */
   ngOnChanges(changes: SimpleChanges): void {
-    if ('scaleOnActivateDir' in changes) {
+    if ('isActive' in changes) {
       this._applyScale();
     }
   }
