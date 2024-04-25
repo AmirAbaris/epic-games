@@ -28,13 +28,14 @@ export class HighlightMainComponent implements OnInit {
   public highlightPreviewData: HighlightPreviewItemInputModel[] = [];
   public highlightSmallData: HighlightSmallItemInputModel[] = [];
   public currentIndex = 0;
-
   //#endregion
 
+  //#region Lifecycle methods
   ngOnInit(): void {
     this._setInitData();
     this._cycleItems();
   }
+  //#endregion
 
   //#region Handler methods
   public onClickWishlistButtonEventHandler(id: string): void {
