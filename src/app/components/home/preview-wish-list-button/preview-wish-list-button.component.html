@@ -2,7 +2,7 @@
 <button class="wishlist-btn" [matTooltip]="caption().removeTitle" matTooltipPosition="below"
     (click)="onClickWishlistButtonEventHandler(itemId()); $event.stopImmediatePropagation()" mat-button>
     <span>
-        @if (wishlistListIds() && !isWishlistProcessing()) {
+        @if (wishlistListIds().length && wishlistListIds().includes(itemId())) {
         <mat-icon>
             check_circle
         </mat-icon>
@@ -11,7 +11,7 @@
             add_circle
         </mat-icon>
         }
-        {{ (wishlistListIds().length !== -1 && wishlistListIds().includes(itemId()) ? caption().inTitle :
+        {{ (wishlistListIds().length && wishlistListIds().includes(itemId()) ? caption().inTitle :
         caption().addTitle) | uppercase }}
     </span>
 </button>

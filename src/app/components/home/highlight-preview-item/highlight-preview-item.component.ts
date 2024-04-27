@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input, model } from '@angular/core';
 import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item-input.model';
 import { HighlightButtonEnum } from '../enums/highlight-button.enum';
 import { HighlightButtonTypeEnumCaptionModel } from '../models/caption-models/highlight-button-type-enum-caption.model';
@@ -14,7 +14,7 @@ export class HighlightPreviewItemComponent {
   //#region Properties
   data = input.required<HighlightPreviewItemInputModel>();
   isLoading = input.required<boolean>();
-  wishlistListIds = input.required<string[]>();
+  wishlistListIds = model.required<string[]>();
   isWishlistProcessing = input.required<boolean>();
   wishlistButtonCaption = input.required<WishListButtonCaptionModel>();
   highlightButtonTypeCaption = input.required<HighlightButtonTypeEnumCaptionModel>();
@@ -29,25 +29,32 @@ export class HighlightPreviewItemComponent {
   public onClickItemEventHandler(id: string): void {
     this.clickItemEvent.emit(id);
   }
+  
   public onClickWishlistButtonEventHandler(id: string): void {
     if (this.isWishlistProcessing()) return;
 
-    // Retrieve the wishlist list array
-    const wishlistList = this.wishlistListIds();
-
     if (this.wishlistListIds().includes(id)) {
-      // If the ID is already in the wishlist list, remove it
-      const index = wishlistList.indexOf(id);
-      index !== -1 && wishlistList.splice(index, 1);
+      this._removeIdFromWishlistIds(id);
+
     } else {
-      // If the ID is not in the wishlist list, add it
-      wishlistList.push(id);
-      // Emit the event indicating the button click
+      this._addIdToWishlistIds(id);
+
       this.clickWishlistButtonEvent.emit(id);
     }
+  }
+  //#endregion
 
-    // Log the current wishlist list IDs
-    console.log(wishlistList);
+  //#region Main logic methods
+  private _removeIdFromWishlistIds(id: string): void {
+    if (!this.wishlistListIds().includes(id)) return;
+
+    this.wishlistListIds.update((item) => item.filter((ids) => ids !== id));
+  }
+
+  private _addIdToWishlistIds(id: string): void {
+    if (this.wishlistListIds().includes(id)) return;
+
+    this.wishlistListIds.update((item) => [...item, id]);
   }
   //#endregion
 }

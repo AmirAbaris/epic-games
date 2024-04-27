@@ -27,7 +27,7 @@ export class HomeMainComponent implements OnInit {
 
   public categoryManagementData: CategoryManagementInputModel = mockData;
   public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
-  public isLoading: boolean = false;
+  public isLoading: boolean = true;
   public isActive = false;
   public isInWishlist = false;
   public isWishlistProcessing = false;
@@ -94,7 +94,7 @@ export class HomeMainComponent implements OnInit {
   }
 
   private _completeLoading(): void {
-    interval(2000).pipe(
+    interval(3000).pipe(
       take(1),
       finalize(() => {
         this.isLoading = false;

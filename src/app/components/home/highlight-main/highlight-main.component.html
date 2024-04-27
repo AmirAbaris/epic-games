@@ -10,9 +10,8 @@
 
     <div class="hidden md:flex md:flex-col md:gap-y-1 md:flex-shrink md:col-span-3">
         @for (item of highlightSmallData; track $index) {
-        <app-highlight-small-item (click)="updateGlobalIndex($index)" [data]="item" [isLoading]="isLoading()"
-            [isActive]="$index === currentIndex"
-            (clickItemEvent)="onClickItemEventHandler(highlightPreviewData[currentIndex].id)" />
+        <app-highlight-small-item [data]="item" [isLoading]="isLoading()" [isActive]="$index === currentIndex"
+            (clickItemEvent)="onClickItemEventHandler(highlightPreviewData[currentIndex].id, $index)" />
         }
     </div>
 </section>

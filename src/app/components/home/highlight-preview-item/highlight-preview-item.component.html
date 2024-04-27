@@ -1,5 +1,6 @@
 @if (isLoading()) {
-<div class="animate-pulse bg-darkCharcoal min-h-[400px] rounded-2xl aspect-square sm:aspect-video"></div>
+<div class="animate-pulse bg-darkCharcoal p-[15rem] pl-[28rem] rounded-2xl aspect-square sm:aspect-video">
+</div>
 } @else {
 <section class="font-inter cursor-pointer relative h-full" (click)="onClickItemEventHandler(data().id)">
     @if (buttonTypeEnum.ARTICLE !== data().highlightButtonType) {
@@ -19,7 +20,7 @@
             <p class="flex flex-wrap text-sm text-white md:text-md sm:w-2/5">
                 {{data().description}}
             </p>
-            <div class="buttons hidden sm:block gap-x-4 mt-8 z-10">
+            <div class="buttons hidden sm:flex sm:gap-x-4 sm:mt-8 sm:z-10">
                 <button class="buy-btn font-inter"
                     mat-raised-button>{{highlightButtonTypeCaption()[data().highlightButtonType]}}</button>
 

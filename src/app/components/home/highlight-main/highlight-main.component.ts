@@ -28,6 +28,7 @@ export class HighlightMainComponent implements OnInit {
   public highlightPreviewData: HighlightPreviewItemInputModel[] = [];
   public highlightSmallData: HighlightSmallItemInputModel[] = [];
   public currentIndex = 0;
+  private readonly _cycleInterval = 5000;
   //#endregion
 
   //#region Lifecycle methods
@@ -42,24 +43,18 @@ export class HighlightMainComponent implements OnInit {
     this.clickWishlistButtonEvent.emit(id);
   }
 
-  public onClickItemEventHandler(id: string): void {
+  public onClickItemEventHandler(id: string, index?: number): void {
     this.clickItemEvent.emit(id);
+
+    if (index !== undefined) {
+      this._updateGlobalIndexHandler(index);
+    }
   }
   //#endregion
 
   //#region Main logic methods
-  /**
- * when user clicks on the small item, the index will replace preview item index
- * and 2 components shows the same index and item (syncs 2 component indexes)
- * @param index 
- * @returns 
- */
-  public updateGlobalIndex(index: number): void {
-    this.currentIndex = index;
-  }
-
   private _cycleItems(): void {
-    interval(5000).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+    interval(this._cycleInterval).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
       this.currentIndex = (this.currentIndex + 1) % this.data().length;
     });
   }
@@ -69,6 +64,15 @@ export class HighlightMainComponent implements OnInit {
       this.highlightPreviewData.push(this._convertHighlightMainInputModelToHighlightPreviewItemInputModel(item));
       this.highlightSmallData.push(this._convertHighlightMainInputModelToHighlightSmallItemInputModel(item));
     });
+  }
+
+  /**
+   * when user clicks on the small item, the index will replace preview item index
+   * two components shows the same index and items (syncs 2 component index)
+   * @param index 
+   */
+  private _updateGlobalIndexHandler(index: number): void {
+    this.currentIndex = index;
   }
   //#endregion
 
