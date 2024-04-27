@@ -19,7 +19,6 @@ export class HighlightSmallItemComponent {
   //#region Handler methods
   public onClickItemEventHandler(): void {
     this.clickItemEvent.emit();
-    console.log('isActive:', this.isActive());
   }
   //#endregion
 }
