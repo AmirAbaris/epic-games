@@ -1,17 +1,17 @@
 <section class="grid md:grid-cols-12 items-center gap-x-4">
     <div class="col-span-9 h-full">
         <app-highlight-preview-item [data]="highlightPreviewData[currentIndex]" [isLoading]="isLoading()"
-            [isInWishlist]="wishlistListIds().includes(highlightPreviewData[currentIndex].id)"
+            [isInWishlist]="wishlistIds() | isInWishlist:highlightPreviewData[currentIndex].id"
             [isWishlistProcessing]="isWishlistProcessing()" [wishlistButtonCaption]="caption().wishlistButtonCaption"
             [highlightButtonTypeCaption]="caption().highlightButtonTypeCaption"
-            (clickItemEvent)="onClickItemEventHandler($event)"
+            (clickItemEvent)="onClickPreviewItemEventHandler($event)"
             (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
     </div>
 
     <div class="hidden md:flex md:flex-col md:gap-y-1 md:flex-shrink md:col-span-3">
         @for (item of highlightSmallData; track $index) {
         <app-highlight-small-item [data]="item" [isLoading]="isLoading()" [isActive]="$index === currentIndex"
-            (clickItemEvent)="onClickItemEventHandler(highlightPreviewData[currentIndex].id, $index)" />
+            (clickItemEvent)="onClickSmallItemEventHandler(highlightPreviewData[currentIndex].id, $index)" />
         }
     </div>
 </section>

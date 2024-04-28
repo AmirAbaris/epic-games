@@ -21,7 +21,7 @@ import { HighlightMainInputModel } from "../types/highlight-main-input.type";
   styleUrl: "./home-main.component.scss",
 })
 export class HomeMainComponent implements OnInit {
-  //region properties
+  //region Properties
   private _translateService = inject(TranslateService);
   protected _destroyRef = inject(DestroyRef);
 
@@ -41,6 +41,7 @@ export class HomeMainComponent implements OnInit {
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
   public highlightMainData: HighlightMainInputModel[] = highlightPreviewMockData;
+  public wishlistIds: string[] = [];
 
   private readonly captionPaths = {
     freeGameCard: "home.FreeGameCard",
@@ -57,12 +58,11 @@ export class HomeMainComponent implements OnInit {
   ngOnInit(): void {
     this._getCaptions();
     this._completeLoading();
-    // this._cycleItems();
   }
 
   //endregion
 
-  //region main logic methods
+  //region Main logic methods
   public clickCard(): void {
     // needs refactor after implementing the routes!
     console.log('click card works');
@@ -99,6 +99,37 @@ export class HomeMainComponent implements OnInit {
       finalize(() => {
         this.isLoading = false;
       })).subscribe();
+  }
+
+  // TODO: removable test!
+  /**
+   * this method just tests the functionality of wishlistIds and wishlistEvent handler
+   * you can remove it if component is clear and Ok!
+   * @param id 
+   */
+  public testWishlistButtonEventHandler(id: string): void {
+    if (this.wishlistIds.includes(id)) {
+      this._removeIdFromWishlistIds(id);
+      console.log('removed from ids', this.wishlistIds);
+
+    } else {
+      this._addIdToWishlistIds(id);
+      console.log('added to ids', this.wishlistIds);
+    }
+  }
+
+  private _removeIdFromWishlistIds(id: string): void {
+    // check if we even have id in our list, if we didn't have the id, it will not continue! (extra layer of protection)
+    if (!this.wishlistIds.includes(id)) return;
+
+    this.wishlistIds = this.wishlistIds.filter((arrayId) => arrayId !== id);
+  }
+
+  private _addIdToWishlistIds(id: string): void {
+    // check if we have id in our array, if we have it, it will stop the method! (extra layer of protection)
+    if (this.wishlistIds.includes(id)) return;
+
+    this.wishlistIds = [...this.wishlistIds, id];
   }
   //endregion
 }

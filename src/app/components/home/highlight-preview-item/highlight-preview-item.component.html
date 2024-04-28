@@ -1,6 +1,7 @@
 @if (isLoading()) {
-<div class="animate-pulse bg-darkCharcoal p-[15rem] pl-[28rem] rounded-2xl aspect-square sm:aspect-video">
+<div class="animate-pulse bg-darkCharcoal h-[30rem] w-[30rem] lg:w-[40rem] rounded-2xl">
 </div>
+<!-- p-[15rem] pl-[28rem] -->
 } @else {
 <section class="font-inter cursor-pointer relative h-full" (click)="onClickItemEventHandler(data().id)">
     @if (buttonTypeEnum.ARTICLE !== data().highlightButtonType) {
