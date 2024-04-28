@@ -4,8 +4,8 @@
     <div class="bg-darkGray w-3/4 h-2 rounded-md"></div>
 </section>
 } @else {
-<section [class.animate-loader]="isActive()"
-    class="flex gap-x-4 px-4 py-4 rounded-xl items-center cursor-pointer text-white w-full"
+<section [ngClass]="{'before:animate-loader': isActive()}"
+    class="relative flex gap-x-4 px-4 py-4 rounded-xl items-center cursor-pointer text-white w-full before:absolute before:top-0 before:left-0 before:h-full before:w-full before:-z-10 before:rounded-2xl"
     (click)="onClickItemEventHandler()">
     <img class="rounded-md" scaleOnActivateDir [isActive]="isActive()" [ngSrc]="data().cover" [alt]="data().name"
         width="45" height="60" priority>
