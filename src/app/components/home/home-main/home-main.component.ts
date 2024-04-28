@@ -30,12 +30,10 @@ export class HomeMainComponent implements OnInit {
   public freeGameList: FreeGameListInputModel = freeGameItemMockData;
   public sliderGameType: GameType = GameType.BASE_GAME;
   public highlightSmallItemData = [{
-    isActive: false,
     cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
     name: 'squad'
   },
   {
-    isActive: false,
     cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
     name: 'squad'
   }];

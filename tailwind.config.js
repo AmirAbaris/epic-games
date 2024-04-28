@@ -9,6 +9,21 @@ module.exports = {
   },
   theme: {
     extend: {
+      keyframes: {
+        loader: {
+          '0%': {
+            width: '0%',
+            backgroundColor: 'transparent',
+          },
+          '100%': {
+            width: '100%',
+            backgroundColor: '#202020',
+          }
+        }
+      },
+      animation: {
+        loader: 'loader 5s linear forwards'
+      },
       fontFamily: {
         sans: ['Open Sans', 'sans-serif'],
         inter: ['Inter', 'sans-serif']
