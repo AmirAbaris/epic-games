@@ -28,7 +28,7 @@ export class HighlightMainComponent implements OnInit {
   public highlightPreviewData: HighlightPreviewItemInputModel[] = [];
   public highlightSmallData: HighlightSmallItemInputModel[] = [];
   public currentIndex = 0;
-  private readonly _cycleInterval = 5000;
+  private readonly _CYCLE_INTERVAL = 5000;
   //#endregion
 
   //#region Lifecycle methods
@@ -71,7 +71,7 @@ export class HighlightMainComponent implements OnInit {
    * changes the index value to change index of our array (changed the item every n second)
    */
   private _cycleItems(): void {
-    interval(this._cycleInterval).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+    interval(this._CYCLE_INTERVAL).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
       this.currentIndex = (this.currentIndex + 1) % this.data().length;
     });
   }
