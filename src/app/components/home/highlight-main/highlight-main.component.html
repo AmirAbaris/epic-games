@@ -1,8 +1,8 @@
 <section class="grid md:grid-cols-12 items-center gap-x-4">
     <div class="col-span-9 h-full">
         <app-highlight-preview-item [data]="highlightPreviewData[currentIndex]" [isLoading]="isLoading()"
-            [wishlistListIds]="wishlistListIds()" [isWishlistProcessing]="isWishlistProcessing()"
-            [wishlistButtonCaption]="caption().wishlistButtonCaption"
+            [isInWishlist]="wishlistListIds().includes(highlightPreviewData[currentIndex].id)"
+            [isWishlistProcessing]="isWishlistProcessing()" [wishlistButtonCaption]="caption().wishlistButtonCaption"
             [highlightButtonTypeCaption]="caption().highlightButtonTypeCaption"
             (clickItemEvent)="onClickItemEventHandler($event)"
             (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />

@@ -9,17 +9,16 @@ import { output } from "@angular/core";
 })
 export class PreviewWishListButtonComponent {
   //#region Properties
-  wishlistListIds = input.required<string[]>();
+  isInWishlist = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
-  itemId = input.required<string>();
   caption = input.required<WishListButtonCaptionModel>();
 
-  clickWishlistButtonEvent = output<string>();
+  clickWishlistButtonEvent = output<void>();
   //#endregion
 
   //#region Handler methods
-  public onClickWishlistButtonEventHandler(id: string): void {
-    this.clickWishlistButtonEvent.emit(id);
+  public onClickWishlistButtonEventHandler(): void {
+    this.clickWishlistButtonEvent.emit();
   }
   //#endregion
 }

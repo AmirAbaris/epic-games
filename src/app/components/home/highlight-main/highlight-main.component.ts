@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject, input } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject, input, model } from '@angular/core';
 import { HighlightMainInputModel } from '../types/highlight-main-input.type';
 import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item-input.model';
 import { HighlightSmallItemInputModel } from '../models/highlight-small-item-input.model';
@@ -20,7 +20,7 @@ export class HighlightMainComponent implements OnInit {
   isLoading = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
   caption = input.required<HighlightMainCaptionMode>();
-  wishlistListIds = input.required<string[]>();
+  wishlistListIds = model.required<string[]>();
 
   clickWishlistButtonEvent = output<string>();
   clickItemEvent = output<string>();
@@ -39,13 +39,27 @@ export class HighlightMainComponent implements OnInit {
   //#endregion
 
   //#region Handler methods
+  /**
+   * checks if the id is in our array, if there is, it will remove the input id value, because if user clicks for second time, it should be removed from array
+   * and if input id was not in our array, it will add that value and then emits the data
+   * @param id 
+   */
   public onClickWishlistButtonEventHandler(id: string): void {
-    this.clickWishlistButtonEvent.emit(id);
+    if (this.wishlistListIds().includes(id)) {
+      this._removeIdFromWishlistIds(id);
+
+    } else {
+      this._addIdToWishlistIds(id);
+
+      this.clickWishlistButtonEvent.emit(id);
+    }
   }
 
   public onClickItemEventHandler(id: string, index?: number): void {
     this.clickItemEvent.emit(id);
 
+    // index param is nullable because we used this method on another component which does not require index parameter!
+    // and if we have the index, it will update its value!
     if (index !== undefined) {
       this._updateGlobalIndexHandler(index);
     }
@@ -53,6 +67,9 @@ export class HighlightMainComponent implements OnInit {
   //#endregion
 
   //#region Main logic methods
+  /**
+   * changes the index value to change index of our array (changed the item every n second)
+   */
   private _cycleItems(): void {
     interval(this._cycleInterval).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
       this.currentIndex = (this.currentIndex + 1) % this.data().length;
@@ -69,10 +86,25 @@ export class HighlightMainComponent implements OnInit {
   /**
    * when user clicks on the small item, the index will replace preview item index
    * two components shows the same index and items (syncs 2 component index)
+   * note that it's a method for better readability in handler methods!
    * @param index 
    */
   private _updateGlobalIndexHandler(index: number): void {
     this.currentIndex = index;
+  }
+
+  private _removeIdFromWishlistIds(id: string): void {
+    // check if we even have id in our list, if we didn't have the id, it will not continue! (extra layer of protection)
+    if (!this.wishlistListIds().includes(id)) return;
+
+    this.wishlistListIds.update((item) => item.filter((arrayId) => arrayId !== id));
+  }
+
+  private _addIdToWishlistIds(id: string): void {
+    // check if we have id in our array, if we have it, it will stop the method! (extra layer of protection)
+    if (this.wishlistListIds().includes(id)) return;
+
+    this.wishlistListIds.update((item) => [...item, id]);
   }
   //#endregion
 

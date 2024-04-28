@@ -1,8 +1,8 @@
 <!-- Angular passes Mouse Event type automatically to $event and we can call methods on $event! -->
 <button class="wishlist-btn" [matTooltip]="caption().removeTitle" matTooltipPosition="below"
-    (click)="onClickWishlistButtonEventHandler(itemId()); $event.stopImmediatePropagation()" mat-button>
+    (click)="onClickWishlistButtonEventHandler(); $event.stopImmediatePropagation()" mat-button>
     <span>
-        @if (wishlistListIds().length && wishlistListIds().includes(itemId())) {
+        @if (isInWishlist()) {
         <mat-icon>
             check_circle
         </mat-icon>
@@ -11,7 +11,6 @@
             add_circle
         </mat-icon>
         }
-        {{ (wishlistListIds().length && wishlistListIds().includes(itemId()) ? caption().inTitle :
-        caption().addTitle) | uppercase }}
+        {{ (isInWishlist() ? caption().inTitle : caption().addTitle) | uppercase }}
     </span>
 </button>

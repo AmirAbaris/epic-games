@@ -14,7 +14,7 @@ export class HighlightPreviewItemComponent {
   //#region Properties
   data = input.required<HighlightPreviewItemInputModel>();
   isLoading = input.required<boolean>();
-  wishlistListIds = model.required<string[]>();
+  isInWishlist = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
   wishlistButtonCaption = input.required<WishListButtonCaptionModel>();
   highlightButtonTypeCaption = input.required<HighlightButtonTypeEnumCaptionModel>();
@@ -29,32 +29,11 @@ export class HighlightPreviewItemComponent {
   public onClickItemEventHandler(id: string): void {
     this.clickItemEvent.emit(id);
   }
-  
+
   public onClickWishlistButtonEventHandler(id: string): void {
     if (this.isWishlistProcessing()) return;
 
-    if (this.wishlistListIds().includes(id)) {
-      this._removeIdFromWishlistIds(id);
-
-    } else {
-      this._addIdToWishlistIds(id);
-
-      this.clickWishlistButtonEvent.emit(id);
-    }
-  }
-  //#endregion
-
-  //#region Main logic methods
-  private _removeIdFromWishlistIds(id: string): void {
-    if (!this.wishlistListIds().includes(id)) return;
-
-    this.wishlistListIds.update((item) => item.filter((ids) => ids !== id));
-  }
-
-  private _addIdToWishlistIds(id: string): void {
-    if (this.wishlistListIds().includes(id)) return;
-
-    this.wishlistListIds.update((item) => [...item, id]);
+    this.clickWishlistButtonEvent.emit(id);
   }
   //#endregion
 }

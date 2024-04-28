@@ -26,9 +26,9 @@
 
                 @if (buttonTypeEnum.ARTICLE !== data().highlightButtonType) {
                 <!-- Angular passes Mouse Event type automatically to $event and we can call methods on $event! -->
-                <app-preview-wish-list-button [caption]="wishlistButtonCaption()" [wishlistListIds]="wishlistListIds()"
-                    [isWishlistProcessing]="isWishlistProcessing()" [itemId]="data().id"
-                    (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)">
+                <app-preview-wish-list-button [caption]="wishlistButtonCaption()" [isInWishlist]="isInWishlist()"
+                    [isWishlistProcessing]="isWishlistProcessing()"
+                    (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler(data().id)">
                 </app-preview-wish-list-button>
                 }
             </div>
