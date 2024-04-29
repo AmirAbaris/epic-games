@@ -4,7 +4,7 @@ import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item
 import { HighlightSmallItemInputModel } from '../models/highlight-small-item-input.model';
 import { output } from "@angular/core";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { interval } from 'rxjs';
+import { Subscription, delay, interval } from 'rxjs';
 import { HighlightMainCaptionMode } from '../models/caption-models/highlight-main-caption.model';
 
 @Component({
@@ -28,6 +28,7 @@ export class HighlightMainComponent implements OnInit {
   public highlightPreviewData: HighlightPreviewItemInputModel[] = [];
   public highlightSmallData: HighlightSmallItemInputModel[] = [];
   public currentIndex = 0;
+  private _intervalSubscription: Subscription | undefined;
   private readonly _CYCLE_INTERVAL = 5000;
   //#endregion
 
@@ -58,8 +59,13 @@ export class HighlightMainComponent implements OnInit {
    * changes the index value to change index of our array (changed the item every n second)
    */
   private _cycleItems(): void {
-    interval(this._CYCLE_INTERVAL).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+    console.log('is loading is', this.isLoading());
+    if (this.isLoading()) return;
+
+    console.log('is loading is', this.isLoading());
+    this._intervalSubscription = interval(this._CYCLE_INTERVAL).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
       this.currentIndex = (this.currentIndex + 1) % this.data().length;
+      console.log(this.currentIndex);
     });
   }
 
@@ -78,10 +84,18 @@ export class HighlightMainComponent implements OnInit {
    */
   private _updateGlobalIndex(index: number): void {
     this.currentIndex = index;
+    this._resetInterval();
   }
 
   private _emitClickEvent(id: string): void {
     this.clickItemEvent.emit(id);
+  }
+
+  private _resetInterval(): void {
+    if (!this._intervalSubscription) return;
+
+    this._intervalSubscription.unsubscribe();
+    this._cycleItems();
   }
   //#endregion
 
