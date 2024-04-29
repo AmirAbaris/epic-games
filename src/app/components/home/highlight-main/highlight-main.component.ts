@@ -4,8 +4,9 @@ import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item
 import { HighlightSmallItemInputModel } from '../models/highlight-small-item-input.model';
 import { output } from "@angular/core";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Subscription, delay, interval } from 'rxjs';
+import { Subscription, filter, interval } from 'rxjs';
 import { HighlightMainCaptionMode } from '../models/caption-models/highlight-main-caption.model';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-highlight-main',
@@ -30,6 +31,7 @@ export class HighlightMainComponent implements OnInit {
   public currentIndex = 0;
   private _intervalSubscription: Subscription | undefined;
   private readonly _CYCLE_INTERVAL = 5000;
+  private _isLoading$ = toObservable(this.isLoading);
   //#endregion
 
   //#region Lifecycle methods
@@ -51,21 +53,26 @@ export class HighlightMainComponent implements OnInit {
   public onClickSmallItemEventHandler(id: string, index: number): void {
     this._emitClickEvent(id);
     this._updateGlobalIndex(index);
+    this._resetInterval();
   }
   //#endregion
 
   //#region Main logic methods
   /**
    * changes the index value to change index of our array (changed the item every n second)
+   * used isLoading which became observable typed because RxJS didn't detect any changes in our signal input!
+   * and because our loading takes some time and then we'll have our content, we must wait until loading is done
+   * 
+   * and put our interval in a subscription typed variable to unsubscribe it when we wanna update the index
    */
   private _cycleItems(): void {
-    console.log('is loading is', this.isLoading());
-    if (this.isLoading()) return;
-
-    console.log('is loading is', this.isLoading());
-    this._intervalSubscription = interval(this._CYCLE_INTERVAL).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-      this.currentIndex = (this.currentIndex + 1) % this.data().length;
-      console.log(this.currentIndex);
+    this._isLoading$.pipe(
+      takeUntilDestroyed(this._destroyRef),
+      filter((isLoading: boolean) => !isLoading) // should be false to apply the interval
+    ).subscribe(() => {
+      this._intervalSubscription = interval(this._CYCLE_INTERVAL).subscribe(() => {
+        this.currentIndex = (this.currentIndex + 1) % this.data().length;
+      })
     });
   }
 
@@ -84,7 +91,6 @@ export class HighlightMainComponent implements OnInit {
    */
   private _updateGlobalIndex(index: number): void {
     this.currentIndex = index;
-    this._resetInterval();
   }
 
   private _emitClickEvent(id: string): void {
