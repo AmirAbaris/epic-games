@@ -1,8 +1,9 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
-import {CategoryType} from "../enums/category-type.enum";
-import {CategoryListCaptionModel} from "../models/caption-models/category-list-caption.model";
-import {CategoryItemCaptionModel} from "../models/caption-models/category-item-caption.model";
-import {CategoryManagementInputModel} from "../models/category-management-input.model";
+import { Component, input } from '@angular/core';
+import { CategoryType } from "../enums/category-type.enum";
+import { CategoryListCaptionModel } from "../models/caption-models/category-list-caption.model";
+import { CategoryItemCaptionModel } from "../models/caption-models/category-item-caption.model";
+import { CategoryManagementInputModel } from "../models/category-management-input.model";
+import { output } from "@angular/core";
 
 @Component({
   selector: 'app-category-management',
@@ -16,9 +17,9 @@ export class CategoryManagementComponent {
   categoryItemCaption = input.required<CategoryItemCaptionModel>();
   isLoading = input.required<boolean>();
 
-  @Output() clickGameEvent = new EventEmitter<string>();
-  @Output() clickWishlistButtonEvent = new EventEmitter<string>();
-  @Output() clickViewMoreButtonEvent = new EventEmitter<CategoryType>();
+  clickGameEvent = output<string>();
+  clickWishlistButtonEvent = output<string>();
+  clickViewMoreButtonEvent = output<CategoryType>();
 
   //endregion
 

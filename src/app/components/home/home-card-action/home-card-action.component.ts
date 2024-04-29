@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { HomeCardActionInputModel } from '../models/home-card-action-input.model';
+import { output } from "@angular/core";
 
 @Component({
   selector: 'app-home-card-action',
@@ -11,7 +12,8 @@ export class HomeCardActionComponent {
   data = input.required<HomeCardActionInputModel>();
   isLoading = input.required<boolean>();
 
-  @Output() clickWishlistButtonEvent = new EventEmitter<string>();
+  clickCardEvent = output<void>();
+  clickWishlistButtonEvent = output<string>();
   //#endregion
 
   //#region Handler methods

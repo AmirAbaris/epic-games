@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, DestroyRef, inject, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { FreeGameCardCaptionModel } from "../models/caption-models/free-game-card-caption.model";
 import { finalize, forkJoin, interval, take } from "rxjs";
@@ -12,6 +12,8 @@ import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-ite
 import { FreeGameListInputModel } from "../models/free-game-list-input.model";
 import { FreeGameListCaptionModel } from "../models/caption-models/free-game-list-caption.model";
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
+import { HighlightButtonEnum } from "../enums/highlight-button.enum";
+import { HighlightMainInputModel } from "../types/highlight-main-input.type";
 
 @Component({
   selector: "app-home-main",
@@ -19,33 +21,27 @@ import { GameSliderCaptionModel } from "../models/caption-models/game-slider-cap
   styleUrl: "./home-main.component.scss",
 })
 export class HomeMainComponent implements OnInit {
-  //region properties
+  //region Properties
   private _translateService = inject(TranslateService);
+  protected _destroyRef = inject(DestroyRef);
 
   public categoryManagementData: CategoryManagementInputModel = mockData;
   public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
   public isLoading: boolean = true;
-  public isActive = true;
+  public isActive = false;
+  public isInWishlist = false;
+  public isWishlistProcessing = false;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameList: FreeGameListInputModel = freeGameItemMockData;
   public sliderGameType: GameType = GameType.BASE_GAME;
-  public highlightSmallItemData = [{
-    isActive: false,
-    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    name: 'squad'
-  },
-  {
-    isActive: false,
-    cover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    name: 'squad'
-  }];
-
   public gameItemCaption: CategoryItemCaptionModel | undefined;
   public categoryListCaption: CategoryListCaptionModel | undefined;
   public categoryItemCaption: CategoryItemCaptionModel | undefined;
   public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
+  public highlightMainData: HighlightMainInputModel[] = highlightPreviewMockData;
+  public wishlistIds: string[] = [];
 
   private readonly captionPaths = {
     freeGameCard: "home.FreeGameCard",
@@ -66,7 +62,7 @@ export class HomeMainComponent implements OnInit {
 
   //endregion
 
-  //region main logic methods
+  //region Main logic methods
   public clickCard(): void {
     // needs refactor after implementing the routes!
     console.log('click card works');
@@ -98,11 +94,42 @@ export class HomeMainComponent implements OnInit {
   }
 
   private _completeLoading(): void {
-    interval(2000).pipe(
+    interval(3000).pipe(
       take(1),
       finalize(() => {
         this.isLoading = false;
       })).subscribe();
+  }
+
+  // TODO: removable test!
+  /**
+   * this method just tests the functionality of wishlistIds and wishlistEvent handler
+   * you can remove it if component is clear and Ok!
+   * @param id 
+   */
+  public testWishlistButtonEventHandler(id: string): void {
+    if (this.wishlistIds.includes(id)) {
+      this._removeIdFromWishlistIds(id);
+      console.log('removed from ids', this.wishlistIds);
+
+    } else {
+      this._addIdToWishlistIds(id);
+      console.log('added to ids', this.wishlistIds);
+    }
+  }
+
+  private _removeIdFromWishlistIds(id: string): void {
+    // check if we even have id in our list, if we didn't have the id, it will not continue! (extra layer of protection)
+    if (!this.wishlistIds.includes(id)) return;
+
+    this.wishlistIds = this.wishlistIds.filter((arrayId) => arrayId !== id);
+  }
+
+  private _addIdToWishlistIds(id: string): void {
+    // check if we have id in our array, if we have it, it will stop the method! (extra layer of protection)
+    if (this.wishlistIds.includes(id)) return;
+
+    this.wishlistIds = [...this.wishlistIds, id];
   }
   //endregion
 }
@@ -194,3 +221,57 @@ const freeGameItemMockData: FreeGameListInputModel =
     }
   ]
 }
+
+const highlightPreviewMockData: HighlightMainInputModel[] = [
+  {
+    id: '1',
+    name: 'item 1',
+    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+    description: 'Description 1',
+    price: 10,
+    highlightButtonType: HighlightButtonEnum.FREE
+  },
+  {
+    id: '2',
+    name: 'item 1',
+    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+    description: 'Description 1',
+    price: 10,
+    highlightButtonType: HighlightButtonEnum.PUBLISHED
+  },
+  {
+    id: '3',
+    name: 'item 1',
+    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+    description: 'Description 1',
+    price: 10,
+    highlightButtonType: HighlightButtonEnum.ARTICLE
+  },
+  {
+    id: '4',
+    name: 'item 1',
+    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+    description: 'Description 1',
+    price: 10,
+    highlightButtonType: HighlightButtonEnum.FREE
+
+  },
+  {
+    id: '5',
+    name: 'item 1',
+    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
+    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
+    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
+    description: 'Description 1',
+    price: 10,
+    highlightButtonType: HighlightButtonEnum.NOT_PUBLISHED
+  }
+];

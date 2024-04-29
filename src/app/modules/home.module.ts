@@ -30,6 +30,8 @@ import { IsHomeCardActionPipe } from '../pipes/is-home-card-action.pipe';
 import { HighlightSmallItemComponent } from '../components/home/highlight-small-item/highlight-small-item.component';
 import { ScaleOnActivateDirective } from '../directives/scale-on-activate.directive';
 import { PreviewWishListButtonComponent } from '../components/home/preview-wish-list-button/preview-wish-list-button.component';
+import { HighlightMainComponent } from '../components/home/highlight-main/highlight-main.component';
+import { IsInWishlistPipe } from '../pipes/is-in-wishlist.pipe';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -54,8 +56,10 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     ActivateWishlistDirective,
     HighlightSmallItemComponent,
     PreviewWishListButtonComponent,
+    HighlightMainComponent,
     ActivateWishlistDirective,
-    ScaleOnActivateDirective
+    ScaleOnActivateDirective,
+    IsInWishlistPipe
   ],
   imports: [
     CommonModule,
