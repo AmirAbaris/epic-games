@@ -1,22 +1,18 @@
-import { Component, DestroyRef, OnInit, inject, input } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, input } from '@angular/core';
 import { HighlightMainInputModel } from '../types/highlight-main-input.type';
 import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item-input.model';
 import { HighlightSmallItemInputModel } from '../models/highlight-small-item-input.model';
 import { output } from "@angular/core";
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Subscription, filter, interval } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
 import { HighlightMainCaptionMode } from '../models/caption-models/highlight-main-caption.model';
-import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-highlight-main',
   templateUrl: './highlight-main.component.html',
   styleUrl: './highlight-main.component.scss'
 })
-export class HighlightMainComponent implements OnInit {
+export class HighlightMainComponent implements OnInit, OnDestroy, OnChanges {
   //#region Properties
-  private _destroyRef = inject(DestroyRef);
-
   data = input.required<HighlightMainInputModel[]>();
   isLoading = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
@@ -31,13 +27,25 @@ export class HighlightMainComponent implements OnInit {
   public currentIndex = 0;
   private _intervalSubscription: Subscription | undefined;
   private readonly _CYCLE_INTERVAL = 5000;
-  private _isLoading$ = toObservable(this.isLoading);
   //#endregion
 
   //#region Lifecycle methods
   ngOnInit(): void {
     this._setInitData();
-    this._cycleItems();
+  }
+
+  ngOnDestroy(): void {
+    this._clearInterval();
+  }
+
+  /**
+   * we check to get the dynamic value of the isLoading to handle it in our logics!
+   * @param changes 
+   */
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['isLoading']) {
+      this._resetInterval();
+    }
   }
   //#endregion
 
@@ -60,24 +68,18 @@ export class HighlightMainComponent implements OnInit {
   //#region Main logic methods
   /**
    * changes the index value to change index of our array (changed the item every n second)
-   * used isLoading which became observable typed because RxJS didn't detect any changes in our signal input!
-   * and because our loading takes some time and then we'll have our content, we must wait until loading is done
-   * 
-   * and put our interval in a subscription typed variable to unsubscribe it when we wanna update the index
+   * @returns void
    */
   private _cycleItems(): void {
-    this._isLoading$.pipe(
-      takeUntilDestroyed(this._destroyRef),
-      filter((isLoading: boolean) => !isLoading) // should be false to apply the interval
-    ).subscribe(() => {
-      this._intervalSubscription = interval(this._CYCLE_INTERVAL).subscribe(() => {
-        this.currentIndex = (this.currentIndex + 1) % this.data().length;
-      })
+    if (this.isLoading()) return;
+
+    this._intervalSubscription = interval(this._CYCLE_INTERVAL).subscribe(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.data().length;
     });
   }
 
   private _setInitData(): void {
-    this.data().forEach(item => {
+    this.data().forEach((item: HighlightMainInputModel) => {
       this.highlightPreviewData.push(this._convertHighlightMainInputModelToHighlightPreviewItemInputModel(item));
       this.highlightSmallData.push(this._convertHighlightMainInputModelToHighlightSmallItemInputModel(item));
     });
@@ -86,7 +88,7 @@ export class HighlightMainComponent implements OnInit {
   /**
    * when user clicks on the small item, the index will replace preview item index
    * two components shows the same index and items (syncs 2 component index)
-   * note that it's a method for better readability in handler methods!
+   * note that this became a method for better readability in handler methods!
    * @param index 
    */
   private _updateGlobalIndex(index: number): void {
@@ -98,10 +100,14 @@ export class HighlightMainComponent implements OnInit {
   }
 
   private _resetInterval(): void {
+    this._clearInterval();
+    this._cycleItems();
+  }
+
+  private _clearInterval(): void {
     if (!this._intervalSubscription) return;
 
     this._intervalSubscription.unsubscribe();
-    this._cycleItems();
   }
   //#endregion
 
