@@ -5,12 +5,13 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './modules/home.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { register } from 'swiper/element/bundle';
 import { NgOptimizedImage } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatDivider } from '@angular/material/divider';
+import { errorInterceptor } from './interceptors/error.interceptor';
 
 register();
 
@@ -37,7 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatButton,
     MatDivider,
   ],
-  providers: [provideAnimationsAsync()],
+  providers: [provideAnimationsAsync(), provideHttpClient(withInterceptors([errorInterceptor]))],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
