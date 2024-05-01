@@ -14,6 +14,8 @@ import { FreeGameListCaptionModel } from "../models/caption-models/free-game-lis
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
 import { HighlightButtonEnum } from "../enums/highlight-button.enum";
 import { HighlightMainInputModel } from "../types/highlight-main-input.type";
+import { GameService } from "../../../services/game.service";
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: "app-home-main",
@@ -23,7 +25,8 @@ import { HighlightMainInputModel } from "../types/highlight-main-input.type";
 export class HomeMainComponent implements OnInit {
   //region Properties
   private _translateService = inject(TranslateService);
-  protected _destroyRef = inject(DestroyRef);
+  private _destroyRef = inject(DestroyRef);
+  private _gameService = inject(GameService);
 
   public categoryManagementData: CategoryManagementInputModel = mockData;
   public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
@@ -57,7 +60,7 @@ export class HomeMainComponent implements OnInit {
   //region lifecycle methods
   ngOnInit(): void {
     this._getCaptions();
-    this._completeLoading();
+    this._testGameService();
   }
 
   //endregion
@@ -93,14 +96,6 @@ export class HomeMainComponent implements OnInit {
     });
   }
 
-  private _completeLoading(): void {
-    interval(3000).pipe(
-      take(1),
-      finalize(() => {
-        this.isLoading = false;
-      })).subscribe();
-  }
-
   // TODO: removable test!
   /**
    * this method just tests the functionality of wishlistIds and wishlistEvent handler
@@ -130,6 +125,29 @@ export class HomeMainComponent implements OnInit {
     if (this.wishlistIds.includes(id)) return;
 
     this.wishlistIds = [...this.wishlistIds, id];
+  }
+
+  private _testGameService(): void {
+    console.log('calls the test');
+    forkJoin([
+      this._gameService.getHighlightItems(),
+      this._gameService.getSliderItems(),
+      this._gameService.getHomeActionItems(),
+      this._gameService.getFreeItems(),
+      this._gameService.getFortniteItems(),
+      this._gameService.getNewReleaseItems(),
+      this._gameService.getTopPlayerItems(),
+      this._gameService.getComingSoonItems(),
+      this._gameService.getTrendingItems(),
+      this._gameService.getMostPopularItems(),
+      this._gameService.getRecentlyUploadedItems()
+    ]).pipe(
+      takeUntilDestroyed(this._destroyRef),
+      finalize(() => this.isLoading = false)
+    )
+      .subscribe((items) => {
+        console.log(items);
+      });
   }
   //endregion
 }

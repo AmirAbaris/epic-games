@@ -1,3 +1,5 @@
+<!-- timer is removable; just for test purposes -->
+@defer (on viewport; on timer(5s)) {
 <app-highlight-main [data]="highlightMainData" [isLoading]="isLoading" [isWishlistProcessing]="isWishlistProcessing"
     [caption]="{
     highlightButtonTypeCaption: {
@@ -13,3 +15,7 @@
     }
 }" [wishlistIds]="wishlistIds" (clickItemEvent)="$event"
     (clickWishlistButtonEvent)="testWishlistButtonEventHandler($event)" />
+}
+@placeholder {
+<h1 class="text-white">loading animation can be here!</h1>
+}
