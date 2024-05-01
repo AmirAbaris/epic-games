@@ -1,7 +1,7 @@
-import { Component, DestroyRef, inject, OnInit } from "@angular/core";
+import { Component, DestroyRef, ElementRef, inject, OnInit, viewChild } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { FreeGameCardCaptionModel } from "../models/caption-models/free-game-card-caption.model";
-import { finalize, forkJoin, interval, take } from "rxjs";
+import { finalize, forkJoin } from "rxjs";
 import { CategoryItemCaptionModel } from "../models/caption-models/category-item-caption.model";
 import { CategoryType } from "../enums/category-type.enum";
 import { CategoryListCaptionModel } from "../models/caption-models/category-list-caption.model";
@@ -28,6 +28,8 @@ export class HomeMainComponent implements OnInit {
   private _destroyRef = inject(DestroyRef);
   private _gameService = inject(GameService);
 
+  public container = viewChild.required<ElementRef<HTMLElement>>('container');
+
   public categoryManagementData: CategoryManagementInputModel = mockData;
   public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
   public isLoading: boolean = true;
@@ -45,6 +47,7 @@ export class HomeMainComponent implements OnInit {
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
   public highlightMainData: HighlightMainInputModel[] = highlightPreviewMockData;
   public wishlistIds: string[] = [];
+  private observer: IntersectionObserver | undefined;
 
   private readonly captionPaths = {
     freeGameCard: "home.FreeGameCard",
@@ -60,7 +63,7 @@ export class HomeMainComponent implements OnInit {
   //region lifecycle methods
   ngOnInit(): void {
     this._getCaptions();
-    this._testGameService();
+    this._setupIntersectionObserver();
   }
 
   //endregion
@@ -127,7 +130,7 @@ export class HomeMainComponent implements OnInit {
     this.wishlistIds = [...this.wishlistIds, id];
   }
 
-  private _testGameService(): void {
+  private _getData(): void {
     console.log('calls the test');
     forkJoin([
       this._gameService.getHighlightItems(),
@@ -148,6 +151,18 @@ export class HomeMainComponent implements OnInit {
       .subscribe((items) => {
         console.log(items);
       });
+  }
+
+  private _setupIntersectionObserver(): void {
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this._getData();
+        }
+      })
+    });
+
+    this.observer.observe(this.container().nativeElement);
   }
   //endregion
 }
