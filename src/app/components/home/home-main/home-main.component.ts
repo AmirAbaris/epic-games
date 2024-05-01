@@ -12,8 +12,8 @@ import { GameSliderCaptionModel } from "../models/caption-models/game-slider-cap
 import { HighlightButtonEnum } from "../enums/highlight-button.enum";
 import { HighlightMainInputModel } from "../types/highlight-main-input.type";
 import { GameService } from "../../../services/game.service";
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GameDto } from "../dtos/game.dto";
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: "app-home-main",
@@ -46,6 +46,8 @@ export class HomeMainComponent implements OnInit, OnDestroy, AfterViewChecked {
   public highlightMainData: HighlightMainInputModel[] | undefined;
   public wishlistIds: string[] = [];
   private observer: IntersectionObserver | undefined;
+  private _isObserverTriggered = false;
+
 
   private readonly captionPaths = {
     freeGameCard: "home.FreeGameCard",
@@ -64,13 +66,11 @@ export class HomeMainComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   ngOnDestroy(): void {
-    if (!this.observer) return;
-
-    this.observer.disconnect();
+    this._destroyObserver();
   }
 
   ngAfterViewChecked(): void {
-    this._setupIntersectionObserver();
+    this._observeIntersection(this.container().nativeElement);
   }
 
   //endregion
@@ -137,8 +137,12 @@ export class HomeMainComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.wishlistIds = [...this.wishlistIds, id];
   }
 
+  /**
+   * note this is just a test method!
+   */
   private _getGames(): void {
     console.log('calls the test');
+    
     forkJoin([
       this._gameService.getHighlightItems(),
       this._gameService.getSliderItems(),
@@ -172,23 +176,34 @@ export class HomeMainComponent implements OnInit, OnDestroy, AfterViewChecked {
       });
   }
 
-  private _setupIntersectionObserver(): void {
-    // disconnect the observer if it already exist
-    if (this.observer) {
-      this.observer.disconnect;
-    }
-    this.observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          this._getGames();
+  /**
+   * applies lazy loading on view to emit data from service
+   * we have a boolean value (_isObserverTriggered) to prevent infinite calls on the method inside!
+   * @param element 
+   */
+  private _observeIntersection(element: HTMLElement): void {
+    // first we make sure we don't have any ongoing observer
+    this._destroyObserver();
 
-          // disconnect the observer after loading the data
-          this.observer?.disconnect();
-        }
-      })
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (entry.isIntersecting && !this._isObserverTriggered) {
+        this._isObserverTriggered = !this._isObserverTriggered;
+        console.log('call count log');
+
+        this._getGames();
+
+        this._destroyObserver();
+      }
     });
 
-    this.observer.observe(this.container().nativeElement);
+    observer.observe(element);
+  }
+
+  private _destroyObserver(): void {
+    if (!this.observer) return;
+
+    this.observer.disconnect();
   }
   //endregion
 

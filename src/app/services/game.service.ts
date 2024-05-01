@@ -1,6 +1,6 @@
-import { Injectable, inject } from '@angular/core';
+import { ElementRef, Injectable, inject } from '@angular/core';
 import { GameRepository } from '../repositories/game.repository';
-import { Observable } from 'rxjs';
+import { Observable, distinctUntilChanged, map, mergeMap } from 'rxjs';
 import { GameDto } from '../components/home/dtos/game.dto';
 
 @Injectable()
