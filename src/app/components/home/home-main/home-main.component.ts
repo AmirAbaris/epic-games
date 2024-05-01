@@ -1,12 +1,9 @@
-import { Component, DestroyRef, ElementRef, inject, OnInit, viewChild } from "@angular/core";
+import { AfterViewChecked, Component, DestroyRef, ElementRef, inject, OnDestroy, OnInit, viewChild } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { FreeGameCardCaptionModel } from "../models/caption-models/free-game-card-caption.model";
 import { finalize, forkJoin } from "rxjs";
 import { CategoryItemCaptionModel } from "../models/caption-models/category-item-caption.model";
-import { CategoryType } from "../enums/category-type.enum";
 import { CategoryListCaptionModel } from "../models/caption-models/category-list-caption.model";
-import { CategoryManagementInputModel } from "../models/category-management-input.model";
-import { GameSliderItemInputModel } from "../models/game-slider-item-input.model";
 import { GameType } from "../../../enums/game-type.enum";
 import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-item-caption.model";
 import { FreeGameListInputModel } from "../models/free-game-list-input.model";
@@ -16,13 +13,14 @@ import { HighlightButtonEnum } from "../enums/highlight-button.enum";
 import { HighlightMainInputModel } from "../types/highlight-main-input.type";
 import { GameService } from "../../../services/game.service";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { GameDto } from "../dtos/game.dto";
 
 @Component({
   selector: "app-home-main",
   templateUrl: "./home-main.component.html",
   styleUrl: "./home-main.component.scss",
 })
-export class HomeMainComponent implements OnInit {
+export class HomeMainComponent implements OnInit, OnDestroy, AfterViewChecked {
   //region Properties
   private _translateService = inject(TranslateService);
   private _destroyRef = inject(DestroyRef);
@@ -30,14 +28,14 @@ export class HomeMainComponent implements OnInit {
 
   public container = viewChild.required<ElementRef<HTMLElement>>('container');
 
-  public categoryManagementData: CategoryManagementInputModel = mockData;
-  public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
+  // public categoryManagementData: CategoryManagementInputModel = mockData;
+  // public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
   public isLoading: boolean = true;
   public isActive = false;
   public isInWishlist = false;
   public isWishlistProcessing = false;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
-  public freeGameList: FreeGameListInputModel = freeGameItemMockData;
+  // public freeGameList: FreeGameListInputModel = freeGameItemMockData;
   public sliderGameType: GameType = GameType.BASE_GAME;
   public gameItemCaption: CategoryItemCaptionModel | undefined;
   public categoryListCaption: CategoryListCaptionModel | undefined;
@@ -45,7 +43,7 @@ export class HomeMainComponent implements OnInit {
   public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
-  public highlightMainData: HighlightMainInputModel[] = highlightPreviewMockData;
+  public highlightMainData: HighlightMainInputModel[] | undefined;
   public wishlistIds: string[] = [];
   private observer: IntersectionObserver | undefined;
 
@@ -63,6 +61,15 @@ export class HomeMainComponent implements OnInit {
   //region lifecycle methods
   ngOnInit(): void {
     this._getCaptions();
+  }
+
+  ngOnDestroy(): void {
+    if (!this.observer) return;
+
+    this.observer.disconnect();
+  }
+
+  ngAfterViewChecked(): void {
     this._setupIntersectionObserver();
   }
 
@@ -130,7 +137,7 @@ export class HomeMainComponent implements OnInit {
     this.wishlistIds = [...this.wishlistIds, id];
   }
 
-  private _getData(): void {
+  private _getGames(): void {
     console.log('calls the test');
     forkJoin([
       this._gameService.getHighlightItems(),
@@ -148,16 +155,35 @@ export class HomeMainComponent implements OnInit {
       takeUntilDestroyed(this._destroyRef),
       finalize(() => this.isLoading = false)
     )
-      .subscribe((items) => {
-        console.log(items);
+      .subscribe(([highlightItems, sliderItems, homeActionItems, freeItems,
+        fortniteItems, newReleaseItems, topPlayerItems, trendingItems,
+        mostPopularItems, recentUploadedItems]) => {
+        highlightItems.forEach(item => {
+          const highlightMain = this._convertGameDtoToHighlightMainInputModel(item);
+
+          if (!highlightMain) return;
+          if (!this.highlightMainData) {
+            this.highlightMainData = [];
+          }
+
+          this.highlightMainData.push(highlightMain);
+          console.log(highlightMain);
+        });
       });
   }
 
   private _setupIntersectionObserver(): void {
+    // disconnect the observer if it already exist
+    if (this.observer) {
+      this.observer.disconnect;
+    }
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          this._getData();
+          this._getGames();
+
+          // disconnect the observer after loading the data
+          this.observer?.disconnect();
         }
       })
     });
@@ -165,146 +191,21 @@ export class HomeMainComponent implements OnInit {
     this.observer.observe(this.container().nativeElement);
   }
   //endregion
-}
 
-// TODO MOCK, REMOVE
-const mockData: CategoryManagementInputModel = {
-  categoryListData: [
-    {
-      categoryItem: [
-        {
-          id: '16',
-          thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
-          name: "Game 16",
-          discountPercent: 0,
-          basePrice: 29.99,
-          finalPrice: 29.99,
-          isFree: false,
-          isPublished: false,
-        }
-      ],
-      title: 'Top Sellers',
-      categoryType: CategoryType.TOP_SELLERS
+  //#region Helper methods
+  private _convertGameDtoToHighlightMainInputModel(item: GameDto): HighlightMainInputModel | null {
+    if (!(item.id && item.name && item.thumbnailCover && item.logo && item.description)) return null;
+
+    return {
+      id: item.id,
+      name: item.name,
+      minimalCover: item.thumbnailCover,
+      largeCover: item.cover,
+      logo: item.logo,
+      description: item.description,
+      price: item.price,
+      highlightButtonType: HighlightButtonEnum.FREE
     }
-  ]
-}
-
-const gameSliderItems: GameSliderItemInputModel[] = [
-  {
-    id: "1",
-    name: 'game 1',
-    type: GameType.BASE_GAME,
-    cover: '../assets/game-covers/game-card-covers/1.jpeg',
-    basePrice: 29.99,
-    finalPrice: 14.99,
-    isFree: true
-  },
-  {
-    id: "2",
-    name: 'game 1',
-    type: GameType.BASE_GAME,
-    cover: '../assets/game-covers/game-card-covers/2.jpeg',
-    basePrice: 29.99,
-    finalPrice: 14.99,
-    isFree: true
-  },
-  {
-    id: "3",
-    name: 'game 1',
-    type: GameType.BASE_GAME,
-    cover: '../assets/game-covers/game-card-covers/4.jpeg',
-    discountPercent: 12,
-    basePrice: 29.99,
-    finalPrice: 14.99,
-    isFree: false
-  },
-  {
-    id: "4",
-    name: 'game 1',
-    type: GameType.BASE_GAME,
-    cover: '../assets/game-covers/game-card-covers/2.jpeg',
-    basePrice: 29.99,
-    finalPrice: 14.99,
-    isFree: true
   }
-];
-
-const freeGameItemMockData: FreeGameListInputModel =
-{
-  freeGameItemData: [
-    {
-      id: '1',
-      cover: '../assets/game-covers/free-games/a1.jpg',
-      name: 'Game 1',
-      freeStartDate: new Date('2024-03-01'),
-      freeEndDate: new Date('2024-03-15')
-    },
-    {
-      id: '2',
-      cover: '../assets/game-covers/free-games/a1.jpg',
-      name: 'Game 2',
-      freeStartDate: new Date('2024-03-10'),
-      freeEndDate: new Date('2024-03-20')
-    },
-    {
-      id: '3',
-      cover: '../assets/game-covers/free-games/a1.jpg',
-      name: 'Game 3',
-      freeEndDate: new Date('2025-02-01')
-    }
-  ]
+  //#endregion
 }
-
-const highlightPreviewMockData: HighlightMainInputModel[] = [
-  {
-    id: '1',
-    name: 'item 1',
-    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 1',
-    price: 10,
-    highlightButtonType: HighlightButtonEnum.FREE
-  },
-  {
-    id: '2',
-    name: 'item 1',
-    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 1',
-    price: 10,
-    highlightButtonType: HighlightButtonEnum.PUBLISHED
-  },
-  {
-    id: '3',
-    name: 'item 1',
-    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 1',
-    price: 10,
-    highlightButtonType: HighlightButtonEnum.ARTICLE
-  },
-  {
-    id: '4',
-    name: 'item 1',
-    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 1',
-    price: 10,
-    highlightButtonType: HighlightButtonEnum.FREE
-
-  },
-  {
-    id: '5',
-    name: 'item 1',
-    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 1',
-    price: 10,
-    highlightButtonType: HighlightButtonEnum.NOT_PUBLISHED
-  }
-];
