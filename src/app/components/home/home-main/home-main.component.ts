@@ -6,7 +6,6 @@ import { CategoryItemCaptionModel } from "../models/caption-models/category-item
 import { CategoryListCaptionModel } from "../models/caption-models/category-list-caption.model";
 import { GameType } from "../../../enums/game-type.enum";
 import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-item-caption.model";
-import { FreeGameListInputModel } from "../models/free-game-list-input.model";
 import { FreeGameListCaptionModel } from "../models/caption-models/free-game-list-caption.model";
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
 import { HighlightButtonEnum } from "../enums/highlight-button.enum";
@@ -142,7 +141,7 @@ export class HomeMainComponent implements OnInit, OnDestroy, AfterViewChecked {
    */
   private _getGames(): void {
     console.log('calls the test');
-    
+
     forkJoin([
       this._gameService.getHighlightItems(),
       this._gameService.getSliderItems(),
