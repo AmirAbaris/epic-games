@@ -18,7 +18,6 @@ export class ScaleOnActivateDirective implements OnChanges, AfterViewInit {
     this._setTargetElement();
 
     this._applyScale();
-    console.log(this.isActive());
   }
 
   /**
