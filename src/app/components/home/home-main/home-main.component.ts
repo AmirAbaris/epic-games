@@ -1,10 +1,9 @@
 import { Component, DestroyRef, inject, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { FreeGameCardCaptionModel } from "../models/caption-models/free-game-card-caption.model";
-import { finalize, forkJoin, interval, take } from "rxjs";
+import { finalize, forkJoin } from "rxjs";
 import { CategoryItemCaptionModel } from "../models/caption-models/category-item-caption.model";
 import { CategoryListCaptionModel } from "../models/caption-models/category-list-caption.model";
-import { GameType } from "../../../enums/game-type.enum";
 import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-item-caption.model";
 import { FreeGameListCaptionModel } from "../models/caption-models/free-game-list-caption.model";
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
@@ -14,6 +13,7 @@ import { GameService } from "../../../services/game.service";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GameDto } from "../dtos/game.dto";
 import { HighlightMainCaptionModel } from "../models/caption-models/highlight-main-caption.model";
+import { GameSliderItemInputModel } from "../models/game-slider-item-input.model";
 
 @Component({
   selector: "app-home-main",
@@ -31,9 +31,11 @@ export class HomeMainComponent implements OnInit {
   public isInWishlist = false;
   public isWishlistProcessing = false;
 
+  //TODO separate caps and regular vars!
+
   public highlightMainCaption: HighlightMainCaptionModel | undefined;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
-  public sliderGameType: GameType = GameType.BASE_GAME;
+  // public sliderGameType: GameType = GameType.BASE_GAME;
   public gameItemCaption: CategoryItemCaptionModel | undefined;
   public categoryListCaption: CategoryListCaptionModel | undefined;
   public categoryItemCaption: CategoryItemCaptionModel | undefined;
@@ -42,6 +44,7 @@ export class HomeMainComponent implements OnInit {
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
   public wishlistIds: string[] = [];
   public highlightMainData: HighlightMainInputModel[] | undefined;
+  public sliderManagementData: GameSliderItemInputModel[] | undefined;
 
   private readonly captionPaths = {
     wishlistButton: 'home.WishListButton',
@@ -52,28 +55,30 @@ export class HomeMainComponent implements OnInit {
     categoryItem: 'home.CategoryItem',
     freeGameList: 'home.FreeGameList',
     freeGameItem: 'home.FreeGameItem',
-    // TODO changed it (removed home!)
+
+    // TODO changed it (removed 'home' from path!)
     gameType: 'enum-captions.gameType',
   }
   //#endregion
 
   //#region Lifecycle methods
   ngOnInit(): void {
-    this._getCaptions();
     this._getGames();
+    this._getCaptions();
   }
   //#endregion
 
   //#region Handler methods
-  public wishlistButtonEventHandler(id: string): void {
+  public onClickWishlistButtonEventHandler(id: string): void {
     if (this.wishlistIds.includes(id)) {
       this._removeIdFromWishlistIds(id);
-      console.log('removed from ids', this.wishlistIds);
-
     } else {
       this._addIdToWishlistIds(id);
-      console.log('added to ids', this.wishlistIds);
     }
+  }
+
+  public onClickItemEventHandler(id: string): void {
+    console.log(id);
   }
   //#endregion
 
@@ -153,7 +158,9 @@ export class HomeMainComponent implements OnInit {
         fortniteItems, newReleaseItems, topPlayerItems, trendingItems,
         mostPopularItems, recentUploadedItems]) => {
         this.highlightMainData = this._convertGameDtoToHighlightMainInputModel(highlightItems);
-        console.log(this.highlightMainData);
+        this.sliderManagementData = this._convertGameDtoToGameSliderItemInputModel(sliderItems);
+
+        console.log(sliderItems);
       });
   }
 
@@ -165,23 +172,63 @@ export class HomeMainComponent implements OnInit {
   //#region Helper methods
   private _convertGameDtoToHighlightMainInputModel(items: GameDto[]): HighlightMainInputModel[] {
     const result: HighlightMainInputModel[] = [];
+
     this._iterateOverGameDtos(items, (item) => {
-      if (item.id && item.name && item.thumbnailCover && item.logo && item.description) {
+      if (this._checksUndefinedForHighlightMainInputModelConvertor(item)) {
         const highlightItem: HighlightMainInputModel = {
-          id: item.id,
-          name: item.name,
-          minimalCover: item.thumbnailCover,
+          id: item.id!,
+          name: item.name!,
+          minimalCover: item.thumbnailCover!,
           largeCover: item.cover,
-          logo: item.logo,
-          description: item.description,
+          logo: item.logo!,
+          description: item.description!,
           price: item.price,
           highlightButtonType: HighlightButtonEnum.FREE
-        };
+        }
+
         result.push(highlightItem);
       }
     });
-    console.log(result);
+
     return result;
+  }
+
+  /**
+   * Converts an array of GameDto items to an array of GameSliderItemInputModel objects
+   * @param items items The array of GameDto items to convert.
+   * @returns An array of converted GameSliderItemInputModel objects.
+   */
+  private _convertGameDtoToGameSliderItemInputModel(items: GameDto[]): GameSliderItemInputModel[] {
+    const result: GameSliderItemInputModel[] = [];
+
+    this._iterateOverGameDtos(items, (item) => {
+      if (this._checksUndefinedForGameSliderItemInputModelConvertor(item)) {
+        const sliderItem: GameSliderItemInputModel = {
+          id: item.id!,
+          cover: item.cover,
+          name: item.name!,
+          discountPercent: item.discountPercent,
+          basePrice: item.basePrice,
+          finalPrice: item.finalPrice,
+          isFree: item.isFree!,
+          type: item.type!
+        }
+
+        result.push(sliderItem);
+      }
+    });
+
+    return result;
+  }
+
+  private _checksUndefinedForHighlightMainInputModelConvertor(item: GameDto): boolean {
+    return !!(item.id !== undefined && item.name !== undefined && item.thumbnailCover !== undefined && item.logo !== undefined
+      && item.description !== undefined);
+  }
+
+  private _checksUndefinedForGameSliderItemInputModelConvertor(item: GameDto): boolean {
+    return !!(item.id !== undefined && item.name !== undefined && item.isFree !== undefined && item.type !== undefined);
   }
   //#endregion
 }
+

@@ -1,7 +1,12 @@
 <section>
     @if (highlightMainData && highlightMainCaption) {
     <app-highlight-main [data]="highlightMainData" [isLoading]="isLoading" [isWishlistProcessing]="isWishlistProcessing"
-        [caption]="highlightMainCaption" [wishlistIds]="wishlistIds" (clickItemEvent)="$event"
-        (clickWishlistButtonEvent)="wishlistButtonEventHandler($event)" />
+        [caption]="highlightMainCaption" [wishlistIds]="wishlistIds" (clickItemEvent)="onClickItemEventHandler($event)"
+        (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
+    }
+
+    @if (sliderManagementData && gameSliderCaption) {
+    <app-game-slider-management [gameCardInputs]="sliderManagementData" [isLoading]="isLoading"
+        [caption]="gameSliderCaption" />
     }
 </section>

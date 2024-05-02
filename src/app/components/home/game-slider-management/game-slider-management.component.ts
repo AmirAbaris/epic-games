@@ -11,14 +11,16 @@ export class GameSliderManagementComponent {
     //region properties
     gameCardInputs = input.required<GameSliderItemInputModel[]>();
     isLoading = input.required<boolean>();
+    caption = input.required<GameSliderCaptionModel>();
 
-    public caption: GameSliderCaptionModel = {
-        freeTitle: 'Free',
-        gameType: {
-            BASE_GAME: 'Base Game',
-            EDITION: 'EDITION'
-        }
-    }
+    // TODO fix
+    // public caption: GameSliderCaptionModel = {
+    //     freeTitle: 'Free',
+    //     gameType: {
+    //         BASE_GAME: 'Base Game',
+    //         EDITION: 'EDITION'
+    //     }
+    // }
 
     //endregion
 }
