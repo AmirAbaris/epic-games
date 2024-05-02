@@ -1,15 +1,7 @@
-<app-highlight-main [data]="highlightMainData" [isLoading]="isLoading" [isWishlistProcessing]="isWishlistProcessing"
-    [caption]="{
-    highlightButtonTypeCaption: {
-        FREE: 'FREE',
-        NOT_PUBLISHED: 'NOT PUBLISHED',
-        ARTICLE: 'SAVE NOW',
-        PUBLISHED: 'PUBLISHED'
-    },
-    wishlistButtonCaption: {
-        inTitle: 'In Wishlist',
-        addTitle: 'Add to wishlist',
-        removeTitle: 'Remove from wishlist'
+<section>
+    @if (highlightMainData && highlightMainCaption) {
+    <app-highlight-main [data]="highlightMainData" [isLoading]="isLoading" [isWishlistProcessing]="isWishlistProcessing"
+        [caption]="highlightMainCaption" [wishlistIds]="wishlistIds" (clickItemEvent)="$event"
+        (clickWishlistButtonEvent)="wishlistButtonEventHandler($event)" />
     }
-}" [wishlistIds]="wishlistIds" (clickItemEvent)="$event"
-    (clickWishlistButtonEvent)="testWishlistButtonEventHandler($event)" />
+</section>
