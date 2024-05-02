@@ -32,6 +32,8 @@ import { ScaleOnActivateDirective } from '../directives/scale-on-activate.direct
 import { PreviewWishListButtonComponent } from '../components/home/preview-wish-list-button/preview-wish-list-button.component';
 import { HighlightMainComponent } from '../components/home/highlight-main/highlight-main.component';
 import { IsInWishlistPipe } from '../pipes/is-in-wishlist.pipe';
+import { GameRepository } from '../repositories/game.repository';
+import { GameService } from '../services/game.service';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -72,7 +74,8 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     MatTooltipModule,
     RouterModule.forChild(homeRoutes),
     TranslateModule
-  ]
+  ],
+  providers: [GameRepository, GameService]
 })
 export class HomeModule {
 }
