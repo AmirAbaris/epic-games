@@ -1,4 +1,5 @@
 <section>
+    @if (highlightMainData) {
     <app-highlight-main [data]="highlightMainData" [isLoading]="isLoading" [isWishlistProcessing]="isWishlistProcessing"
         [caption]="{
     highlightButtonTypeCaption: {
@@ -14,4 +15,5 @@
     }
 }" [wishlistIds]="wishlistIds" (clickItemEvent)="$event"
         (clickWishlistButtonEvent)="testWishlistButtonEventHandler($event)" />
+    }
 </section>

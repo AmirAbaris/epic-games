@@ -40,7 +40,7 @@ export class HomeMainComponent implements OnInit {
   public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
-  public highlightMainData: HighlightMainInputModel[] = [];
+  public highlightMainData: HighlightMainInputModel[] | undefined;
   public wishlistIds: string[] = [];
 
 
