@@ -19,13 +19,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: "./home-main.component.html",
   styleUrl: "./home-main.component.scss",
 })
-export class HomeMainComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class HomeMainComponent implements OnInit {
   //region Properties
   private _translateService = inject(TranslateService);
   private _destroyRef = inject(DestroyRef);
   private _gameService = inject(GameService);
-
-  public container = viewChild.required<ElementRef<HTMLElement>>('container');
 
   // public categoryManagementData: CategoryManagementInputModel = mockData;
   // public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
@@ -42,10 +40,8 @@ export class HomeMainComponent implements OnInit, OnDestroy, AfterViewChecked {
   public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
-  public highlightMainData: HighlightMainInputModel[] | undefined;
+  public highlightMainData: HighlightMainInputModel[] = [];
   public wishlistIds: string[] = [];
-  private observer: IntersectionObserver | undefined;
-  private _isObserverTriggered = false;
 
 
   private readonly captionPaths = {
@@ -62,14 +58,7 @@ export class HomeMainComponent implements OnInit, OnDestroy, AfterViewChecked {
   //region lifecycle methods
   ngOnInit(): void {
     this._getCaptions();
-  }
-
-  ngOnDestroy(): void {
-    this._destroyObserver();
-  }
-
-  ngAfterViewChecked(): void {
-    this._observeIntersection(this.container().nativeElement);
+    this._getGames();
   }
 
   //endregion
@@ -161,65 +150,44 @@ export class HomeMainComponent implements OnInit, OnDestroy, AfterViewChecked {
       .subscribe(([highlightItems, sliderItems, homeActionItems, freeItems,
         fortniteItems, newReleaseItems, topPlayerItems, trendingItems,
         mostPopularItems, recentUploadedItems]) => {
-        highlightItems.forEach(item => {
-          const highlightMain = this._convertGameDtoToHighlightMainInputModel(item);
-
-          if (!highlightMain) return;
-          if (!this.highlightMainData) {
-            this.highlightMainData = [];
-          }
-
-          this.highlightMainData.push(highlightMain);
-          console.log(highlightMain);
-        });
+        this.highlightMainData = this._convertGameDtoToHighlightMainInputModel(highlightItems);
+        console.log(this.highlightMainData);
       });
   }
-
   /**
-   * applies lazy loading on view to emit data from service
-   * we have a boolean value (_isObserverTriggered) to prevent infinite calls on the method inside!
-   * @param element 
+   * added foreach call back. we added this because we will repeat this logic for each type convert we need!
+   * first parameter is the GameDto array we get from service and second is item we want to convert! (we can create logic and guard on second param)
+   * @param items 
+   * @param callback 
    */
-  private _observeIntersection(element: HTMLElement): void {
-    // first we make sure we don't have any ongoing observer
-    this._destroyObserver();
-
-    const observer = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      if (entry.isIntersecting && !this._isObserverTriggered) {
-        this._isObserverTriggered = !this._isObserverTriggered;
-        console.log('call count log');
-
-        this._getGames();
-
-        this._destroyObserver();
-      }
-    });
-
-    observer.observe(element);
-  }
-
-  private _destroyObserver(): void {
-    if (!this.observer) return;
-
-    this.observer.disconnect();
+  private _iterateOverGameDtos(items: GameDto[], callback: (item: GameDto) => void): void {
+    items.forEach(callback);
   }
   //endregion
 
   //#region Helper methods
-  private _convertGameDtoToHighlightMainInputModel(item: GameDto): HighlightMainInputModel | null {
-    if (!(item.id && item.name && item.thumbnailCover && item.logo && item.description)) return null;
+  private _convertGameDtoToHighlightMainInputModel(items: GameDto[]): HighlightMainInputModel[] {
+    const result: HighlightMainInputModel[] = [];
 
-    return {
-      id: item.id,
-      name: item.name,
-      minimalCover: item.thumbnailCover,
-      largeCover: item.cover,
-      logo: item.logo,
-      description: item.description,
-      price: item.price,
-      highlightButtonType: HighlightButtonEnum.FREE
-    }
+    this._iterateOverGameDtos(items, (item) => {
+      if (item.id && item.name && item.thumbnailCover && item.logo && item.description) {
+        const highlightItem: HighlightMainInputModel = {
+          id: item.id,
+          name: item.name,
+          minimalCover: item.thumbnailCover,
+          largeCover: item.cover,
+          logo: item.logo,
+          description: item.description,
+          price: item.price,
+          highlightButtonType: HighlightButtonEnum.FREE
+        };
+
+        result.push(highlightItem);
+      }
+    });
+
+    console.log(result);
+    return result;
   }
   //#endregion
 }
