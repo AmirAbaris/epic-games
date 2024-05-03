@@ -164,18 +164,29 @@ export class HomeMainComponent implements OnInit {
       });
   }
 
+  /**
+   * loop over each GameDto input items
+   * @param items the array of GameDto to loop over
+   * @param callback the each element of the input array
+   */
   private _iterateOverGameDtos(items: GameDto[], callback: (item: GameDto) => void): void {
     items.forEach(callback);
   }
   //#endregion
 
   //#region Helper methods
+  /**
+   * converts GameDto items to HighlightMainInputModel items
+   * @param items the GameDto input items we get from service
+   * @returns highlight main input model typed array
+   */
   private _convertGameDtoToHighlightMainInputModel(items: GameDto[]): HighlightMainInputModel[] {
     const result: HighlightMainInputModel[] = [];
 
     this._iterateOverGameDtos(items, (item) => {
       if (this._checksUndefinedForHighlightMainInputModelConvertor(item)) {
         const highlightItem: HighlightMainInputModel = {
+          // we can ignore null checks because we checked them in a method!
           id: item.id!,
           name: item.name!,
           minimalCover: item.thumbnailCover!,
@@ -195,8 +206,8 @@ export class HomeMainComponent implements OnInit {
 
   /**
    * Converts an array of GameDto items to an array of GameSliderItemInputModel objects
-   * @param items items The array of GameDto items to convert.
-   * @returns An array of converted GameSliderItemInputModel objects.
+   * @param items items The array of GameDto items to convert
+   * @returns An array of converted GameSliderItemInputModel objects
    */
   private _convertGameDtoToGameSliderItemInputModel(items: GameDto[]): GameSliderItemInputModel[] {
     const result: GameSliderItemInputModel[] = [];
@@ -204,6 +215,7 @@ export class HomeMainComponent implements OnInit {
     this._iterateOverGameDtos(items, (item) => {
       if (this._checksUndefinedForGameSliderItemInputModelConvertor(item)) {
         const sliderItem: GameSliderItemInputModel = {
+          // we can ignore null checks because we checked them in a method!
           id: item.id!,
           cover: item.cover,
           name: item.name!,
@@ -221,11 +233,21 @@ export class HomeMainComponent implements OnInit {
     return result;
   }
 
+  /**
+   * check the input item to has any property of the HighlightMainInputModel and its properties should not be null!
+   * @param item the GameDto item
+   * @returns the checked highlight main input model type if items has the properties and the properties we want are not null
+   */
   private _checksUndefinedForHighlightMainInputModelConvertor(item: GameDto): boolean {
     return !!(item.id !== undefined && item.name !== undefined && item.thumbnailCover !== undefined && item.logo !== undefined
       && item.description !== undefined);
   }
 
+  /**
+   * check the input item to has any property of the gameSlider and its properties should not be null!
+   * @param item the GameDto item
+   * @returns the checked slider items model type if items has the properties and the properties we want are not null
+   */
   private _checksUndefinedForGameSliderItemInputModelConvertor(item: GameDto): boolean {
     return !!(item.id !== undefined && item.name !== undefined && item.isFree !== undefined && item.type !== undefined);
   }
