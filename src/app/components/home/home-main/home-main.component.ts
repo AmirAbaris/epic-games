@@ -42,21 +42,22 @@ export class HomeMainComponent implements OnInit {
   public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
+
   public wishlistIds: string[] = [];
   public highlightMainData: HighlightMainInputModel[] | undefined;
   public sliderManagementData: GameSliderItemInputModel[] | undefined;
 
   private readonly captionPaths = {
     wishlistButton: 'home.WishListButton',
-    highlightButtonType: 'enum-captions.HighlightButtonType',
+    gameSliderItem: 'home.GameSliderItem',
     freeGameCard: "home.FreeGameCard",
     gameItemList: 'home.GameItemList',
     categoryList: 'home.CategoryList',
     categoryItem: 'home.CategoryItem',
     freeGameList: 'home.FreeGameList',
     freeGameItem: 'home.FreeGameItem',
-
-    // TODO changed it (removed 'home' from path!)
+    
+    highlightButtonType: 'enum-captions.HighlightButtonType',
     gameType: 'enum-captions.gameType',
   }
   //#endregion
@@ -91,6 +92,9 @@ export class HomeMainComponent implements OnInit {
   private _getCaptions(): void {
     const wishListButtonCaption = this._translateService.get(this.captionPaths.wishlistButton);
     const highlightButtonTypeCaption = this._translateService.get(this.captionPaths.highlightButtonType);
+    const gameSliderItemCaption = this._translateService.get(this.captionPaths.gameSliderItem);
+    const gameTypeCaption = this._translateService.get(this.captionPaths.gameType);
+
     const freeGamesCaption = this._translateService.get(this.captionPaths.freeGameCard);
     const gameItemCaption = this._translateService.get(this.captionPaths.gameItemList);
     const categoryListCaption = this._translateService.get(this.captionPaths.categoryList);
@@ -101,16 +105,24 @@ export class HomeMainComponent implements OnInit {
     forkJoin([
       wishListButtonCaption,
       highlightButtonTypeCaption,
+      gameSliderItemCaption,
+      gameTypeCaption,
+
       freeGamesCaption,
       gameItemCaption,
       categoryListCaption,
       categoryItemCaption,
       freeGameItemCaption,
       freeGameListCaption
-    ]).subscribe(([wishListButtonCaption, highlightButtonTypeCaption, freeGamesCaption, gameItemCaption, categoryListCaption, categoryItemCaption, freeGameItemCaption, freeGameList]) => {
+    ]).subscribe(([wishListButtonCaption, highlightButtonTypeCaption, gameSliderItemCaption, gameTypeCaption, freeGamesCaption, gameItemCaption, categoryListCaption, categoryItemCaption, freeGameItemCaption, freeGameList]) => {
       this.highlightMainCaption = {
         wishlistButtonCaption: wishListButtonCaption,
         highlightButtonTypeCaption: highlightButtonTypeCaption
+      }
+
+      this.gameSliderCaption = {
+        freeTitle: gameSliderItemCaption,
+        gameType: gameTypeCaption
       }
 
       this.freeGamesCaption = freeGamesCaption;

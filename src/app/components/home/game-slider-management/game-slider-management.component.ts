@@ -13,14 +13,5 @@ export class GameSliderManagementComponent {
     isLoading = input.required<boolean>();
     caption = input.required<GameSliderCaptionModel>();
 
-    // TODO fix
-    // public caption: GameSliderCaptionModel = {
-    //     freeTitle: 'Free',
-    //     gameType: {
-    //         BASE_GAME: 'Base Game',
-    //         EDITION: 'EDITION'
-    //     }
-    // }
-
     //endregion
 }
