@@ -16,6 +16,8 @@ import { HighlightMainCaptionModel } from "../models/caption-models/highlight-ma
 import { GameSliderItemInputModel } from "../models/game-slider-item-input.model";
 import { FreeGameListInputModel } from "../models/free-game-list-input.model";
 import { FreeGameItemInputModel } from "../models/free-game-item-input.model";
+import { HomeCardActionInputModel } from "../models/home-card-action-input.model";
+import { HomeCardInputModel } from "../models/home-card-input.model";
 
 @Component({
   selector: "app-home-main",
@@ -47,6 +49,7 @@ export class HomeMainComponent implements OnInit {
   public highlightMainData: HighlightMainInputModel[] | undefined;
   public sliderManagementData: GameSliderItemInputModel[] | undefined;
   public freeGameListData: FreeGameListInputModel | undefined;
+  public homeCardActionData: HomeCardActionInputModel[] | undefined;
 
   private readonly captionPaths = {
     wishlistButton: 'home.WishListButton',
@@ -151,11 +154,9 @@ export class HomeMainComponent implements OnInit {
   }
 
   private _getGames(): void {
-    console.log('calls the test');
     forkJoin([
       this._gameService.getHighlightItems(),
       this._gameService.getSliderItems(),
-      this._gameService.getFreeItems(),
       this._gameService.getHomeActionItems(),
       this._gameService.getFreeItems(),
       this._gameService.getFortniteItems(),
@@ -169,15 +170,14 @@ export class HomeMainComponent implements OnInit {
       takeUntilDestroyed(this._destroyRef),
       finalize(() => this.isLoading = false)
     )
-      // TODO order. in order...
-      .subscribe(([highlightItems, sliderItems, freeItems, homeActionItems,
+      .subscribe(([highlightItems, sliderItems, homeActionItems, freeItems,
         fortniteItems, newReleaseItems, topPlayerItems, trendingItems,
         mostPopularItems, recentUploadedItems]) => {
         this.highlightMainData = this._convertGameDtoToHighlightMainInputModel(highlightItems);
         this.sliderManagementData = this._convertGameDtoToGameSliderItemInputModel(sliderItems);
-        this.freeGameListData = {
-          freeGameItemData: this._convertGameDtoToFreeGameItemInputModel(freeItems)
-        }
+        this.homeCardActionData = this._convertGameDtoToHomeCardActionInputModel(homeActionItems);
+        console.log(this._convertGameDtoToHomeCardActionInputModel(homeActionItems));
+        this.freeGameListData = this._convertGameDtoToFreeGameListInputModel(freeItems);
       });
   }
 
@@ -251,12 +251,14 @@ export class HomeMainComponent implements OnInit {
   }
 
   /**
-   * Converts an array of GameDto items to an array of FreeGameItemInputModel objects
+   * Converts an array of GameDto items to an array of FreeGameListInputModel objects
    * @param items items The array of GameDto items to convert
-   * @returns an array of converted FreeGameItemInputModel objects
+   * @returns an array of converted FreeGameListInputModel objects
    */
-  private _convertGameDtoToFreeGameItemInputModel(items: GameDto[]): FreeGameItemInputModel[] {
-    const result: FreeGameItemInputModel[] = [];
+  private _convertGameDtoToFreeGameListInputModel(items: GameDto[]): FreeGameListInputModel {
+    const result: FreeGameListInputModel = {
+      freeGameItemData: []
+    }
 
     this._iterateOverGameDtos(items, (item) => {
       if (this._checksUndefinedForFreeGameItemInputModelConvertor(item)) {
@@ -268,8 +270,39 @@ export class HomeMainComponent implements OnInit {
           freeEndDate: item.freeEndDate!
         }
 
-        result.push(freeItem);
+        result.freeGameItemData.push(freeItem);
       }
+    });
+
+    return result;
+  }
+
+  /**
+   * converts GameDto items to HomeCardActionInputModel
+   * @param items the game dto from service data
+   * @returns our home card action data
+   */
+  private _convertGameDtoToHomeCardActionInputModel(items: GameDto[]): HomeCardActionInputModel[] {
+    const result: HomeCardActionInputModel[] = [];
+
+    this._iterateOverGameDtos(items, (item) => {
+      if (!item.name) return;
+
+      const homeCardActionItem: HomeCardActionInputModel = {
+        actionName: 'Play',
+        cardData: {
+          id: item.id,
+          cover: item.cover,
+          description: item.description,
+          name: item.name,
+          hasWishlist: true
+        },
+        clickCardFn: () => {
+          console.log(`Clicked on ${item.name}`);
+        }
+      };
+
+      result.push(homeCardActionItem); // Push the item into the result array
     });
 
     return result;

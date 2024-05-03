@@ -10,6 +10,14 @@
         [caption]="gameSliderCaption" />
     }
 
+    @if (homeCardActionData) {
+    <div class="grid grid-cols-2 gap-x-4">
+        @for (item of homeCardActionData | slice: 0 : 2; track $index) {
+        <app-home-card-action [data]="item" [isLoading]="isLoading" />
+        }
+    </div>
+    }
+
     @if (freeGameListData && freeGameListCaption && freeGameItemCaption) {
     <app-free-game-list [isLoading]="isLoading" [data]="freeGameListData" [caption]="freeGameListCaption"
         [gameItemCaption]="freeGameItemCaption" />

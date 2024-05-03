@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { HomeCardInputModel } from '../models/home-card-input.model';
 import { output } from "@angular/core";
 
@@ -27,6 +27,4 @@ export class HomeCardComponent {
     }
   }
   //#endregion
-  ;
-  ;
 }
