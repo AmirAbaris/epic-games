@@ -18,6 +18,7 @@ import { FreeGameListInputModel } from "../models/free-game-list-input.model";
 import { FreeGameItemInputModel } from "../models/free-game-item-input.model";
 import { HomeCardActionInputModel } from "../models/home-card-action-input.model";
 import { HomeCardInputModel } from "../models/home-card-input.model";
+import { HomeCardGameInputModel } from "../models/home-card-game-input.model";
 
 @Component({
   selector: "app-home-main",
@@ -50,6 +51,7 @@ export class HomeMainComponent implements OnInit {
   public sliderManagementData: GameSliderItemInputModel[] | undefined;
   public freeGameListData: FreeGameListInputModel | undefined;
   public homeCardActionData: HomeCardActionInputModel[] | undefined;
+  public homeCardGameData: HomeCardGameInputModel[] | undefined;
 
   private readonly captionPaths = {
     wishlistButton: 'home.WishListButton',
@@ -176,7 +178,6 @@ export class HomeMainComponent implements OnInit {
         this.highlightMainData = this._convertGameDtoToHighlightMainInputModel(highlightItems);
         this.sliderManagementData = this._convertGameDtoToGameSliderItemInputModel(sliderItems);
         this.homeCardActionData = this._convertGameDtoToHomeCardActionInputModel(homeActionItems);
-        console.log(this._convertGameDtoToHomeCardActionInputModel(homeActionItems));
         this.freeGameListData = this._convertGameDtoToFreeGameListInputModel(freeItems);
       });
   }
@@ -303,6 +304,31 @@ export class HomeMainComponent implements OnInit {
       };
 
       result.push(homeCardActionItem); // Push the item into the result array
+    });
+
+    return result;
+  }
+
+  private _convertGameDtoToHomeCardGameInputModel(items: GameDto[]): HomeCardGameInputModel[] {
+    const result: HomeCardGameInputModel[] = [];
+
+    this._iterateOverGameDtos(items, (item) => {
+      if (!item.name) return;
+
+      const homeCardGameItem: HomeCardGameInputModel = {
+        discountPercent: 22,
+        basePrice: 12,
+        finalPrice: 55,
+        cardData: {
+          id: item.id,
+          cover: item.cover,
+          description: item.description,
+          name: item.name,
+          hasWishlist: false
+        }
+      }
+
+      return result.push(homeCardGameItem);
     });
 
     return result;
