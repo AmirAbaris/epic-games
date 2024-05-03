@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { FreeGameListInputModel } from '../models/free-game-list-input.model';
 import { FreeGameItemCaptionModel } from '../models/caption-models/free-game-item-caption.model';
 import { FreeGameListCaptionModel } from '../models/caption-models/free-game-list-caption.model';

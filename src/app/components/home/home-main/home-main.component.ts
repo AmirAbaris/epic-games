@@ -14,6 +14,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GameDto } from "../dtos/game.dto";
 import { HighlightMainCaptionModel } from "../models/caption-models/highlight-main-caption.model";
 import { GameSliderItemInputModel } from "../models/game-slider-item-input.model";
+import { FreeGameListInputModel } from "../models/free-game-list-input.model";
+import { FreeGameItemInputModel } from "../models/free-game-item-input.model";
 
 @Component({
   selector: "app-home-main",
@@ -30,33 +32,32 @@ export class HomeMainComponent implements OnInit {
   public isActive = false;
   public isInWishlist = false;
   public isWishlistProcessing = false;
+  public wishlistIds: string[] = [];
 
   //TODO separate caps and regular vars!
 
   public highlightMainCaption: HighlightMainCaptionModel | undefined;
-  public freeGamesCaption: FreeGameCardCaptionModel | undefined;
-  // public sliderGameType: GameType = GameType.BASE_GAME;
-  public gameItemCaption: CategoryItemCaptionModel | undefined;
-  public categoryListCaption: CategoryListCaptionModel | undefined;
-  public categoryItemCaption: CategoryItemCaptionModel | undefined;
   public gameSliderCaption: GameSliderCaptionModel | undefined;
+  // public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
+  public categoryListCaption: CategoryListCaptionModel | undefined;
+  public categoryItemCaption: CategoryItemCaptionModel | undefined;
 
-  public wishlistIds: string[] = [];
   public highlightMainData: HighlightMainInputModel[] | undefined;
   public sliderManagementData: GameSliderItemInputModel[] | undefined;
+  public freeGameListData: FreeGameListInputModel | undefined;
 
   private readonly captionPaths = {
     wishlistButton: 'home.WishListButton',
     gameSliderItem: 'home.GameSliderItem',
-    freeGameCard: "home.FreeGameCard",
+    freeGameList: 'home.FreeGameList',
+    freeGameItem: 'home.FreeGameItem',
+    // freeGameCard: "home.FreeGameCard",
     gameItemList: 'home.GameItemList',
     categoryList: 'home.CategoryList',
     categoryItem: 'home.CategoryItem',
-    freeGameList: 'home.FreeGameList',
-    freeGameItem: 'home.FreeGameItem',
-    
+
     highlightButtonType: 'enum-captions.HighlightButtonType',
     gameType: 'enum-captions.gameType',
   }
@@ -94,27 +95,28 @@ export class HomeMainComponent implements OnInit {
     const highlightButtonTypeCaption = this._translateService.get(this.captionPaths.highlightButtonType);
     const gameSliderItemCaption = this._translateService.get(this.captionPaths.gameSliderItem);
     const gameTypeCaption = this._translateService.get(this.captionPaths.gameType);
+    const freeGameItemCaption = this._translateService.get(this.captionPaths.freeGameItem);
+    const freeGameListCaption = this._translateService.get(this.captionPaths.freeGameList);
 
-    const freeGamesCaption = this._translateService.get(this.captionPaths.freeGameCard);
+    // const freeGamesCaption = this._translateService.get(this.captionPaths.freeGameCard);
     const gameItemCaption = this._translateService.get(this.captionPaths.gameItemList);
     const categoryListCaption = this._translateService.get(this.captionPaths.categoryList);
     const categoryItemCaption = this._translateService.get(this.captionPaths.categoryItem);
-    const freeGameItemCaption = this._translateService.get(this.captionPaths.freeGameItem);
-    const freeGameListCaption = this._translateService.get(this.captionPaths.freeGameList);
 
     forkJoin([
       wishListButtonCaption,
       highlightButtonTypeCaption,
       gameSliderItemCaption,
       gameTypeCaption,
+      freeGameItemCaption,
+      freeGameListCaption,
 
-      freeGamesCaption,
+      // freeGamesCaption,
       gameItemCaption,
       categoryListCaption,
-      categoryItemCaption,
-      freeGameItemCaption,
-      freeGameListCaption
-    ]).subscribe(([wishListButtonCaption, highlightButtonTypeCaption, gameSliderItemCaption, gameTypeCaption, freeGamesCaption, gameItemCaption, categoryListCaption, categoryItemCaption, freeGameItemCaption, freeGameList]) => {
+      categoryItemCaption
+    ]).subscribe(([wishListButtonCaption, highlightButtonTypeCaption, gameSliderItemCaption, gameTypeCaption,
+      freeGameItemCaption, freeGameListCaption, freeGamesCaption, gameItemCaption, categoryListCaption]) => {
       this.highlightMainCaption = {
         wishlistButtonCaption: wishListButtonCaption,
         highlightButtonTypeCaption: highlightButtonTypeCaption
@@ -125,12 +127,12 @@ export class HomeMainComponent implements OnInit {
         gameType: gameTypeCaption
       }
 
-      this.freeGamesCaption = freeGamesCaption;
-      this.gameItemCaption = gameItemCaption;
+      // this.freeGamesCaption = freeGamesCaption;
+      // this.gameItemCaption = free;
       this.categoryListCaption = categoryListCaption;
-      this.categoryItemCaption = categoryItemCaption;
+      // this.categoryItemCaption = categoryItemCaption;
+      this.freeGameListCaption = freeGameListCaption;
       this.freeGameItemCaption = freeGameItemCaption;
-      this.freeGameListCaption = freeGameList;
     });
   }
 
@@ -153,6 +155,7 @@ export class HomeMainComponent implements OnInit {
     forkJoin([
       this._gameService.getHighlightItems(),
       this._gameService.getSliderItems(),
+      this._gameService.getFreeItems(),
       this._gameService.getHomeActionItems(),
       this._gameService.getFreeItems(),
       this._gameService.getFortniteItems(),
@@ -166,13 +169,15 @@ export class HomeMainComponent implements OnInit {
       takeUntilDestroyed(this._destroyRef),
       finalize(() => this.isLoading = false)
     )
-      .subscribe(([highlightItems, sliderItems, homeActionItems, freeItems,
+      // TODO order. in order...
+      .subscribe(([highlightItems, sliderItems, freeItems, homeActionItems,
         fortniteItems, newReleaseItems, topPlayerItems, trendingItems,
         mostPopularItems, recentUploadedItems]) => {
         this.highlightMainData = this._convertGameDtoToHighlightMainInputModel(highlightItems);
         this.sliderManagementData = this._convertGameDtoToGameSliderItemInputModel(sliderItems);
-
-        console.log(sliderItems);
+        this.freeGameListData = {
+          freeGameItemData: this._convertGameDtoToFreeGameItemInputModel(freeItems)
+        }
       });
   }
 
@@ -219,7 +224,7 @@ export class HomeMainComponent implements OnInit {
   /**
    * Converts an array of GameDto items to an array of GameSliderItemInputModel objects
    * @param items items The array of GameDto items to convert
-   * @returns An array of converted GameSliderItemInputModel objects
+   * @returns an array of converted GameSliderItemInputModel objects
    */
   private _convertGameDtoToGameSliderItemInputModel(items: GameDto[]): GameSliderItemInputModel[] {
     const result: GameSliderItemInputModel[] = [];
@@ -246,6 +251,31 @@ export class HomeMainComponent implements OnInit {
   }
 
   /**
+   * Converts an array of GameDto items to an array of FreeGameItemInputModel objects
+   * @param items items The array of GameDto items to convert
+   * @returns an array of converted FreeGameItemInputModel objects
+   */
+  private _convertGameDtoToFreeGameItemInputModel(items: GameDto[]): FreeGameItemInputModel[] {
+    const result: FreeGameItemInputModel[] = [];
+
+    this._iterateOverGameDtos(items, (item) => {
+      if (this._checksUndefinedForFreeGameItemInputModelConvertor(item)) {
+        const freeItem: FreeGameItemInputModel = {
+          id: item.id!,
+          cover: item.cover,
+          name: item.name!,
+          freeStartDate: item.freeStartDate,
+          freeEndDate: item.freeEndDate!
+        }
+
+        result.push(freeItem);
+      }
+    });
+
+    return result;
+  }
+
+  /**
    * check the input item to has any property of the HighlightMainInputModel and its properties should not be null!
    * @param item the GameDto item
    * @returns the checked highlight main input model type if items has the properties and the properties we want are not null
@@ -262,6 +292,10 @@ export class HomeMainComponent implements OnInit {
    */
   private _checksUndefinedForGameSliderItemInputModelConvertor(item: GameDto): boolean {
     return !!(item.id !== undefined && item.name !== undefined && item.isFree !== undefined && item.type !== undefined);
+  }
+
+  private _checksUndefinedForFreeGameItemInputModelConvertor(item: GameDto): boolean {
+    return !!(item.id !== undefined && item.name !== undefined && item.freeEndDate !== undefined);
   }
   //#endregion
 }
