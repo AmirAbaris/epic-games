@@ -19,6 +19,10 @@ import { FreeGameItemInputModel } from "../models/free-game-item-input.model";
 import { HomeCardActionInputModel } from "../models/home-card-action-input.model";
 import { HomeCardInputModel } from "../models/home-card-input.model";
 import { HomeCardGameInputModel } from "../models/home-card-game-input.model";
+import { CategoryListInputModel } from "../models/category-list-input.model";
+import { CategoryManagementInputModel } from "../models/category-management-input.model";
+import { CategoryType } from "../enums/category-type.enum";
+import { CategoryItemInputModel } from "../models/category-item-input.model";
 
 @Component({
   selector: "app-home-main",
@@ -41,7 +45,7 @@ export class HomeMainComponent implements OnInit {
 
   public highlightMainCaption: HighlightMainCaptionModel | undefined;
   public gameSliderCaption: GameSliderCaptionModel | undefined;
-  // public freeGamesCaption: FreeGameCardCaptionModel | undefined;
+  public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
   public categoryListCaption: CategoryListCaptionModel | undefined;
@@ -49,9 +53,11 @@ export class HomeMainComponent implements OnInit {
 
   public highlightMainData: HighlightMainInputModel[] | undefined;
   public sliderManagementData: GameSliderItemInputModel[] | undefined;
-  public freeGameListData: FreeGameListInputModel | undefined;
   public homeCardActionData: HomeCardActionInputModel[] | undefined;
+  public freeGameListData: FreeGameListInputModel | undefined;
+  public fortniteGameData: HomeCardActionInputModel[] | undefined;
   public homeCardGameData: HomeCardGameInputModel[] | undefined;
+  public categoryManagementData: CategoryManagementInputModel | undefined;
 
   private readonly captionPaths = {
     wishlistButton: 'home.WishListButton',
@@ -100,8 +106,8 @@ export class HomeMainComponent implements OnInit {
     const highlightButtonTypeCaption = this._translateService.get(this.captionPaths.highlightButtonType);
     const gameSliderItemCaption = this._translateService.get(this.captionPaths.gameSliderItem);
     const gameTypeCaption = this._translateService.get(this.captionPaths.gameType);
-    const freeGameItemCaption = this._translateService.get(this.captionPaths.freeGameItem);
     const freeGameListCaption = this._translateService.get(this.captionPaths.freeGameList);
+    const freeGameItemCaption = this._translateService.get(this.captionPaths.freeGameItem);
 
     // const freeGamesCaption = this._translateService.get(this.captionPaths.freeGameCard);
     const gameItemCaption = this._translateService.get(this.captionPaths.gameItemList);
@@ -115,13 +121,11 @@ export class HomeMainComponent implements OnInit {
       gameTypeCaption,
       freeGameItemCaption,
       freeGameListCaption,
-
-      // freeGamesCaption,
       gameItemCaption,
       categoryListCaption,
       categoryItemCaption
     ]).subscribe(([wishListButtonCaption, highlightButtonTypeCaption, gameSliderItemCaption, gameTypeCaption,
-      freeGameItemCaption, freeGameListCaption, freeGamesCaption, gameItemCaption, categoryListCaption]) => {
+      , freeGameListCaption, gameItemCaption, categoryListCaption, categoryItemCaption]) => {
       this.highlightMainCaption = {
         wishlistButtonCaption: wishListButtonCaption,
         highlightButtonTypeCaption: highlightButtonTypeCaption
@@ -135,11 +139,12 @@ export class HomeMainComponent implements OnInit {
       // this.freeGamesCaption = freeGamesCaption;
       // this.gameItemCaption = free;
       this.categoryListCaption = categoryListCaption;
-      // this.categoryItemCaption = categoryItemCaption;
+      this.categoryItemCaption = categoryItemCaption;
       this.freeGameListCaption = freeGameListCaption;
-      this.freeGameItemCaption = freeGameItemCaption;
+      this.freeGameItemCaption = gameItemCaption;
     });
   }
+
 
   private _removeIdFromWishlistIds(id: string): void {
     // check if we even have id in our list, if we didn't have the id, it will not continue! (extra layer of protection)
@@ -179,16 +184,69 @@ export class HomeMainComponent implements OnInit {
         this.sliderManagementData = this._convertGameDtoToGameSliderItemInputModel(sliderItems);
         this.homeCardActionData = this._convertGameDtoToHomeCardActionInputModel(homeActionItems);
         this.freeGameListData = this._convertGameDtoToFreeGameListInputModel(freeItems);
+        this.fortniteGameData = this._convertGameDtoToHomeCardActionInputModel(fortniteItems);
+        console.log(this.fortniteGameData);
+        this.categoryManagementData = this._convertGameDtoToCategoryManagementInputModel(newReleaseItems);
       });
   }
 
   /**
-   * loop over each GameDto input items
-   * @param items the array of GameDto to loop over
-   * @param callback the each element of the input array
+  * check the input item to has any property of the HighlightMainInputModel and its properties should not be undefined!
+  * @param item the GameDto item
+  * @returns the checked highlight main input model type if items has the properties and the properties we want are not undefined
+  */
+  private _checksUndefinedForHighlightMainInputModelConvertor(item: GameDto): boolean {
+    const propertiesToCheck: (keyof GameDto)[] = ['id', 'name', 'thumbnailCover', 'logo', 'description'];
+
+    for (const property of propertiesToCheck) {
+      if (item[property] === undefined) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * check the input item to has any property of the gameSlider and its properties should not be undefined!
+   * @param item the GameDto item
+   * @returns the checked slider items model type if items has the properties and the properties we want are not undefined
    */
-  private _iterateOverGameDtos(items: GameDto[], callback: (item: GameDto) => void): void {
-    items.forEach(callback);
+  private _checksUndefinedForGameSliderItemInputModelConvertor(item: GameDto): boolean {
+    const propertiesToCheck: (keyof GameDto)[] = ['id', 'name', 'isFree', 'type'];
+
+    for (const property of propertiesToCheck) {
+      if (item[property] === undefined) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  private _checksUndefinedForFreeGameItemInputModelConvertor(item: GameDto): boolean {
+    const propertiesToCheck: (keyof GameDto)[] = ['id', 'name', 'freeEndDate'];
+
+    for (const property of propertiesToCheck) {
+      if (item[property] === undefined) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  private _checksUndefinedForCategoryItemInputModel(item: GameDto): boolean {
+    const propertiesToCheck: (keyof GameDto)[] = ['id', 'name', 'cover', 'discountPercent',
+      'basePrice', 'finalPrice', 'isFree', 'isPublished'];
+
+    for (const property of propertiesToCheck) {
+      if (item[property] === undefined) {
+        return false;
+      }
+    }
+
+    return true;
   }
   //#endregion
 
@@ -201,7 +259,8 @@ export class HomeMainComponent implements OnInit {
   private _convertGameDtoToHighlightMainInputModel(items: GameDto[]): HighlightMainInputModel[] {
     const result: HighlightMainInputModel[] = [];
 
-    this._iterateOverGameDtos(items, (item) => {
+    items.forEach(item => {
+
       if (this._checksUndefinedForHighlightMainInputModelConvertor(item)) {
         const highlightItem: HighlightMainInputModel = {
           // we can ignore null checks because we checked them in a method!
@@ -230,7 +289,8 @@ export class HomeMainComponent implements OnInit {
   private _convertGameDtoToGameSliderItemInputModel(items: GameDto[]): GameSliderItemInputModel[] {
     const result: GameSliderItemInputModel[] = [];
 
-    this._iterateOverGameDtos(items, (item) => {
+    items.forEach(item => {
+
       if (this._checksUndefinedForGameSliderItemInputModelConvertor(item)) {
         const sliderItem: GameSliderItemInputModel = {
           // we can ignore null checks because we checked them in a method!
@@ -252,41 +312,14 @@ export class HomeMainComponent implements OnInit {
   }
 
   /**
-   * Converts an array of GameDto items to an array of FreeGameListInputModel objects
-   * @param items items The array of GameDto items to convert
-   * @returns an array of converted FreeGameListInputModel objects
-   */
-  private _convertGameDtoToFreeGameListInputModel(items: GameDto[]): FreeGameListInputModel {
-    const result: FreeGameListInputModel = {
-      freeGameItemData: []
-    }
-
-    this._iterateOverGameDtos(items, (item) => {
-      if (this._checksUndefinedForFreeGameItemInputModelConvertor(item)) {
-        const freeItem: FreeGameItemInputModel = {
-          id: item.id!,
-          cover: item.cover,
-          name: item.name!,
-          freeStartDate: item.freeStartDate,
-          freeEndDate: item.freeEndDate!
-        }
-
-        result.freeGameItemData.push(freeItem);
-      }
-    });
-
-    return result;
-  }
-
-  /**
-   * converts GameDto items to HomeCardActionInputModel
-   * @param items the game dto from service data
-   * @returns our home card action data
-   */
+  * converts GameDto items to HomeCardActionInputModel
+  * @param items the game dto from service data
+  * @returns our home card action data
+  */
   private _convertGameDtoToHomeCardActionInputModel(items: GameDto[]): HomeCardActionInputModel[] {
     const result: HomeCardActionInputModel[] = [];
 
-    this._iterateOverGameDtos(items, (item) => {
+    items.forEach(item => {
       if (!item.name) return;
 
       const homeCardActionItem: HomeCardActionInputModel = {
@@ -309,10 +342,39 @@ export class HomeMainComponent implements OnInit {
     return result;
   }
 
+  /**
+   * Converts an array of GameDto items to an array of FreeGameListInputModel objects
+   * @param items items The array of GameDto items to convert
+   * @returns an array of converted FreeGameListInputModel objects
+   */
+  private _convertGameDtoToFreeGameListInputModel(items: GameDto[]): FreeGameListInputModel {
+    const result: FreeGameListInputModel = {
+      freeGameItemData: []
+    }
+
+    items.forEach(item => {
+
+      if (this._checksUndefinedForFreeGameItemInputModelConvertor(item)) {
+        const freeItem: FreeGameItemInputModel = {
+          id: item.id!,
+          cover: item.cover,
+          name: item.name!,
+          freeStartDate: item.freeStartDate,
+          freeEndDate: item.freeEndDate!
+        }
+
+        result.freeGameItemData.push(freeItem);
+      }
+    });
+
+    return result;
+  }
+
+  // TODO: use it
   private _convertGameDtoToHomeCardGameInputModel(items: GameDto[]): HomeCardGameInputModel[] {
     const result: HomeCardGameInputModel[] = [];
 
-    this._iterateOverGameDtos(items, (item) => {
+    items.forEach(item => {
       if (!item.name) return;
 
       const homeCardGameItem: HomeCardGameInputModel = {
@@ -334,27 +396,38 @@ export class HomeMainComponent implements OnInit {
     return result;
   }
 
-  /**
-   * check the input item to has any property of the HighlightMainInputModel and its properties should not be null!
-   * @param item the GameDto item
-   * @returns the checked highlight main input model type if items has the properties and the properties we want are not null
-   */
-  private _checksUndefinedForHighlightMainInputModelConvertor(item: GameDto): boolean {
-    return !!(item.id !== undefined && item.name !== undefined && item.thumbnailCover !== undefined && item.logo !== undefined
-      && item.description !== undefined);
-  }
+  private _convertGameDtoToCategoryManagementInputModel(items: GameDto[]): CategoryManagementInputModel {
+    const result: CategoryManagementInputModel = {
+      categoryListData: []
+    }
 
-  /**
-   * check the input item to has any property of the gameSlider and its properties should not be null!
-   * @param item the GameDto item
-   * @returns the checked slider items model type if items has the properties and the properties we want are not null
-   */
-  private _checksUndefinedForGameSliderItemInputModelConvertor(item: GameDto): boolean {
-    return !!(item.id !== undefined && item.name !== undefined && item.isFree !== undefined && item.type !== undefined);
-  }
+    items.forEach(item => {
 
-  private _checksUndefinedForFreeGameItemInputModelConvertor(item: GameDto): boolean {
-    return !!(item.id !== undefined && item.name !== undefined && item.freeEndDate !== undefined);
+      if (this._checksUndefinedForCategoryItemInputModel(item)) {
+        const categoryList: CategoryListInputModel = {
+          title: 'Test',
+          categoryItem: [],
+          categoryType: CategoryType.MOST_PLAYED
+        };
+
+        const categoryItemData: CategoryItemInputModel = {
+          id: item.id!,
+          thumbnailCover: item.cover!,
+          name: item.name!,
+          discountPercent: item.discountPercent!,
+          basePrice: item.basePrice!,
+          finalPrice: item.finalPrice!,
+          isFree: item.isFree!,
+          publishDate: item.publishDate,
+          isPublished: item.isPublished!
+        };
+
+        categoryList.categoryItem.push(categoryItemData);
+        result.categoryListData.push(categoryList);
+      }
+    });
+
+    return result;
   }
   //#endregion
 }

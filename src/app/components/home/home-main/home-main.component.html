@@ -23,5 +23,16 @@
         [gameItemCaption]="freeGameItemCaption" />
     }
 
-    <!-- <app-home-card-game /> -->
+    @if (fortniteGameData) {
+    <div class="grid grid-cols-3 gap-x-4">
+        @for (item of fortniteGameData | slice: 0 : 3; track $index) {
+        <app-home-card-action [data]="item" [isLoading]="isLoading" />
+        }
+    </div>
+    }
+
+    @if (categoryManagementData && categoryListCaption && categoryItemCaption) {
+    <app-category-management [data]="categoryManagementData" [categoryListCaption]="categoryListCaption"
+        [categoryItemCaption]="categoryItemCaption" [isLoading]="isLoading" />
+    }
 </section>
