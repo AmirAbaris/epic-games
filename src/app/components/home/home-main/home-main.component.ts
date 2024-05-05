@@ -195,7 +195,7 @@ export class HomeMainComponent implements OnInit {
   * @param item the GameDto item
   * @returns the checked highlight main input model type if items has the properties and the properties we want are not undefined
   */
-  private _checksUndefinedForHighlightMainInputModelConvertor(item: GameDto): boolean {
+  private _isValidHighlightMain(item: GameDto): boolean {
     const propertiesToCheck: (keyof GameDto)[] = ['id', 'name', 'thumbnailCover', 'logo', 'description'];
 
     for (const property of propertiesToCheck) {
@@ -212,7 +212,7 @@ export class HomeMainComponent implements OnInit {
    * @param item the GameDto item
    * @returns the checked slider items model type if items has the properties and the properties we want are not undefined
    */
-  private _checksUndefinedForGameSliderItemInputModelConvertor(item: GameDto): boolean {
+  private _isValidGameSliderItem(item: GameDto): boolean {
     const propertiesToCheck: (keyof GameDto)[] = ['id', 'name', 'isFree', 'type'];
 
     for (const property of propertiesToCheck) {
@@ -224,7 +224,7 @@ export class HomeMainComponent implements OnInit {
     return true;
   }
 
-  private _checksUndefinedForFreeGameItemInputModelConvertor(item: GameDto): boolean {
+  private _isValidFreeGameItem(item: GameDto): boolean {
     const propertiesToCheck: (keyof GameDto)[] = ['id', 'name', 'freeEndDate'];
 
     for (const property of propertiesToCheck) {
@@ -236,7 +236,7 @@ export class HomeMainComponent implements OnInit {
     return true;
   }
 
-  private _checksUndefinedForCategoryItemInputModel(item: GameDto): boolean {
+  private _isValidCategoryItem(item: GameDto): boolean {
     const propertiesToCheck: (keyof GameDto)[] = ['id', 'name', 'cover', 'discountPercent',
       'basePrice', 'finalPrice', 'isFree', 'isPublished'];
 
@@ -248,37 +248,81 @@ export class HomeMainComponent implements OnInit {
 
     return true;
   }
+
+  // TODO: move to helpers
+  private _createCategoryItem(item: GameDto): CategoryItemInputModel {
+    return {
+      id: item.id!,
+      thumbnailCover: item.cover!,
+      name: item.name!,
+      discountPercent: item.discountPercent!,
+      basePrice: item.basePrice!,
+      finalPrice: item.finalPrice!,
+      isFree: item.isFree!,
+      publishDate: item.publishDate,
+      isPublished: item.isPublished!
+    };
+  }
+
+  private _createHighlightMainItem(item: GameDto): HighlightMainInputModel {
+    return {
+      id: item.id!,
+      name: item.name!,
+      minimalCover: item.thumbnailCover!,
+      largeCover: item.cover,
+      logo: item.logo!,
+      description: item.description!,
+      price: item.price,
+      highlightButtonType: HighlightButtonEnum.FREE
+    }
+  }
+
+  private _createGameSliderItem(item: GameDto): GameSliderItemInputModel {
+    return {
+      id: item.id!,
+      cover: item.cover,
+      name: item.name!,
+      discountPercent: item.discountPercent!,
+      basePrice: item.basePrice!,
+      finalPrice: item.finalPrice!,
+      isFree: item.isFree!,
+      type: item.type!
+    }
+  }
+
+  // TODO: just convert. main convert = check and convert name! move them in helper
+  private _createHomeCardItem(item: GameDto): HomeCardInputModel {
+    return {
+      id: item.id,
+      cover: item.cover,
+      description: item.description,
+      name: item.name!,
+      hasWishlist: true
+    }
+  }
+
+  private _createFreeGameItem(item: GameDto): FreeGameItemInputModel {
+    return {
+      id: item.id!,
+      cover: item.cover,
+      name: item.name!,
+      freeStartDate: item.freeStartDate,
+      freeEndDate: item.freeEndDate!
+    }
+  }
   //#endregion
 
   //#region Helper methods
   /**
-   * converts GameDto items to HighlightMainInputModel items
+     * converts GameDto items to HighlightMainInputModel items
    * @param items the GameDto input items we get from service
    * @returns highlight main input model typed array
    */
   private _convertGameDtoToHighlightMainInputModel(items: GameDto[]): HighlightMainInputModel[] {
-    const result: HighlightMainInputModel[] = [];
-
-    items.forEach(item => {
-
-      if (this._checksUndefinedForHighlightMainInputModelConvertor(item)) {
-        const highlightItem: HighlightMainInputModel = {
-          // we can ignore null checks because we checked them in a method!
-          id: item.id!,
-          name: item.name!,
-          minimalCover: item.thumbnailCover!,
-          largeCover: item.cover,
-          logo: item.logo!,
-          description: item.description!,
-          price: item.price,
-          highlightButtonType: HighlightButtonEnum.FREE
-        }
-
-        result.push(highlightItem);
-      }
-    });
-
-    return result;
+    return items
+      // TODO: fix names for isValid more specific
+      .filter((item: GameDto) => this._isValidHighlightMain(item))
+      .map((item: GameDto) => this._createHighlightMainItem(item));
   }
 
   /**
@@ -287,28 +331,9 @@ export class HomeMainComponent implements OnInit {
    * @returns an array of converted GameSliderItemInputModel objects
    */
   private _convertGameDtoToGameSliderItemInputModel(items: GameDto[]): GameSliderItemInputModel[] {
-    const result: GameSliderItemInputModel[] = [];
-
-    items.forEach(item => {
-
-      if (this._checksUndefinedForGameSliderItemInputModelConvertor(item)) {
-        const sliderItem: GameSliderItemInputModel = {
-          // we can ignore null checks because we checked them in a method!
-          id: item.id!,
-          cover: item.cover,
-          name: item.name!,
-          discountPercent: item.discountPercent,
-          basePrice: item.basePrice,
-          finalPrice: item.finalPrice,
-          isFree: item.isFree!,
-          type: item.type!
-        }
-
-        result.push(sliderItem);
-      }
-    });
-
-    return result;
+    return items
+      .filter((items) => this._isValidGameSliderItem(items))
+      .map((item) => this._createGameSliderItem(item));
   }
 
   /**
@@ -317,29 +342,16 @@ export class HomeMainComponent implements OnInit {
   * @returns our home card action data
   */
   private _convertGameDtoToHomeCardActionInputModel(items: GameDto[]): HomeCardActionInputModel[] {
-    const result: HomeCardActionInputModel[] = [];
+    const validItems = items.filter((item: GameDto) => item.id !== undefined);
+    const cardDataItem = validItems.map((item: GameDto) => this._createHomeCardItem(item));
 
-    items.forEach(item => {
-      if (!item.name) return;
-
-      const homeCardActionItem: HomeCardActionInputModel = {
-        actionName: 'Play',
-        cardData: {
-          id: item.id,
-          cover: item.cover,
-          description: item.description,
-          name: item.name,
-          hasWishlist: true
-        },
-        clickCardFn: () => {
-          console.log(`Clicked on ${item.name}`);
-        }
-      };
-
-      result.push(homeCardActionItem); // Push the item into the result array
-    });
-
-    return result;
+    return cardDataItem.map((cardItem) => ({
+      actionName: 'Play',
+      cardData: cardItem,
+      clickCardFn: () => {
+        console.log(`Clicked`);
+      }
+    }));
   }
 
   /**
@@ -348,87 +360,54 @@ export class HomeMainComponent implements OnInit {
    * @returns an array of converted FreeGameListInputModel objects
    */
   private _convertGameDtoToFreeGameListInputModel(items: GameDto[]): FreeGameListInputModel {
-    const result: FreeGameListInputModel = {
-      freeGameItemData: []
+    const validItems = items.filter((item: GameDto) => this._isValidFreeGameItem(item));
+    const freeGameItem = validItems.map((item: GameDto) => this._createFreeGameItem(item));
+
+    return {
+      freeGameItemData: [...freeGameItem]
     }
-
-    items.forEach(item => {
-
-      if (this._checksUndefinedForFreeGameItemInputModelConvertor(item)) {
-        const freeItem: FreeGameItemInputModel = {
-          id: item.id!,
-          cover: item.cover,
-          name: item.name!,
-          freeStartDate: item.freeStartDate,
-          freeEndDate: item.freeEndDate!
-        }
-
-        result.freeGameItemData.push(freeItem);
-      }
-    });
-
-    return result;
   }
 
   // TODO: use it
-  private _convertGameDtoToHomeCardGameInputModel(items: GameDto[]): HomeCardGameInputModel[] {
-    const result: HomeCardGameInputModel[] = [];
+  // private _convertGameDtoToHomeCardGameInputModel(items: GameDto[]): HomeCardGameInputModel[] {
+  //   const result: HomeCardGameInputModel[] = [];
 
-    items.forEach(item => {
-      if (!item.name) return;
+  //   items.forEach(item => {
+  //     if (!item.name) return;
 
-      const homeCardGameItem: HomeCardGameInputModel = {
-        discountPercent: 22,
-        basePrice: 12,
-        finalPrice: 55,
-        cardData: {
-          id: item.id,
-          cover: item.cover,
-          description: item.description,
-          name: item.name,
-          hasWishlist: false
-        }
-      }
+  //     const homeCardGameItem: HomeCardGameInputModel = {
+  //       discountPercent: 22,
+  //       basePrice: 12,
+  //       finalPrice: 55,
+  //       cardData: {
+  //         id: item.id,
+  //         cover: item.cover,
+  //         description: item.description,
+  //         name: item.name,
+  //         hasWishlist: false
+  //       }
+  //     }
 
-      return result.push(homeCardGameItem);
-    });
+  //     return result.push(homeCardGameItem);
+  //   });
 
-    return result;
-  }
+  //   return result;
+  // }
 
   private _convertGameDtoToCategoryManagementInputModel(items: GameDto[]): CategoryManagementInputModel {
-    const result: CategoryManagementInputModel = {
-      categoryListData: []
+    const validItems = items.filter((item: GameDto) => this._isValidCategoryItem(item));
+
+    const categoryList: CategoryListInputModel = {
+      title: 'New Releases',
+      categoryItem: validItems.map((item: GameDto) => this._createCategoryItem(item)),
+      categoryType: CategoryType.MOST_PLAYED
     }
 
-    items.forEach(item => {
-
-      if (this._checksUndefinedForCategoryItemInputModel(item)) {
-        const categoryList: CategoryListInputModel = {
-          title: 'Test',
-          categoryItem: [],
-          categoryType: CategoryType.MOST_PLAYED
-        };
-
-        const categoryItemData: CategoryItemInputModel = {
-          id: item.id!,
-          thumbnailCover: item.cover!,
-          name: item.name!,
-          discountPercent: item.discountPercent!,
-          basePrice: item.basePrice!,
-          finalPrice: item.finalPrice!,
-          isFree: item.isFree!,
-          publishDate: item.publishDate,
-          isPublished: item.isPublished!
-        };
-
-        categoryList.categoryItem.push(categoryItemData);
-        result.categoryListData.push(categoryList);
-      }
-    });
-
-    return result;
+    return {
+      categoryListData: [categoryList]
+    }
   }
   //#endregion
 }
 
+// TODO: research! lodash
