@@ -6,7 +6,7 @@ export interface HighlightMainInputModel {
     minimalCover: string;
     largeCover: string;
     logo: string
-    description: string
+    description: string;
     price?: number;
     highlightButtonType: HighlightButtonEnum;
 }

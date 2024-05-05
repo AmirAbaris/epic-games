@@ -1,19 +1,18 @@
-import { Component, DestroyRef, inject, OnInit } from "@angular/core";
+import { AfterViewChecked, Component, DestroyRef, ElementRef, inject, OnDestroy, OnInit, viewChild } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { FreeGameCardCaptionModel } from "../models/caption-models/free-game-card-caption.model";
-import { finalize, forkJoin, interval, take } from "rxjs";
+import { finalize, forkJoin } from "rxjs";
 import { CategoryItemCaptionModel } from "../models/caption-models/category-item-caption.model";
-import { CategoryType } from "../enums/category-type.enum";
 import { CategoryListCaptionModel } from "../models/caption-models/category-list-caption.model";
-import { CategoryManagementInputModel } from "../models/category-management-input.model";
-import { GameSliderItemInputModel } from "../models/game-slider-item-input.model";
 import { GameType } from "../../../enums/game-type.enum";
 import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-item-caption.model";
-import { FreeGameListInputModel } from "../models/free-game-list-input.model";
 import { FreeGameListCaptionModel } from "../models/caption-models/free-game-list-caption.model";
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
 import { HighlightButtonEnum } from "../enums/highlight-button.enum";
 import { HighlightMainInputModel } from "../types/highlight-main-input.type";
+import { GameService } from "../../../services/game.service";
+import { GameDto } from "../dtos/game.dto";
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: "app-home-main",
@@ -23,16 +22,17 @@ import { HighlightMainInputModel } from "../types/highlight-main-input.type";
 export class HomeMainComponent implements OnInit {
   //region Properties
   private _translateService = inject(TranslateService);
-  protected _destroyRef = inject(DestroyRef);
+  private _destroyRef = inject(DestroyRef);
+  private _gameService = inject(GameService);
 
-  public categoryManagementData: CategoryManagementInputModel = mockData;
-  public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
+  // public categoryManagementData: CategoryManagementInputModel = mockData;
+  // public gameSliderItemData: GameSliderItemInputModel[] = gameSliderItems;
   public isLoading: boolean = true;
   public isActive = false;
   public isInWishlist = false;
   public isWishlistProcessing = false;
   public freeGamesCaption: FreeGameCardCaptionModel | undefined;
-  public freeGameList: FreeGameListInputModel = freeGameItemMockData;
+  // public freeGameList: FreeGameListInputModel = freeGameItemMockData;
   public sliderGameType: GameType = GameType.BASE_GAME;
   public gameItemCaption: CategoryItemCaptionModel | undefined;
   public categoryListCaption: CategoryListCaptionModel | undefined;
@@ -40,8 +40,9 @@ export class HomeMainComponent implements OnInit {
   public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
-  public highlightMainData: HighlightMainInputModel[] = highlightPreviewMockData;
+  public highlightMainData: HighlightMainInputModel[] | undefined;
   public wishlistIds: string[] = [];
+
 
   private readonly captionPaths = {
     freeGameCard: "home.FreeGameCard",
@@ -57,7 +58,7 @@ export class HomeMainComponent implements OnInit {
   //region lifecycle methods
   ngOnInit(): void {
     this._getCaptions();
-    this._completeLoading();
+    this._getGames();
   }
 
   //endregion
@@ -93,14 +94,6 @@ export class HomeMainComponent implements OnInit {
     });
   }
 
-  private _completeLoading(): void {
-    interval(3000).pipe(
-      take(1),
-      finalize(() => {
-        this.isLoading = false;
-      })).subscribe();
-  }
-
   // TODO: removable test!
   /**
    * this method just tests the functionality of wishlistIds and wishlistEvent handler
@@ -131,147 +124,70 @@ export class HomeMainComponent implements OnInit {
 
     this.wishlistIds = [...this.wishlistIds, id];
   }
+
+  /**
+   * note this is just a test method!
+   */
+  private _getGames(): void {
+    console.log('calls the test');
+
+    forkJoin([
+      this._gameService.getHighlightItems(),
+      this._gameService.getSliderItems(),
+      this._gameService.getHomeActionItems(),
+      this._gameService.getFreeItems(),
+      this._gameService.getFortniteItems(),
+      this._gameService.getNewReleaseItems(),
+      this._gameService.getTopPlayerItems(),
+      this._gameService.getComingSoonItems(),
+      this._gameService.getTrendingItems(),
+      this._gameService.getMostPopularItems(),
+      this._gameService.getRecentlyUploadedItems()
+    ]).pipe(
+      takeUntilDestroyed(this._destroyRef),
+      finalize(() => this.isLoading = false)
+    )
+      .subscribe(([highlightItems, sliderItems, homeActionItems, freeItems,
+        fortniteItems, newReleaseItems, topPlayerItems, trendingItems,
+        mostPopularItems, recentUploadedItems]) => {
+        this.highlightMainData = this._convertGameDtoToHighlightMainInputModel(highlightItems);
+        console.log(this.highlightMainData);
+      });
+  }
+  /**
+   * added foreach call back. we added this because we will repeat this logic for each type convert we need!
+   * first parameter is the GameDto array we get from service and second is item we want to convert! (we can create logic and guard on second param)
+   * @param items 
+   * @param callback 
+   */
+  private _iterateOverGameDtos(items: GameDto[], callback: (item: GameDto) => void): void {
+    items.forEach(callback);
+  }
   //endregion
-}
 
-// TODO MOCK, REMOVE
-const mockData: CategoryManagementInputModel = {
-  categoryListData: [
-    {
-      categoryItem: [
-        {
-          id: '16',
-          thumbnailCover: "../assets/game-covers/game-list/l15.jpeg",
-          name: "Game 16",
-          discountPercent: 0,
-          basePrice: 29.99,
-          finalPrice: 29.99,
-          isFree: false,
-          isPublished: false,
-        }
-      ],
-      title: 'Top Sellers',
-      categoryType: CategoryType.TOP_SELLERS
-    }
-  ]
-}
+  //#region Helper methods
+  private _convertGameDtoToHighlightMainInputModel(items: GameDto[]): HighlightMainInputModel[] {
+    const result: HighlightMainInputModel[] = [];
 
-const gameSliderItems: GameSliderItemInputModel[] = [
-  {
-    id: "1",
-    name: 'game 1',
-    type: GameType.BASE_GAME,
-    cover: '../assets/game-covers/game-card-covers/1.jpeg',
-    basePrice: 29.99,
-    finalPrice: 14.99,
-    isFree: true
-  },
-  {
-    id: "2",
-    name: 'game 1',
-    type: GameType.BASE_GAME,
-    cover: '../assets/game-covers/game-card-covers/2.jpeg',
-    basePrice: 29.99,
-    finalPrice: 14.99,
-    isFree: true
-  },
-  {
-    id: "3",
-    name: 'game 1',
-    type: GameType.BASE_GAME,
-    cover: '../assets/game-covers/game-card-covers/4.jpeg',
-    discountPercent: 12,
-    basePrice: 29.99,
-    finalPrice: 14.99,
-    isFree: false
-  },
-  {
-    id: "4",
-    name: 'game 1',
-    type: GameType.BASE_GAME,
-    cover: '../assets/game-covers/game-card-covers/2.jpeg',
-    basePrice: 29.99,
-    finalPrice: 14.99,
-    isFree: true
+    this._iterateOverGameDtos(items, (item) => {
+      if (item.id && item.name && item.thumbnailCover && item.logo && item.description) {
+        const highlightItem: HighlightMainInputModel = {
+          id: item.id,
+          name: item.name,
+          minimalCover: item.thumbnailCover,
+          largeCover: item.cover,
+          logo: item.logo,
+          description: item.description,
+          price: item.price,
+          highlightButtonType: HighlightButtonEnum.FREE
+        };
+
+        result.push(highlightItem);
+      }
+    });
+
+    console.log(result);
+    return result;
   }
-];
-
-const freeGameItemMockData: FreeGameListInputModel =
-{
-  freeGameItemData: [
-    {
-      id: '1',
-      cover: '../assets/game-covers/free-games/a1.jpg',
-      name: 'Game 1',
-      freeStartDate: new Date('2024-03-01'),
-      freeEndDate: new Date('2024-03-15')
-    },
-    {
-      id: '2',
-      cover: '../assets/game-covers/free-games/a1.jpg',
-      name: 'Game 2',
-      freeStartDate: new Date('2024-03-10'),
-      freeEndDate: new Date('2024-03-20')
-    },
-    {
-      id: '3',
-      cover: '../assets/game-covers/free-games/a1.jpg',
-      name: 'Game 3',
-      freeEndDate: new Date('2025-02-01')
-    }
-  ]
+  //#endregion
 }
-
-const highlightPreviewMockData: HighlightMainInputModel[] = [
-  {
-    id: '1',
-    name: 'item 1',
-    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 1',
-    price: 10,
-    highlightButtonType: HighlightButtonEnum.FREE
-  },
-  {
-    id: '2',
-    name: 'item 1',
-    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 1',
-    price: 10,
-    highlightButtonType: HighlightButtonEnum.PUBLISHED
-  },
-  {
-    id: '3',
-    name: 'item 1',
-    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 1',
-    price: 10,
-    highlightButtonType: HighlightButtonEnum.ARTICLE
-  },
-  {
-    id: '4',
-    name: 'item 1',
-    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 1',
-    price: 10,
-    highlightButtonType: HighlightButtonEnum.FREE
-
-  },
-  {
-    id: '5',
-    name: 'item 1',
-    minimalCover: '../assets/game-covers/highlight-small-item-cover/sc.jpg',
-    largeCover: '../assets/game-covers/highlight-preview-item-cover/egg.jpg',
-    logo: '../assets/game-covers/highlight-preview-item-cover/egg2.png',
-    description: 'Description 1',
-    price: 10,
-    highlightButtonType: HighlightButtonEnum.NOT_PUBLISHED
-  }
-];
