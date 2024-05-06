@@ -1,38 +1,80 @@
-<section>
+<section class="flex flex-col items-center gap-y-11">
     @if (highlightMainData && highlightMainCaption) {
     <app-highlight-main [data]="highlightMainData" [isLoading]="isLoading" [isWishlistProcessing]="isWishlistProcessing"
         [caption]="highlightMainCaption" [wishlistIds]="wishlistIds" (clickItemEvent)="onClickItemEventHandler($event)"
         (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
     }
 
-    @if (sliderManagementData && gameSliderCaption) {
-    <app-game-slider-management [gameCardInputs]="sliderManagementData" [isLoading]="isLoading"
-        [caption]="gameSliderCaption" />
+    @if (sliderData && gameSliderCaption) {
+    <!-- note that game slider item is not responsive at all -->
+    <app-game-slider-management [gameCardInputs]="sliderData" [isLoading]="isLoading" [caption]="gameSliderCaption" />
     }
 
-    @if (homeCardActionData) {
-    <div class="grid grid-cols-2 gap-x-4">
-        @for (item of homeCardActionData | slice: 0 : 2; track $index) {
-        <app-home-card-action [data]="item" [isLoading]="isLoading" />
+    <div class="flex flex-col p-10 gap-y-4 md:grid md:grid-cols-3 md:gap-x-4 md:p-0">
+        @if (homeCardGameData) {
+        <!-- didn't made maximum index numbers into a variable because they are used too much in this DOM -->
+        @for (item of homeCardGameData | slice: 0: 2; track $index) {
+        <app-home-card-game [data]="item" [isLoading]="isLoading"
+            (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
+            (clickCardEvent)="onClickItemEventHandler(item.cardData.id)" />
+        }
+        }
+        @if (homeCardActionData) {
+        @for (item of homeCardActionData | slice: 0 : 1; track $index) {
+        <app-home-card-action [data]="item" [isLoading]="isLoading"
+            (clickCardEvent)="onClickItemEventHandler(item.cardData.id)" />
+        }
+        }
+    </div>
+
+    @if (freeGameListData && freeGameListCaption && freeGameItemCaption) {
+    <app-free-game-list [isLoading]="isLoading" [data]="freeGameListData" [caption]="freeGameListCaption"
+        [gameItemCaption]="freeGameItemCaption" (clickEvent)="onClickItemEventHandler($event)"
+        (viewMoreClickEvent)="$event" />
+    }
+
+    @if (fortniteGameData) {
+    <div class="flex flex-col p-10 gap-y-4 md:grid md:grid-cols-3 md:gap-x-4 md:p-0">
+        @for (item of fortniteGameData; track $index) {
+        <app-home-card-action [data]="item" [isLoading]="isLoading"
+            (clickCardEvent)="onClickItemEventHandler(item.cardData.id)" />
         }
     </div>
     }
 
-    @if (freeGameListData && freeGameListCaption && freeGameItemCaption) {
-    <app-free-game-list [isLoading]="isLoading" [data]="freeGameListData" [caption]="freeGameListCaption"
-        [gameItemCaption]="freeGameItemCaption" />
-    }
-
-    @if (fortniteGameData) {
-    <div class="grid grid-cols-3 gap-x-4">
-        @for (item of fortniteGameData | slice: 0 : 3; track $index) {
-        <app-home-card-action [data]="item" [isLoading]="isLoading" />
+    @if (homeCardActionData) {
+    <div class="flex flex-col p-10 gap-y-4 md:grid md:grid-cols-2 md:gap-x-4 md:p-0">
+        @for (item of homeCardActionData | slice: 1 : 3; track $index) {
+        <app-home-card-action [data]="item" [isLoading]="isLoading"
+            (clickCardEvent)="onClickItemEventHandler(item.cardData.id)" />
         }
     </div>
     }
 
     @if (categoryManagementData && categoryListCaption && categoryItemCaption) {
     <app-category-management [data]="categoryManagementData" [categoryListCaption]="categoryListCaption"
-        [categoryItemCaption]="categoryItemCaption" [isLoading]="isLoading" />
+        [categoryItemCaption]="categoryItemCaption" [isLoading]="isLoading"
+        (clickGameEvent)="onClickItemEventHandler($event)"
+        (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
+        (clickViewMoreButtonEvent)="onClickViewMoreHandler($event)" />
     }
+
+    @if (trendingSliderData && recentSliderData && gameSliderCaption) {
+    <app-game-slider-management [gameCardInputs]="trendingSliderData" [isLoading]="isLoading"
+        [caption]="gameSliderCaption" />
+
+    <app-game-slider-management [gameCardInputs]="recentSliderData" [isLoading]="isLoading"
+        [caption]="gameSliderCaption" />
+    }
+
+
+    <div class="flex flex-col p-10 gap-y-4 md:grid md:grid-cols-2 md:gap-x-4 md:p-0">
+        @if (homeCardGameData) {
+        @for (item of homeCardGameData | slice: 2: 4; track $index) {
+        <app-home-card-game [data]="item" [isLoading]="isLoading"
+            (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
+            (clickCardEvent)="onClickItemEventHandler(item.cardData.id)" />
+        }
+        }
+    </div>
 </section>

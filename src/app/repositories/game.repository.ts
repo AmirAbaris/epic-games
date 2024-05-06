@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, delay } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { GameDto } from '../components/home/dtos/game.dto';
 
@@ -14,47 +14,47 @@ export class GameRepository {
 
   //#region Main logic methods
   public getHighlightItems(): Observable<GameDto[]> {
-    return this._http.get<GameDto[]>(`${this._url}/highlight-data`);
+    return this._http.get<GameDto[]>(`${this._url}/highlight-data`).pipe(delay(1000));
   }
 
   public getSliderItems(): Observable<GameDto[]> {
-    return this._http.get<GameDto[]>(`${this._url}/slider-data`);
+    return this._http.get<GameDto[]>(`${this._url}/slider-data`).pipe(delay(1000));
   }
 
   public geHomeActionItems(): Observable<GameDto[]> {
-    return this._http.get<GameDto[]>(`${this._url}/home-action-data`);
+    return this._http.get<GameDto[]>(`${this._url}/home-action-data`).pipe(delay(1000));
   }
 
   public getFreeItems(): Observable<GameDto[]> {
-    return this._http.get<GameDto[]>(`${this._url}/free-item-data`);
+    return this._http.get<GameDto[]>(`${this._url}/free-item-data`).pipe(delay(1000));
   }
 
   public getFortniteItems(): Observable<GameDto[]> {
-    return this._http.get<GameDto[]>(`${this._url}/fortnite-data`);
+    return this._http.get<GameDto[]>(`${this._url}/fortnite-data`).pipe(delay(1000));
   }
 
   public getNewReleaseItems(): Observable<GameDto[]> {
-    return this._http.get<GameDto[]>(`${this._url}/new-release-data`);
+    return this._http.get<GameDto[]>(`${this._url}/new-release-data`).pipe(delay(1000));
   }
 
   public getTopPlayerItems(): Observable<GameDto[]> {
-    return this._http.get<GameDto[]>(`${this._url}/top-player-data`);
+    return this._http.get<GameDto[]>(`${this._url}/top-player-data`).pipe(delay(1000));
   }
 
   public getComingSoonItems(): Observable<GameDto[]> {
-    return this._http.get<GameDto[]>(`${this._url}/coming-soon-data`);
+    return this._http.get<GameDto[]>(`${this._url}/coming-soon-data`).pipe(delay(1000));
   }
 
   public getTrendingItems(): Observable<GameDto[]> {
-    return this._http.get<GameDto[]>(`${this._url}/trending-items-data`);
+    return this._http.get<GameDto[]>(`${this._url}/trending-items-data`).pipe(delay(1000));
   }
 
   public getMostPopularItems(): Observable<GameDto[]> {
-    return this._http.get<GameDto[]>(`${this._url}/most-popular-items-data`);
+    return this._http.get<GameDto[]>(`${this._url}/most-popular-items-data`).pipe(delay(1000));
   }
 
   public getRecentlyUploadedItems(): Observable<GameDto[]> {
-    return this._http.get<GameDto[]>(`${this._url}/recently-uploaded-items-data`);
+    return this._http.get<GameDto[]>(`${this._url}/recently-uploaded-items-data`).pipe(delay(1000));
   }
   //#endregion
 }

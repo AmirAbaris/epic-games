@@ -1,12 +1,20 @@
 {
   "home": {
+    "HomeCardAction": {
+      "browseTitle": "Browse",
+      "discoverTitle": "discover",
+      "freePlayTitle": "Play For Free"
+    },
     "CategoryItem": {
       "freeTitle": "FREE",
       "comingSoonTitle": "Coming Soon",
       "availableTitle": "Available"
     },
     "CategoryList": {
-      "viewTitle": "View More"
+      "viewTitle": "View More",
+      "newReleaseTitle": "New Releases",
+      "topRatedTitle": "Top Player Rated",
+      "comingSoonTitle": "Coming Soon"
     },
     "WishListButton": {
       "inTitle": "In wishlist",

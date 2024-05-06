@@ -1,6 +1,5 @@
 import { Component, DestroyRef, inject, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { FreeGameCardCaptionModel } from "../models/caption-models/free-game-card-caption.model";
 import { finalize, forkJoin } from "rxjs";
 import { CategoryItemCaptionModel } from "../models/caption-models/category-item-caption.model";
 import { CategoryListCaptionModel } from "../models/caption-models/category-list-caption.model";
@@ -23,6 +22,7 @@ import { CategoryListInputModel } from "../models/category-list-input.model";
 import { CategoryManagementInputModel } from "../models/category-management-input.model";
 import { CategoryType } from "../enums/category-type.enum";
 import { CategoryItemInputModel } from "../models/category-item-input.model";
+import { HomeCardActionCaptionModel } from "../models/caption-models/home-card-action-caption.model";
 
 @Component({
   selector: "app-home-main",
@@ -45,18 +45,22 @@ export class HomeMainComponent implements OnInit {
 
   public highlightMainCaption: HighlightMainCaptionModel | undefined;
   public gameSliderCaption: GameSliderCaptionModel | undefined;
-  public freeGamesCaption: FreeGameCardCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
   public freeGameListCaption: FreeGameListCaptionModel | undefined;
   public categoryListCaption: CategoryListCaptionModel | undefined;
   public categoryItemCaption: CategoryItemCaptionModel | undefined;
+  public homeCardActionCaption: HomeCardActionCaptionModel | undefined;
 
+  // TODO: check for loops in dom
   public highlightMainData: HighlightMainInputModel[] | undefined;
-  public sliderManagementData: GameSliderItemInputModel[] | undefined;
+
+  public sliderData: GameSliderItemInputModel[] | undefined;
+  public trendingSliderData: GameSliderItemInputModel[] | undefined;
+  public recentSliderData: GameSliderItemInputModel[] | undefined;
   public homeCardActionData: HomeCardActionInputModel[] | undefined;
+  public homeCardGameData: HomeCardGameInputModel[] | undefined;
   public freeGameListData: FreeGameListInputModel | undefined;
   public fortniteGameData: HomeCardActionInputModel[] | undefined;
-  public homeCardGameData: HomeCardGameInputModel[] | undefined;
   public categoryManagementData: CategoryManagementInputModel | undefined;
 
   private readonly captionPaths = {
@@ -64,10 +68,10 @@ export class HomeMainComponent implements OnInit {
     gameSliderItem: 'home.GameSliderItem',
     freeGameList: 'home.FreeGameList',
     freeGameItem: 'home.FreeGameItem',
-    // freeGameCard: "home.FreeGameCard",
     gameItemList: 'home.GameItemList',
     categoryList: 'home.CategoryList',
     categoryItem: 'home.CategoryItem',
+    cardActionItem: 'home.HomeCardAction',
 
     highlightButtonType: 'enum-captions.HighlightButtonType',
     gameType: 'enum-captions.gameType',
@@ -90,14 +94,22 @@ export class HomeMainComponent implements OnInit {
     }
   }
 
-  public onClickItemEventHandler(id: string): void {
+  // TODO fix undefined
+  public onClickItemEventHandler(id: string | undefined): void {
+    if (!id) return;
+
     console.log(id);
+  }
+
+  public onClickViewMoreHandler(title: string | undefined): void {
+    if (!title) return;
+
+    console.log(title);
   }
   //#endregion
 
   //#region Main logic methods
   public clickCard(): void {
-    // needs refactor after implementing the routes!
     console.log('click card works');
   }
 
@@ -108,11 +120,10 @@ export class HomeMainComponent implements OnInit {
     const gameTypeCaption = this._translateService.get(this.captionPaths.gameType);
     const freeGameListCaption = this._translateService.get(this.captionPaths.freeGameList);
     const freeGameItemCaption = this._translateService.get(this.captionPaths.freeGameItem);
-
-    // const freeGamesCaption = this._translateService.get(this.captionPaths.freeGameCard);
     const gameItemCaption = this._translateService.get(this.captionPaths.gameItemList);
     const categoryListCaption = this._translateService.get(this.captionPaths.categoryList);
     const categoryItemCaption = this._translateService.get(this.captionPaths.categoryItem);
+    const homeCardActionCaption = this._translateService.get(this.captionPaths.cardActionItem);
 
     forkJoin([
       wishListButtonCaption,
@@ -123,9 +134,10 @@ export class HomeMainComponent implements OnInit {
       freeGameListCaption,
       gameItemCaption,
       categoryListCaption,
-      categoryItemCaption
+      categoryItemCaption,
+      homeCardActionCaption
     ]).subscribe(([wishListButtonCaption, highlightButtonTypeCaption, gameSliderItemCaption, gameTypeCaption,
-      , freeGameListCaption, gameItemCaption, categoryListCaption, categoryItemCaption]) => {
+      freeGameItemCaption, freeGameListCaption, categoryListCaption, categoryItemCaption, homeCardActionCaption]) => {
       this.highlightMainCaption = {
         wishlistButtonCaption: wishListButtonCaption,
         highlightButtonTypeCaption: highlightButtonTypeCaption
@@ -136,12 +148,11 @@ export class HomeMainComponent implements OnInit {
         gameType: gameTypeCaption
       }
 
-      // this.freeGamesCaption = freeGamesCaption;
-      // this.gameItemCaption = free;
       this.categoryListCaption = categoryListCaption;
       this.categoryItemCaption = categoryItemCaption;
       this.freeGameListCaption = freeGameListCaption;
-      this.freeGameItemCaption = gameItemCaption;
+      this.freeGameItemCaption = freeGameItemCaption;
+      this.homeCardActionCaption = homeCardActionCaption;
     });
   }
 
@@ -180,13 +191,19 @@ export class HomeMainComponent implements OnInit {
       .subscribe(([highlightItems, sliderItems, homeActionItems, freeItems,
         fortniteItems, newReleaseItems, topPlayerItems, trendingItems,
         mostPopularItems, recentUploadedItems]) => {
-        this.highlightMainData = this._convertGameDtoToHighlightMainInputModel(highlightItems);
-        this.sliderManagementData = this._convertGameDtoToGameSliderItemInputModel(sliderItems);
-        this.homeCardActionData = this._convertGameDtoToHomeCardActionInputModel(homeActionItems);
-        this.freeGameListData = this._convertGameDtoToFreeGameListInputModel(freeItems);
-        this.fortniteGameData = this._convertGameDtoToHomeCardActionInputModel(fortniteItems);
-        console.log(this.fortniteGameData);
-        this.categoryManagementData = this._convertGameDtoToCategoryManagementInputModel(newReleaseItems);
+        this.highlightMainData = this._convertAndCheckGameDtoToHighlightMainInputModel(highlightItems);
+        this.sliderData = this._convertAndCheckGameDtoToGameSliderItemInputModel(sliderItems);
+        this.homeCardActionData = this._convertAndCheckGameDtoToHomeCardActionInputModel(homeActionItems);
+        this.homeCardGameData = this._convertAndCheckGameDtoToHomeCardGameInputModel(homeActionItems);
+        this.freeGameListData = this._convertAndCheckGameDtoToFreeGameListInputModel(freeItems);
+        this.fortniteGameData = this._convertAndCheckGameDtoToHomeCardActionInputModel(fortniteItems);
+        if (this.categoryListCaption) {
+          this.categoryManagementData = this._convertAndCheckGameDtoToCategoryManagementInputModel(newReleaseItems, this.categoryListCaption.newReleaseTitle);
+          this.categoryManagementData = this._convertAndCheckGameDtoToCategoryManagementInputModel(topPlayerItems, this.categoryListCaption.topRatedTitle);
+          this.categoryManagementData = this._convertAndCheckGameDtoToCategoryManagementInputModel(trendingItems, this.categoryListCaption.comingSoonTitle);
+        }
+        this.trendingSliderData = this._convertAndCheckGameDtoToGameSliderItemInputModel(mostPopularItems);
+        this.recentSliderData = this._convertAndCheckGameDtoToGameSliderItemInputModel(recentUploadedItems);
       });
   }
 
@@ -213,7 +230,8 @@ export class HomeMainComponent implements OnInit {
    * @returns the checked slider items model type if items has the properties and the properties we want are not undefined
    */
   private _isValidGameSliderItem(item: GameDto): boolean {
-    const propertiesToCheck: (keyof GameDto)[] = ['id', 'name', 'isFree', 'type'];
+    const propertiesToCheck: (keyof GameDto)[] = ['id', 'name', 'discountPercent', 'basePrice',
+      'finalPrice', 'isFree', 'type'];
 
     for (const property of propertiesToCheck) {
       if (item[property] === undefined) {
@@ -237,8 +255,7 @@ export class HomeMainComponent implements OnInit {
   }
 
   private _isValidCategoryItem(item: GameDto): boolean {
-    const propertiesToCheck: (keyof GameDto)[] = ['id', 'name', 'cover', 'discountPercent',
-      'basePrice', 'finalPrice', 'isFree', 'isPublished'];
+    const propertiesToCheck: (keyof GameDto)[] = ['id', 'name', 'cover', 'isFree', 'isPublished'];
 
     for (const property of propertiesToCheck) {
       if (item[property] === undefined) {
@@ -249,22 +266,165 @@ export class HomeMainComponent implements OnInit {
     return true;
   }
 
-  // TODO: move to helpers
-  private _createCategoryItem(item: GameDto): CategoryItemInputModel {
+  /**
+   * handles texts for homeAction item components.
+   * @param index number of index it receive from a for loop on each item
+   * @returns a string of text or undefined
+   */
+  private _setActionNameViaItemIndex(index: number): string | undefined {
+    if (!this.homeCardActionCaption) return;
+
+    switch (index) {
+      case 0:
+        return this.homeCardActionCaption.browseTitle;
+
+      case 1:
+        return this.homeCardActionCaption.discoverTitle;
+
+      case 2:
+        return this.homeCardActionCaption.freePlayTitle;
+
+      default:
+        return this.homeCardActionCaption.discoverTitle;
+    }
+  }
+
+  /**
+   * merges all the arrays components need. we added to to prevent component usage on the last input array data!
+   */
+  private _mergeCategoryLists(newCategoryList: CategoryListInputModel): CategoryListInputModel[] {
+    const categoryListData: CategoryListInputModel[] = this.categoryManagementData ?
+      [...this.categoryManagementData.categoryListData] :
+      [];
+
+    categoryListData.push(newCategoryList);
+    return categoryListData;
+  }
+
+  /**
+   * we set the wishlist true for homeCardGame component 
+   * note wishlist is by default false became of homeCardAction
+   */
+  private _setHasWishlistToTrueForHomeCardGames(items: HomeCardInputModel[]): void {
+    items.forEach(item => {
+      item.hasWishlist = true;
+    });
+  }
+  //#endregion
+
+  //#region Helper methods
+  /**
+     * converts GameDto items to HighlightMainInputModel items
+   * @param items the GameDto input items we get from service
+   * @returns highlight main input model typed array
+   */
+  private _convertAndCheckGameDtoToHighlightMainInputModel(items: GameDto[]): HighlightMainInputModel[] {
+    return items
+      // TODO: fix names for isValid more specific
+      .filter((item: GameDto) => this._isValidHighlightMain(item))
+      .map((item: GameDto) => this._convertGameDtoToHighlightMainInputModel(item));
+  }
+
+  /**
+   * Converts an array of GameDto items to an array of GameSliderItemInputModel objects
+   * @param items items The array of GameDto items to convert
+   * @returns an array of converted GameSliderItemInputModel objects
+   */
+  private _convertAndCheckGameDtoToGameSliderItemInputModel(items: GameDto[]): GameSliderItemInputModel[] {
+    return items
+      .filter((items) => this._isValidGameSliderItem(items))
+      .map((item) => this._convertGameDtoToGameSliderItemInputModel(item));
+  }
+
+  /**
+  * converts GameDto items to HomeCardActionInputModel
+  * @param items the game dto from service data
+  * @returns our home card action data
+  */
+  private _convertAndCheckGameDtoToHomeCardActionInputModel(items: GameDto[]): HomeCardActionInputModel[] {
+    const validItems = items.filter((item: GameDto) => item.name !== undefined);
+    const cardDataItem = validItems.map((item: GameDto) => this._convertGameDtoToHomeCardInputModel(item));
+
+    return cardDataItem.map((cardItem, index) => ({
+      // we used || and its value if our methods returns undefined!
+      // it will not be the case but just to make sure we handled that senario like this
+      actionName: this._setActionNameViaItemIndex(index) || 'Discover',
+      cardData: cardItem,
+      clickCardFn: () => {
+        console.log(`Clicked`);
+      }
+    }));
+  }
+  // TODO: add flex mobile
+
+  /**
+   * converts the GameDto to array of HomeCardGameInputModel
+   * note we set the hasWishlist to true in here for GameAction components!
+   */
+  private _convertAndCheckGameDtoToHomeCardGameInputModel(items: GameDto[]): HomeCardGameInputModel[] {
+    const validItems: GameDto[] = items.filter((item: GameDto) => item.name !== undefined);
+    const cardDataItems: HomeCardInputModel[] = validItems.map((item: GameDto) => (this._convertGameDtoToHomeCardInputModel(item)));
+
+    // sets the wishlist to true for our games
+    this._setHasWishlistToTrueForHomeCardGames(cardDataItems);
+
+    return validItems.map((item: GameDto, index: number) => this._convertGameDtoToHomeCardGameInputModel(item, cardDataItems[index]));
+  }
+
+
+
+  private _convertAndCheckGameDtoToCategoryManagementInputModel(items: GameDto[], title: string): CategoryManagementInputModel {
+    const validItems = items.filter((item: GameDto) => this._isValidCategoryItem(item));
+
+    const categoryList: CategoryListInputModel = this._convertGameDtoToCategoryListInputModel(validItems, title);
+
+    const categoryManagementInput: CategoryManagementInputModel = {
+      categoryListData: this._mergeCategoryLists(categoryList)
+    }
+
+    return categoryManagementInput;
+  }
+
+  /**
+   * Converts an array of GameDto items to an array of FreeGameListInputModel objects
+   * @param items items The array of GameDto items to convert
+   * @returns an array of converted FreeGameListInputModel objects
+   */
+  private _convertAndCheckGameDtoToFreeGameListInputModel(items: GameDto[]): FreeGameListInputModel {
+    const validItems = items.filter((item: GameDto) => this._isValidFreeGameItem(item));
+    const freeGameItem = validItems.map((item: GameDto) => this._convertGameDtoToFreeGameItemInputModel(item));
+
+    return {
+      freeGameItemData: [...freeGameItem]
+    }
+  }
+
+  /**
+   * note we used '!' only became we ALWAYS check for undefined values by another methods!
+   */
+  private _convertGameDtoToCategoryItemInputModel(item: GameDto): CategoryItemInputModel {
     return {
       id: item.id!,
       thumbnailCover: item.cover!,
       name: item.name!,
-      discountPercent: item.discountPercent!,
-      basePrice: item.basePrice!,
-      finalPrice: item.finalPrice!,
+      discountPercent: item.discountPercent || 0,
+      basePrice: item.basePrice || 0,
+      finalPrice: item.finalPrice || 0,
       isFree: item.isFree!,
       publishDate: item.publishDate,
       isPublished: item.isPublished!
     };
   }
 
-  private _createHighlightMainItem(item: GameDto): HighlightMainInputModel {
+  private _convertGameDtoToCategoryListInputModel(validItems: GameDto[], title: string): CategoryListInputModel {
+    return {
+      title: title,
+      categoryItem: validItems.map((item: GameDto) => this._convertGameDtoToCategoryItemInputModel(item)),
+      categoryType: CategoryType.MOST_PLAYED
+    }
+  }
+
+  private _convertGameDtoToHighlightMainInputModel(item: GameDto): HighlightMainInputModel {
     return {
       id: item.id!,
       name: item.name!,
@@ -277,7 +437,7 @@ export class HomeMainComponent implements OnInit {
     }
   }
 
-  private _createGameSliderItem(item: GameDto): GameSliderItemInputModel {
+  private _convertGameDtoToGameSliderItemInputModel(item: GameDto): GameSliderItemInputModel {
     return {
       id: item.id!,
       cover: item.cover,
@@ -290,18 +450,26 @@ export class HomeMainComponent implements OnInit {
     }
   }
 
-  // TODO: just convert. main convert = check and convert name! move them in helper
-  private _createHomeCardItem(item: GameDto): HomeCardInputModel {
+  private _convertGameDtoToHomeCardInputModel(item: GameDto): HomeCardInputModel {
     return {
       id: item.id,
       cover: item.cover,
       description: item.description,
       name: item.name!,
-      hasWishlist: true
+      hasWishlist: false
     }
   }
 
-  private _createFreeGameItem(item: GameDto): FreeGameItemInputModel {
+  private _convertGameDtoToHomeCardGameInputModel(item: GameDto, cardDataItem: HomeCardInputModel): HomeCardGameInputModel {
+    return {
+      discountPercent: item.discountPercent,
+      basePrice: item.basePrice,
+      finalPrice: item.finalPrice,
+      cardData: cardDataItem
+    }
+  }
+
+  private _convertGameDtoToFreeGameItemInputModel(item: GameDto): FreeGameItemInputModel {
     return {
       id: item.id!,
       cover: item.cover,
@@ -311,103 +479,4 @@ export class HomeMainComponent implements OnInit {
     }
   }
   //#endregion
-
-  //#region Helper methods
-  /**
-     * converts GameDto items to HighlightMainInputModel items
-   * @param items the GameDto input items we get from service
-   * @returns highlight main input model typed array
-   */
-  private _convertGameDtoToHighlightMainInputModel(items: GameDto[]): HighlightMainInputModel[] {
-    return items
-      // TODO: fix names for isValid more specific
-      .filter((item: GameDto) => this._isValidHighlightMain(item))
-      .map((item: GameDto) => this._createHighlightMainItem(item));
-  }
-
-  /**
-   * Converts an array of GameDto items to an array of GameSliderItemInputModel objects
-   * @param items items The array of GameDto items to convert
-   * @returns an array of converted GameSliderItemInputModel objects
-   */
-  private _convertGameDtoToGameSliderItemInputModel(items: GameDto[]): GameSliderItemInputModel[] {
-    return items
-      .filter((items) => this._isValidGameSliderItem(items))
-      .map((item) => this._createGameSliderItem(item));
-  }
-
-  /**
-  * converts GameDto items to HomeCardActionInputModel
-  * @param items the game dto from service data
-  * @returns our home card action data
-  */
-  private _convertGameDtoToHomeCardActionInputModel(items: GameDto[]): HomeCardActionInputModel[] {
-    const validItems = items.filter((item: GameDto) => item.id !== undefined);
-    const cardDataItem = validItems.map((item: GameDto) => this._createHomeCardItem(item));
-
-    return cardDataItem.map((cardItem) => ({
-      actionName: 'Play',
-      cardData: cardItem,
-      clickCardFn: () => {
-        console.log(`Clicked`);
-      }
-    }));
-  }
-
-  /**
-   * Converts an array of GameDto items to an array of FreeGameListInputModel objects
-   * @param items items The array of GameDto items to convert
-   * @returns an array of converted FreeGameListInputModel objects
-   */
-  private _convertGameDtoToFreeGameListInputModel(items: GameDto[]): FreeGameListInputModel {
-    const validItems = items.filter((item: GameDto) => this._isValidFreeGameItem(item));
-    const freeGameItem = validItems.map((item: GameDto) => this._createFreeGameItem(item));
-
-    return {
-      freeGameItemData: [...freeGameItem]
-    }
-  }
-
-  // TODO: use it
-  // private _convertGameDtoToHomeCardGameInputModel(items: GameDto[]): HomeCardGameInputModel[] {
-  //   const result: HomeCardGameInputModel[] = [];
-
-  //   items.forEach(item => {
-  //     if (!item.name) return;
-
-  //     const homeCardGameItem: HomeCardGameInputModel = {
-  //       discountPercent: 22,
-  //       basePrice: 12,
-  //       finalPrice: 55,
-  //       cardData: {
-  //         id: item.id,
-  //         cover: item.cover,
-  //         description: item.description,
-  //         name: item.name,
-  //         hasWishlist: false
-  //       }
-  //     }
-
-  //     return result.push(homeCardGameItem);
-  //   });
-
-  //   return result;
-  // }
-
-  private _convertGameDtoToCategoryManagementInputModel(items: GameDto[]): CategoryManagementInputModel {
-    const validItems = items.filter((item: GameDto) => this._isValidCategoryItem(item));
-
-    const categoryList: CategoryListInputModel = {
-      title: 'New Releases',
-      categoryItem: validItems.map((item: GameDto) => this._createCategoryItem(item)),
-      categoryType: CategoryType.MOST_PLAYED
-    }
-
-    return {
-      categoryListData: [categoryList]
-    }
-  }
-  //#endregion
 }
-
-// TODO: research! lodash
