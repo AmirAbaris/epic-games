@@ -7,10 +7,10 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: HttpErrorResponse) => {
       let errorMessage = 'An unknown error occurred';
       if (error.error instanceof ErrorEvent) {
-        // Client-side errors
+        // client-side errors
         errorMessage = `Error: ${error.error.message}`;
       } else {
-        // Server-side errors
+        // server-side errors
         errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
       }
 
@@ -19,4 +19,4 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
     })
   );
 
-};
+}
