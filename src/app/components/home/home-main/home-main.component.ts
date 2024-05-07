@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, DestroyRef, ElementRef, inject, OnDestroy, OnInit, viewChild } from "@angular/core";
+import { Component, DestroyRef, inject, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { finalize, forkJoin } from "rxjs";
 import { CategoryItemCaptionModel } from "../models/caption-models/category-item-caption.model";
@@ -132,7 +132,6 @@ export class HomeMainComponent implements OnInit {
       gameTypeCaption,
       freeGameItemCaption,
       freeGameListCaption,
-      gameItemCaption,
       categoryListCaption,
       categoryItemCaption,
       homeCardActionCaption
