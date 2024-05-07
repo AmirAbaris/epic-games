@@ -7,12 +7,15 @@
 
     @if (sliderData && gameSliderCaption) {
     <!-- note that game slider item is not responsive at all -->
-    <app-game-slider-management [gameCardInputs]="sliderData" [isLoading]="isLoading" [caption]="gameSliderCaption" />
+    <div class="flex w-full bg-red-600">
+        <app-game-slider-management [gameCardInputs]="sliderData" [isLoading]="isLoading"
+            [caption]="gameSliderCaption" />
+    </div>
     }
 
     <div class="flex flex-col p-10 gap-y-4 md:grid md:grid-cols-3 md:gap-x-4 md:p-0">
         @if (homeCardGameData) {
-        <!-- didn't made maximum index numbers into a variable because they are used too much in this DOM -->
+        <!-- didn't made maximum index numbers into a variable because they are used too much in this DOM! -->
         @for (item of homeCardGameData | slice: 0: 2; track $index) {
         <app-home-card-game [data]="item" [isLoading]="isLoading"
             (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
@@ -30,7 +33,7 @@
     @if (freeGameListData && freeGameListCaption && freeGameItemCaption) {
     <app-free-game-list [isLoading]="isLoading" [data]="freeGameListData" [caption]="freeGameListCaption"
         [gameItemCaption]="freeGameItemCaption" (clickEvent)="onClickItemEventHandler($event)"
-        (viewMoreClickEvent)="$event" />
+        (viewMoreClickEvent)="onClickViewMoreHandler(freeGameListData.freeGameItemData[0].id)" />
     }
 
     @if (fortniteGameData) {

@@ -41,8 +41,6 @@ export class HomeMainComponent implements OnInit {
   public isWishlistProcessing = false;
   public wishlistIds: string[] = [];
 
-  //TODO separate caps and regular vars!
-
   public highlightMainCaption: HighlightMainCaptionModel | undefined;
   public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
@@ -51,9 +49,7 @@ export class HomeMainComponent implements OnInit {
   public categoryItemCaption: CategoryItemCaptionModel | undefined;
   public homeCardActionCaption: HomeCardActionCaptionModel | undefined;
 
-  // TODO: check for loops in dom
   public highlightMainData: HighlightMainInputModel[] | undefined;
-
   public sliderData: GameSliderItemInputModel[] | undefined;
   public trendingSliderData: GameSliderItemInputModel[] | undefined;
   public recentSliderData: GameSliderItemInputModel[] | undefined;
@@ -94,7 +90,6 @@ export class HomeMainComponent implements OnInit {
     }
   }
 
-  // TODO fix undefined
   public onClickItemEventHandler(id: string | undefined): void {
     if (!id) return;
 
@@ -318,7 +313,6 @@ export class HomeMainComponent implements OnInit {
    */
   private _convertAndCheckGameDtoToHighlightMainInputModel(items: GameDto[]): HighlightMainInputModel[] {
     return items
-      // TODO: fix names for isValid more specific
       .filter((item: GameDto) => this._isValidHighlightMain(item))
       .map((item: GameDto) => this._convertGameDtoToHighlightMainInputModel(item));
   }
@@ -353,7 +347,6 @@ export class HomeMainComponent implements OnInit {
       }
     }));
   }
-  // TODO: add flex mobile
 
   /**
    * converts the GameDto to array of HomeCardGameInputModel

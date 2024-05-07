@@ -25,6 +25,8 @@ export class GameSliderManagementComponent implements AfterViewChecked {
                 prevEl: '.prev-btn',
             }
         });
+
+        console.log(this.caption().freeTitle);
     }
     //#endregion
 }

@@ -1,0 +1,17 @@
+.icon-display {
+    scale: 0.8;
+    transition: transform 0.2s ease;
+
+    &.hovered {
+        transform: translateX(10px);
+    }
+}
+
+.prev-btn,
+.next-btn {
+    scale: 0.7;
+
+    &.prev-btn {
+        rotate: 180deg;
+    }
+}
