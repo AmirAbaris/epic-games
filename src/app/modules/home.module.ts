@@ -34,6 +34,7 @@ import { HighlightMainComponent } from '../components/home/highlight-main/highli
 import { IsInWishlistPipe } from '../pipes/is-in-wishlist.pipe';
 import { GameRepository } from '../repositories/game.repository';
 import { GameService } from '../services/game.service';
+import { TextHoverIndicatorDirective } from '../directives/text-hover-indicator.directive';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -61,6 +62,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     HighlightMainComponent,
     ActivateWishlistDirective,
     ScaleOnActivateDirective,
+    TextHoverIndicatorDirective,
     IsInWishlistPipe
   ],
   imports: [
