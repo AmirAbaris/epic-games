@@ -155,7 +155,6 @@ export class HomeMainComponent implements OnInit {
     });
   }
 
-
   private _removeIdFromWishlistIds(id: string): void {
     // check if we even have id in our list, if we didn't have the id, it will not continue! (extra layer of protection)
     if (!this.wishlistIds.includes(id)) return;
@@ -369,8 +368,6 @@ export class HomeMainComponent implements OnInit {
 
     return validItems.map((item: GameDto, index: number) => this._convertGameDtoToHomeCardGameInputModel(item, cardDataItems[index]));
   }
-
-
 
   private _convertAndCheckGameDtoToCategoryManagementInputModel(items: GameDto[], title: string): CategoryManagementInputModel {
     const validItems = items.filter((item: GameDto) => this._isValidCategoryItem(item));
