@@ -1,32 +1,55 @@
-import { AfterViewChecked, Component, input } from '@angular/core';
+import { AfterViewInit, Component, input, output } from '@angular/core';
 import { GameSliderItemInputModel } from "../models/game-slider-item-input.model";
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
-import Swiper from 'swiper';
+import Swiper from "swiper";
 
 @Component({
     selector: 'app-game-slider-management',
     templateUrl: './game-slider-management.component.html',
     styleUrl: './game-slider-management.component.scss'
 })
-export class GameSliderManagementComponent implements AfterViewChecked {
+export class GameSliderManagementComponent implements AfterViewInit {
     //#region Properties
     gameCardInputs = input.required<GameSliderItemInputModel[]>();
     isLoading = input.required<boolean>();
     caption = input.required<GameSliderCaptionModel>();
+
+    // added a title input for dynamic title values
+    titleCaption = input.required<string>();
+    isTitleClickable = input.required<boolean>();
+
+    clickItemEventHandler = output<string>();
+    clickWishlistButtonEvent = output<string>();
+    clickTitleEvent = output<string>();
     //#endregion
 
     //#region Lifecycle methods
-    ngAfterViewChecked(): void {
+    ngAfterViewInit(): void {
         const swiper = new Swiper('.swiper-container', {
             slidesPerView: 5,
             spaceBetween: 2,
+            direction: 'horizontal',
             navigation: {
                 nextEl: '.next-btn',
                 prevEl: '.prev-btn',
             }
         });
+    }
+    //#endregion
 
-        console.log(this.caption().freeTitle);
+    //#region Handler methods
+    public onClickItemEventHandler(gameId: string): void {
+        this.clickItemEventHandler.emit(gameId);
+    }
+
+    public onClickWishlistButtonEventHandler(gameId: string): void {
+        this.clickWishlistButtonEvent.emit(gameId);
+    }
+
+    public onClickTitleEventHandler(title: string): void {
+        if (this.isTitleClickable()) {
+            this.clickTitleEvent.emit(title);
+        }
     }
     //#endregion
 }

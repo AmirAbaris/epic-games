@@ -5,14 +5,6 @@
         (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
     }
 
-    @if (sliderData && gameSliderCaption) {
-    <!-- note that game slider item is not responsive at all -->
-    <div class="flex w-full bg-red-600">
-        <app-game-slider-management [gameCardInputs]="sliderData" [isLoading]="isLoading"
-            [caption]="gameSliderCaption" />
-    </div>
-    }
-
     <div class="flex flex-col p-10 gap-y-4 md:grid md:grid-cols-3 md:gap-x-4 md:p-0">
         @if (homeCardGameData) {
         <!-- didn't made maximum index numbers into a variable because they are used too much in this DOM! -->
@@ -31,9 +23,10 @@
     </div>
 
     @if (freeGameListData && freeGameListCaption && freeGameItemCaption) {
+    <!-- a test route for view more handler on its argument! -->
     <app-free-game-list [isLoading]="isLoading" [data]="freeGameListData" [caption]="freeGameListCaption"
         [gameItemCaption]="freeGameItemCaption" (clickEvent)="onClickItemEventHandler($event)"
-        (viewMoreClickEvent)="onClickViewMoreHandler(freeGameListData.freeGameItemData[0].id)" />
+        (viewMoreClickEvent)="onCLickViewMoreFreeItemEventHandler('more-games')" />
     }
 
     @if (fortniteGameData) {
@@ -59,15 +52,15 @@
         [categoryItemCaption]="categoryItemCaption" [isLoading]="isLoading"
         (clickGameEvent)="onClickItemEventHandler($event)"
         (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
-        (clickViewMoreButtonEvent)="onClickViewMoreHandler($event)" />
+        (clickViewMoreButtonEvent)="onClickViewMoreCategoryItemEventHandler($event)" />
     }
 
-    @if (trendingSliderData && recentSliderData && gameSliderCaption) {
-    <app-game-slider-management [gameCardInputs]="trendingSliderData" [isLoading]="isLoading"
-        [caption]="gameSliderCaption" />
+    @if (trendingSliderData && recentSliderData && gameSliderCaption && sliderTitleCaption) {
+    <!-- <app-game-slider-management [gameCardInputs]="trendingSliderData" [isLoading]="isLoading"
+        [caption]="gameSliderCaption" [title]="sliderTitleCaption.trendingTitle" />
 
     <app-game-slider-management [gameCardInputs]="recentSliderData" [isLoading]="isLoading"
-        [caption]="gameSliderCaption" />
+        [caption]="gameSliderCaption" [title]="sliderTitleCaption.popularTitle" /> -->
     }
 
 
@@ -81,3 +74,13 @@
         }
     </div>
 </section>
+
+<!-- TODO convert items to rows via swiper  -->
+@if (sliderData && gameSliderCaption && sliderTitleCaption) {
+<!-- note that game slider item is not responsive at all! -->
+<app-game-slider-management [gameCardInputs]="sliderData" [isLoading]="isLoading" [caption]="gameSliderCaption"
+    [titleCaption]="sliderTitleCaption.saleSpotTitle" [isTitleClickable]="true"
+    (clickTitleEvent)="onClickTitleEventHandler($event)"
+    (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
+    (clickItemEventHandler)="onClickItemEventHandler($event)" />
+}

@@ -1,17 +1,30 @@
-.icon-display {
-    scale: 0.8;
-    transition: transform 0.2s ease;
+.container {
+    .icon-display {
+        scale: 0.8;
+        transition: transform 0.2s ease;
 
-    &.hovered {
-        transform: translateX(10px);
+        &.hovered {
+            transform: translateX(10px);
+        }
     }
-}
 
-.prev-btn,
-.next-btn {
-    scale: 0.7;
+    .prev-btn,
+    .next-btn {
+        background-color: #2a2a2a;
+        color: white;
+        scale: 0.7;
 
-    &.prev-btn {
-        rotate: 180deg;
+        mat-icon {
+            scale: 0.6;
+        }
+
+        &.prev-btn {
+            rotate: 180deg;
+        }
+
+        &:hover {
+            filter: brightness(1.25);
+            transition: filter ease-out 0.2s;
+        }
     }
 }

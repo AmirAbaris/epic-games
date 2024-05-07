@@ -23,6 +23,7 @@ import { CategoryManagementInputModel } from "../models/category-management-inpu
 import { CategoryType } from "../enums/category-type.enum";
 import { CategoryItemInputModel } from "../models/category-item-input.model";
 import { HomeCardActionCaptionModel } from "../models/caption-models/home-card-action-caption.model";
+import { SliderTitleCaptionModel } from "../models/caption-models/slider-title-caption.model";
 
 @Component({
   selector: "app-home-main",
@@ -49,6 +50,11 @@ export class HomeMainComponent implements OnInit {
   public categoryItemCaption: CategoryItemCaptionModel | undefined;
   public homeCardActionCaption: HomeCardActionCaptionModel | undefined;
 
+  // created dynamic title captions for slider titles!
+  // it's not in slider main caption model because more simpler logic handlings
+  // if to merge all slider caption models in one model; we'll have more complex logics in getCaptions method because of different enum path in en.json
+  public sliderTitleCaption: SliderTitleCaptionModel | undefined;
+
   public highlightMainData: HighlightMainInputModel[] | undefined;
   public sliderData: GameSliderItemInputModel[] | undefined;
   public trendingSliderData: GameSliderItemInputModel[] | undefined;
@@ -68,6 +74,7 @@ export class HomeMainComponent implements OnInit {
     categoryList: 'home.CategoryList',
     categoryItem: 'home.CategoryItem',
     cardActionItem: 'home.HomeCardAction',
+    sliderTitleItem: 'home.GameSliderTitles',
 
     highlightButtonType: 'enum-captions.HighlightButtonType',
     gameType: 'enum-captions.gameType',
@@ -96,9 +103,15 @@ export class HomeMainComponent implements OnInit {
     console.log(id);
   }
 
-  public onClickViewMoreHandler(title: string | undefined): void {
-    if (!title) return;
+  public onClickViewMoreCategoryItemEventHandler(title: string): void {
+    console.log(title);
+  }
 
+  public onCLickViewMoreFreeItemEventHandler(moreGameRoutePath: string): void {
+    console.log(`Routes to ${moreGameRoutePath}`);
+  }
+
+  public onClickTitleEventHandler(title: string): void {
     console.log(title);
   }
   //#endregion
@@ -115,10 +128,10 @@ export class HomeMainComponent implements OnInit {
     const gameTypeCaption = this._translateService.get(this.captionPaths.gameType);
     const freeGameListCaption = this._translateService.get(this.captionPaths.freeGameList);
     const freeGameItemCaption = this._translateService.get(this.captionPaths.freeGameItem);
-    const gameItemCaption = this._translateService.get(this.captionPaths.gameItemList);
     const categoryListCaption = this._translateService.get(this.captionPaths.categoryList);
     const categoryItemCaption = this._translateService.get(this.captionPaths.categoryItem);
     const homeCardActionCaption = this._translateService.get(this.captionPaths.cardActionItem);
+    const sliderTitleCaption = this._translateService.get(this.captionPaths.sliderTitleItem);
 
     forkJoin([
       wishListButtonCaption,
@@ -129,9 +142,10 @@ export class HomeMainComponent implements OnInit {
       freeGameListCaption,
       categoryListCaption,
       categoryItemCaption,
-      homeCardActionCaption
+      homeCardActionCaption,
+      sliderTitleCaption
     ]).subscribe(([wishListButtonCaption, highlightButtonTypeCaption, gameSliderItemCaption, gameTypeCaption,
-      freeGameItemCaption, freeGameListCaption, categoryListCaption, categoryItemCaption, homeCardActionCaption]) => {
+      freeGameItemCaption, freeGameListCaption, categoryListCaption, categoryItemCaption, homeCardActionCaption, sliderTitleCaption]) => {
       this.highlightMainCaption = {
         wishlistButtonCaption: wishListButtonCaption,
         highlightButtonTypeCaption: highlightButtonTypeCaption
@@ -147,6 +161,8 @@ export class HomeMainComponent implements OnInit {
       this.freeGameListCaption = freeGameListCaption;
       this.freeGameItemCaption = freeGameItemCaption;
       this.homeCardActionCaption = homeCardActionCaption;
+      this.sliderTitleCaption = sliderTitleCaption;
+      console.log(this.sliderTitleCaption);
     });
   }
 
