@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { HomeMainComponent } from '../components/home/home-main/home-main.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -77,7 +77,8 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     RouterModule.forChild(homeRoutes),
     TranslateModule
   ],
-  providers: [GameRepository, GameService]
+  providers: [GameRepository, GameService],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeModule {
 }

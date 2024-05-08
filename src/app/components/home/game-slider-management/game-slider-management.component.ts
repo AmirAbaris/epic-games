@@ -1,14 +1,14 @@
-import { AfterViewInit, Component, input, output } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, input, output } from '@angular/core';
 import { GameSliderItemInputModel } from "../models/game-slider-item-input.model";
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
-import Swiper from "swiper";
+import { Swiper } from 'swiper';
 
 @Component({
     selector: 'app-game-slider-management',
     templateUrl: './game-slider-management.component.html',
     styleUrl: './game-slider-management.component.scss'
 })
-export class GameSliderManagementComponent implements AfterViewInit {
+export class GameSliderManagementComponent implements AfterContentInit {
     //#region Properties
     gameCardInputs = input.required<GameSliderItemInputModel[]>();
     isLoading = input.required<boolean>();
@@ -24,11 +24,8 @@ export class GameSliderManagementComponent implements AfterViewInit {
     //#endregion
 
     //#region Lifecycle methods
-    ngAfterViewInit(): void {
+    ngAfterContentInit(): void {
         const swiper = new Swiper('.swiper-container', {
-            slidesPerView: 5,
-            spaceBetween: 2,
-            direction: 'horizontal',
             navigation: {
                 nextEl: '.next-btn',
                 prevEl: '.prev-btn',

@@ -1,69 +1,4 @@
-<!-- <div class="container text-white font-inter flex flex-col justify-between items-center mb-2 bg-red-700">
-    <div class="flex w-full justify-between">
-        <div class="flex cursor-pointer" textHoverIndicatorDir>
-            @if (isTitleClickable()) {
-            <h1>{{ titleCaption() }}</h1>
-            <mat-icon class="icon-display">chevron_right</mat-icon>
-            } @else {
-            <h1>{{ titleCaption() }}</h1>
-            }
-        </div>
-        <div>
-            <button class="prev-btn" mat-mini-fab>
-                <mat-icon>arrow_forward_ios</mat-icon>
-            </button>
-            <button class="next-btn" mat-mini-fab>
-                <mat-icon>arrow_forward_ios</mat-icon>
-            </button>
-        </div>
-    </div> -->
-<!-- <div class="flex gap-x-4"> -->
-<!-- <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                @for (game of gameCardInputs(); track $index) {
-                <app-game-slider-item [data]="game" [caption]="caption()" [isLoading]="isLoading()" />
-                }
-            </div>
-        </div>
-    </div> -->
-<!-- </div> -->
-<!-- </div> -->
-
-<!-- <section class="flex justify-between items-center text-white mb-2">
-    @if (isTitleClickable()) {
-    <div class="flex cursor-pointer" titleHoverDir (click)="onClickTitleEventHandler()">
-        <h1>{{ titleCaption() }}</h1>
-        <mat-icon class="icon-display">chevron_right</mat-icon>
-    </div>
-    } @else {
-    <h2>{{ titleCaption() }}</h2>
-    }
-    <div class="flex">
-        <button class="prev-btn" mat-mini-fab>
-            <mat-icon>arrow_forward_ios</mat-icon>
-        </button>
-        <button class="next-btn" mat-mini-fab>
-            <mat-icon>arrow_forward_ios</mat-icon>
-        </button>
-    </div>
-</section>
-<section class="swiper-container overflow-hidden">
-    <div class="swiper-wrapper">
-        @for (data of gameCardInputs(); track $index) {
-        <div class="swiper-slide">
-            <app-game-slider-item [data]="data" [caption]="caption()" [isLoading]="isLoading()"
-                (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
-                (clickItemEvent)="onClickGameEventHandler($event)" />
-        </div>
-        }
-    </div>
-</section> -->
-
-
-
-
-<section class="container flex justify-between items-center text-white mb-2">
+<section class="swiper-container flex justify-between items-center text-white mb-2">
     @if (isTitleClickable()) {
     <div class="flex cursor-pointer" textHoverIndicatorDir (click)="onClickTitleEventHandler(titleCaption())">
         <h1>{{ titleCaption() }}</h1>
@@ -81,14 +16,12 @@
         </button>
     </div>
 </section>
-<div class="swiper-container">
-    <div class="swiper-wrapper">
-        @for (data of gameCardInputs(); track $index) {
-        <div class="swiper-slide">
-            <app-game-slider-item [data]="data" [caption]="caption()" [isLoading]="isLoading()"
-                (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
-                (clickItemEvent)="onClickItemEventHandler($event)" />
-        </div>
-        }
-    </div>
-</div>
+<swiper-container class="swiper-container" slides-per-view="5">
+    @for (data of gameCardInputs(); track $index) {
+    <swiper-slide class="swiper-slide">
+        <app-game-slider-item [data]="data" [caption]="caption()" [isLoading]="isLoading()"
+            (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
+            (clickItemEvent)="onClickItemEventHandler($event)" />
+    </swiper-slide>
+    }
+</swiper-container>
