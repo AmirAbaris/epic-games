@@ -22,10 +22,7 @@
       "removeTitle": "Remove From Wishlist"
     },
     "GameSliderItem": {
-      "freeTitle": "Free",
-      "trendingTitle": "Trending",
-      "popularTitle": "Most Popular",
-      "saleSpotTitle": "May the 4th Sale Spotlight"
+      "freeTitle": "Free"
     },
     "GameSliderTitles": {
       "trendingTitle": "Trending",

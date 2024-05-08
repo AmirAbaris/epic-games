@@ -5,6 +5,16 @@
         (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
     }
 
+    @if (sliderData && gameSliderCaption && sliderTitleCaption) {
+    <div class="w-full">
+        <app-game-slider-management [gameCardInputs]="sliderData" [isLoading]="isLoading" [caption]="gameSliderCaption"
+            [titleCaption]="sliderTitleCaption.saleSpotTitle" [isTitleClickable]="true"
+            (clickTitleEvent)="onClickTitleEventHandler($event)"
+            (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
+            (clickItemEventHandler)="onClickItemEventHandler($event)" />
+    </div>
+    }
+
     <div class="flex flex-col p-10 gap-y-4 md:grid md:grid-cols-3 md:gap-x-4 md:p-0">
         @if (homeCardGameData) {
         <!-- didn't made maximum index numbers into a variable because they are used too much in this DOM! -->
@@ -55,14 +65,15 @@
         (clickViewMoreButtonEvent)="onClickViewMoreCategoryItemEventHandler($event)" />
     }
 
-    @if (trendingSliderData && recentSliderData && gameSliderCaption && sliderTitleCaption) {
-    <!-- <app-game-slider-management [gameCardInputs]="trendingSliderData" [isLoading]="isLoading"
-        [caption]="gameSliderCaption" [title]="sliderTitleCaption.trendingTitle" />
-
-    <app-game-slider-management [gameCardInputs]="recentSliderData" [isLoading]="isLoading"
-        [caption]="gameSliderCaption" [title]="sliderTitleCaption.popularTitle" /> -->
+    @if (trendingSliderData && gameSliderCaption && sliderTitleCaption) {
+    <div class="w-full">
+        <app-game-slider-management [gameCardInputs]="trendingSliderData" [isLoading]="isLoading"
+            [caption]="gameSliderCaption" [titleCaption]="sliderTitleCaption.trendingTitle" [isTitleClickable]="false"
+            (clickTitleEvent)="onClickTitleEventHandler($event)"
+            (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
+            (clickItemEventHandler)="onClickItemEventHandler($event)" />
+    </div>
     }
-
 
     <div class="flex flex-col p-10 gap-y-4 md:grid md:grid-cols-2 md:gap-x-4 md:p-0">
         @if (homeCardGameData) {
@@ -74,13 +85,3 @@
         }
     </div>
 </section>
-
-<!-- TODO convert items to rows via swiper  -->
-@if (sliderData && gameSliderCaption && sliderTitleCaption) {
-<!-- note that game slider item is not responsive at all! -->
-<app-game-slider-management [gameCardInputs]="sliderData" [isLoading]="isLoading" [caption]="gameSliderCaption"
-    [titleCaption]="sliderTitleCaption.saleSpotTitle" [isTitleClickable]="true"
-    (clickTitleEvent)="onClickTitleEventHandler($event)"
-    (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
-    (clickItemEventHandler)="onClickItemEventHandler($event)" />
-}

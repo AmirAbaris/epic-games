@@ -97,6 +97,9 @@ export class HomeMainComponent implements OnInit {
     }
   }
 
+  /**
+   * some ids may be null
+   */
   public onClickItemEventHandler(id: string | undefined): void {
     if (!id) return;
 
@@ -117,10 +120,6 @@ export class HomeMainComponent implements OnInit {
   //#endregion
 
   //#region Main logic methods
-  public clickCard(): void {
-    console.log('click card works');
-  }
-
   private _getCaptions(): void {
     const wishListButtonCaption = this._translateService.get(this.captionPaths.wishlistButton);
     const highlightButtonTypeCaption = this._translateService.get(this.captionPaths.highlightButtonType);
@@ -359,7 +358,7 @@ export class HomeMainComponent implements OnInit {
       actionName: this._setActionNameViaItemIndex(index) || 'Discover',
       cardData: cardItem,
       clickCardFn: () => {
-        console.log(`Clicked`);
+        console.log(`click fn works!`);
       }
     }));
   }

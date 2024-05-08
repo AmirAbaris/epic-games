@@ -7,12 +7,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { register } from 'swiper/element/bundle';
 import { NgOptimizedImage } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatDivider } from '@angular/material/divider';
 import { errorInterceptor } from './interceptors/error.interceptor';
 
+// swiper config
+import { register } from 'swiper/element/bundle';
 register();
 
 // AoT requires an exported function for factories
