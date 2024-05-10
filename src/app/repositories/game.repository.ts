@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, delay } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { GameDto } from '../components/home/dtos/game.dto';
+import { GameDto } from '../dtos/game.dto';
 
 @Injectable()
 export class GameRepository {

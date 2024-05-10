@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, input } from '@angular/core';
-import { HighlightMainInputModel } from '../types/highlight-main-input.type';
+import { HighlightMainInputModel } from '../models/highlight-main-input.model';
 import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item-input.model';
 import { HighlightSmallItemInputModel } from '../models/highlight-small-item-input.model';
 import { output } from "@angular/core";

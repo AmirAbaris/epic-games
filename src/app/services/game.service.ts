@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GameDto } from '../components/home/dtos/game.dto';
+import { GameDto } from '../dtos/game.dto';
 import { GameRepository } from '../repositories/game.repository';
 
 @Injectable()

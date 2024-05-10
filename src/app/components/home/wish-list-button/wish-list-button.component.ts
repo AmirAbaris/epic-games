@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
 import { output } from "@angular/core";
 
@@ -11,8 +11,7 @@ export class WishListButtonComponent {
   //#region Properties
   private _translateService = inject(TranslateService);
 
-  //#endregion
-    clickButtonEvent = output<void>();
+  clickButtonEvent = output<void>();
 
   public tooltipMessage: string = this._translateService.instant('home.WishListButton.addTitle');
   //#endregion
@@ -26,5 +25,5 @@ export class WishListButtonComponent {
     this.clickButtonEvent.emit();
   }
   //#endregion
-;
+  ;
 }

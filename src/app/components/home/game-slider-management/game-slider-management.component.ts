@@ -26,11 +26,44 @@ export class GameSliderManagementComponent implements AfterViewInit {
 
     private readonly _swiperConfig: SwiperOptions = {
         slidesPerView: 5,
+        loop: true,
+        spaceBetween: 25,
         navigation: {
             nextEl: '.next-btn',
             prevEl: '.prev-btn',
+        },
+        breakpoints: {
+            320: {
+                slidesPerView: 2,
+                spaceBetween: 5,
+            },
+            // Breakpoint for screens smaller than 480px
+            480: {
+                slidesPerView: 3,
+                spaceBetween: 5,
+            },
+            // Breakpoint for screens smaller than 640px
+            640: {
+                slidesPerView: 3,
+                spaceBetween: 10,
+            },
+            // Breakpoint for screens between 640px and 768px
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 15,
+            },
+            // Breakpoint for screens between 768px and 1024px
+            1024: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+            },
+            // Breakpoint for larger screens
+            1280: {
+                slidesPerView: 5,
+                spaceBetween: 25,
+            }
         }
-    };
+    }
     //#endregion
 
     //#region Lifecycle methods

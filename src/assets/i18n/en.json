@@ -1,8 +1,11 @@
 {
   "home": {
+    "HomeMain": {
+      "fortniteTitle": "Fortnite Experiences"
+    },
     "HomeCardAction": {
       "browseTitle": "Browse",
-      "discoverTitle": "discover",
+      "discoverTitle": "Discover",
       "freePlayTitle": "Play For Free"
     },
     "CategoryItem": {
@@ -22,7 +25,11 @@
       "removeTitle": "Remove From Wishlist"
     },
     "GameSliderItem": {
-      "freeTitle": "Free"
+      "freeTitle": "Free",
+      "gameType": {
+        "BASE_GAME": "Base Game",
+        "EDITION": "Edition"
+      }
     },
     "GameSliderTitles": {
       "trendingTitle": "Trending",
