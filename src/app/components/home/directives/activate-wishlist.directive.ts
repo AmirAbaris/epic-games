@@ -36,19 +36,18 @@ export class ActivateWishlistDirective implements AfterViewInit {
 
   /**
    * it shows/hides the wishlist component based on if the mouse is on it or not
-   * @param isVisible 
    */
   private _toggleWishlistVisibility(isVisible: boolean): void {
-    if (this._targetElement) {
-      // determine the display style based on visibility
-      const displayStyle = isVisible ? 'block' : 'none';
+    if (!this._targetElement) return;
 
-      // add wishlist classes to the element
-      this._addClassesToElement();
+    // determine the display style based on visibility
+    const displayStyle = isVisible ? 'block' : 'none';
 
-      // sets wishlist tailwind classes
-      this._setElementDisplayStyle(displayStyle);
-    }
+    // add wishlist classes to the element
+    this._addClassesToElement();
+
+    // sets wishlist tailwind classes
+    this._setElementDisplayStyle(displayStyle);
   }
 
   private _setElementValues(): void {
@@ -67,6 +66,8 @@ export class ActivateWishlistDirective implements AfterViewInit {
   }
 
   private _removeWishlistClasses(): void {
+    if (!this._targetElement) return;
+
     this._wishlistClasses.forEach((className: string) => {
       this._renderer.removeClass(this._targetElement, className);
     });

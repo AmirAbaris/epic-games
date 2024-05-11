@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, input, output, viewChild } from '
 import { GameSliderItemInputModel } from "../models/game-slider-item-input.model";
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
 import { SwiperOptions } from 'swiper/types';
+import { SliderTitleEnum } from '../enums/slider-title.enum';
 
 @Component({
     selector: 'app-game-slider-management',
@@ -13,6 +14,9 @@ export class GameSliderManagementComponent implements AfterViewInit {
     gameCardInputs = input.required<GameSliderItemInputModel[]>();
     isLoading = input.required<boolean>();
     caption = input.required<GameSliderCaptionModel>();
+    titleTypeEnum = input.required<SliderTitleEnum>();
+    isWishlistProcessing = input.required<boolean>();
+    wishlistIds = input.required<string[]>();
 
     // added a title input for dynamic title values
     titleCaption = input.required<string>();
@@ -20,7 +24,7 @@ export class GameSliderManagementComponent implements AfterViewInit {
 
     clickItemEventHandler = output<string>();
     clickWishlistButtonEvent = output<string>();
-    clickTitleEvent = output<string>();
+    clickSliderTitleEvent = output<SliderTitleEnum>();
 
     swiper = viewChild.required<ElementRef<HTMLElement>>('swiper');
 
@@ -81,11 +85,12 @@ export class GameSliderManagementComponent implements AfterViewInit {
         this.clickWishlistButtonEvent.emit(gameId);
     }
 
-    public onClickTitleEventHandler(title: string): void {
+    public onClickTitleEventHandler(titleType: SliderTitleEnum): void {
         if (this.isTitleClickable()) {
-            this.clickTitleEvent.emit(title);
+            this.clickSliderTitleEvent.emit(titleType);
         }
     }
+
     //#endregion
 
     //#region Main logic methods

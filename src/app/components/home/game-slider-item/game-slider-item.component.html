@@ -10,8 +10,10 @@
 } @else {
 <section class="text-white font-inter cursor-pointer" (click)="onClickItemEventHandler(data().id)">
   <div class="relative hover:brightness-125 hover:transition duration-300" activateWishlistDir>
-    <div class="absolute top-1 right-1 text-black">
-      <app-wish-list-button class="wishlist" (click)="onClickWishlistButtonEventHandler($event, data().id)" />
+    <div class="absolute top-1 right-1">
+      <app-wish-list-icon class="wishlist" [isInWishlist]="wishlistIds() | isInWishlist: data().id"
+        [isWishlistProcessing]="isWishlistProcessing()"
+        (clickButtonEvent)="onClickWishlistButtonEventHandler(data().id)" (click)="$event.stopPropagation()" />
     </div>
     <img class="item-cover rounded-md mb-2" ngSrc="{{data().cover}}" priority width="208" height="256"
       alt="{{data().name}}">

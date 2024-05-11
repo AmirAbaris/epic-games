@@ -1,7 +1,7 @@
 import { HighlightButtonTypeEnumCaptionModel } from "./highlight-button-type-enum-caption.model";
-import { WishListButtonCaptionModel } from "./wishlist-button-caption.model";
+import { WishlistCaptionModel } from "./wishlist-caption.model";
 
 export interface HighlightMainCaptionModel {
-    wishlistButtonCaption: WishListButtonCaptionModel;
+    wishlistButtonCaption: WishlistCaptionModel;
     highlightButtonTypeCaption: HighlightButtonTypeEnumCaptionModel;
 }

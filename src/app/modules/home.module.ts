@@ -12,7 +12,6 @@ import { GameSliderItemComponent } from '../components/home/game-slider-item/gam
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { HomeCardComponent } from '../components/home/home-card/home-card.component';
-import { WishListButtonComponent } from '../components/home/wish-list-button/wish-list-button.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivateWishlistDirective } from '../components/home/directives/activate-wishlist.directive';
 import { PriceLabelComponent } from '../components/home/price-label/price-label.component';
@@ -35,6 +34,7 @@ import { IsInWishlistPipe } from '../components/home/pipes/is-in-wishlist.pipe';
 import { GameRepository } from '../repositories/game.repository';
 import { GameService } from '../services/game.service';
 import { TextHoverIndicatorDirective } from '../directives/text-hover-indicator.directive';
+import { WishListIconComponent } from '../components/home/wish-list-icon/wish-list-icon.component';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -46,7 +46,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     CategoryManagementComponent,
     CategoryListComponent,
     CategoryItemComponent,
-    WishListButtonComponent,
+    WishListIconComponent,
     FreeGameItemComponent,
     HomeCardComponent,
     FreeGameListComponent,

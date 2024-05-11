@@ -1,6 +1,6 @@
 <section class="container flex justify-between items-center text-white mb-2">
     @if (isTitleClickable()) {
-    <div class="flex cursor-pointer" textHoverIndicatorDir (click)="onClickTitleEventHandler(titleCaption())">
+    <div class="flex cursor-pointer" textHoverIndicatorDir (click)="onClickTitleEventHandler(titleTypeEnum())">
         <h1>{{ titleCaption() }}</h1>
         <mat-icon class="icon-display">chevron_right</mat-icon>
     </div>
@@ -17,9 +17,10 @@
     </div>
 </section>
 <swiper-container #swiper init="false">
-    @for (data of gameCardInputs(); track $index) {
+    @for (item of gameCardInputs(); track $index) {
     <swiper-slide>
-        <app-game-slider-item [data]="data" [caption]="caption()" [isLoading]="isLoading()"
+        <app-game-slider-item [data]="item" [caption]="caption()" [isLoading]="isLoading()"
+            [wishlistIds]="wishlistIds()" [isWishlistProcessing]="isWishlistProcessing()"
             (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
             (clickItemEvent)="onClickItemEventHandler($event)" />
     </swiper-slide>

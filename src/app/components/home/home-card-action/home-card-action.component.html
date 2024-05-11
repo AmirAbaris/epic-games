@@ -1,5 +1,8 @@
 <app-home-card [data]="data().cardData" [isLoading]="isLoading()"
-    (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" (clickCardEvent)="onClickCardEventHandler()">
+    (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" [isInWishlist]="false"
+    [isWishlistProcessing]="false" (clickCardEvent)="onClickCardEventHandler()">
     <a (click)="onClickCardFnHandler()"
         class="w-fit text-[22px] text-white border-b-[1px] border-lightDarkGray cursor-pointer hover:border-white">{{data().actionName}}</a>
 </app-home-card>
+<!-- note: isInWishlist and isWishlistProcessing have a default false value because we never use them in this action component and they are required in the component
+and we have to provide a value for them! -->

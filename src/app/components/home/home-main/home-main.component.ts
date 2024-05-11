@@ -19,12 +19,14 @@ import { HomeCardInputModel } from "../models/home-card-input.model";
 import { HomeCardGameInputModel } from "../models/home-card-game-input.model";
 import { CategoryListInputModel } from "../models/category-list-input.model";
 import { CategoryManagementInputModel } from "../models/category-management-input.model";
-import { CategoryType } from "../enums/category-type.enum";
 import { CategoryItemInputModel } from "../models/category-item-input.model";
 import { HomeCardActionCaptionModel } from "../models/caption-models/home-card-action-caption.model";
 import { SliderTitleCaptionModel } from "../models/caption-models/slider-title-caption.model";
 import { ClickCardFunctionType } from "../types/click-card-function.type";
 import { HomeMainCaptionModel } from "../models/caption-models/home-main-caption.model";
+import { CategoryEnum } from "../enums/category.enum";
+import { SliderTitleEnum } from "../enums/slider-title.enum";
+import { FreeItemEnum } from "../enums/free-item.enum";
 
 @Component({
   selector: "app-home-main",
@@ -68,10 +70,11 @@ export class HomeMainComponent implements OnInit {
   public freeGameListData: FreeGameListInputModel | undefined;
   public fortniteGameData: HomeCardActionInputModel[] | undefined;
   public categoryManagementData: CategoryManagementInputModel | undefined;
+  public sliderTitleEnum: typeof SliderTitleEnum = SliderTitleEnum;
 
   private readonly captionPaths = {
     homeMain: 'home.HomeMain',
-    wishlistButton: 'home.WishListButton',
+    wishlistButton: 'home.Wishlist',
     gameSliderItem: 'home.GameSliderItem',
     freeGameList: 'home.FreeGameList',
     freeGameItem: 'home.FreeGameItem',
@@ -92,34 +95,47 @@ export class HomeMainComponent implements OnInit {
   //#endregion
 
   //#region Handler methods
+  /**
+   * we handled the isWishlistProcessing as well
+   * it will set the processing true and apply the logics, then sets it to false when our logics implemented!
+   * @param id takes game IDs from other components
+   */
   public onClickWishlistButtonEventHandler(id: string): void {
-    if (this.wishlistIds.includes(id)) {
+    console.log('wishlist id:', id);
+    // Toggle the processing state
+    // it will be true to continue our logic
+    this._toggleIsWishlistProcessing();
+
+    // Check if the ID is in the wishlist
+    const isIdInWishlist = this.wishlistIds.includes(id);
+
+    // If the ID is in the wishlist, remove it; otherwise, add it
+    if (isIdInWishlist) {
       this._removeIdFromWishlistIds(id);
     } else {
       this._addIdToWishlistIds(id);
     }
+
+    // Toggle the processing state again to indicate completion
+    this._toggleIsWishlistProcessing();
   }
 
   /**
-   * some ids may be null
+   * note: some ids may be null
    * we handled it with undefined input as well beside string input
    */
   public onClickItemEventHandler(id: string | undefined): void {
     if (!id) return;
 
-    console.log(id);
+    console.log('item:', id);
   }
 
-  public onClickViewMoreCategoryItemEventHandler(category: CategoryType): void {
-    console.log(category);
-  }
-
-  public onClickViewMoreFreeItemEventHandler(): void {
-    console.log('view more clicked');
-  }
-
-  public onClickSliderTitleEventHandler(title: string): void {
-    console.log(title);
+  /**
+   * we can accept and handle any routing from our accepted input enum types!
+   * @param enumType different types of enums to route from in future updates
+   */
+  public onClickEnumTypeHandler(enumType: CategoryEnum | FreeItemEnum | SliderTitleEnum): void {
+    console.log(enumType);
   }
 
   /**
@@ -209,9 +225,9 @@ export class HomeMainComponent implements OnInit {
         this.freeGameListData = this._convertAndCheckGameDtoToFreeGameListInputModel(freeItems);
         this.fortniteGameData = this._convertAndCheckGameDtoToHomeCardActionInputModel(fortniteItems, this.onClickCardFnHandler);
         if (this.categoryListCaption) {
-          this.categoryManagementData = this._convertAndCheckGameDtoToCategoryManagementInputModel(newReleaseItems, this.categoryListCaption.newReleaseTitle, CategoryType.MOST_PLAYED);
-          this.categoryManagementData = this._convertAndCheckGameDtoToCategoryManagementInputModel(topPlayerItems, this.categoryListCaption.topRatedTitle, CategoryType.TOP_SELLERS);
-          this.categoryManagementData = this._convertAndCheckGameDtoToCategoryManagementInputModel(trendingItems, this.categoryListCaption.comingSoonTitle, CategoryType.TOP_UPCOMING_WISHLISTED);
+          this.categoryManagementData = this._convertAndCheckGameDtoToCategoryManagementInputModel(newReleaseItems, this.categoryListCaption.newReleaseTitle, CategoryEnum.NEW_RELEASES);
+          this.categoryManagementData = this._convertAndCheckGameDtoToCategoryManagementInputModel(topPlayerItems, this.categoryListCaption.topRatedTitle, CategoryEnum.TOP_RATED);
+          this.categoryManagementData = this._convertAndCheckGameDtoToCategoryManagementInputModel(trendingItems, this.categoryListCaption.comingSoonTitle, CategoryEnum.COMING_SOON);
         }
         this.trendingSliderData = this._convertAndCheckGameDtoToGameSliderItemInputModel(mostPopularItems);
         this.recentSliderData = this._convertAndCheckGameDtoToGameSliderItemInputModel(recentUploadedItems);
@@ -320,6 +336,10 @@ export class HomeMainComponent implements OnInit {
       item.hasWishlist = true;
     });
   }
+
+  private _toggleIsWishlistProcessing(): void {
+    this.isWishlistProcessing = !this.isWishlistProcessing;
+  }
   //#endregion
 
   //#region Helper methods
@@ -384,7 +404,7 @@ export class HomeMainComponent implements OnInit {
     return validItems.map((item: GameDto, index: number) => this._convertGameDtoToHomeCardGameInputModel(item, cardDataItems[index]));
   }
 
-  private _convertAndCheckGameDtoToCategoryManagementInputModel(items: GameDto[], title: string, categoryType: CategoryType): CategoryManagementInputModel {
+  private _convertAndCheckGameDtoToCategoryManagementInputModel(items: GameDto[], title: string, categoryType: CategoryEnum): CategoryManagementInputModel {
     const validItems = items.filter((item: GameDto) => this._isValidCategoryItem(item));
 
     const categoryList: CategoryListInputModel = this._convertGameDtoToCategoryListInputModel(validItems, title, categoryType);
@@ -427,7 +447,7 @@ export class HomeMainComponent implements OnInit {
     }
   }
 
-  private _convertGameDtoToCategoryListInputModel(validItems: GameDto[], title: string, categoryType: CategoryType): CategoryListInputModel {
+  private _convertGameDtoToCategoryListInputModel(validItems: GameDto[], title: string, categoryType: CategoryEnum): CategoryListInputModel {
     return {
       title: title,
       categoryItem: validItems.map((item: GameDto) => this._convertGameDtoToCategoryItemInputModel(item)),

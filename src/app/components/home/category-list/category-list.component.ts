@@ -1,9 +1,9 @@
 import { Component, input } from '@angular/core';
-import { CategoryType } from '../enums/category-type.enum';
 import { CategoryListInputModel } from "../models/category-list-input.model";
 import { CategoryListCaptionModel } from "../models/caption-models/category-list-caption.model";
 import { CategoryItemCaptionModel } from "../models/caption-models/category-item-caption.model";
 import { output } from "@angular/core";
+import { CategoryEnum } from '../enums/category.enum';
 
 @Component({
   selector: 'app-category-list',
@@ -16,10 +16,12 @@ export class CategoryListComponent {
   caption = input.required<CategoryListCaptionModel>();
   itemCaption = input.required<CategoryItemCaptionModel>();
   isLoading = input.required<boolean>();
+  isWishlistProcessing = input.required<boolean>();
+  wishlistIds = input.required<string[]>();
 
   clickGameEvent = output<string>();
   clickWishlistEvent = output<string>();
-  clickViewMoreButtonEvent = output<CategoryType>();
+  clickViewMoreButtonEvent = output<CategoryEnum>();
 
   public readonly maxNumberItemIndex: number = 5;
 
@@ -34,10 +36,8 @@ export class CategoryListComponent {
     this.clickWishlistEvent.emit(gameId);
   }
 
-  public onClickViewMoreButtonEventHandler(categoryType: CategoryType): void {
+  public onClickViewMoreButtonEventHandler(categoryType: CategoryEnum): void {
     this.clickViewMoreButtonEvent.emit(categoryType);
-
-    console.log(categoryType);
   }
 
   //endregion

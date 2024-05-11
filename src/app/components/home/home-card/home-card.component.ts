@@ -11,6 +11,8 @@ export class HomeCardComponent {
   //#region Properties
   data = input.required<HomeCardInputModel>();
   isLoading = input.required<boolean>();
+  isInWishlist = input.required<boolean>();
+  isWishlistProcessing = input.required<boolean>();
 
   clickCardEvent = output<void>();
   clickWishlistButtonEvent = output<string>();

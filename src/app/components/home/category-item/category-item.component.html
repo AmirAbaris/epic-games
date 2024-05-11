@@ -14,11 +14,11 @@
 <div class="flex flex-row gap-6 p-2 rounded-2xl w-80 h-24 hover:bg-darkGray transition duration-300 cursor-pointer"
   activateWishlistDir (click)="onClickItemHandler(data().id)">
   <div class="relative">
-    <div class="absolute top-1 right-1 text-black z-10">
-      <app-wish-list-button class="wishlist" (click)="onClickWishlistButtonHandler($event, data().id)" />
-    </div>
+    <!-- overwrite the icon position because of different image sizes -->
+    <app-wish-list-icon class="wishlist top-1 right-0 mr-2" [isInWishlist]="isInWishlist()"
+      [isWishlistProcessing]="isWishlistProcessing()" (clickButtonEvent)="onClickWishlistButtonHandler(data().id)" />
     <div class="w-16 h-full">
-      <img class="rounded-md" ngSrc="{{ data().thumbnailCover }}" fill alt="{{ data().name }}" />
+      <img class="item-cover rounded-md" ngSrc="{{ data().thumbnailCover }}" fill alt="{{ data().name }}" />
     </div>
   </div>
   <div class="flex flex-col justify-center gap-2">

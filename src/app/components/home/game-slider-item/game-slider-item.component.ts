@@ -15,6 +15,8 @@ export class GameSliderItemComponent implements OnInit {
     data = input.required<GameSliderItemInputModel>();
     caption = input.required<GameSliderCaptionModel>();
     isLoading = input.required<boolean>();
+    isWishlistProcessing = input.required<boolean>();
+    wishlistIds = input.required<string[]>();
 
     clickItemEvent = output<string>();
     clickWishlistButtonEvent = output<string>();
@@ -43,10 +45,7 @@ export class GameSliderItemComponent implements OnInit {
         this.clickItemEvent.emit(id);
     }
 
-    public onClickWishlistButtonEventHandler(event: MouseEvent, id: string): void {
-        // Prevent event propagation
-        event.stopPropagation();
-
+    public onClickWishlistButtonEventHandler(id: string): void {
         this.clickWishlistButtonEvent.emit(id);
     }
 
