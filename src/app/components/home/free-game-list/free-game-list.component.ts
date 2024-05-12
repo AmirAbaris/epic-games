@@ -3,7 +3,7 @@ import { FreeGameListInputModel } from '../models/free-game-list-input.model';
 import { FreeGameItemCaptionModel } from '../models/caption-models/free-game-item-caption.model';
 import { FreeGameListCaptionModel } from '../models/caption-models/free-game-list-caption.model';
 import { output } from "@angular/core";
-import { FreeItemEnum } from '../enums/free-item.enum';
+import { CategoryEnum } from '../enums/category.enum';
 
 @Component({
   selector: 'app-free-game-list',
@@ -18,9 +18,7 @@ export class FreeGameListComponent {
   gameItemCaption = input.required<FreeGameItemCaptionModel>();
 
   clickEvent = output<string>();
-  viewMoreClickEvent = output<FreeItemEnum>();
-
-  private readonly _viewMoreEnumType: FreeItemEnum = FreeItemEnum.VIEW_MORE_ITEMS;
+  viewMoreClickEvent = output<CategoryEnum>();
   //#endregion
 
   //#region Handler methods
@@ -28,8 +26,11 @@ export class FreeGameListComponent {
     this.clickEvent.emit(gameId);
   }
 
+  /**
+   * emits the enum of CategoryEnum to route if needed in home main
+   */
   public onClickViewMoreEventHandler(): void {
-    this.viewMoreClickEvent.emit(this._viewMoreEnumType);
+    this.viewMoreClickEvent.emit(CategoryEnum.MORE_FREE_ITEMS);
   }
   //#endregion
 }

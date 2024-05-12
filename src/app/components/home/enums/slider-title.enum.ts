@@ -1,5 +1,0 @@
-export enum SliderTitleEnum {
-    TRENDING = 'TRENDING',
-    POPULAR = 'MOST POPULAR',
-    SALE_SPOTLIGHT = 'MAY_THE_4TH_SALE_SPOTLIGHT'
-}

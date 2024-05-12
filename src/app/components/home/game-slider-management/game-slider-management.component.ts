@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, input, output, viewChild } from '
 import { GameSliderItemInputModel } from "../models/game-slider-item-input.model";
 import { GameSliderCaptionModel } from "../models/caption-models/game-slider-caption.model";
 import { SwiperOptions } from 'swiper/types';
-import { SliderTitleEnum } from '../enums/slider-title.enum';
+import { CategoryEnum } from '../enums/category.enum';
 
 @Component({
     selector: 'app-game-slider-management',
@@ -14,7 +14,7 @@ export class GameSliderManagementComponent implements AfterViewInit {
     gameCardInputs = input.required<GameSliderItemInputModel[]>();
     isLoading = input.required<boolean>();
     caption = input.required<GameSliderCaptionModel>();
-    titleTypeEnum = input.required<SliderTitleEnum>();
+    titleTypeEnum = input.required<CategoryEnum>();
     isWishlistProcessing = input.required<boolean>();
     wishlistIds = input.required<string[]>();
 

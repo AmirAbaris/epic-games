@@ -12,9 +12,9 @@
             <div class="w-full">
                 <app-game-slider-management [gameCardInputs]="sliderSpotlightData" [isLoading]="isLoading"
                     [caption]="gameSliderCaption" [titleCaption]="sliderTitleCaption.saleSpotTitle"
-                    [titleTypeEnum]="sliderTitleEnum.SALE_SPOTLIGHT" [isTitleClickable]="true"
-                    [wishlistIds]="wishlistIds" [isWishlistProcessing]="isWishlistProcessing"
-                    (clickSliderTitleEvent)="onClickEnumTypeHandler(sliderTitleEnum.SALE_SPOTLIGHT)"
+                    [titleTypeEnum]="categoryEnum.SALE_SPOTLIGHT" [isTitleClickable]="true" [wishlistIds]="wishlistIds"
+                    [isWishlistProcessing]="isWishlistProcessing"
+                    (clickSliderTitleEvent)="onClickEnumTypeHandler(categoryEnum.SALE_SPOTLIGHT)"
                     (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
                     (clickItemEventHandler)="onClickItemEventHandler($event)" />
             </div>
@@ -72,11 +72,11 @@
             <div class="w-full">
                 <app-game-slider-management [gameCardInputs]="trendingSliderData" [isLoading]="isLoading"
                     [caption]="gameSliderCaption" [titleCaption]="sliderTitleCaption.trendingTitle"
-                    [titleTypeEnum]="sliderTitleEnum.TRENDING" [isTitleClickable]="false" [wishlistIds]="wishlistIds"
+                    [titleTypeEnum]="categoryEnum.TRENDING" [isTitleClickable]="false" [wishlistIds]="wishlistIds"
                     [isWishlistProcessing]="isWishlistProcessing"
                     (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
                     (clickItemEventHandler)="onClickItemEventHandler($event)"
-                    (clickSliderTitleEvent)="onClickEnumTypeHandler(sliderTitleEnum.TRENDING)" />
+                    (clickSliderTitleEvent)="onClickEnumTypeHandler(categoryEnum.TRENDING)" />
             </div>
             }
         </div>

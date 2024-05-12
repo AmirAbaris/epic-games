@@ -25,8 +25,6 @@ import { SliderTitleCaptionModel } from "../models/caption-models/slider-title-c
 import { ClickCardFunctionType } from "../types/click-card-function.type";
 import { HomeMainCaptionModel } from "../models/caption-models/home-main-caption.model";
 import { CategoryEnum } from "../enums/category.enum";
-import { SliderTitleEnum } from "../enums/slider-title.enum";
-import { FreeItemEnum } from "../enums/free-item.enum";
 
 @Component({
   selector: "app-home-main",
@@ -70,7 +68,7 @@ export class HomeMainComponent implements OnInit {
   public freeGameListData: FreeGameListInputModel | undefined;
   public fortniteGameData: HomeCardActionInputModel[] | undefined;
   public categoryManagementData: CategoryManagementInputModel | undefined;
-  public sliderTitleEnum: typeof SliderTitleEnum = SliderTitleEnum;
+  public categoryEnum: typeof CategoryEnum = CategoryEnum;
 
   private readonly captionPaths = {
     homeMain: 'home.HomeMain',
@@ -131,10 +129,11 @@ export class HomeMainComponent implements OnInit {
   }
 
   /**
-   * we can accept and handle any routing from our accepted input enum types!
-   * @param enumType different types of enums to route from in future updates
+   * it handles all routings by output categoryEnum return types
+   * note: for now we don't have other components, so we just log it here...
+   * @param enumType a enum types that we can route from if we need
    */
-  public onClickEnumTypeHandler(enumType: CategoryEnum | FreeItemEnum | SliderTitleEnum): void {
+  public onClickEnumTypeHandler(enumType: CategoryEnum): void {
     console.log(enumType);
   }
 
