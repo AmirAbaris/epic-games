@@ -14,6 +14,8 @@ import { errorInterceptor } from './interceptors/error.interceptor';
 
 // swiper config
 import { register } from 'swiper/element/bundle';
+import { ScaleOnActivateDirective } from './directives/scale-on-activate.directive';
+import { TextHoverIndicatorDirective } from './directives/text-hover-indicator.directive';
 register();
 
 // AoT requires an exported function for factories
@@ -22,7 +24,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ScaleOnActivateDirective, TextHoverIndicatorDirective],
   imports: [
     BrowserModule,
     HomeModule,

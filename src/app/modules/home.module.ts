@@ -27,13 +27,11 @@ import { HomeCardActionComponent } from '../components/home/home-card-action/hom
 import { CardListComponent } from '../components/home/card-list/card-list.component';
 import { IsHomeCardActionPipe } from '../components/home/pipes/is-home-card-action.pipe';
 import { HighlightSmallItemComponent } from '../components/home/highlight-small-item/highlight-small-item.component';
-import { ScaleOnActivateDirective } from '../directives/scale-on-activate.directive';
 import { PreviewWishListButtonComponent } from '../components/home/preview-wish-list-button/preview-wish-list-button.component';
 import { HighlightMainComponent } from '../components/home/highlight-main/highlight-main.component';
 import { IsInWishlistPipe } from '../components/home/pipes/is-in-wishlist.pipe';
 import { GameRepository } from '../repositories/game.repository';
 import { GameService } from '../services/game.service';
-import { TextHoverIndicatorDirective } from '../directives/text-hover-indicator.directive';
 import { WishListIconComponent } from '../components/home/wish-list-icon/wish-list-icon.component';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
@@ -61,8 +59,6 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     PreviewWishListButtonComponent,
     HighlightMainComponent,
     ActivateWishlistDirective,
-    ScaleOnActivateDirective,
-    TextHoverIndicatorDirective,
     IsInWishlistPipe
   ],
   imports: [
