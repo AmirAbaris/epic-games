@@ -39,12 +39,6 @@ export class HomeMainComponent implements OnInit {
   public isLoading: boolean = false;
   public isWishlistProcessing = false;
   public wishlistIds: string[] = [];
-  private _highlightButtonTypes: HighlightButtonEnum[] = [
-    HighlightButtonEnum.FREE,
-    HighlightButtonEnum.NOT_PUBLISHED,
-    HighlightButtonEnum.ARTICLE,
-    HighlightButtonEnum.PUBLISHED
-  ];
   public highlightMainCaption: HighlightMainCaptionModel | undefined;
   public gameSliderCaption: GameSliderCaptionModel | undefined;
   public freeGameItemCaption: FreeGameItemCaptionModel | undefined;
@@ -339,6 +333,31 @@ export class HomeMainComponent implements OnInit {
   private _toggleIsWishlistProcessing(): void {
     this.isWishlistProcessing = !this.isWishlistProcessing;
   }
+
+  /**
+   * determine the types of the highlight based on game DTO input data
+   * @param item GameDto input
+   * @returns HighlightButtonEnum of different values determine by the logic
+   */
+  private _determineButtonTypeEnum(item: GameDto): HighlightButtonEnum {
+    switch (true) {
+      // checks for undefined value for isFree to not intervene with next isFree check logic!
+      case !item.price && item.isFree === undefined:
+        return HighlightButtonEnum.ARTICLE;
+
+      case item.isFree:
+        return HighlightButtonEnum.FREE;
+
+      case item.isPublished:
+        return HighlightButtonEnum.PUBLISHED;
+
+      case !item.isPublished:
+        return HighlightButtonEnum.NOT_PUBLISHED;
+
+      default:
+        return HighlightButtonEnum.PUBLISHED;
+    }
+  }
   //#endregion
 
   //#region Helper methods
@@ -350,9 +369,12 @@ export class HomeMainComponent implements OnInit {
   private _convertAndCheckGameDtoToHighlightMainInputModel(items: GameDto[]): HighlightMainInputModel[] {
     return items
       .filter((item: GameDto) => this._isValidHighlightMain(item))
-      .map((item: GameDto, index: number) => {
-        const buttonType = this._highlightButtonTypes[index % this._highlightButtonTypes.length]; // dynamic enum type input
-        return this._convertGameDtoToHighlightMainInputModel(item, buttonType);
+      .map((item: GameDto) => {
+        // determine the button type
+        const gameButtonTypeEnum: HighlightButtonEnum = this._determineButtonTypeEnum(item);
+        console.log(gameButtonTypeEnum);
+
+        return this._convertGameDtoToHighlightMainInputModel(item, gameButtonTypeEnum);
       });
   }
 
