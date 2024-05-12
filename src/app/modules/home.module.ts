@@ -33,6 +33,7 @@ import { IsInWishlistPipe } from '../components/home/pipes/is-in-wishlist.pipe';
 import { GameRepository } from '../repositories/game.repository';
 import { GameService } from '../services/game.service';
 import { WishListIconComponent } from '../components/home/wish-list-icon/wish-list-icon.component';
+import { ScaleOnActivateDirective } from '../components/home/directives/scale-on-activate.directive';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -58,6 +59,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     HighlightSmallItemComponent,
     PreviewWishListButtonComponent,
     HighlightMainComponent,
+    ScaleOnActivateDirective,
     ActivateWishlistDirective,
     IsInWishlistPipe
   ],

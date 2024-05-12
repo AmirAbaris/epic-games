@@ -11,11 +11,10 @@ import { NgOptimizedImage } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatDivider } from '@angular/material/divider';
 import { errorInterceptor } from './interceptors/error.interceptor';
+import { TextHoverIndicatorDirective } from './directives/text-hover-indicator.directive';
 
 // swiper config
 import { register } from 'swiper/element/bundle';
-import { ScaleOnActivateDirective } from './directives/scale-on-activate.directive';
-import { TextHoverIndicatorDirective } from './directives/text-hover-indicator.directive';
 register();
 
 // AoT requires an exported function for factories
@@ -24,7 +23,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, ScaleOnActivateDirective, TextHoverIndicatorDirective],
+  declarations: [AppComponent, TextHoverIndicatorDirective],
   imports: [
     BrowserModule,
     HomeModule,
