@@ -52,11 +52,13 @@
             }
 
             @if (categoryManagementData && categoryListCaption && categoryItemCaption) {
-            <app-category-management [data]="categoryManagementData" [categoryListCaption]="categoryListCaption"
-                [categoryItemCaption]="categoryItemCaption" [isLoading]="isLoading" [wishlistIds]="wishlistIds"
-                [isWishlistProcessing]="isWishlistProcessing" (clickGameEvent)="onClickItemEventHandler($event)"
-                (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
-                (clickViewMoreButtonEvent)="onClickEnumTypeHandler($event)" />
+            <div class="md:flex w-full">
+                <app-category-management [data]="categoryManagementData" [categoryListCaption]="categoryListCaption"
+                    [categoryItemCaption]="categoryItemCaption" [isLoading]="isLoading" [wishlistIds]="wishlistIds"
+                    [isWishlistProcessing]="isWishlistProcessing" (clickGameEvent)="onClickItemEventHandler($event)"
+                    (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
+                    (clickViewMoreButtonEvent)="onClickEnumTypeHandler($event)" />
+            </div>
             }
 
             @if (homeCardGameData) {
