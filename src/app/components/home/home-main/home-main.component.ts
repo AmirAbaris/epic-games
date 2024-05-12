@@ -197,7 +197,7 @@ export class HomeMainComponent implements OnInit {
       this._gameService.getMostPopularItems(),
       this._gameService.getRecentlyUploadedItems()
     ]).pipe(
-      // finalize(() => this.isLoading = false)
+      finalize(() => this.isLoading = false)
     )
       .subscribe(([highlightItems, sliderItems, homeActionItems, freeItems,
         fortniteItems, newReleaseItems, topPlayerItems, trendingItems,
@@ -367,7 +367,6 @@ export class HomeMainComponent implements OnInit {
       .map((item: GameDto) => {
         // determine the button type
         const gameButtonTypeEnum: HighlightButtonEnum = this._determineButtonTypeEnum(item);
-        console.log(gameButtonTypeEnum);
 
         return this._convertGameDtoToHighlightMainInputModel(item, gameButtonTypeEnum);
       });
