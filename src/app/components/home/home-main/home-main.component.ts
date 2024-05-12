@@ -94,9 +94,8 @@ export class HomeMainComponent implements OnInit {
    */
   public onClickWishlistButtonEventHandler(id: string): void {
     console.log('wishlist id:', id);
-    // Toggle the processing state
-    // it will be true to continue our logic
-    this._toggleIsWishlistProcessing();
+
+    this.isWishlistProcessing = true;
 
     // Check if the ID is in the wishlist
     const isIdInWishlist = this.wishlistIds.includes(id);
@@ -108,8 +107,8 @@ export class HomeMainComponent implements OnInit {
       this._addIdToWishlistIds(id);
     }
 
-    // Toggle the processing state again to indicate completion
-    this._toggleIsWishlistProcessing();
+    // Toggle the processing state to false to indicate completion
+    this.isWishlistProcessing = false;
   }
 
   /**
@@ -328,10 +327,6 @@ export class HomeMainComponent implements OnInit {
     items.forEach(item => {
       item.hasWishlist = true;
     });
-  }
-
-  private _toggleIsWishlistProcessing(): void {
-    this.isWishlistProcessing = !this.isWishlistProcessing;
   }
 
   /**
