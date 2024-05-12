@@ -197,7 +197,7 @@ export class HomeMainComponent implements OnInit {
       this._gameService.getMostPopularItems(),
       this._gameService.getRecentlyUploadedItems()
     ]).pipe(
-      finalize(() => this.isLoading = false)
+      // finalize(() => this.isLoading = false)
     )
       .subscribe(([highlightItems, sliderItems, homeActionItems, freeItems,
         fortniteItems, newReleaseItems, topPlayerItems, trendingItems,

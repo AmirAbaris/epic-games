@@ -1,4 +1,3 @@
-<!-- Angular passes Mouse Event type automatically to $event and we can call methods on $event! -->
 <button class="wishlist-btn" [matTooltip]="isInWishlist() ? caption().removeTitle : caption().addTitle"
     matTooltipPosition="below" (click)="onClickWishlistButtonEventHandler(); $event.stopImmediatePropagation()"
     mat-button>

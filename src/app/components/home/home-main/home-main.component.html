@@ -52,7 +52,7 @@
             }
 
             @if (categoryManagementData && categoryListCaption && categoryItemCaption) {
-            <div class="md:flex w-full">
+            <div class="md:flex justify-center w-full">
                 <app-category-management [data]="categoryManagementData" [categoryListCaption]="categoryListCaption"
                     [categoryItemCaption]="categoryItemCaption" [isLoading]="isLoading" [wishlistIds]="wishlistIds"
                     [isWishlistProcessing]="isWishlistProcessing" (clickGameEvent)="onClickItemEventHandler($event)"
