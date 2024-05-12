@@ -8,7 +8,7 @@ export class ActivateWishlistDirective implements AfterViewInit {
   private _elementRef = inject(ElementRef);
   private _renderer = inject(Renderer2);
 
-  private _wishlistClasses = ['absolute', 'right-4', 'top-2', 'cursor-pointer', 'z-10'];
+  private _wishlistClasses = ['absolute', 'cursor-pointer', 'z-10'];
   private _targetElement: HTMLElement | undefined;
   private _imageElement: HTMLElement | null | undefined;
   //#endregion

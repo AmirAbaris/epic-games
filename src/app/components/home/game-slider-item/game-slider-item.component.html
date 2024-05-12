@@ -9,12 +9,10 @@
 </section>
 } @else {
 <section class="text-white font-inter cursor-pointer" (click)="onClickItemEventHandler(data().id)">
-  <div class="relative hover:brightness-125 hover:transition duration-300" activateWishlistDir>
-    <div class="absolute top-1 right-1">
-      <app-wish-list-icon class="wishlist" [isInWishlist]="wishlistIds() | isInWishlist: data().id"
-        [isWishlistProcessing]="isWishlistProcessing()"
-        (clickButtonEvent)="onClickWishlistButtonEventHandler(data().id)" (click)="$event.stopPropagation()" />
-    </div>
+  <div class="hover:brightness-125 hover:transition duration-300" activateWishlistDir>
+    <app-wish-list-icon class="wishlist top-2 right-3" [isInWishlist]="wishlistIds() | isInWishlist: data().id"
+      [isWishlistProcessing]="isWishlistProcessing()" (clickButtonEvent)="onClickWishlistButtonEventHandler(data().id)"
+      (click)="$event.stopPropagation()" />
     <img class="item-cover rounded-md mb-2" ngSrc="{{data().cover}}" priority width="208" height="256"
       alt="{{data().name}}">
   </div>
