@@ -129,14 +129,6 @@ export class HomeMainComponent implements OnInit {
   public onClickEnumTypeHandler(enumType: CategoryEnum): void {
     console.log(enumType);
   }
-
-  /**
-   * its for general usage of the function
-   * we can be more specific and make a separate functions for separate usages in the long run
-   */
-  public onClickCardFnHandler(): void {
-    console.log('function works');
-  }
   //#endregion
 
   //#region Main logic methods
@@ -212,10 +204,10 @@ export class HomeMainComponent implements OnInit {
         mostPopularItems, recentUploadedItems]) => {
         this.highlightMainData = this._convertAndCheckGameDtoToHighlightMainInputModel(highlightItems);
         this.sliderSpotlightData = this._convertAndCheckGameDtoToGameSliderItemInputModel(sliderItems);
-        this.homeCardActionData = this._convertAndCheckGameDtoToHomeCardActionInputModel(homeActionItems, this.onClickCardFnHandler);
+        this.homeCardActionData = this._convertAndCheckGameDtoToHomeCardActionInputModel(homeActionItems, this._onClickCardFn);
         this.homeCardGameData = this._convertAndCheckGameDtoToHomeCardGameInputModel(homeActionItems);
         this.freeGameListData = this._convertAndCheckGameDtoToFreeGameListInputModel(freeItems);
-        this.fortniteGameData = this._convertAndCheckGameDtoToHomeCardActionInputModel(fortniteItems, this.onClickCardFnHandler);
+        this.fortniteGameData = this._convertAndCheckGameDtoToHomeCardActionInputModel(fortniteItems, this._onClickCardFn);
         if (this.categoryListCaption) {
           this.categoryManagementData = this._convertAndCheckGameDtoToCategoryManagementInputModel(newReleaseItems, this.categoryListCaption.newReleaseTitle, CategoryEnum.NEW_RELEASES);
           this.categoryManagementData = this._convertAndCheckGameDtoToCategoryManagementInputModel(topPlayerItems, this.categoryListCaption.topRatedTitle, CategoryEnum.TOP_RATED);
@@ -352,6 +344,14 @@ export class HomeMainComponent implements OnInit {
       default:
         return HighlightButtonEnum.PUBLISHED;
     }
+  }
+
+  /**
+ * its for general usage of the function
+ * we can be more specific and make a separate functions for separate usages in the long run
+ */
+  private _onClickCardFn(): void {
+    console.log('function works');
   }
   //#endregion
 
