@@ -8,7 +8,7 @@
   </div>
 </section>
 } @else {
-<section class="text-white font-inter cursor-pointer" (click)="onClickItemEventHandler(data().id)">
+<section class="flex flex-col text-white font-inter cursor-pointer h-full" (click)="onClickItemEventHandler(data().id)">
   <div class="hover:brightness-125 hover:transition duration-300" activateWishlistDir>
     <app-wish-list-icon class="wishlist top-2 right-3" [isInWishlist]="wishlistIds() | isInWishlist: data().id"
       [isWishlistProcessing]="isWishlistProcessing()" (clickButtonEvent)="onClickWishlistButtonEventHandler(data().id)"
@@ -16,9 +16,9 @@
     <img class="item-cover rounded-md mb-2" ngSrc="{{data().cover}}" priority width="208" height="256"
       alt="{{data().name}}">
   </div>
-  <div class="flex flex-col gap-1">
+  <div class="flex flex-col gap-1 flex-1">
     <h1 class="text-[9px] font-thin">{{ caption().gameType[data().type] | uppercase }}</h1>
-    <h2 class="text-sm">{{ data().name }}</h2>
+    <h2 class="text-sm flex-1">{{ data().name }}</h2>
     <div>
       @if (data().isFree) {
       <h3 class="text-xs">{{ caption().freeTitle | uppercase }}</h3>
