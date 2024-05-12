@@ -24,7 +24,7 @@ export class GameSliderManagementComponent implements AfterViewInit {
 
     clickItemEventHandler = output<string>();
     clickWishlistButtonEvent = output<string>();
-    clickSliderTitleEvent = output<SliderTitleEnum>();
+    clickSliderTitleEvent = output<void>();
 
     swiper = viewChild.required<ElementRef<HTMLElement>>('swiper');
 
@@ -85,9 +85,9 @@ export class GameSliderManagementComponent implements AfterViewInit {
         this.clickWishlistButtonEvent.emit(gameId);
     }
 
-    public onClickTitleEventHandler(titleType: SliderTitleEnum): void {
+    public onClickTitleEventHandler(): void {
         if (this.isTitleClickable()) {
-            this.clickSliderTitleEvent.emit(titleType);
+            this.clickSliderTitleEvent.emit();
         }
     }
 

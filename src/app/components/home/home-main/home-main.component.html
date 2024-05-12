@@ -14,7 +14,7 @@
                     [caption]="gameSliderCaption" [titleCaption]="sliderTitleCaption.saleSpotTitle"
                     [titleTypeEnum]="sliderTitleEnum.SALE_SPOTLIGHT" [isTitleClickable]="true"
                     [wishlistIds]="wishlistIds" [isWishlistProcessing]="isWishlistProcessing"
-                    (clickSliderTitleEvent)="onClickEnumTypeHandler($event)"
+                    (clickSliderTitleEvent)="onClickEnumTypeHandler(sliderTitleEnum.SALE_SPOTLIGHT)"
                     (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
                     (clickItemEventHandler)="onClickItemEventHandler($event)" />
             </div>
@@ -76,7 +76,7 @@
                     [isWishlistProcessing]="isWishlistProcessing"
                     (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
                     (clickItemEventHandler)="onClickItemEventHandler($event)"
-                    (clickSliderTitleEvent)="onClickEnumTypeHandler($event)" />
+                    (clickSliderTitleEvent)="onClickEnumTypeHandler(sliderTitleEnum.TRENDING)" />
             </div>
             }
         </div>

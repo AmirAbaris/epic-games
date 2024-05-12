@@ -1,6 +1,6 @@
 <section class="container flex justify-between items-center text-white mb-2">
     @if (isTitleClickable()) {
-    <div class="flex cursor-pointer" textHoverIndicatorDir (click)="onClickTitleEventHandler(titleTypeEnum())">
+    <div class="flex cursor-pointer" textHoverIndicatorDir (click)="onClickTitleEventHandler()">
         <h1>{{ titleCaption() }}</h1>
         <mat-icon class="icon-display">chevron_right</mat-icon>
     </div>
