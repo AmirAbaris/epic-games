@@ -28,9 +28,8 @@
                     [isWishlistProcessing]="isWishlistProcessing" (clickCardEvent)="onClickItemEventHandler($event)"
                     (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
 
-                <app-card-list [data]="homeCardActionData | slice: 0 : 1" [isLoading]="isLoading"
-                    [wishlistIds]="wishlistIds" [isWishlistProcessing]="isWishlistProcessing"
-                    (clickCardEvent)="onClickItemEventHandler($event)"
+                <app-card-list [data]="homeCardActionData | slice: 0 : 1" [wishlistIds]="wishlistIds"
+                    [isWishlistProcessing]="isWishlistProcessing" (clickCardEvent)="onClickItemEventHandler($event)"
                     (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
                 }
             </div>
@@ -64,19 +63,17 @@
 
             @if (homeCardGameData) {
             <div class="flex flex-col gap-y-4 md:flex-row md:gap-x-4">
-                <app-card-list [data]="homeCardGameData | slice: 3 : 5" [isLoading]="isLoading"
-                    [wishlistIds]="wishlistIds" [isWishlistProcessing]="isWishlistProcessing"
-                    (clickCardEvent)="onClickItemEventHandler($event)"
+                <app-card-list [data]="homeCardGameData | slice: 3 : 5" [wishlistIds]="wishlistIds"
+                    [isWishlistProcessing]="isWishlistProcessing" (clickCardEvent)="onClickItemEventHandler($event)"
                     (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
             </div>
             }
 
             @if (trendingSliderData && gameSliderCaption && sliderTitleCaption) {
             <div class="w-full">
-                <app-game-slider-management [gameCardInputs]="trendingSliderData" [isLoading]="isLoading"
-                    [caption]="gameSliderCaption" [titleCaption]="sliderTitleCaption.trendingTitle"
-                    [titleTypeEnum]="categoryEnum.TRENDING" [isTitleClickable]="false" [wishlistIds]="wishlistIds"
-                    [isWishlistProcessing]="isWishlistProcessing"
+                <app-game-slider-management [gameCardInputs]="trendingSliderData" [caption]="gameSliderCaption"
+                    [titleCaption]="sliderTitleCaption.trendingTitle" [titleTypeEnum]="categoryEnum.TRENDING"
+                    [isTitleClickable]="false" [wishlistIds]="wishlistIds" [isWishlistProcessing]="isWishlistProcessing"
                     (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
                     (clickItemEventHandler)="onClickItemEventHandler($event)"
                     (clickSliderTitleEvent)="onClickEnumTypeHandler(categoryEnum.TRENDING)" />
