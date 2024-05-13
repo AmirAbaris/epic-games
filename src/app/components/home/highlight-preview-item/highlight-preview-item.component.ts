@@ -13,7 +13,6 @@ import { WishlistCaptionModel } from '../models/caption-models/wishlist-caption.
 export class HighlightPreviewItemComponent {
   //#region Properties
   data = input.required<HighlightPreviewItemInputModel>();
-  isLoading = input.required<boolean>();
   isInWishlist = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
   wishlistButtonCaption = input.required<WishlistCaptionModel>();

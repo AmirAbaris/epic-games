@@ -1,9 +1,3 @@
-@if (isLoading()) {
-<section class="animate-pulse flex gap-x-4 px-4 py-4 rounded-xl items-center bg-darkCharcoal">
-    <div class="rounded-xl w-[85px] h-[60px] bg-darkGray"></div>
-    <div class="bg-darkGray w-3/4 h-2 rounded-md"></div>
-</section>
-} @else {
 <section [class.active]="isActive()"
     class="container relative flex gap-x-4 px-4 py-4 rounded-xl items-center cursor-pointer text-white hover:bg-darkCharcoal"
     (click)="onClickItemEventHandler()">
@@ -11,4 +5,3 @@
         [alt]="data().name" width="45" height="60" priority>
     <h1 class="line-clamp-2">{{data().name}}</h1>
 </section>
-}

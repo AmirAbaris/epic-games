@@ -35,6 +35,7 @@ import { GameService } from '../services/game.service';
 import { WishListIconComponent } from '../components/home/wish-list-icon/wish-list-icon.component';
 import { ScaleOnActivateDirective } from '../components/home/directives/scale-on-activate.directive';
 import { UserService } from '../services/user.service';
+import { LoadingComponent } from '../components/home/loading/loading.component';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -60,6 +61,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     HighlightSmallItemComponent,
     PreviewWishListButtonComponent,
     HighlightMainComponent,
+    LoadingComponent,
     ScaleOnActivateDirective,
     ActivateWishlistDirective,
     IsInWishlistPipe

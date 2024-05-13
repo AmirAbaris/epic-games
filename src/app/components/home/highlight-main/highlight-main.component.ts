@@ -14,7 +14,6 @@ import { HighlightMainCaptionModel } from '../models/caption-models/highlight-ma
 export class HighlightMainComponent implements OnInit, OnDestroy, OnChanges {
   //#region Properties
   data = input.required<HighlightMainInputModel[]>();
-  isLoading = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
   caption = input.required<HighlightMainCaptionModel>();
   wishlistIds = input.required<string[]>();
@@ -71,8 +70,6 @@ export class HighlightMainComponent implements OnInit, OnDestroy, OnChanges {
    * @returns void
    */
   private _cycleItems(): void {
-    if (this.isLoading()) return;
-
     this._intervalSubscription = interval(this._CYCLE_INTERVAL).subscribe(() => {
       this.currentIndex = (this.currentIndex + 1) % this.data().length;
     });

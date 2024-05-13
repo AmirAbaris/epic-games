@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { finalize, forkJoin } from "rxjs";
+import { delay, finalize, forkJoin } from "rxjs";
 import { CategoryItemCaptionModel } from "../models/caption-models/category-item-caption.model";
 import { CategoryListCaptionModel } from "../models/caption-models/category-list-caption.model";
 import { FreeGameItemCaptionModel } from "../models/caption-models/free-game-item-caption.model";
@@ -221,7 +221,9 @@ export class HomeMainComponent implements OnInit {
       this._gameService.getMostPopularItems(),
       this._gameService.getRecentlyUploadedItems()
     ]).pipe(
-      finalize(() => this.isLoading = false)
+      // TODO: remove delay
+      delay(2000),
+      // finalize(() => this.isLoading = false)
     )
       .subscribe(([highlightItems, sliderItems, homeActionItems, freeItems,
         fortniteItems, newReleaseItems, topPlayerItems, trendingItems,
