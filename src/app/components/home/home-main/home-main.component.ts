@@ -83,6 +83,7 @@ export class HomeMainComponent implements OnInit {
 
   //#region Lifecycle methods
   ngOnInit(): void {
+    this._getWishlistIds();
     this._getCaptions();
     this._getGames();
   }
@@ -178,7 +179,7 @@ export class HomeMainComponent implements OnInit {
   private _addIdToWishlistIds(id: string): void {
     this.isWishlistProcessing = true;
 
-    this._userService.addIdToWishlistIds(this.wishlistIds, id)
+    this._userService.addIdToWishlistIds(id)
       .pipe(finalize(() => this.isWishlistProcessing = false))
       .subscribe(newWishlistIds => {
         this.wishlistIds = newWishlistIds;
@@ -188,11 +189,20 @@ export class HomeMainComponent implements OnInit {
   private _removeIdFromWishlistIds(id: string): void {
     this.isWishlistProcessing = true;
 
-    this._userService.removeIdFromWishlistIds(this.wishlistIds, id)
+    this._userService.removeIdFromWishlistIds(id)
       .pipe(finalize(() => this.isWishlistProcessing = false))
       .subscribe(newWishlistIds => {
         this.wishlistIds = newWishlistIds;
       });
+  }
+
+  /**
+   * get user wishlist ids from the service and store it in wishlistIds in here to handle the logics here
+   */
+  private _getWishlistIds(): void {
+    this._userService.getWishlistIds().subscribe((wishlistIds) => {
+      this.wishlistIds = wishlistIds;
+    });
   }
 
   private _getGames(): void {
