@@ -25,6 +25,7 @@ import { SliderTitleCaptionModel } from "../models/caption-models/slider-title-c
 import { ClickCardFunctionType } from "../types/click-card-function.type";
 import { HomeMainCaptionModel } from "../models/caption-models/home-main-caption.model";
 import { CategoryEnum } from "../enums/category.enum";
+import { UserService } from "../../../services/user.service";
 
 @Component({
   selector: "app-home-main",
@@ -35,6 +36,7 @@ export class HomeMainComponent implements OnInit {
   //#region Properties
   private _translateService = inject(TranslateService);
   private _gameService = inject(GameService);
+  private _userService = inject(UserService);
 
   public isLoading: boolean = false;
   public isWishlistProcessing = false;
@@ -95,8 +97,6 @@ export class HomeMainComponent implements OnInit {
   public onClickWishlistButtonEventHandler(id: string): void {
     console.log('wishlist id:', id);
 
-    this.isWishlistProcessing = true;
-
     // Check if the ID is in the wishlist
     const isIdInWishlist = this.wishlistIds.includes(id);
 
@@ -106,9 +106,6 @@ export class HomeMainComponent implements OnInit {
     } else {
       this._addIdToWishlistIds(id);
     }
-
-    // Toggle the processing state to false to indicate completion
-    this.isWishlistProcessing = false;
   }
 
   /**
@@ -173,12 +170,29 @@ export class HomeMainComponent implements OnInit {
     });
   }
 
-  private _removeIdFromWishlistIds(id: string): void {
-    this.wishlistIds = this.wishlistIds.filter((arrayId) => arrayId !== id);
+  /**
+   * also handled isWishlistProcessing here 
+   * it will set it to true, and when completing its logic, it then sets it to false!
+   * @param id the users target, if its in our wishlist we remove it and if not we'll add it
+   */
+  private _addIdToWishlistIds(id: string): void {
+    this.isWishlistProcessing = true;
+
+    this._userService.addIdToWishlistIds(this.wishlistIds, id)
+      .pipe(finalize(() => this.isWishlistProcessing = false))
+      .subscribe(newWishlistIds => {
+        this.wishlistIds = newWishlistIds;
+      });
   }
 
-  private _addIdToWishlistIds(id: string): void {
-    this.wishlistIds = [...this.wishlistIds, id];
+  private _removeIdFromWishlistIds(id: string): void {
+    this.isWishlistProcessing = true;
+
+    this._userService.removeIdFromWishlistIds(this.wishlistIds, id)
+      .pipe(finalize(() => this.isWishlistProcessing = false))
+      .subscribe(newWishlistIds => {
+        this.wishlistIds = newWishlistIds;
+      });
   }
 
   private _getGames(): void {
