@@ -36,7 +36,7 @@
             </div>
 
             @if (freeGameListData && freeGameListCaption && freeGameItemCaption) {
-            <app-free-game-list [isLoading]="isLoading" [data]="freeGameListData" [caption]="freeGameListCaption"
+            <app-free-game-list [data]="freeGameListData" [caption]="freeGameListCaption"
                 [gameItemCaption]="freeGameItemCaption" (clickEvent)="onClickItemEventHandler($event)"
                 (viewMoreClickEvent)="onClickEnumTypeHandler($event)" />
             }

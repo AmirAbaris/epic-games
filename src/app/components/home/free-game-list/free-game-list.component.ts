@@ -13,7 +13,6 @@ import { CategoryEnum } from '../enums/category.enum';
 export class FreeGameListComponent {
   //#region Properties
   data = input.required<FreeGameListInputModel>();
-  isLoading = input.required<boolean>();
   caption = input.required<FreeGameListCaptionModel>();
   gameItemCaption = input.required<FreeGameItemCaptionModel>();
 

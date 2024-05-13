@@ -1,13 +1,3 @@
-@if (isLoading()) {
-<section class="animate-pulse">
-  <div class="rounded-md min-w-72 h-96 bg-darkCharcoal"></div>
-  <div class="flex flex-col gap-2 mt-6">
-    <div class="bg-darkCharcoal w-4/5 h-2 rounded-md"></div>
-    <div class="bg-darkCharcoal w-1/2 h-2 rounded-md"></div>
-    <div></div>
-  </div>
-</section>
-} @else {
 <section class="cursor-pointer" (click)="onClickEventHandler(data().id)">
   <img class="object-cover w-full rounded-t-md min-w-72 h-96 hover:brightness-110 hover:transition duration-300"
     [src]="data().cover" [alt]="data().name">
@@ -40,4 +30,3 @@
     </div>
   </div>
 </section>
-}
