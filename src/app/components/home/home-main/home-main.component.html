@@ -13,10 +13,9 @@
 
             @if (sliderSpotlightData && gameSliderCaption && sliderTitleCaption) {
             <div class="w-full">
-                <app-game-slider-management [gameCardInputs]="sliderSpotlightData" [isLoading]="isLoading"
-                    [caption]="gameSliderCaption" [titleCaption]="sliderTitleCaption.saleSpotTitle"
-                    [titleTypeEnum]="categoryEnum.SALE_SPOTLIGHT" [isTitleClickable]="true" [wishlistIds]="wishlistIds"
-                    [isWishlistProcessing]="isWishlistProcessing"
+                <app-game-slider-management [gameCardInputs]="sliderSpotlightData" [caption]="gameSliderCaption"
+                    [titleCaption]="sliderTitleCaption.saleSpotTitle" [titleTypeEnum]="categoryEnum.SALE_SPOTLIGHT"
+                    [isTitleClickable]="true" [wishlistIds]="wishlistIds" [isWishlistProcessing]="isWishlistProcessing"
                     (clickSliderTitleEvent)="onClickEnumTypeHandler(categoryEnum.SALE_SPOTLIGHT)"
                     (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
                     (clickItemEventHandler)="onClickItemEventHandler($event)" />

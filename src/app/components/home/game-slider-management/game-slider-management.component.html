@@ -19,8 +19,8 @@
 <swiper-container #swiper init="false">
     @for (item of gameCardInputs(); track $index) {
     <swiper-slide class="h-auto">
-        <app-game-slider-item [data]="item" [caption]="caption()" [isLoading]="isLoading()"
-            [wishlistIds]="wishlistIds()" [isWishlistProcessing]="isWishlistProcessing()"
+        <app-game-slider-item [data]="item" [caption]="caption()" [wishlistIds]="wishlistIds()"
+            [isWishlistProcessing]="isWishlistProcessing()"
             (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
             (clickItemEvent)="onClickItemEventHandler($event)" />
     </swiper-slide>

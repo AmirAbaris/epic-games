@@ -12,7 +12,6 @@ import { CategoryEnum } from '../enums/category.enum';
 export class GameSliderManagementComponent implements AfterViewInit {
     //#region Properties
     gameCardInputs = input.required<GameSliderItemInputModel[]>();
-    isLoading = input.required<boolean>();
     caption = input.required<GameSliderCaptionModel>();
     titleTypeEnum = input.required<CategoryEnum>();
     isWishlistProcessing = input.required<boolean>();

@@ -14,7 +14,6 @@ export class GameSliderItemComponent implements OnInit {
     //region Properties
     data = input.required<GameSliderItemInputModel>();
     caption = input.required<GameSliderCaptionModel>();
-    isLoading = input.required<boolean>();
     isWishlistProcessing = input.required<boolean>();
     wishlistIds = input.required<string[]>();
 

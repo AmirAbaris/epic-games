@@ -1,18 +1,8 @@
-@if (isLoading()) {
-<section class="flex flex-col gap-2 w-full animate-pulse">
-  <div class="bg-darkGray w-52 h-64 mb-2 rounded-md"></div>
-  <div class="flex flex-col gap-1">
-    <div class="bg-darkSilver w-16 h-3"></div>
-    <div class="bg-darkSilver w-28 h-3"></div>
-    <div class="bg-darkSilver w-full h-3 mt-1"></div>
-  </div>
-</section>
-} @else {
 <section class="flex flex-col text-white font-inter cursor-pointer h-full" (click)="onClickItemEventHandler(data().id)">
   <div class="hover:brightness-125 hover:transition duration-300" activateWishlistDir>
-    <app-wish-list-icon class="wishlist top-2 right-2 md:right-7 xl:right-3" [isInWishlist]="wishlistIds() | isInWishlist: data().id"
-      [isWishlistProcessing]="isWishlistProcessing()" (clickButtonEvent)="onClickWishlistButtonEventHandler(data().id)"
-      (click)="$event.stopPropagation()" />
+    <app-wish-list-icon class="wishlist top-2 right-2 md:right-7 xl:right-3"
+      [isInWishlist]="wishlistIds() | isInWishlist: data().id" [isWishlistProcessing]="isWishlistProcessing()"
+      (clickButtonEvent)="onClickWishlistButtonEventHandler(data().id)" (click)="$event.stopPropagation()" />
     <img class="item-cover rounded-md mb-2" ngSrc="{{data().cover}}" priority width="208" height="256"
       alt="{{data().name}}">
   </div>
@@ -32,4 +22,3 @@
     </div>
   </div>
 </section>
-}
