@@ -45,7 +45,7 @@
             <div class="flex flex-col gap-y-4">
                 <h1 class="font-inter text-white text-lg">{{homeMainCaption.fortniteTitle}}</h1>
                 <div class="flex flex-col gap-y-4 md:flex-row md:gap-x-4">
-                    <app-card-list [data]="fortniteGameData" [isLoading]="isLoading" [wishlistIds]="wishlistIds"
+                    <app-card-list [data]="fortniteGameData" [wishlistIds]="wishlistIds"
                         [isWishlistProcessing]="isWishlistProcessing" (clickCardEvent)="onClickItemEventHandler($event)"
                         (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
                 </div>
@@ -55,7 +55,7 @@
             @if (categoryManagementData && categoryListCaption && categoryItemCaption) {
             <div class="md:flex justify-center w-full">
                 <app-category-management [data]="categoryManagementData" [categoryListCaption]="categoryListCaption"
-                    [categoryItemCaption]="categoryItemCaption" [isLoading]="isLoading" [wishlistIds]="wishlistIds"
+                    [categoryItemCaption]="categoryItemCaption" [wishlistIds]="wishlistIds"
                     [isWishlistProcessing]="isWishlistProcessing" (clickGameEvent)="onClickItemEventHandler($event)"
                     (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
                     (clickViewMoreButtonEvent)="onClickEnumTypeHandler($event)" />

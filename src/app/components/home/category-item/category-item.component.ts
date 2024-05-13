@@ -14,7 +14,6 @@ export class CategoryItemComponent implements OnInit {
   //region Properties
   data = input.required<CategoryItemInputModel>();
   caption = input.required<CategoryItemCaptionModel>();
-  isLoading = input.required<boolean>();
   isInWishlist = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
 

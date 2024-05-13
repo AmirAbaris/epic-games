@@ -15,7 +15,6 @@ export class CategoryListComponent {
   data = input.required<CategoryListInputModel>();
   caption = input.required<CategoryListCaptionModel>();
   itemCaption = input.required<CategoryItemCaptionModel>();
-  isLoading = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
   wishlistIds = input.required<string[]>();
 

@@ -1,7 +1,7 @@
 <div class="container flex flex-col justify-center gap-4 md:flex-row">
     @for (data of data().categoryListData | slice: 0 : 3; track $index) {
     <app-category-list [data]="data" [caption]="categoryListCaption()" [itemCaption]="categoryItemCaption()"
-        [isLoading]="isLoading()" [wishlistIds]="wishlistIds()" [isWishlistProcessing]="isWishlistProcessing()"
+        [wishlistIds]="wishlistIds()" [isWishlistProcessing]="isWishlistProcessing()"
         (clickGameEvent)="onClickGameEventHandler($event)"
         (clickViewMoreButtonEvent)="onClickViewMoreButtonEventHandler($event)"
         (clickWishlistEvent)="onClickWishlistEventHandler($event)" />
