@@ -12,7 +12,6 @@ import { output } from "@angular/core";
 export class HomeCardGameComponent implements OnInit {
   //#region Properties
   data = input.required<HomeCardGameInputModel>();
-  isLoading = input.required<boolean>();
   isInWishlist = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
 

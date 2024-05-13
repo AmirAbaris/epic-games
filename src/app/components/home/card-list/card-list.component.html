@@ -2,10 +2,9 @@
     @for (item of data(); track $index) {
     <div class="flex-1">
         @if (item | isHomeCardAction) {
-        <app-home-card-action [data]="item" [isLoading]="isLoading()"
-            (clickWishlistButtonEvent)=" onClickWishlistButtonEventHandler($event)" />
+        <app-home-card-action [data]="item" (clickWishlistButtonEvent)=" onClickWishlistButtonEventHandler($event)" />
         } @else {
-        <app-home-card-game *ngIf="item.cardData.id" [data]="item" [isLoading]="isLoading()"
+        <app-home-card-game *ngIf="item.cardData.id" [data]="item"
             [isInWishlist]="wishlistIds() | isInWishlist: item.cardData.id"
             [isWishlistProcessing]="isWishlistProcessing()" (clickCardEvent)="onClickCardEventHandler(item.cardData.id)"
             (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />

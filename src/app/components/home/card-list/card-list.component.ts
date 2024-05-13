@@ -9,7 +9,6 @@ import { CardListInputType } from '../types/card-list-input.type';
 export class CardListComponent {
   //#region Properties
   data = input.required<CardListInputType[]>();
-  isLoading = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
   wishlistIds = input.required<string[]>();
 

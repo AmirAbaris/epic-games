@@ -223,7 +223,7 @@ export class HomeMainComponent implements OnInit {
     ]).pipe(
       // TODO: remove delay
       delay(2000),
-      // finalize(() => this.isLoading = false)
+      finalize(() => this.isLoading = false)
     )
       .subscribe(([highlightItems, sliderItems, homeActionItems, freeItems,
         fortniteItems, newReleaseItems, topPlayerItems, trendingItems,
