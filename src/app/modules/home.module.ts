@@ -34,6 +34,7 @@ import { GameRepository } from '../repositories/game.repository';
 import { GameService } from '../services/game.service';
 import { WishListIconComponent } from '../components/home/wish-list-icon/wish-list-icon.component';
 import { ScaleOnActivateDirective } from '../components/home/directives/scale-on-activate.directive';
+import { UserService } from '../services/user.service';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -75,7 +76,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     RouterModule.forChild(homeRoutes),
     TranslateModule
   ],
-  providers: [GameRepository, GameService],
+  providers: [GameRepository, GameService, UserService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomeModule {
