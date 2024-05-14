@@ -1,19 +1,93 @@
-<section>
-    @if (highlightMainData) {
-    <app-highlight-main [data]="highlightMainData" [isLoading]="isLoading" [isWishlistProcessing]="isWishlistProcessing"
-        [caption]="{
-    highlightButtonTypeCaption: {
-        FREE: 'FREE',
-        NOT_PUBLISHED: 'NOT PUBLISHED',
-        ARTICLE: 'SAVE NOW',
-        PUBLISHED: 'PUBLISHED'
-    },
-    wishlistButtonCaption: {
-        inTitle: 'In Wishlist',
-        addTitle: 'Add to wishlist',
-        removeTitle: 'Remove from wishlist'
-    }
-}" [wishlistIds]="wishlistIds" (clickItemEvent)="$event"
-        (clickWishlistButtonEvent)="testWishlistButtonEventHandler($event)" />
-    }
+<section class="container">
+    <div class="col-span-full">
+        <div class="flex flex-col items-center gap-y-11">
+            @if (data) {
+            @if (highlightMainData && highlightMainCaption) {
+            <app-highlight-main [data]="highlightMainData" [isWishlistProcessing]="isWishlistProcessing"
+                [caption]="highlightMainCaption" [wishlistIds]="wishlistIds"
+                (clickItemEvent)="onClickItemEventHandler($event)"
+                (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
+            }
+
+            @if (sliderSpotlightData && gameSliderCaption && sliderTitleCaption) {
+            <div class="w-full">
+                <app-game-slider-management [gameCardInputs]="sliderSpotlightData" [caption]="gameSliderCaption"
+                    [titleCaption]="sliderTitleCaption.saleSpotTitle" [titleTypeEnum]="categoryEnum.SALE_SPOTLIGHT"
+                    [isTitleClickable]="true" [wishlistIds]="wishlistIds" [isWishlistProcessing]="isWishlistProcessing"
+                    (clickSliderTitleEvent)="onClickEnumTypeHandler(categoryEnum.SALE_SPOTLIGHT)"
+                    (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
+                    (clickItemEventHandler)="onClickItemEventHandler($event)" />
+            </div>
+            }
+
+            <div class="flex flex-col gap-y-4 md:flex-row md:gap-x-4">
+                @if (homeCardGameData && homeCardActionData) {
+                <app-card-list [data]="homeCardGameData | slice: 1 : 3" [wishlistIds]="wishlistIds"
+                    [isWishlistProcessing]="isWishlistProcessing" (clickCardEvent)="onClickItemEventHandler($event)"
+                    (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
+
+                <app-card-list [data]="homeCardActionData | slice: 0 : 1" [wishlistIds]="wishlistIds"
+                    [isWishlistProcessing]="isWishlistProcessing" (clickCardEvent)="onClickItemEventHandler($event)"
+                    (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
+                }
+            </div>
+
+            @if (freeGameListData && freeGameListCaption && freeGameItemCaption) {
+            <app-free-game-list [data]="freeGameListData" [caption]="freeGameListCaption"
+                [gameItemCaption]="freeGameItemCaption" (clickEvent)="onClickItemEventHandler($event)"
+                (viewMoreClickEvent)="onClickEnumTypeHandler($event)" />
+            }
+
+            @if (fortniteGameData && homeMainCaption) {
+            <div class="flex flex-col gap-y-4">
+                <h1 class="font-inter text-white text-lg">{{homeMainCaption.fortniteTitle}}</h1>
+                <div class="flex flex-col gap-y-4 md:flex-row md:gap-x-4">
+                    <app-card-list [data]="fortniteGameData" [wishlistIds]="wishlistIds"
+                        [isWishlistProcessing]="isWishlistProcessing" (clickCardEvent)="onClickItemEventHandler($event)"
+                        (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
+                </div>
+            </div>
+            }
+
+            @if (categoryManagementData && categoryListCaption && categoryItemCaption) {
+            <div class="md:flex justify-center w-full">
+                <app-category-management [data]="categoryManagementData" [categoryListCaption]="categoryListCaption"
+                    [categoryItemCaption]="categoryItemCaption" [wishlistIds]="wishlistIds"
+                    [isWishlistProcessing]="isWishlistProcessing" (clickGameEvent)="onClickItemEventHandler($event)"
+                    (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
+                    (clickViewMoreButtonEvent)="onClickEnumTypeHandler($event)" />
+            </div>
+            }
+
+            @if (homeCardGameData) {
+            <div class="flex flex-col gap-y-4 md:flex-row md:gap-x-4">
+                <app-card-list [data]="homeCardGameData | slice: 3 : 5" [wishlistIds]="wishlistIds"
+                    [isWishlistProcessing]="isWishlistProcessing" (clickCardEvent)="onClickItemEventHandler($event)"
+                    (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)" />
+            </div>
+            }
+
+            @if (trendingSliderData && gameSliderCaption && sliderTitleCaption) {
+            <div class="w-full">
+                <app-game-slider-management [gameCardInputs]="trendingSliderData" [caption]="gameSliderCaption"
+                    [titleCaption]="sliderTitleCaption.trendingTitle" [titleTypeEnum]="categoryEnum.TRENDING"
+                    [isTitleClickable]="false" [wishlistIds]="wishlistIds" [isWishlistProcessing]="isWishlistProcessing"
+                    (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
+                    (clickItemEventHandler)="onClickItemEventHandler($event)"
+                    (clickSliderTitleEvent)="onClickEnumTypeHandler(categoryEnum.TRENDING)" />
+            </div>
+            }
+            } @else {
+            <!-- skeleton loading -->
+            <app-highlight-main-skeleton [itemCount]="6" />
+            <app-game-slider-item-skeleton />
+            <app-card-list-skeleton [itemCount]="3" />
+            <app-free-item-skeleton [itemCount]="3" />
+            <app-card-list-skeleton [itemCount]="3" />
+            <app-category-management-skeleton class="w-full" />
+            <app-card-list-skeleton [itemCount]="2" />
+            <app-game-slider-item-skeleton />
+            }
+        </div>
+    </div>
 </section>

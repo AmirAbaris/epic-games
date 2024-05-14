@@ -1,5 +1,28 @@
-<div class="grid grid-cols-5 gap-2 mt-20">
-    @for (game of gameCardInputs().slice(0, 5); track $index) {
-    <app-game-slider-item [data]="game" [caption]="caption" [isLoading]="isLoading()" />
+<section class="container flex justify-between items-center text-white mb-2">
+    @if (isTitleClickable()) {
+    <div class="flex cursor-pointer" textHoverIndicatorDir (click)="onClickTitleEventHandler()">
+        <h1>{{ titleCaption() }}</h1>
+        <mat-icon class="icon-display">chevron_right</mat-icon>
+    </div>
+    } @else {
+    <h2>{{ titleCaption() }}</h2>
     }
-</div>
+    <div>
+        <button class="prev-btn" mat-mini-fab>
+            <mat-icon>arrow_forward_ios</mat-icon>
+        </button>
+        <button class="next-btn" mat-mini-fab>
+            <mat-icon>arrow_forward_ios</mat-icon>
+        </button>
+    </div>
+</section>
+<swiper-container #swiper init="false">
+    @for (item of gameCardInputs(); track $index) {
+    <swiper-slide class="h-auto">
+        <app-game-slider-item [data]="item" [caption]="caption()" [wishlistIds]="wishlistIds()"
+            [isWishlistProcessing]="isWishlistProcessing()"
+            (clickWishlistButtonEvent)="onClickWishlistButtonEventHandler($event)"
+            (clickItemEvent)="onClickItemEventHandler($event)" />
+    </swiper-slide>
+    }
+</swiper-container>

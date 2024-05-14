@@ -1,20 +1,23 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
 import { output } from "@angular/core";
+import { WishlistCaptionModel } from '../models/caption-models/wishlist-caption.model';
 
 @Component({
-  selector: 'app-wish-list-button',
-  templateUrl: './wish-list-button.component.html',
-  styleUrl: './wish-list-button.component.scss'
+  selector: 'app-wish-list-icon',
+  templateUrl: './wish-list-icon.component.html',
+  styleUrl: './wish-list-icon.component.scss'
 })
-export class WishListButtonComponent {
+export class WishListIconComponent {
   //#region Properties
   private _translateService = inject(TranslateService);
 
-  //#endregion
-    clickButtonEvent = output<void>();
+  isInWishlist = input.required<boolean>();
+  isWishlistProcessing = input.required<boolean>();
 
-  public tooltipMessage: string = this._translateService.instant('home.WishListButton.addTitle');
+  clickButtonEvent = output<void>();
+
+  public tooltipMessage: WishlistCaptionModel = this._translateService.instant('home.Wishlist');
   //#endregion
 
   //#region Handler methods
@@ -26,5 +29,4 @@ export class WishListButtonComponent {
     this.clickButtonEvent.emit();
   }
   //#endregion
-;
 }

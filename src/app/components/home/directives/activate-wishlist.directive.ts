@@ -7,7 +7,8 @@ export class ActivateWishlistDirective implements AfterViewInit {
   //#region Properties
   private _elementRef = inject(ElementRef);
   private _renderer = inject(Renderer2);
-  private _wishlistClasses = ['absolute', 'right-4', 'top-2', 'cursor-pointer', 'z-10'];
+
+  private _wishlistClasses = ['absolute', 'cursor-pointer', 'z-10'];
   private _targetElement: HTMLElement | undefined;
   private _imageElement: HTMLElement | null | undefined;
   //#endregion
@@ -28,26 +29,25 @@ export class ActivateWishlistDirective implements AfterViewInit {
   }
 
   @HostListener('mouseleave', ['$event'])
-  onMouseLeave(event: MouseEvent): void {
+  onMouseLeave(): void {
     this._toggleWishlistVisibility(false);
     this._removeWishlistClasses();
   }
 
   /**
    * it shows/hides the wishlist component based on if the mouse is on it or not
-   * @param isVisible 
    */
   private _toggleWishlistVisibility(isVisible: boolean): void {
-    if (this._targetElement) {
-      // determine the display style based on visibility
-      const displayStyle = isVisible ? 'block' : 'none';
+    if (!this._targetElement) return;
 
-      // add wishlist classes to the element
-      this._addClassesToElement();
+    // determine the display style based on visibility
+    const displayStyle = isVisible ? 'block' : 'none';
 
-      // sets wishlist tailwind classes
-      this._setElementDisplayStyle(displayStyle);
-    }
+    // add wishlist classes to the element
+    this._addClassesToElement();
+
+    // sets wishlist tailwind classes
+    this._setElementDisplayStyle(displayStyle);
   }
 
   private _setElementValues(): void {
@@ -66,6 +66,8 @@ export class ActivateWishlistDirective implements AfterViewInit {
   }
 
   private _removeWishlistClasses(): void {
+    if (!this._targetElement) return;
+
     this._wishlistClasses.forEach((className: string) => {
       this._renderer.removeClass(this._targetElement, className);
     });

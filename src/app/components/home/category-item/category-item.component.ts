@@ -14,7 +14,8 @@ export class CategoryItemComponent implements OnInit {
   //region Properties
   data = input.required<CategoryItemInputModel>();
   caption = input.required<CategoryItemCaptionModel>();
-  isLoading = input.required<boolean>();
+  isInWishlist = input.required<boolean>();
+  isWishlistProcessing = input.required<boolean>();
 
   clickWishlistButtonEvent = output<string>();
   clickItemEvent = output<string>();
@@ -39,11 +40,7 @@ export class CategoryItemComponent implements OnInit {
   //endregion
 
   //region Handler methods
-  public onClickWishlistButtonHandler(event: MouseEvent, gameId: string): void {
-    // Prevent event propagation
-    event.stopPropagation();
-
-    // Emit the clickWishlistButtonEvent
+  public onClickWishlistButtonHandler(gameId: string): void {
     this.clickWishlistButtonEvent.emit(gameId);
   }
 

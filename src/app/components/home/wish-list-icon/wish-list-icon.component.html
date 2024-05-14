@@ -1,0 +1,19 @@
+<div [matTooltip]="isInWishlist() ? tooltipMessage.removeTitle : tooltipMessage.addTitle" matTooltipPosition="above">
+  <span class="wishlist" (click)="onClickButtonEventHandler($event)">
+    @if (isWishlistProcessing()) {
+    <mat-icon [class.reverse-rotate-animation]="isWishlistProcessing()">
+      add_circle
+    </mat-icon>
+    } @else {
+    @if (isInWishlist()) {
+    <mat-icon>
+      check_circle
+    </mat-icon>
+    } @else {
+    <mat-icon [class.rotate-animation]="isWishlistProcessing()">
+      add_circle
+    </mat-icon>
+    }
+    }
+  </span>
+</div>

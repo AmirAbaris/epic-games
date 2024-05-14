@@ -10,7 +10,6 @@ import { output } from "@angular/core";
 export class HighlightSmallItemComponent {
   //#region Properties
   data = input.required<HighlightSmallItemInputModel>();
-  isLoading = input.required<boolean>();
   isActive = input.required<boolean>();
 
   clickItemEvent = output<void>();

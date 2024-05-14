@@ -1,0 +1,12 @@
+<section class="flex gap-x-4 items-center">
+    <div class="animate-pulse bg-darkCharcoal h-[25rem] w-[25rem] md:h-[35rem] lg:w-[40rem] rounded-2xl"></div>
+
+    <div class="hidden md:animate-pulse md:flex md:flex-col md:justify-between md:gap-y-1">
+        <ng-container *ngFor="let _ of [].constructor(itemCount())">
+            <section ng-repeat="6" class="animate-pulse flex gap-x-4 px-4 py-4 rounded-xl items-center bg-darkCharcoal">
+                <div class="rounded-xl w-[42px] h-[60px] bg-darkGray"></div>
+                <div class="bg-darkGray w-20 h-2 rounded-md"></div>
+            </section>
+        </ng-container>
+    </div>
+</section>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { HomeCardInputModel } from '../models/home-card-input.model';
 import { output } from "@angular/core";
 
@@ -10,7 +10,8 @@ import { output } from "@angular/core";
 export class HomeCardComponent {
   //#region Properties
   data = input.required<HomeCardInputModel>();
-  isLoading = input.required<boolean>();
+  isInWishlist = input.required<boolean>();
+  isWishlistProcessing = input.required<boolean>();
 
   clickCardEvent = output<void>();
   clickWishlistButtonEvent = output<string>();
@@ -27,6 +28,4 @@ export class HomeCardComponent {
     }
   }
   //#endregion
-  ;
-  ;
 }

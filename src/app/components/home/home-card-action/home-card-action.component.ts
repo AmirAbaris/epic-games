@@ -10,7 +10,6 @@ import { output } from "@angular/core";
 export class HomeCardActionComponent {
   //#region Properties
   data = input.required<HomeCardActionInputModel>();
-  isLoading = input.required<boolean>();
 
   clickCardEvent = output<void>();
   clickWishlistButtonEvent = output<string>();

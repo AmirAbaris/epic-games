@@ -1,0 +1,12 @@
+<section class="flex flex-col gap-8 animate-pulse md:flex-row">
+    <ng-container *ngFor="let _ of [].constructor(itemCount())">
+        <div class="flex flex-col gap-y-4 h-full">
+            <div class="bg-darkCharcoal flex-1 w-full rounded-xl aspect-video mb-2 min-w-80"></div>
+            <div class="flex flex-col gap-y-2">
+                <div class="bg-darkCharcoal h-3 w-3/4 rounded-sm"></div>
+                <div class="bg-darkCharcoal h-3 rounded-sm"></div>
+                <div class="bg-darkCharcoal h-8 w-3/5 rounded-sm"></div>
+            </div>
+        </div>
+    </ng-container>
+</section>

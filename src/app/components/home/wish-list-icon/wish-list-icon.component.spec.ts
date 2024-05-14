@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WishListButtonComponent } from './wish-list-button.component';
+import { WishListButtonComponent } from './wish-list-icon.component';
 
 describe('WishListButtonComponent', () => {
   let component: WishListButtonComponent;
@@ -10,8 +10,8 @@ describe('WishListButtonComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [WishListButtonComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(WishListButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

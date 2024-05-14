@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { CardListInputType } from '../types/card-list-input.type';
 
 @Component({
@@ -9,10 +9,11 @@ import { CardListInputType } from '../types/card-list-input.type';
 export class CardListComponent {
   //#region Properties
   data = input.required<CardListInputType[]>();
-  isLoading = input.required<boolean>();
+  isWishlistProcessing = input.required<boolean>();
+  wishlistIds = input.required<string[]>();
 
-  @Output() clickCardEvent = new EventEmitter<string>();
-  @Output() clickWishlistButtonEvent = new EventEmitter<string>();
+  clickCardEvent = output<string>();
+  clickWishlistButtonEvent = output<string>();
   //#endregion
 
   //#region Handler methods

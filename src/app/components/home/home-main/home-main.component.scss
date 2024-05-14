@@ -1,0 +1,20 @@
+.container {
+    @apply grid;
+    @apply mx-auto;
+    @apply px-4;
+    @apply grid-cols-6;
+
+    @apply md:gap-6;
+    @apply md:px-8;
+
+    @apply lg:gap-6;
+    @apply lg:px-8;
+
+    @apply xl:grid-cols-12;
+    @apply xl:gap-6;
+    @apply xl:px-14;
+
+    @apply 2xl:grid-cols-12;
+    @apply 2xl:gap-6;
+    @apply 2xl:px-20;
+}

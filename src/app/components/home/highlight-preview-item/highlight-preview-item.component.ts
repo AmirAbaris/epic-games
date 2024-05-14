@@ -2,8 +2,8 @@ import { Component, input } from '@angular/core';
 import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item-input.model';
 import { HighlightButtonEnum } from '../enums/highlight-button.enum';
 import { HighlightButtonTypeEnumCaptionModel } from '../models/caption-models/highlight-button-type-enum-caption.model';
-import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-button-caption.model';
 import { output } from "@angular/core";
+import { WishlistCaptionModel } from '../models/caption-models/wishlist-caption.model';
 
 @Component({
   selector: 'app-highlight-preview-item',
@@ -13,10 +13,9 @@ import { output } from "@angular/core";
 export class HighlightPreviewItemComponent {
   //#region Properties
   data = input.required<HighlightPreviewItemInputModel>();
-  isLoading = input.required<boolean>();
   isInWishlist = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
-  wishlistButtonCaption = input.required<WishListButtonCaptionModel>();
+  wishlistButtonCaption = input.required<WishlistCaptionModel>();
   highlightButtonTypeCaption = input.required<HighlightButtonTypeEnumCaptionModel>();
 
   clickWishlistButtonEvent = output<string>();

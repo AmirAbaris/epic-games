@@ -1,10 +1,10 @@
 import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, input } from '@angular/core';
-import { HighlightMainInputModel } from '../types/highlight-main-input.type';
+import { HighlightMainInputModel } from '../models/highlight-main-input.model';
 import { HighlightPreviewItemInputModel } from '../models/highlight-preview-item-input.model';
 import { HighlightSmallItemInputModel } from '../models/highlight-small-item-input.model';
 import { output } from "@angular/core";
 import { Subscription, interval } from 'rxjs';
-import { HighlightMainCaptionMode } from '../models/caption-models/highlight-main-caption.model';
+import { HighlightMainCaptionModel } from '../models/caption-models/highlight-main-caption.model';
 
 @Component({
   selector: 'app-highlight-main',
@@ -14,9 +14,8 @@ import { HighlightMainCaptionMode } from '../models/caption-models/highlight-mai
 export class HighlightMainComponent implements OnInit, OnDestroy, OnChanges {
   //#region Properties
   data = input.required<HighlightMainInputModel[]>();
-  isLoading = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
-  caption = input.required<HighlightMainCaptionMode>();
+  caption = input.required<HighlightMainCaptionModel>();
   wishlistIds = input.required<string[]>();
 
   clickWishlistButtonEvent = output<string>();
@@ -71,8 +70,6 @@ export class HighlightMainComponent implements OnInit, OnDestroy, OnChanges {
    * @returns void
    */
   private _cycleItems(): void {
-    if (this.isLoading()) return;
-
     this._intervalSubscription = interval(this._CYCLE_INTERVAL).subscribe(() => {
       this.currentIndex = (this.currentIndex + 1) % this.data().length;
     });

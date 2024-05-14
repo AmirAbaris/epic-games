@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { WishListButtonCaptionModel } from '../models/caption-models/wishlist-button-caption.model';
+import { WishlistCaptionModel } from '../models/caption-models/wishlist-caption.model';
 import { output } from "@angular/core";
 
 @Component({
@@ -11,7 +11,7 @@ export class PreviewWishListButtonComponent {
   //#region Properties
   isInWishlist = input.required<boolean>();
   isWishlistProcessing = input.required<boolean>();
-  caption = input.required<WishListButtonCaptionModel>();
+  caption = input.required<WishlistCaptionModel>();
 
   clickWishlistButtonEvent = output<void>();
   //#endregion

@@ -1,20 +1,40 @@
 {
   "home": {
+    "HomeMain": {
+      "fortniteTitle": "Fortnite Experiences"
+    },
+    "HomeCardAction": {
+      "browseTitle": "Browse",
+      "discoverTitle": "Discover",
+      "freePlayTitle": "Play For Free"
+    },
     "CategoryItem": {
       "freeTitle": "FREE",
       "comingSoonTitle": "Coming Soon",
       "availableTitle": "Available"
     },
     "CategoryList": {
-      "viewTitle": "View More"
+      "viewTitle": "View More",
+      "newReleaseTitle": "New Releases",
+      "topRatedTitle": "Top Player Rated",
+      "comingSoonTitle": "Coming Soon"
     },
-    "WishListButton": {
+    "Wishlist": {
       "inTitle": "In wishlist",
       "addTitle": "Add to Wishlist",
       "removeTitle": "Remove From Wishlist"
     },
     "GameSliderItem": {
-      "freeTitle": "Free"
+      "freeTitle": "Free",
+      "gameType": {
+        "BASE_GAME": "Base Game",
+        "EDITION": "Edition"
+      }
+    },
+    "GameSliderTitles": {
+      "trendingTitle": "Trending",
+      "popularTitle": "Most Popular",
+      "saleSpotTitle": "May the 4th Sale Spotlight"
     },
     "FreeGameList": {
       "freeGamesTitle": "Free Games",

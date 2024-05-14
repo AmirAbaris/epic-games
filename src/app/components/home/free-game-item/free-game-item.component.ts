@@ -12,7 +12,6 @@ export class FreeGameItemComponent {
   //region Properties
   data = input.required<FreeGameItemInputModel>();
   caption = input.required<FreeGameItemCaptionModel>();
-  isLoading = input.required<boolean>();
 
   clickEvent = output<string>();
 
