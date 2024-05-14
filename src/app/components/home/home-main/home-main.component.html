@@ -1,16 +1,7 @@
 <section class="container">
     <div class="col-span-full">
         <div class="flex flex-col items-center gap-y-11">
-            @if (isLoading) {
-            <app-highlight-main-skeleton [itemCount]="6" />
-            <app-game-slider-item-skeleton />
-            <app-card-list-skeleton [itemCount]="3" />
-            <app-free-item-skeleton [itemCount]="3" />
-            <app-card-list-skeleton [itemCount]="3" />
-            <app-category-management-skeleton class="w-full" />
-            <app-card-list-skeleton [itemCount]="2" />
-            <app-game-slider-item-skeleton />
-            } @else {
+            @if (data) {
             @if (highlightMainData && highlightMainCaption) {
             <app-highlight-main [data]="highlightMainData" [isWishlistProcessing]="isWishlistProcessing"
                 [caption]="highlightMainCaption" [wishlistIds]="wishlistIds"
@@ -42,9 +33,9 @@
             </div>
 
             @if (freeGameListData && freeGameListCaption && freeGameItemCaption) {
-                <app-free-game-list [data]="freeGameListData" [caption]="freeGameListCaption"
-                    [gameItemCaption]="freeGameItemCaption" (clickEvent)="onClickItemEventHandler($event)"
-                    (viewMoreClickEvent)="onClickEnumTypeHandler($event)" />
+            <app-free-game-list [data]="freeGameListData" [caption]="freeGameListCaption"
+                [gameItemCaption]="freeGameItemCaption" (clickEvent)="onClickItemEventHandler($event)"
+                (viewMoreClickEvent)="onClickEnumTypeHandler($event)" />
             }
 
             @if (fortniteGameData && homeMainCaption) {
@@ -86,6 +77,16 @@
                     (clickSliderTitleEvent)="onClickEnumTypeHandler(categoryEnum.TRENDING)" />
             </div>
             }
+            } @else {
+            <!-- skeleton loading -->
+            <app-highlight-main-skeleton [itemCount]="6" />
+            <app-game-slider-item-skeleton />
+            <app-card-list-skeleton [itemCount]="3" />
+            <app-free-item-skeleton [itemCount]="3" />
+            <app-card-list-skeleton [itemCount]="3" />
+            <app-category-management-skeleton class="w-full" />
+            <app-card-list-skeleton [itemCount]="2" />
+            <app-game-slider-item-skeleton />
             }
         </div>
     </div>

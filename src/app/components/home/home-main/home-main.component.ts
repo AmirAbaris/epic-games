@@ -38,7 +38,7 @@ export class HomeMainComponent implements OnInit {
   private _gameService = inject(GameService);
   private _userService = inject(UserService);
 
-  public isLoading: boolean = false;
+  public data: boolean = false;
   public isWishlistProcessing = false;
   public wishlistIds: string[] = [];
   public highlightMainCaption: HighlightMainCaptionModel | undefined;
@@ -102,10 +102,8 @@ export class HomeMainComponent implements OnInit {
     // If the ID is in the wishlist, remove it; otherwise, add it
     if (isIdInWishlist) {
       this._removeIdFromWishlistIds(id);
-      console.log(id, 'removed from wishlist');
     } else {
       this._addIdToWishlistIds(id);
-      console.log(id, 'added to wishlist');
     }
   }
 
@@ -183,6 +181,8 @@ export class HomeMainComponent implements OnInit {
       .pipe(finalize(() => this.isWishlistProcessing = false))
       .subscribe(newWishlistIds => {
         this.wishlistIds = newWishlistIds;
+
+        console.log(id, 'added to wishlist');
       });
   }
 
@@ -193,6 +193,8 @@ export class HomeMainComponent implements OnInit {
       .pipe(finalize(() => this.isWishlistProcessing = false))
       .subscribe(newWishlistIds => {
         this.wishlistIds = newWishlistIds;
+
+        console.log(id, 'removed from wishlist');
       });
   }
 
@@ -206,7 +208,7 @@ export class HomeMainComponent implements OnInit {
   }
 
   private _getGames(): void {
-    this.isLoading = true;
+    this.data = false;
 
     forkJoin([
       this._gameService.getHighlightItems(),
@@ -222,7 +224,7 @@ export class HomeMainComponent implements OnInit {
       this._gameService.getRecentlyUploadedItems()
     ]).pipe(
       delay(2000),
-      finalize(() => this.isLoading = false)
+      finalize(() => this.data = true)
     )
       .subscribe(([highlightItems, sliderItems, homeActionItems, freeItems,
         fortniteItems, newReleaseItems, topPlayerItems, trendingItems,
