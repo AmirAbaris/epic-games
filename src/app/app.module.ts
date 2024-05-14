@@ -11,7 +11,6 @@ import { NgOptimizedImage } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatDivider } from '@angular/material/divider';
 import { errorInterceptor } from './interceptors/error.interceptor';
-import { TextHoverIndicatorDirective } from './directives/text-hover-indicator.directive';
 
 // swiper config
 import { register } from 'swiper/element/bundle';
@@ -23,7 +22,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, TextHoverIndicatorDirective],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HomeModule,

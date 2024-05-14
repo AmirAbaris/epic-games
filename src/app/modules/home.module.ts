@@ -40,6 +40,7 @@ import { GameSliderItemSkeletonComponent } from '../components/home/game-slider-
 import { CardListSkeletonComponent } from '../components/home/card-list-skeleton/card-list-skeleton.component';
 import { FreeItemSkeletonComponent } from '../components/home/free-item-skeleton/free-item-skeleton.component';
 import { CategoryManagementSkeletonComponent } from '../components/home/category-management-skeleton/category-management-skeleton.component';
+import { TextHoverIndicatorDirective } from '../directives/text-hover-indicator.directive';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -72,6 +73,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     CategoryManagementSkeletonComponent,
     ScaleOnActivateDirective,
     ActivateWishlistDirective,
+    TextHoverIndicatorDirective,
     IsInWishlistPipe
   ],
   imports: [
