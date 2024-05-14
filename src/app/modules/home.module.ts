@@ -35,7 +35,11 @@ import { GameService } from '../services/game.service';
 import { WishListIconComponent } from '../components/home/wish-list-icon/wish-list-icon.component';
 import { ScaleOnActivateDirective } from '../components/home/directives/scale-on-activate.directive';
 import { UserService } from '../services/user.service';
-import { LoadingComponent } from '../components/home/loading/loading.component';
+import { HighlightMainSkeletonComponent } from '../components/home/highlight-main-skeleton/highlight-main-skeleton.component';
+import { GameSliderItemSkeletonComponent } from '../components/home/game-slider-item-skeleton/game-slider-item-skeleton.component';
+import { CardListSkeletonComponent } from '../components/home/card-list-skeleton/card-list-skeleton.component';
+import { FreeItemSkeletonComponent } from '../components/home/free-item-skeleton/free-item-skeleton.component';
+import { CategoryManagementSkeletonComponent } from '../components/home/category-management-skeleton/category-management-skeleton.component';
 
 const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
 
@@ -61,7 +65,11 @@ const homeRoutes: Routes = [{ path: '', component: HomeMainComponent }];
     HighlightSmallItemComponent,
     PreviewWishListButtonComponent,
     HighlightMainComponent,
-    LoadingComponent,
+    HighlightMainSkeletonComponent,
+    GameSliderItemSkeletonComponent,
+    CardListSkeletonComponent,
+    FreeItemSkeletonComponent,
+    CategoryManagementSkeletonComponent,
     ScaleOnActivateDirective,
     ActivateWishlistDirective,
     IsInWishlistPipe

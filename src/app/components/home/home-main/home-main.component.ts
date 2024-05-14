@@ -96,16 +96,16 @@ export class HomeMainComponent implements OnInit {
    * @param id takes game IDs from other components
    */
   public onClickWishlistButtonEventHandler(id: string): void {
-    console.log('wishlist id:', id);
-
     // Check if the ID is in the wishlist
     const isIdInWishlist = this.wishlistIds.includes(id);
 
     // If the ID is in the wishlist, remove it; otherwise, add it
     if (isIdInWishlist) {
       this._removeIdFromWishlistIds(id);
+      console.log(id, 'removed from wishlist');
     } else {
       this._addIdToWishlistIds(id);
+      console.log(id, 'added to wishlist');
     }
   }
 

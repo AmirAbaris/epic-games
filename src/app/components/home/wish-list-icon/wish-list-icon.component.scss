@@ -8,6 +8,16 @@
     }
 }
 
+@keyframes reverseRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
 .wishlist {
     font-size: 0.75rem;
     height: 50px;
@@ -22,5 +32,9 @@
 
     .rotate-animation {
         animation: rotate 2s infinite linear;
+    }
+
+    .reverse-rotate-animation {
+        animation: reverseRotate 2s infinite linear;
     }
 }
