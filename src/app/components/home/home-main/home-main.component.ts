@@ -96,6 +96,12 @@ export class HomeMainComponent implements OnInit {
    * @param id takes game IDs from other components
    */
   public onClickWishlistButtonEventHandler(id: string): void {
+    // prevent multiple clicks 
+    if (this.isWishlistProcessing) return;
+
+    // checks if wishlist clicked
+    console.log('wishlist clicked!');
+
     // Check if the ID is in the wishlist
     const isIdInWishlist = this.wishlistIds.includes(id);
 
